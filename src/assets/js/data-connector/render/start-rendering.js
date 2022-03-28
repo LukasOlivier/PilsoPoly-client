@@ -32,7 +32,15 @@ function renderJoin(){
     // join button
     $joinInterface.querySelector("#join-button").addEventListener("click", function (){
         const id = $joinInterface.querySelector("#ID").value;
+        const name = {
+            playerName: $joinInterface.querySelector("#name").value
+        };
         console.log(id);
+        console.log(name);
+        fetchFromServer(`/games/${id}/players`,'POST', name)
+            .then(response => console.log(response.token))
+            // this token is your security token.
+            .catch(errorHandler);
     });
 
 }
