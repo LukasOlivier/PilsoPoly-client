@@ -1,0 +1,37 @@
+/* General */
+img{
+    max-width: 100%;
+}
+
+/* Start-Screen */
+#start-screen main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#start-screen img{
+    width: 30rem;
+    margin-top: 50%;
+}
+#start-screen figcaption{
+    width: 30rem;
+}
+#start-screen p, #start-screen input{
+    color: white;
+    font-family: "Cardo", serif;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+#start-screen .flex-container{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+}
+input{
+    padding: 0.5rem;
+    background: red;
+    color: white;
+    border: black solid 0.1em;
+}
