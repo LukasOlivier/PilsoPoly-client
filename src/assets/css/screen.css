@@ -1,0 +1,61 @@
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Cardo sans-serif;
+    font-size: 1rem;
+}
+
+#main-screen header {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+#main-screen h1 {
+    font-size: 2.5rem;
+}
+
+#main-screen h2 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#main-screen button {
+    width: 10rem;
+    height: 2.5rem;
+}
+
+#main-screen img {
+    max-width: 5rem;
+}
+
+#main-screen section {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+}
+
+#main-screen .card {
+    text-align: center;
+    width: 10rem;
+    background-color: #979797;
+}
+
+#main-screen .card p {
+    margin: 1rem;
+}
+
+#main-screen .middle {
+    width: 15rem;
+}
+
+#main-screen #arrows {
+    width: 10.25rem;
+    margin-top: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main-screen #arrows img:last-of-type {
+    transform: scaleX(-1);
+}
