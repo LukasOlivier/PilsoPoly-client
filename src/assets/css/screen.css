@@ -9,6 +9,9 @@ body{
     color: #000000FF;
     font-size: 1rem;
 }
+.hidden{
+    visibility: hidden;
+}
 /* Start-Screen */
 #start-screen{
     background-color: #f4f4f4;
