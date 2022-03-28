@@ -11,6 +11,23 @@ body {
     margin: 1rem;
 }
 
+#main-screen body {
+    display: flex;
+    flex-direction: column;
+}
+
+#main-screen main {
+    margin-top: 3rem;
+}
+
+#main-screen footer {
+    /*TODO: ask if right (position:fixed)*/
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: #979797;
+}
+
 #main-screen h1 {
     font-size: 2.5rem;
 }
@@ -38,6 +55,7 @@ body {
 #main-screen .card {
     text-align: center;
     width: 10rem;
+    padding: 1rem;
     background-color: #979797;
 }
 
@@ -58,4 +76,15 @@ body {
 
 #main-screen #arrows img:last-of-type {
     transform: scaleX(-1);
+}
+
+#main-screen .info-container {
+    display: flex;
+}
+
+#main-screen .square {
+    width: 0.4rem;
+    height: 0.4rem;
+    margin: 0.1rem;
+    background-color: fuchsia;
 }
