@@ -18,6 +18,10 @@ function initStartScreen() {
         $startInterface.classList.toggle("hidden");
         renderRules();
     });
+    document.querySelector("#icon-picker").addEventListener("click", function (){
+        document.querySelector("#join-interface").classList.toggle("hidden");
+        renderIconPicker();
+    });
 }
 
 function renderJoin(){
@@ -43,6 +47,20 @@ function renderJoin(){
             .catch(errorHandler);
     });
 
+}
+
+function renderIconPicker(){
+    document.querySelector("#icon-interface").classList.toggle("hidden");
+    document.querySelectorAll('img').forEach(item => {
+        item.addEventListener('click', event => {
+            const icon = event.target.id;
+            console.log(icon)
+            document.querySelector("#player-options button").innerHTML = `<img src="assets/media/${icon}.png" alt="${icon}" id="${icon}">`;
+            document.querySelector("#icon-interface").classList.add("hidden");
+            document.querySelector("#join-interface").classList.remove("hidden");
+
+        })
+    })
 }
 function renderCreate(){
     console.log("Now in renderCreate function");
