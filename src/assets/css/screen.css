@@ -64,3 +64,32 @@ input:hover{
 {
     display: none;
 }
+
+#losing-and-winning-screen div
+{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    text-align: center;
+}
+
+#losing-and-winning-screen #winnerscreenimg
+{
+    max-width: 90%;
+}
+#losing-and-winning-screen img
+{
+    max-width: 55%;
+}
+#losing-and-winning-screen h2
+{
+    font-size: 10rem;
+}
+#losing-and-winning-screen p
+{
+    font-size: 7rem;
+}
