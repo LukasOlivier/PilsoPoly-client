@@ -23,7 +23,7 @@
 </head>
 <body id="start-screen">
 <main>
-    <figure>
+    <figure id="start-interface">
         <img src="assets/media/logo.png" alt="Monopoly-logo">
         <figcaption class="flex-container">
             <input type="button" name="create" title="start" id="create" value="Create Game">
@@ -32,6 +32,14 @@
                    value="Rules">
         </figcaption>
     </figure>
+    <div id="join-interface" class="hidden">
+        <h2>Enter ID</h2>
+        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID" required>
+        <nav>
+            <input type="button" name="back" id="back-button" value="back">
+            <input type="button" name="join" id="join-button" value="join">
+        </nav>
+    </div>
 </main>
 </body>
 </html>
