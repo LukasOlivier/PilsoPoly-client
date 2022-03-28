@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>loseorwin</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/screen.css">
+    <script src="assets/js/toggle-between-winning-or-loosing-screen.js"></script>
 </head>
-<body>
-<div>
+<body id="losing-and-winning-screen">
+<div class="hidden">
     <img src="../src/assets/media/social-logo.png" alt="winscreen">
     <h2>you won</h2>
     <p>you are the better player</p>
@@ -15,5 +18,6 @@
     <h2>you lost</h2>
     <p>you are very bad</p>
 </div>
+<button type="button"> click me to change from losing to winning screen</button>
 </body>
 </html>

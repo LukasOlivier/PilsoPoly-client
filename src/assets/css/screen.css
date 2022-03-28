@@ -57,3 +57,10 @@ input:hover{
     cursor: pointer;
 }
 
+
+/* losing and winning screen */
+
+#losing-and-winning-screen .hidden
+{
+    display: none;
+}
