@@ -4,30 +4,51 @@ document.addEventListener('DOMContentLoaded',init);
 
 function init()
 {
-   const streets = fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles)).catch(errorHandler)
+   let sortregular = "";
+   let streetnames = [];
+   fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnames, sortregular));
+   document.querySelector('form').addEventListener('input', searchstreet);
 }
 
-
-
-function runStreets(tiles)
+/*if there is input*/
+function searchstreet(e)
 {
-    tiles.forEach(street => render_streets(street));
+    let streetnamessort = [];
+    let sort = "";
+    if (e.target.value)
+    {
+        sort = e.target.value;
+        console.log(sort);
+        fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnamessort, sort));
+    }
+    else
+    {fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnamessort, sort));}
 }
 
+
+/*filter on go, community, chance and carts that do not have the given letters in it*/
+function runStreets(tiles, streetnames, sort)
+{
+    tiles.forEach(street =>{
+    if (street.name.includes("Go"))
+    {}
+    else if (street.name.includes("Community"))
+    {}
+    else if (street.name.includes("Chance"))
+    {}
+    else if (street.name.includes(sort))
+    {
+        streetnames.push(street);
+    }
+    });
+    document.querySelector('.templatediv').innerHTML = "";
+    streetnames.forEach(street => render_streets(street));
+}
+
+
+/* fill in the template with the api results*/
 function render_streets(street)
 {
-    if (street.name.includes("Go"))
-    {
-        return;
-    }
-    if (street.name.includes("Community"))
-    {
-        return;
-    }
-    if (street.name.includes("Chance"))
-    {
-        return;
-    }
     const $template = document.querySelector('template').content.firstElementChild.cloneNode(true);
     $template.querySelector('h2').innerText = street.name;
     $template.querySelector('li').innerText= "positie:  " + street.position;

@@ -51,6 +51,7 @@ body{
     color: black;
     border: solid black;
     padding: 0.4rem;
+    background: rgba(171, 203, 220, 0.1);
 }
 
 #see-all-the-streets-with-owners .templatearticle h2
