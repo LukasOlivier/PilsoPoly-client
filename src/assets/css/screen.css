@@ -21,6 +21,8 @@ body {
 }
 
 #main-screen footer {
+    display: flex;
+    justify-content: space-around;
     /*TODO: ask if right (position:fixed)*/
     position: fixed;
     width: 100%;
@@ -82,9 +84,14 @@ body {
     display: flex;
 }
 
+#main-screen .info-container>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 #main-screen .square {
     width: 0.4rem;
     height: 0.4rem;
     margin: 0.1rem;
-    background-color: fuchsia;
 }
