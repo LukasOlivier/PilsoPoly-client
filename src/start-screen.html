@@ -21,6 +21,7 @@
     <script src="assets/js/functionality/join-game.js"></script>
     <script src="assets/js/functionality/create-game.js"></script>
     <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/functionality/lobby.js"></script>
 </head>
 <body>
 <main>
@@ -83,24 +84,16 @@
     </div>
 
     <div id="lobby-interface" class="hidden">
-        <h2>Game ID: xxx-xxx-xxx</h2>
+        <h2>Game ID: <span>xxx-xxx-xxx</span></h2>
+        <p></p>
+        <template>
+            <section>
+                <h3></h3>
+                <button><img class="icon-picker" src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+            </section>
+        </template>
         <div id="players">
-            <section>
-                <h3>PlayerName</h3>
-                <button><img class="icon-picker" src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-            </section>
-            <section>
-                <h3>PlayerName</h3>
-                <button><img class="icon-picker" src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-            </section>
-            <section>
-                <h3>PlayerName</h3>
-                <button><img class="icon-picker" src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-            </section>
-            <section>
-                <h3>PlayerName</h3>
-                <button><img class="icon-picker" src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-            </section>
+
         </div>
         <input type="button" name="back" class="back-button" value="back">
     </div>

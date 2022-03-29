@@ -204,6 +204,11 @@ body {
     text-align: center;
 }
 
+#lobby-interface p {
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 6rem;
+}
 #players {
     display: flex;
     flex-direction: row;
@@ -213,7 +218,7 @@ body {
 #lobby-interface h2 {
     color: black;
     font-size: 3rem;
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
 }
 
 #players section {

@@ -31,7 +31,6 @@ function createGame(numberOfPlayer){
     fetchFromServer('/games', 'POST', body)
         .then(response => {
             console.log(response.id);
-
         });
 }
 

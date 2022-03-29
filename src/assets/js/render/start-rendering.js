@@ -56,7 +56,19 @@ function renderCreate() {
     $createInterface.querySelector(".join-button").addEventListener("click", checkInput);
 }
 
-function renderLobby() {
+function renderLobby(id, numberOfPlayers, playerNames) {
+    hideEverythingForLobby();
+    _$lobbyInterface.querySelector("span").innerText = id;
+    const playersToJoin = numberOfPlayers - playerNames.length;
+    _$lobbyInterface.querySelector("p").innerText = "Waiting for " + playersToJoin + " more players to join.";
+    playerNames.forEach(player => {
+        const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
+        $templateClone.querySelector('h3').innerText = player.name;
+        document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
+    });
+    }
+// oke pls give me a better name xd
+function hideEverythingForLobby(){
     _$joinInterface.classList.add("hidden");
     _$createInterface.classList.add("hidden");
     _$lobbyInterface.classList.remove("hidden");
@@ -64,6 +76,8 @@ function renderLobby() {
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$lobbyInterface.classList.remove("hidden");
+
+    _$lobbyInterface.querySelector("#players").innerText = "";
 }
 
 function renderIconPicker($clickedIcon) {

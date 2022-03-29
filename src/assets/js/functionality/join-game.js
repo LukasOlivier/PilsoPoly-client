@@ -27,20 +27,20 @@ function checkExistingGames(){
             if (name.playerName === "") {
                 throw "Your player name cant be empty";
             }
-            joinGame();
+            joinGame(id, name);
         })
         .catch(errorHandler);
 }
 
-function joinGame(){
+function joinGame(id, name){
     console.log("posting to server");
-    fetchFromServer(`/games/${id}/players`,'POST', name)
-        .then(response => {
-            _token = response.token;
-            console.log(_token);
-        })
+//    fetchFromServer(`/games/${id}/players`,'POST', name)
+//        .then(response => {
+//            _token = response.token;
+//            console.log(_token);
+//            loadGameDataForLobby(id, name);
+//        })
         // this token is your security token.
-        .catch(errorHandler);
-    console.log("rendering");
-    renderLobby();
+//        .catch(errorHandler);
+    loadGameDataForLobby(id, name);
 }
