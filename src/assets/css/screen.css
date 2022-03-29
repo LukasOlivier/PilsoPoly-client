@@ -1,4 +1,4 @@
-body {
+#main-screen body {
     background-color: #ffffff;
     color: #000000;
     font-family: Cardo sans-serif;
@@ -105,4 +105,6 @@ body {
     height: 0.7rem;
     margin: 0.1rem;
     border: solid 0.065rem;
+    justify-content: center;
+    align-items: center;
 }
