@@ -64,12 +64,17 @@ body{
 /* =======================================================================*/
 
 /* ============================ error message ============================*/
-.errormessages {
+.errormessages p {
     text-align: center;
     background-color: #FF0000FF;
+    margin: 1rem;
     padding: 1rem;
     border: #000000FF solid 0.1em;
 
+}
+.errormessages p:empty{
+    padding: 0;
+    border: none;
 }
 /* =======================================================================*/
 
