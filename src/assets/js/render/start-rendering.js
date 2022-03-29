@@ -40,15 +40,20 @@ function renderJoin() {
     _$joinInterface.classList.remove("hidden");
     document.querySelector(".errormessages").classList.remove("hidden");
 
-    const $joinInterface = document.querySelector("#join-interface");
     // join button
+    const $joinInterface = document.querySelector("#join-interface");
     $joinInterface.querySelector(".join-button").addEventListener("click", checkExistingGames);
 }
 
 function renderCreate() {
+    document.querySelector(".errormessages p").innerHTML = "";
     _$startInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$createInterface.classList.remove("hidden");
+    // should this button be named create button? and have an ID instead of a class?
+    // kept it like this for css maybe??????? IDKKKKK
+    const $createInterface = document.querySelector("#create-interface");
+    $createInterface.querySelector(".join-button").addEventListener("click", checkInput);
 }
 
 function renderLobby() {

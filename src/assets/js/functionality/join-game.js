@@ -33,7 +33,7 @@ function checkExistingGames(){
 }
 
 function joinGame(){
-    console.log("Fetching from server");
+    console.log("posting to server");
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
             _token = response.token;
