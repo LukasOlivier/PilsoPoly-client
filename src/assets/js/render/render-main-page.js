@@ -61,7 +61,7 @@ function createToShow(id, firstId, lastId) {
     } else if (id === 1) {
         toShow.push(39, 0, 1, 2, 3);
     } else if (id === 39) {
-        toShow.push(36, 37, 38, 39, 0);
+        toShow.push(37, 38, 39, 0, 1);
     } else if (id === 40) {
         toShow.push(37, 38, 39, 0, 1);
     } else {
