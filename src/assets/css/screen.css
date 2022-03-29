@@ -182,10 +182,14 @@ body{
     max-width: 7rem;
 }
 /* =======================================================================*/
-
+#see-all-the-streets-with-owners div
+{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 #see-all-the-streets-with-owners .templatearticle
 {
+    width: 22%;
     color: black;
-    background-color: red;
 }
