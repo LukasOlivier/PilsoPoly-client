@@ -17,7 +17,7 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-    <script src="assets/js/data-connector/render/start-rendering.js"></script>
+    <script src="assets/js/render/start-rendering.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
 </head>
@@ -38,14 +38,14 @@
     <!-- Join interface (hidden by default) -->
     <div id="join-interface" class="hidden">
         <h2>Enter ID</h2>
-        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID" placeholder="Game-ID" required>
-        <div id="player-options">
-            <input type="text" name="name" id="name" placeholder="Your name" required>
-            <button name="icon-picker" id="icon-picker" value="?"><img src="assets/media/question-mark.svg" alt="question-mark" id="icon-not-picked"></button>
-        </div>
+        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID"
+                                                                                      placeholder="Game-ID" required>
+
+        <input type="text" name="name" class="name" placeholder="Your name" required>
+
         <nav aria-label="navigation">
-            <input type="button" name="back" id="back-button" value="back">
-            <input type="button" name="join" id="join-button" value="join">
+            <input type="button" name="back" class="back-button" value="back">
+            <input type="button" name="join" class="join-button" value="join">
         </nav>
     </div>
     <!-- END -->
@@ -62,6 +62,57 @@
     </div>
     <!-- END -->
 
+    <!-- Create interface (hidden by default) -->
+    <div id="create-interface" class="hidden">
+        <h2>Create a game</h2>
+        <label>Please fill in your name and choose an icon</label>
+        <div class="player-options">
+            <input type="text" name="name" class="name" placeholder="Your name" required>
+        </div>
+        <input type="number" name="amount-of-players" id="amount-of-players"
+               placeholder="How many players will join this game?" min="1" max="8" required>
+
+        <nav aria-label="navigation">
+            <input type="button" name="back" class="back-button" value="back">
+            <input type="button" name="join" class="join-button" value="join">
+        </nav>
+    </div>
+
+    <div id="lobby-interface" class="hidden">
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+    </div>
+    <!-- END -->
 </main>
 </body>
 </html>
