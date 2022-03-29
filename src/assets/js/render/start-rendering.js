@@ -13,6 +13,7 @@ function initStartScreen() {
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
+
     document.querySelectorAll('.icon-picker').forEach(item => {
 
         item.addEventListener('click', function (e) {
@@ -26,7 +27,9 @@ function initStartScreen() {
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
     });
-
+    document.querySelectorAll('.join-button').forEach(item => {
+        item.addEventListener('click', renderLobby);
+    });
 
     function renderJoin() {
         document.querySelector(".errormessages p").innerHTML = ""
@@ -53,9 +56,9 @@ function initStartScreen() {
         _$createInterface.classList.add("hidden");
         _$lobbyInterface.classList.remove("hidden");
 
-        document.querySelector("#start-interface").classList.add("hidden");
-        document.querySelector("#join-interface").classList.add("hidden");
-        document.querySelector("#create-interface").classList.remove("hidden");
+        _$createInterface.classList.add("hidden");
+        _$joinInterface.classList.add("hidden");
+        _$lobbyInterface.classList.remove("hidden");
     }
 
 
@@ -75,6 +78,10 @@ function initStartScreen() {
         });
     }
 
+
+    function renderRules() {
+        console.log("Now in renderRules function");
+    }
 
     function renderRules() {
         console.log("Now in renderRules function");
