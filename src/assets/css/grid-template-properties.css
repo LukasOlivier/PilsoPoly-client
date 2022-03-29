@@ -1,0 +1,49 @@
+#main-screen .player-properties {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas:
+            ".       .      .        .        .     .        .       .       black-4 ."
+            ".       blue-3 purple-3 orange-3 red-3 yellow-3 green-3 .       black-3 ."
+            "brown-2 blue-2 purple-2 orange-2 red-2 yellow-2 green-2 dblue-2 black-2 white-2"
+            "brown-1 blue-1 purple-1 orange-1 red-1 yellow-1 green-1 dblue-1 black-1 white-1";
+}
+
+.info-container .not-bought {background-color: #979797}
+
+.brown-1 {grid-area: brown-1; background-color: saddlebrown}
+.brown-2 {grid-area: brown-2; background-color: saddlebrown}
+
+.blue-1 {grid-area: blue-1; background-color: blue}
+.blue-2 {grid-area: blue-2; background-color: blue}
+.blue-3 {grid-area: blue-3; background-color: blue}
+
+.purple-1 {grid-area: purple-1; background-color: purple}
+.purple-2 {grid-area: purple-2; background-color: purple}
+.purple-3 {grid-area: purple-3; background-color: purple}
+
+.orange-1 {grid-area: orange-1; background-color: orange}
+.orange-2 {grid-area: orange-2; background-color: orange}
+.orange-3 {grid-area: orange-3; background-color: orange}
+
+.red-1 {grid-area: red-1; background-color: red}
+.red-2 {grid-area: red-2; background-color: red}
+.red-3 {grid-area: red-3; background-color: red}
+
+.yellow-1 {grid-area: yellow-1; background-color: yellow}
+.yellow-2 {grid-area: yellow-2; background-color: yellow}
+.yellow-3 {grid-area: yellow-3; background-color: yellow}
+
+.green-1 {grid-area: green-1; background-color: green}
+.green-2 {grid-area: green-2; background-color: green}
+.green-3 {grid-area: green-3; background-color: green}
+
+.dblue-1 {grid-area: dblue-1; background-color: darkblue}
+.dblue-2 {grid-area: dblue-2; background-color: darkblue}
+
+.black-1 {grid-area: black-1; background-color: black}
+.black-2 {grid-area: black-2; background-color: black}
+.black-3 {grid-area: black-3; background-color: black}
+.black-4 {grid-area: black-4; background-color: black}
+
+.white-1 {grid-area: white-1; background-color: white}
+.white-2 {grid-area: white-2; background-color: white}
