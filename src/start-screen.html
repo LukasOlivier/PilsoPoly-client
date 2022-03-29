@@ -23,28 +23,34 @@
 </head>
 <body>
 <main>
+    <!-- Start interface -->
     <div id="start-interface">
         <img src="assets/media/logo.png" alt="Monopoly-logo">
-        <nav class="flex-container">
+        <nav class="flex-container" aria-label="start-screen">
             <input type="button" name="create" title="start" id="create" value="Create Game">
             <input type="button" name="join" title="join" id="join" value="Join Game">
             <input type="button" name="Rules-&-Explanation" title="Rules-&-Explanation" id="rules"
                    value="Rules">
         </nav>
     </div>
+    <!-------------------->
+
+    <!-- Join interface (hidden by default) -->
     <div id="join-interface" class="hidden">
         <h2>Enter ID</h2>
-        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID"
-                                                                                      placeholder="Game-ID" required>
-        <div id="player-options" >
+        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID" placeholder="Game-ID" required>
+        <div id="player-options">
             <input type="text" name="name" id="name" placeholder="Your name" required>
             <button name="icon-picker" id="icon-picker" value="?"><img src="assets/media/question-mark.svg" alt="question-mark" id="icon-not-picked"></button>
         </div>
-            <nav>
-                <input type="button" name="back" id="back-button" value="back">
-                <input type="button" name="join" id="join-button" value="join">
-            </nav>
-        </div>
+        <nav aria-label="navigation">
+            <input type="button" name="back" id="back-button" value="back">
+            <input type="button" name="join" id="join-button" value="join">
+        </nav>
+    </div>
+    <!-------------------->
+
+    <!-- Icon picker interface (hidden by default) -->
     <div id="icon-interface" class="hidden">
         <ul>
             <li><img src="assets/media/wide-glass.png" alt="beer-icon" title="beer-icon" id="wide-glass"></li>
@@ -54,6 +60,8 @@
             <li><img src="assets/media/barrel.png" alt="beer-icon" title="beer-icon" id="barrel"></li>
         </ul>
     </div>
+    <!-------------------->
+
 </main>
 </body>
 </html>
