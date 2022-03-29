@@ -184,3 +184,8 @@ body{
 /* =======================================================================*/
 
 
+#see-all-the-streets-with-owners .templatearticle
+{
+    color: black;
+    background-color: red;
+}
