@@ -55,5 +55,6 @@ function render_streets(street)
     $template.querySelector('li+li').innerText= "cost:  " + street.cost;
     $template.querySelector('li+li+li').innerText= "mortage:  " + street.mortage;
     $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
+    $template.querySelector(`div p`).innerText = "player:";
     document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
