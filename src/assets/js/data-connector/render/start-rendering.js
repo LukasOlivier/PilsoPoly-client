@@ -51,16 +51,17 @@ function renderJoin(){
 
 function renderIconPicker(){
     document.querySelector("#icon-interface").classList.toggle("hidden");
+    // gives all icons an click event listener
     document.querySelectorAll('img').forEach(item => {
         item.addEventListener('click', event => {
             const icon = event.target.id;
-            console.log(icon)
+            // this is the currently selected icon.
             document.querySelector("#player-options button").innerHTML = `<img src="assets/media/${icon}.png" alt="${icon}" id="${icon}">`;
             document.querySelector("#icon-interface").classList.add("hidden");
             document.querySelector("#join-interface").classList.remove("hidden");
 
-        })
-    })
+        });
+    });
 }
 function renderCreate(){
     console.log("Now in renderCreate function");
