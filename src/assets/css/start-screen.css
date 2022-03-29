@@ -231,5 +231,14 @@ body {
 }
 
 #players button {
-    width: 5vw;
+    width: 6vw;
+    height: 6vw;
+
+    background: white;
+    border: black solid 0.1rem;
+    border-radius: 1rem;
+}
+
+#players button:hover {
+    cursor: pointer;
 }
