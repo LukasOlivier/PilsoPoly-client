@@ -9,21 +9,24 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo"/>
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="assets/css/start-screen.css">
 
     <script src="assets/js/config.js"></script>
-
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-
+    <script src="assets/js/render/start-rendering.js"></script>
+    <script src="assets/js/functionality/join-game.js"></script>
     <script src="assets/js/initialiser.js"></script>
 </head>
-<body id="start-screen">
+<body>
 <main>
-    <figure>
+    <!-- Start interface -->
+    <div id="start-interface">
         <img src="assets/media/logo.png" alt="Monopoly-logo">
-        <figcaption class="flex-container">
+        <nav class="flex-container" aria-label="start-screen">
             <input type="button" name="create" title="start" id="create" value="Create Game">
             <input type="button" name="join" title="join" id="join" value="Join Game">
             <button onclick="window.location.href='rules.html'">
@@ -31,6 +34,94 @@
             </button>
         </figcaption>
     </figure>
+            <input type="button" name="Rules-&-Explanation" title="Rules-&-Explanation" id="rules"
+                   value="Rules">
+        </nav>
+    </div>
+    <!-- END -->
+
+    <!-- Join interface (hidden by default) -->
+    <div id="join-interface" class="hidden">
+        <h2>Enter ID</h2>
+        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID"
+                                                                                      placeholder="Game-ID" required>
+
+        <input type="text" name="name" class="name" placeholder="Your name" required>
+
+        <nav aria-label="navigation">
+            <input type="button" name="back" class="back-button" value="back">
+            <input type="button" name="join" class="join-button" value="join">
+        </nav>
+    </div>
+    <!-- END -->
+
+    <!-- Icon picker interface (hidden by default) -->
+    <div id="icon-interface" class="hidden">
+        <ul>
+            <li><img src="assets/media/wide-glass.png" alt="beer-icon" title="beer-icon" id="wide-glass"></li>
+            <li><img src="assets/media/tap.png" alt="beer-icon" title="beer-icon" id="tap"></li>
+            <li><img src="assets/media/tall-glass.png" alt="beer-icon" title="beer-icon" id="tall-glass"></li>
+            <li><img src="assets/media/pretzel.png" alt="beer-icon" title="beer-icon" id="pretzel"></li>
+            <li><img src="assets/media/barrel.png" alt="beer-icon" title="beer-icon" id="barrel"></li>
+        </ul>
+    </div>
+    <!-- Error message -->
+    <div class="errormessages">
+        <p></p>
+    </div>
+    <!-- END -->
+
+    <!-- Create interface (hidden by default) -->
+    <div id="create-interface" class="hidden">
+        <h2>Create a game</h2>
+        <label>Please fill in your name and choose an icon</label>
+        <div class="player-options">
+            <input type="text" name="name" class="name" placeholder="Your name" required>
+        </div>
+        <input type="number" name="amount-of-players" id="amount-of-players"
+               placeholder="How many players will join this game?" min="1" max="8" required>
+
+        <nav aria-label="navigation">
+            <input type="button" name="back" class="back-button" value="back">
+            <input type="button" name="join" class="join-button" value="join">
+        </nav>
+    </div>
+
+    <div id="lobby-interface" class="hidden">
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+        <section>
+            <h3>PlayerName</h3>
+            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+        </section>
+    </div>
+    <!-- END -->
 </main>
 </body>
 </html>
