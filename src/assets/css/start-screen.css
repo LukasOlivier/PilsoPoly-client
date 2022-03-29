@@ -68,7 +68,6 @@ body{
 /* =========================== Join-interface ===========================*/
 #join-interface {
     box-shadow: rgba(0, 0, 0, 0.1) 0 0.25rem 0.75rem;
-    background: rgba(128, 128, 128, 0.7);
     text-align: center;
     display: flex;
     flex-direction: column;
