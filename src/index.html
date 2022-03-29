@@ -19,7 +19,7 @@
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-
+    <script src="assets/js/initialiser.js"></script>
     <script src="assets/js/render/render-main-page.js"></script>
 
 </head>
@@ -38,7 +38,7 @@
 <main>
     <section>
         <h2>Current position:</h2>
-        <div>
+        <div id="cards-parent">
             <template>
                 <!--middle article should have class "middle"-->
                 <article class="card">
@@ -58,75 +58,75 @@
 
 
             <!-- for testing purposes-->
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+<!--            <article class="card">-->
+<!--                <h3 class="card-name">name</h3>-->
+<!--                <p class="rent">455</p>-->
+<!--                <ol>-->
+<!--                    <li><p class="rent-one-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-two-house">teeeeest</p></li>-->
+<!--                    <li><p class="rent-three-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-four-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-hotel">price for one house</p></li>-->
+<!--                </ol>-->
+<!--                <p class="price-house">2525</p>-->
+<!--                <p class="mortgage">2525</p>-->
+<!--            </article>-->
 
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+<!--            <article class="card">-->
+<!--                <h3 class="card-name">name</h3>-->
+<!--                <p class="rent">455</p>-->
+<!--                <ol>-->
+<!--                    <li><p class="rent-one-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-two-house">teeeeest</p></li>-->
+<!--                    <li><p class="rent-three-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-four-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-hotel">price for one house</p></li>-->
+<!--                </ol>-->
+<!--                <p class="price-house">2525</p>-->
+<!--                <p class="mortgage">2525</p>-->
+<!--            </article>-->
 
-            <article class="card middle">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+<!--            <article class="card middle">-->
+<!--                <h3 class="card-name">name</h3>-->
+<!--                <p class="rent">455</p>-->
+<!--                <ol>-->
+<!--                    <li><p class="rent-one-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-two-house">teeeeest</p></li>-->
+<!--                    <li><p class="rent-three-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-four-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-hotel">price for one house</p></li>-->
+<!--                </ol>-->
+<!--                <p class="price-house">2525</p>-->
+<!--                <p class="mortgage">2525</p>-->
+<!--            </article>-->
 
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+<!--            <article class="card">-->
+<!--                <h3 class="card-name">name</h3>-->
+<!--                <p class="rent">455</p>-->
+<!--                <ol>-->
+<!--                    <li><p class="rent-one-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-two-house">teeeeest</p></li>-->
+<!--                    <li><p class="rent-three-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-four-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-hotel">price for one house</p></li>-->
+<!--                </ol>-->
+<!--                <p class="price-house">2525</p>-->
+<!--                <p class="mortgage">2525</p>-->
+<!--            </article>-->
 
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+<!--            <article class="card">-->
+<!--                <h3 class="card-name">name</h3>-->
+<!--                <p class="rent">455</p>-->
+<!--                <ol>-->
+<!--                    <li><p class="rent-one-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-two-house">teeeeest</p></li>-->
+<!--                    <li><p class="rent-three-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-four-house">price for one house</p></li>-->
+<!--                    <li><p class="rent-hotel">price for one house</p></li>-->
+<!--                </ol>-->
+<!--                <p class="price-house">2525</p>-->
+<!--                <p class="mortgage">2525</p>-->
+<!--            </article>-->
         </div>
     </section>
 

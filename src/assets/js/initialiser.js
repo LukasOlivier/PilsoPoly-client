@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded',init);
 
 function init(){
     testConnection();
-    initStartScreen();
+    // initStartScreen();
     // renderMainPage();
     // this is the innit for the main page
 }
