@@ -16,8 +16,23 @@ function runStreets(tiles)
 
 function render_streets(street)
 {
-    console.log(street.name);
+    if (street.name.includes("Go"))
+    {
+        return;
+    }
+    if (street.name.includes("Community"))
+    {
+        return;
+    }
+    if (street.name.includes("Chance"))
+    {
+        return;
+    }
     const $template = document.querySelector('template').content.firstElementChild.cloneNode(true);
     $template.querySelector('h2').innerText = street.name;
+    $template.querySelector('li').innerText= "positie:  " + street.position;
+    $template.querySelector('li+li').innerText= "cost:  " + street.cost;
+    $template.querySelector('li+li+li').innerText= "mortage:  " + street.mortage;
+    $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
     document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
