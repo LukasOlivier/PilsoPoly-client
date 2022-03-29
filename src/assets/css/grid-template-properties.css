@@ -8,7 +8,7 @@
             "brown-1 blue-1 purple-1 orange-1 red-1 yellow-1 green-1 dblue-1 black-1 white-1";
 }
 
-.not-bought {background-color: #757576}
+.info-container .not-bought {background-color: #979797}
 
 .brown-1 {grid-area: brown-1; background-color: saddlebrown}
 .brown-2 {grid-area: brown-2; background-color: saddlebrown}

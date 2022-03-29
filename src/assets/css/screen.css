@@ -23,6 +23,7 @@ body {
 #main-screen footer {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     /*TODO: ask if right (position:fixed)*/
     position: fixed;
     width: 100%;
@@ -45,7 +46,9 @@ body {
 }
 
 #main-screen img {
-    max-width: 5rem;
+    margin: auto 0.5rem 0.5rem 0.5rem;
+    height: 3rem;
+    width: 3rem;
 }
 
 #main-screen section {
@@ -91,7 +94,8 @@ body {
 }
 
 #main-screen .square {
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 0.7rem;
+    height: 0.7rem;
     margin: 0.1rem;
+    border: solid 0.065rem;
 }
