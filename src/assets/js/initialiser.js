@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded',init);
 
 function init(){
     testConnection();
-    initStartScreen();
 }
 
 function testConnection(){
