@@ -19,124 +19,167 @@
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-    <script src="assets/js/data-connector/render/start-rendering.js"></script>
 
-    <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/render/render-main-page.js"></script>
 
 </head>
 
 <body id="main-screen">
 
 <header>
-    <button>End turn</button>
+    <button id="end-turn">End turn</button>
     <h1>Monopoly</h1>
     <div>
-        <img src="images/trade.png" alt="trade" title="trade">
-        <img src="images/map.png" alt="map" title="map">
+        <img src="images/trade.png" alt="trade" title="trade" id="trade">
+        <img src="images/map.png" alt="map" title="map" id="map">
     </div>
 </header>
 
 <main>
-    <h2>Current position:</h2>
-
     <section>
-        <template>
-            <!--middle article should have class "middle"-->
-            <article>
-                <h3></h3>
-                <p></p>
+        <h2>Current position:</h2>
+        <div>
+            <template>
+                <!--middle article should have class "middle"-->
+                <article class="card">
+                    <h3 class="card-name"></h3>
+                    <p class="rent"></p>
+                    <ol>
+                        <li><p class="rent-one-house"></p></li>
+                        <li><p class="rent-two-house"></p></li>
+                        <li><p class="rent-three-house"></p></li>
+                        <li><p class="rent-four-house"></p></li>
+                        <li><p class="rent-hotel"></p></li>
+                    </ol>
+                    <p class="price-house"></p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
+
+
+            <!-- for testing purposes-->
+            <article class="card">
+                <h3 class="card-name">name</h3>
+                <p class="rent">455</p>
                 <ol>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                    <li><p class="rent-one-house">price for one house</p></li>
+                    <li><p class="rent-two-house">teeeeest</p></li>
+                    <li><p class="rent-three-house">price for one house</p></li>
+                    <li><p class="rent-four-house">price for one house</p></li>
+                    <li><p class="rent-hotel">price for one house</p></li>
                 </ol>
-                <p></p>
-                <p></p>
+                <p class="price-house">2525</p>
+                <p class="mortgage">2525</p>
             </article>
-        </template>
 
+            <article class="card">
+                <h3 class="card-name">name</h3>
+                <p class="rent">455</p>
+                <ol>
+                    <li><p class="rent-one-house">price for one house</p></li>
+                    <li><p class="rent-two-house">teeeeest</p></li>
+                    <li><p class="rent-three-house">price for one house</p></li>
+                    <li><p class="rent-four-house">price for one house</p></li>
+                    <li><p class="rent-hotel">price for one house</p></li>
+                </ol>
+                <p class="price-house">2525</p>
+                <p class="mortgage">2525</p>
+            </article>
 
-        <!-- for testing purposes-->
-        <article class="card">
-            <h3 class="card-name">card name</h3>
-            <p class="rent">rent:</p>
-            <ol>
-                <p class="rent-one-house">With 1 house: </p>
-                <p class="rent-two-house">With 2 houses: </p>
-                <p class="rent-three-house">With 3 houses: </p>
-                <p class="rent-four-house">With 4 houses: </p>
-                <p class="rent-hotel">With hotel </p>
-            </ol>
-            <p class="price-house">Price for house:</p>
-            <p class="mortgage">Mortgage: </p>
-        </article>
+            <article class="card">
+                <h3 class="card-name">name</h3>
+                <p class="rent">455</p>
+                <ol>
+                    <li><p class="rent-one-house">price for one house</p></li>
+                    <li><p class="rent-two-house">teeeeest</p></li>
+                    <li><p class="rent-three-house">price for one house</p></li>
+                    <li><p class="rent-four-house">price for one house</p></li>
+                    <li><p class="rent-hotel">price for one house</p></li>
+                </ol>
+                <p class="price-house">2525</p>
+                <p class="mortgage">2525</p>
+            </article>
 
-        <article class="card">
-            <h3 class="card-name">card name</h3>
-            <p class="rent">rent:</p>
-            <ol>
-                <p class="rent-one-house">With 1 house: </p>
-                <p class="rent-two-house">With 2 houses: </p>
-                <p class="rent-three-house">With 3 houses: </p>
-                <p class="rent-four-house">With 4 houses: </p>
-                <p class="rent-hotel">With hotel </p>
-            </ol>
-            <p class="price-house">Price for house:</p>
-            <p class="mortgage">Mortgage: </p>
-        </article>
+            <article class="card">
+                <h3 class="card-name">name</h3>
+                <p class="rent">455</p>
+                <ol>
+                    <li><p class="rent-one-house">price for one house</p></li>
+                    <li><p class="rent-two-house">teeeeest</p></li>
+                    <li><p class="rent-three-house">price for one house</p></li>
+                    <li><p class="rent-four-house">price for one house</p></li>
+                    <li><p class="rent-hotel">price for one house</p></li>
+                </ol>
+                <p class="price-house">2525</p>
+                <p class="mortgage">2525</p>
+            </article>
 
-        <article class="card middle">
-            <h3 class="card-name">card name</h3>
-            <p class="rent">rent:</p>
-            <ol>
-                <p class="rent-one-house">With 1 house: </p>
-                <p class="rent-two-house">With 2 houses: </p>
-                <p class="rent-three-house">With 3 houses: </p>
-                <p class="rent-four-house">With 4 houses: </p>
-                <p class="rent-hotel">With hotel </p>
-            </ol>
-            <p class="price-house">Price for house:</p>
-            <p class="mortgage">Mortgage: </p>
-        </article>
-
-        <article class="card">
-            <h3 class="card-name">card name</h3>
-            <p class="rent">rent:</p>
-            <ol>
-                <p class="rent-one-house">With 1 house: </p>
-                <p class="rent-two-house">With 2 houses: </p>
-                <p class="rent-three-house">With 3 houses: </p>
-                <p class="rent-four-house">With 4 houses: </p>
-                <p class="rent-hotel">With hotel </p>
-            </ol>
-            <p class="price-house">Price for house:</p>
-            <p class="mortgage">Mortgage: </p>
-        </article>
-
-        <article class="card">
-            <h3 class="card-name">card name</h3>
-            <p class="rent">rent:</p>
-            <ol>
-                <p class="rent-one-house">With 1 house: </p>
-                <p class="rent-two-house">With 2 houses: </p>
-                <p class="rent-three-house">With 3 houses: </p>
-                <p class="rent-four-house">With 4 houses: </p>
-                <p class="rent-hotel">With hotel </p>
-            </ol>
-            <p class="price-house">Price for house:</p>
-            <p class="mortgage">Mortgage: </p>
-        </article>
+            <article class="card">
+                <h3 class="card-name">name</h3>
+                <p class="rent">455</p>
+                <ol>
+                    <li><p class="rent-one-house">price for one house</p></li>
+                    <li><p class="rent-two-house">teeeeest</p></li>
+                    <li><p class="rent-three-house">price for one house</p></li>
+                    <li><p class="rent-four-house">price for one house</p></li>
+                    <li><p class="rent-hotel">price for one house</p></li>
+                </ol>
+                <p class="price-house">2525</p>
+                <p class="mortgage">2525</p>
+            </article>
+        </div>
     </section>
 
     <div id="arrows">
-        <img src="images/arrow.jpg" alt="left-arrow" title="left-arrow">
-        <img src="images/arrow.jpg" alt="right-arrow" title="right-arrow">
+        <img src="images/arrow.jpg" alt="left-arrow" title="left-arrow" id="left-arrow">
+        <img src="images/arrow.jpg" alt="right-arrow" title="right-arrow" id="right-arrow">
     </div>
 </main>
 
 <footer>
+    <template>
+        <div class="info-container">
+            <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
+            <div>
+                <div>
+                    <p class="player-balance"></p>
+                </div>
+                <div class="player-properties">
+                    <!-- add class "not-bought" to make grey-->
+                    <div class="square brown-1"></div>
+                    <div class="square brown-2"></div>
+                    <div class="square blue-1"></div>
+                    <div class="square blue-2"></div>
+                    <div class="square blue-3"></div>
+                    <div class="square purple-1"></div>
+                    <div class="square purple-2"></div>
+                    <div class="square purple-3"></div>
+                    <div class="square orange-1"></div>
+                    <div class="square orange-2"></div>
+                    <div class="square orange-3"></div>
+                    <div class="square red-1"></div>
+                    <div class="square red-2"></div>
+                    <div class="square red-3"></div>
+                    <div class="square yellow-1"></div>
+                    <div class="square yellow-2"></div>
+                    <div class="square yellow-3"></div>
+                    <div class="square green-1"></div>
+                    <div class="square green-2"></div>
+                    <div class="square green-3"></div>
+                    <div class="square dblue-1"></div>
+                    <div class="square dblue-2"></div>
+                    <div class="square black-1"></div>
+                    <div class="square black-2"></div>
+                    <div class="square black-3"></div>
+                    <div class="square black-4"></div>
+                    <div class="square white-1"></div>
+                    <div class="square white-2"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--for testing purposes-->
     <div class="info-container">
         <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
         <div>
