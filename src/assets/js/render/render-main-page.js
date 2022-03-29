@@ -10,7 +10,7 @@ function renderMainPage() {
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
 
-    renderCardsFetch();
+    renderCards();
     renderProperties();
 }
 
@@ -18,43 +18,64 @@ function endTurn() {
     console.log("end");
 }
 
-function renderCardsFetch() {
+
+async function renderCards() {
+    const currentTileName = await getCurrentTileName();
+    const response = await fetchFromServer("/tiles");
+    response.forEach(function (tile) {
+        if (tile.name === currentTileName) {
+            getCardById(tile.position);
+        }
+    });
+}
+
+async function getCurrentTileName() {
     const playerName = "Bob";
-    fetchFromServer("/games/dummy", "GET")
-        .then(res => res.players.forEach(function (player) {
-            if (player.name === playerName) {
-                getCardInformationWithName(player.currentTile);
-            }
-        }));
+    let currentTile = null;
+    const response = await fetchFromServer("/games/dummy", "GET");
+    response.players.forEach(function (player){
+        if (player.name === playerName) {
+            currentTile = player.currentTile;
+        }
+    });
+    return currentTile;
 }
 
-function getCardInformationWithName(tileName) {
-    fetchFromServer("/tiles")
-        .then(res => res.forEach(function (tile) {
-            if (tileName === tile.name) {
-                renderCards(tile);
-            }
-        }));
-}
 
-function getCardInformationWithId(tileId) {
-    return null;
-}
-
-function renderCards(tile) {
-    const position = tile.position;
-    for (let i = position - 2; i < position + 3; i++) {
-        if (i === position) {
-            renderCard(tile, true);
+async function getCardById(id) {
+    const toShow = createToShow(id, id-2, id+3);
+    for (let cardId of toShow) {
+        const response = await fetchFromServer(`/tiles/${cardId}`);
+        if (cardId === id) {
+            showCards(response, true);
         } else {
-            renderCard(tile, false);
+            showCards(response, false);
         }
     }
 }
 
-function renderCard(cardInfo, middle) {
+function createToShow(id, firstId, lastId) {
+    const toShow = [];
+    if (id === 0) {
+        toShow.push(38, 39, 0, 1, 2);
+    } else if (id === 1) {
+        toShow.push(39, 0, 1, 2, 3);
+    } else if (id === 39) {
+        toShow.push(36, 37, 38, 39, 0);
+    } else if (id === 40) {
+        toShow.push(37, 38, 39, 0, 1);
+    } else {
+        for (let i = firstId; i < lastId; i++) {
+            toShow.push(i);
+        }
+    }
+    return toShow;
+}
+
+
+function showCards(cardInfo, middle) {
     // TODO : filter special cards
-    if (cardInfo.type === "street") {
+    if (cardInfo.type === "street" || true) {
         const $template = document.querySelector('main template').content.firstElementChild.cloneNode(true);
         if (middle) {
             $template.classList.add("middle");
@@ -73,7 +94,7 @@ function renderCard(cardInfo, middle) {
 
 
 function renderProperties() {
-    // console.log("render properties");
+    console.log("render properties");
 }
 
 function moveLeft() {
