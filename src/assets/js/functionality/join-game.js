@@ -4,7 +4,7 @@ function joinGame(){
     const $joinInterface = document.querySelector("#join-interface");
     const id = $joinInterface.querySelector("#ID").value;
     const name = {
-        playerName: $joinInterface.querySelector("#name").value.toLowerCase()
+        playerName: $joinInterface.querySelector(".name").value.toLowerCase()
     };
     // these checks dont see errors from the server
     // we can change this when we make our own api server.
