@@ -1,6 +1,7 @@
 // "use strict";
 
 _token = {token : loadFromStorage("token")};
+_gameId = loadFromStorage("gameId");
 
 function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
@@ -9,6 +10,7 @@ function renderMainPage() {
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
     getTiles();
+    getCurrentBalance();
 }
 
 function endTurn() {
@@ -18,9 +20,7 @@ function endTurn() {
 function renderCards() {
     let currentTileName = null;
     const playerName = loadFromStorage("name");
-    const gameId = loadFromStorage("gameId");
-
-    fetchFromServer(`/games/${gameId}`, "GET")
+    fetchFromServer(`/games/${_gameId}`, "GET")
         .then(res => {
             res.players.forEach(function (player) {
                 if (player.name === playerName) {
@@ -120,6 +120,19 @@ function railUtilityTemplate($template, cardInfo, middle) {
     $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+}
+
+function getCurrentBalance() {
+    fetchFromServer(`/games/${_gameId}`, "GET")
+        .then(res => {
+            res.players.forEach(function (player) {
+                showBalance(player.money);
+            });
+        });
+}
+
+function showBalance(money) {
+
 }
 
 function renderProperties() {
