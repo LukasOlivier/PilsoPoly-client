@@ -366,7 +366,6 @@ body {
 
 /* =========================== See-all-games-interface ===========================*/
 #see-all-games-interface {
-
     flex-direction: column;
     align-items: center;
     position: fixed;
@@ -388,14 +387,17 @@ body {
 
 #see-all-games-interface li {
     font-size: 1.2rem;
-    text-align: center;
+    text-align: right;
     width: 100%;
-    margin-bottom: 0.5rem;
     border-bottom: white solid 0.1rem;
-    display: inline-block;
     padding: 1rem 0 1rem 0;
+    display: flex;
+    justify-content: space-between;
 }
 
+#see-all-games-interface p {
+    padding: 0 0.5rem 0 0.5rem;
+}
 #see-all-games-interface li:hover {
     background: #4a83c4;
     cursor: pointer;

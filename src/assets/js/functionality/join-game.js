@@ -40,3 +40,12 @@ function joinGame(id, name){
         // this token is your security token.
         .catch(errorHandler);
 }
+
+
+// https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
+function fetchAllGames(){
+    console.log(_config.prefix)
+    // ${_config.prefix}
+    fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
+        .then(response => renderAllAvailableGames(response))
+}

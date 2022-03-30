@@ -21,7 +21,7 @@ function initStartScreen() {
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
-    document.querySelector("#show-all-games").addEventListener("click", renderAllAvailableGames);
+    document.querySelector("#show-all-games").addEventListener("click", fetchAllGames);
 
 
     document.querySelectorAll('.icon-picker').forEach(item => {
@@ -122,9 +122,18 @@ function renderRules() {
     _$rulesInterface.classList.remove("hidden");
 }
 
-function renderAllAvailableGames() {
+function renderAllAvailableGames(allGames) {
     _$joinInterface.style.opacity = "0.2";
     _$seeAllGamesInterface.classList.remove("hidden");
+    const $ul = _$seeAllGamesInterface.querySelector('ul');
+    console.log(allGames);
+    allGames.forEach(game => {
+        const textToDisplay = game.id + game.players.length + "/" + game.numberOfPlayers;
+        console.log(textToDisplay)
+        $ul.insertAdjacentHTML("beforeend", `<li><p class="gameID">${game.id}</p><p>${game.players.length}/${game.numberOfPlayers}</p></li>`);
+    })
+
+    // _$seeAllGamesInterface.querySelector('ul').innerHTML
 }
 
 function backButton() {
