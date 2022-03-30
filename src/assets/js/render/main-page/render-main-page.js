@@ -1,14 +1,19 @@
 // "use strict";
 
-_token = {token : loadFromStorage("token")};
-_gameID = loadFromStorage("gameId");
+let _playerPositionID = null;
+let _tempPlayerPositionID = null;
 
 function renderMainPage() {
+
+    _token = {token : loadFromStorage("token")};
+    _gameID = loadFromStorage("gameId");
+
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
+
     getTiles();
     renderPlayerInfo();
 }
@@ -29,6 +34,8 @@ function renderCards() {
             });
             _tiles.forEach(function (tile) {
                 if (tile.name === currentTileName) {
+                    _tempPlayerPositionID = tile.position;
+                    _playerPositionID = tile.position;
                     getCardById(tile.position);
                 }
             });
@@ -53,7 +60,7 @@ function createToShow(id, firstId, lastId) {
     } else if (id === 1) {
         toShow.push(39, 0, 1, 2, 3);
     } else if (id === 38) {
-        toShow.push(36, 37, 38, 0, 1);
+        toShow.push(36, 37, 38, 39, 0);
     } else if (id === 39) {
         toShow.push(37, 38, 39, 0, 1);
     } else {
@@ -88,12 +95,25 @@ function renderPlayerInfo() {
         });
 }
 
+function move(value) {
+    _tempPlayerPositionID -= value;
+    if (_tempPlayerPositionID === -1) {
+        _tempPlayerPositionID = 39;
+    }
+    console.log(_tempPlayerPositionID);
+    const $articles = document.querySelectorAll("#cards-parent article");
+    $articles.forEach((article) => {
+        article.remove();
+    });
+    getCardById(_tempPlayerPositionID);
+}
+
 function moveLeft() {
-    console.log("move left");
+    move(1);
 }
 
 function moveRight() {
-    console.log("move right");
+    move(-1);
 }
 
 function showMap() {
