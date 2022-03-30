@@ -12,9 +12,12 @@
 
 
 #rules div {
+    margin: 5%;
+    padding: 1rem 1rem 1rem 1rem;
     border: #c90b0b solid 0.1em;
     margin-bottom: 2rem;
-
+    background: white;
+    background: rgba(255, 255, 255, .5)
 }
 
 
@@ -39,10 +42,11 @@
 }
 
 #rules h3{
+    font-weight: bolder;
     font-size: large;
-    text-align: center;
+    text-align: left;
     font-family: "Cardo", serif;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
     color: #c90b0b;
 }
 
@@ -56,6 +60,20 @@
 }
 
 #rules p{
-    text-align: center;
+    text-align: left;
+    margin-bottom: 2rem;
     font-family: "Cardo", serif;
+}
+
+#rules button{
+    background: white;
+    outline: none;
+    border: black 0.1rem solid;
+    border-radius: 0.2rem;
+    width: 10%;
+    height: 2rem;
+}
+#rules button:hover{
+    cursor: pointer;
+    background: #dedddd;
 }
