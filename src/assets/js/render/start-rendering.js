@@ -6,7 +6,6 @@ let _$joinInterface = "";
 let _$lobbyInterface = "";
 let _$iconInterface = "";
 
-
 function initStartScreen() {
     _$startInterface = document.querySelector("#start-interface");
     _$createInterface = document.querySelector("#create-interface");

@@ -14,4 +14,3 @@ function loadGameDataForLobby(id, name){
 function refresh(id){
     loadGameDataForLobby(id)
 }
-

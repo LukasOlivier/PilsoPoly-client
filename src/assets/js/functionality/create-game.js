@@ -33,4 +33,3 @@ function createGame(numberOfPlayer, name){
         })
         .catch(errorHandler);
 }
-
