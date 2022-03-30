@@ -97,6 +97,10 @@ function renderPlayerInfo() {
 }
 
 function move(value) {
+    const $button = document.querySelector("main button");
+    if ($button.classList.contains("hidden")) {
+        $button.classList.toggle("hidden");
+    }
     _tempPlayerPositionID -= value;
     if (_tempPlayerPositionID === -1) {
         _tempPlayerPositionID = 39;
@@ -114,6 +118,7 @@ function moveRight() {
 }
 
 function backToCurrentPosition() {
+    document.querySelector("main button").classList.toggle("hidden");
     removeCards();
     getCardById(_playerPositionID);
 }
