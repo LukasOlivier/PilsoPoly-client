@@ -15,7 +15,6 @@ function initStartScreen() {
     _$iconInterface = document.querySelector("#icon-interface");
     _$rulesInterface = document.querySelector("#rules-interface");
 
-
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
@@ -38,7 +37,6 @@ function renderJoin() {
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.remove("hidden");
     document.querySelector(".errormessages").classList.remove("hidden");
-
     // join button
     const $joinInterface = document.querySelector("#join-interface");
     $joinInterface.querySelector(".join-button").addEventListener("click", checkExistingGames);
@@ -58,9 +56,10 @@ function renderCreate() {
 function renderLobby(id, numberOfPlayers, playerNames) {
     hideEverythingForLobby();
     _$lobbyInterface.querySelector("span").innerText = id;
-    console.log(_$lobbyInterface);
     const playersToJoin = numberOfPlayers - playerNames.length;
     _$lobbyInterface.querySelector("p").innerText = "Waiting for " + playersToJoin + " more players to join.";
+    // for every player in this game, clone a template and fill in the correct name etc
+    // later we will also fill in the correct icon.
     playerNames.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
@@ -107,7 +106,7 @@ function renderRules() {
     _$startInterface.classList.add("hidden");
     _$rulesInterface.classList.remove("hidden");
 }
-
+// this function is for all back buttons in the starting screen.
 function backButton() {
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
