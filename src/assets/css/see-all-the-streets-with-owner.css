@@ -46,17 +46,72 @@ body{
 
 #see-all-the-streets-with-owners .templatearticle
 {
+    transition: all .2s ease-in-out;
     margin: 1rem;
     width: 15rem;
+    height: 15rem;
     color: black;
     border: solid black;
     padding: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: rgba(171, 203, 220, 0.1);
 }
 
-#see-all-the-streets-with-owners .templatearticle h2
+#see-all-the-streets-with-owners .templatearticle:hover
+{
+    transform: scale(1.1);
+    width: 18rem;
+    height: 18rem;
+}
+
+.PURPLE
+{
+    background: rgba(161, 27, 161, 0.5);
+}
+.BLACK
+{
+    background: rgba(16, 15, 15, 0.6);
+}
+
+.LIGHTBLUE
 {
     background: #abcbdc;
+}
+
+.VIOLET
+{
+    background: rgba(238, 130, 238, 0.9);
+}
+#see-all-the-streets-with-owners .templatearticle .WHITE
+{
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+}
+
+.ORANGE
+{
+    background: rgba(255, 165, 0, 0.5);
+}
+.RED
+{
+    background: rgba(255, 0, 0, 0.5);
+}
+.YELLOW
+{
+    background: rgba(255, 255, 0, 0.35);
+}
+.DARKGREEN
+{
+    background: rgba(0, 100, 0, 0.5);
+}
+.DARKBLUE
+{
+    background: rgba(0, 0, 139, 0.6);
+}
+#see-all-the-streets-with-owners .templatearticle h2
+{
     border: solid black;
     text-align: center;
     padding: 0.3rem;
@@ -64,7 +119,7 @@ body{
 }
 #see-all-the-streets-with-owners .templatearticle li
 {
-    padding: 0.3rem;
+    padding: 0.7rem;
 }
 #see-all-the-streets-with-owners .templatearticle .iconplace
 {
@@ -87,8 +142,16 @@ body{
 
 #see-all-the-streets-with-owners footer a
 {
+    transition: all .2s ease-in-out;
     padding: 0.5rem 2rem 0.5rem 2rem;
-    background: #543625;
+    background: rgba(84, 54, 37, 0.75);
+    font-size: 1rem;
     color: white;
     text-decoration: none;
+}
+#see-all-the-streets-with-owners footer a:hover
+{
+    transform: scale(1.1);
+    padding: 0.7rem 2.3rem 0.7rem 2.3rem;
+    font-size: 1.4rem;
 }
