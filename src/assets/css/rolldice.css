@@ -1,0 +1,42 @@
+h1{
+    text-align: center;
+    margin: 5rem 0 0 0;
+    font-size: 3rem
+}
+img{
+    width: 30%;
+    margin: 3rem 50% 0 50%;
+
+
+}
+input {
+    padding: 0.5rem;
+    background: #FF0000FF;
+    color: #FFFFFFFF;
+    border: #000000FF solid 0.1em;
+    width: 12rem;
+
+}
+input:hover {
+    background: #ac0b0b;
+    cursor: pointer;
+}
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h2{
+    margin-top: 2rem ;
+    font-size: 2rem;
+}
+h3{
+    margin-top: 2rem ;
+    font-size: 1.5rem;
+}
