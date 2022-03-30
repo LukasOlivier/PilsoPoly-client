@@ -7,7 +7,7 @@ function init(){
     if (document.querySelector("h1").id === "start-screen") {
         initStartScreen();
     }
-    else if (document.querySelector("h1").id === "main-screen"){
+    else if (document.querySelector("h1").id === "game-screen"){
         renderMainPage();
     }
     // this is the innit for the main page
