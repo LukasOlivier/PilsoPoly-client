@@ -51,21 +51,31 @@
     width: 3rem;
 }
 
+
 #main-screen section div {
     display: flex;
     justify-content: space-around;
     margin-top: 1.5rem;
 }
 
-#main-screen .card {
+#main-screen .normal-card, .special-card, .utility-card, .railroad-card{
     text-align: center;
     width: 10rem;
     padding: 1rem;
     background-color: #979797;
 }
 
-#main-screen .card p {
+#main-screen .normal-card p {
     margin: 1rem;
+}
+
+
+/*TODO: make sure the go card is proper
+   simuleer het met de function call getCardById(0)*/
+
+#main-screen .special-card h3 {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #main-screen .middle {
