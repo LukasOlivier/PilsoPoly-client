@@ -67,6 +67,7 @@ function renderCreate() {
     $createInterface.querySelector(".join-button").addEventListener("click", checkInput);
 }
 
+
 function renderLobby(id, numberOfPlayers, playerNames) {
     hideEverythingForLobby();
     _$lobbyInterface.querySelector("span").innerText = id;
