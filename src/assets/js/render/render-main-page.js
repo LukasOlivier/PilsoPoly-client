@@ -86,11 +86,15 @@ function showCards(cardInfo, middle) {
     }
 }
 
-function renderNormalCard(cardInfo, middle) {
-    const $template = document.querySelector('main .normal-card-template').content.firstElementChild.cloneNode(true);
+function addClassToMiddle($template, middle) {
     if (middle) {
         $template.classList.add("middle");
     }
+}
+
+function renderNormalCard(cardInfo, middle) {
+    const $template = document.querySelector('main .normal-card-template').content.firstElementChild.cloneNode(true);
+    addClassToMiddle($template, middle);
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('p:first-of-type').innerText = `rent: ${cardInfo.rent}`;
     $template.querySelector('.rent-one-house').innerText = `Rent with one house: ${cardInfo.rentWithOneHouse}`;
@@ -104,18 +108,14 @@ function renderNormalCard(cardInfo, middle) {
 
 function specialCard(cardInfo, middle) {
     const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
-    if (middle) {
-        $template.classList.add("middle");
-    }
+    addClassToMiddle($template, middle);
     $template.querySelector("h3").innerText = cardInfo.name;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
 function renderUtilityCard(cardInfo, middle) {
     const $template = document.querySelector('main .utility-card-template').content.firstElementChild.cloneNode(true);
-    if (middle) {
-        $template.classList.add("middle");
-    }
+    addClassToMiddle($template, middle);
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
@@ -124,9 +124,7 @@ function renderUtilityCard(cardInfo, middle) {
 
 function renderRailroad(cardInfo, middle) {
     const $template = document.querySelector('main .railroad-card-template').content.firstElementChild.cloneNode(true);
-    if (middle) {
-        $template.classList.add("middle");
-    }
+    addClassToMiddle($template, middle);
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
