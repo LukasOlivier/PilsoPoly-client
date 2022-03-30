@@ -59,6 +59,7 @@ function renderCreate() {
 function renderLobby(id, numberOfPlayers, playerNames) {
     hideEverythingForLobby();
     _$lobbyInterface.querySelector("span").innerText = id;
+    console.log(_$lobbyInterface);
     const playersToJoin = numberOfPlayers - playerNames.length;
     _$lobbyInterface.querySelector("p").innerText = "Waiting for " + playersToJoin + " more players to join.";
     playerNames.forEach(player => {
@@ -66,6 +67,7 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
+    // _$lobbyInterface.querySelector('.start-button').addEventListener("click");
     }
 // oke pls give me a better name xd
 function hideEverythingForLobby(){
