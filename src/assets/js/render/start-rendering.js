@@ -134,7 +134,7 @@ function renderAllAvailableGames(allGames) {
     const $listItems = $ul.querySelectorAll('li');
     $listItems.forEach(item => item.addEventListener("click", fillInGameID));
 }
-
+// todo: make it so that clicking anywhere on the screen, the popup for the games dissapears....
 function backButton() {
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
