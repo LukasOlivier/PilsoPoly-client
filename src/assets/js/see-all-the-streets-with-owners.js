@@ -1,7 +1,7 @@
 "use strict";
 
 /*global variable because i saw no way of adding him into the functions*/
-let _playersBoughtProperties = {};
+const _playersBoughtProperties = {};
 
 /*load the dom in and then start function init*/
 document.addEventListener('DOMContentLoaded',init);
@@ -19,7 +19,7 @@ function init()
 /*if there is input, catch it => put it to lower case and go to the runstreets function*/
 function searchstreet(e)
 {
-    let streetnamessort = [];
+    const streetnamessort = [];
     let sort = "";
     if (e.target.value)
     {
@@ -36,29 +36,29 @@ function runStreets(tiles, streetnames, sort)
 {
     tiles.forEach(street =>{
     if (street.name.includes("Go"))
-    {}
+    {console.log(null);}
     else if (street.name.includes("Community"))
-    {}
+    {console.log(null);}
     else if (street.name.includes("Chance"))
-    {}
+    {console.log(null);}
     else if (street.name.includes("Jail"))
-    {}
+    {console.log(null);}
     else if (street.name.includes("Tax"))
-    {}
+    {console.log(null);}
     else if (street.name.includes("Parking"))
-    {}
+    {console.log(null);}
     else if (street.name.toLowerCase().includes(sort))
     {
         streetnames.push(street);
     }
     });
     document.querySelector('.templatediv').innerHTML = "";
-    streetnames.forEach(street => render_streets(street));
+    streetnames.forEach(street => renderStreets(street));
 }
 
 
 /* fill in the template with the api results*/
-function render_streets(street)
+function renderStreets(street)
 {
     let isbought = false;
     const $template = document.querySelector('template').content.firstElementChild.cloneNode(true);
@@ -68,23 +68,15 @@ function render_streets(street)
     $template.querySelector('li+li').innerText= "cost:  " + street.cost;
     $template.querySelector('li+li+li').innerText= "mortage:  " + street.mortgage;
     $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
-
     for (const [key, value] of Object.entries(_playersBoughtProperties))
-    {
-        let playername = key;
-        value.forEach(propertie =>
-        {
-            if (propertie === street.name)
-            {
+    {const playername = key;
+        value.forEach(propertie => {
+            if (propertie === street.name) {
                 isbought = true;
-                $template.querySelector(`div p`).innerText = "player: " + playername;
-            }
-        });
+                $template.querySelector(`div p`).innerText = "player: " + playername;}});
     }
-    if (isbought === false)
-    {
-        $template.querySelector(`div p`).innerText = "player: not bought yet";
-    }
+    if (isbought === false) {
+        $template.querySelector(`div p`).innerText = "player: not bought yet";}
     document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
@@ -93,8 +85,8 @@ function showPlayers(players)
 {
     players.forEach(player =>
     {
-        let nameplayer = player.name;
-        let playerstreets = [];
+        const nameplayer = player.name;
+        const playerstreets = [];
         playerstreets.push(player.properties.forEach(property => playerstreets.push(property.property)));
         _playersBoughtProperties[nameplayer] = playerstreets;
     });
