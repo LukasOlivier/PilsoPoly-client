@@ -7,6 +7,7 @@ function init()
    let sortregular = "";
    let streetnames = [];
    fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnames, sortregular));
+   fetchFromServer('/games/dummy','GET').then(players => showPlayers(players.players));
    document.querySelector('form').addEventListener('input', searchstreet);
 }
 
@@ -57,4 +58,17 @@ function render_streets(street)
     $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
     $template.querySelector(`div p`).innerText = "player:";
     document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
+}
+
+function showPlayers(players)
+{
+    let playerstreetsdict = [];
+    players.forEach(player =>
+    {
+        let playerstreets = [];
+        playerstreets.push(player.name);
+        playerstreets.push(player.properties.forEach(property => playerstreets.push(property.property)));
+        playerstreetsdict.push(playerstreets);
+    });
+    console.log(playerstreetsdict)
 }
