@@ -19,16 +19,21 @@
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/render/start-rendering.js"></script>
     <script src="assets/js/functionality/join-game.js"></script>
+    <script src="assets/js/functionality/create-game.js"></script>
     <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/functionality/lobby.js"></script>
 </head>
 <body>
 <main>
     <!-- Start interface -->
     <div id="start-interface">
-        <img src="assets/media/logo.png" alt="Monopoly-logo">
+        <h1 id="start-screen"><img src="assets/media/logo.png" alt="Monopoly-logo"></h1>
         <nav class="flex-container" aria-label="start-screen">
             <input type="button" name="create" title="start" id="create" value="Create Game">
             <input type="button" name="join" title="join" id="join" value="Join Game">
+            <button onclick="window.location.href='rules.html'">
+                RULES
+            </button>
             <input type="button" name="Rules-&-Explanation" title="Rules-&-Explanation" id="rules"
                    value="Rules">
         </nav>
@@ -38,9 +43,8 @@
     <!-- Join interface (hidden by default) -->
     <div id="join-interface" class="hidden">
         <h2>Enter ID</h2>
-        <label for="ID">To join your friend’s game, enter their game ID</label><input type="text" name="ID" id="ID"
-                                                                                      placeholder="Game-ID" required>
-
+        <label for="ID">To join your friend’s game, enter their game ID</label>
+        <input type="text" name="ID" id="ID" placeholder="Game-ID" required>
         <input type="text" name="name" class="name" placeholder="Your name" required>
 
         <nav aria-label="navigation">
@@ -74,47 +78,29 @@
             <input type="text" name="name" class="name" placeholder="Your name" required>
         </div>
         <input type="number" name="amount-of-players" id="amount-of-players"
-               placeholder="How many players will join this game?" min="1" max="8" required>
+               placeholder="How many players will join this game?" min="2" max="8" required>
 
         <nav aria-label="navigation">
             <input type="button" name="back" class="back-button" value="back">
-            <input type="button" name="join" class="join-button" value="join">
+            <input type="button" name="join" class="join-button" value="create">
         </nav>
     </div>
 
     <div id="lobby-interface" class="hidden">
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
-        <section>
-            <h3>PlayerName</h3>
-            <button class="icon-picker"><img src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
-        </section>
+        <h2>Game ID: <span>xxx-xxx-xxx</span></h2>
+        <p></p>
+        <template>
+            <section>
+                <h3></h3>
+                <button><img class="icon-picker" src="assets/media/question-mark.svg" alt="icon-not-picked"></button>
+            </section>
+        </template>
+        <div id="players">
+
+        </div>
+        <input type="button" name="back" class="back-button" value="back">
+        <input type="button" name="refresh" class="refresh" value="refresh">
+        <input type="button" onclick="location.href = 'index.html';" name="start-game" class="start-button" value="start" >
     </div>
     <!-- END -->
 </main>
