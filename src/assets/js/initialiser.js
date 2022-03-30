@@ -1,8 +1,7 @@
 "use strict";
 
 let _token = null;
-let _gameID = null
-
+let _gameID = null;
 
 document.addEventListener('DOMContentLoaded',init);
 
