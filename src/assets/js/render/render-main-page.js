@@ -1,8 +1,10 @@
 "use strict";
 
+let _tiles = null;
+
 document.addEventListener("DOMContentLoaded", renderMainPage);
 
-function renderMainPage() {
+async function renderMainPage() {
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
@@ -10,46 +12,48 @@ function renderMainPage() {
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
 
-    renderCards();
-    renderProperties();
+    getTiles();
 }
 
 function endTurn() {
     console.log("end");
 }
 
-
-async function renderCards() {
-    const currentTileName = await getCurrentTileName();
-    const response = await fetchFromServer("/tiles");
-    response.forEach(function (tile) {
-        if (tile.name === currentTileName) {
-            getCardById(tile.position);
-        }
-    });
+function getTiles() {
+    fetchFromServer("/tiles", "GET")
+        .then(tiles => {
+            _tiles = tiles;
+            console.log(tiles);
+            renderCards();
+        });
 }
 
-async function getCurrentTileName() {
+function renderCards() {
+    let currentTileName = null;
     const playerName = "Bob";
-    let currentTile = null;
-    const response = await fetchFromServer("/games/dummy", "GET");
-    response.players.forEach(function (player){
-        if (player.name === playerName) {
-            currentTile = player.currentTile;
-        }
-    });
-    return currentTile;
+    fetchFromServer("/games/dummy", "GET")
+        .then(res => {
+            res.players.forEach(function (player) {
+                if (player.name === playerName) {
+                    currentTileName = player.currentTile;
+                }
+            });
+            _tiles.forEach(function (tile) {
+                if (tile.name === currentTileName) {
+                    getCardById(tile.position);
+                }
+            });
+        });
 }
 
-
-async function getCardById(id) {
+function getCardById(id) {
     const toShow = createToShow(id, id-2, id+3);
-    for (let cardId of toShow) {
-        const response = await fetchFromServer(`/tiles/${cardId}`);
+    console.log(toShow);
+    for (const cardId of toShow) {
         if (cardId === id) {
-            showCards(response, true);
+            showCards(_tiles[cardId], true);
         } else {
-            showCards(response, false);
+            showCards(_tiles[cardId], false);
         }
     }
 }
@@ -74,22 +78,49 @@ function createToShow(id, firstId, lastId) {
 
 
 function showCards(cardInfo, middle) {
-    // TODO : filter special cards
-    if (cardInfo.type === "street" || true) {
-        const $template = document.querySelector('main template').content.firstElementChild.cloneNode(true);
-        if (middle) {
-            $template.classList.add("middle");
-        }
-        $template.querySelector("h3").innerText = cardInfo.name;
-        $template.querySelector('p:first-of-type').innerText = `rent: ${cardInfo.rent}`;
-        $template.querySelector('.rent-one-house').innerText = `Rent with one house: ${cardInfo.rentWithOneHouse}`;
-        $template.querySelector('.rent-two-house').innerText = `Rent with two houses: ${cardInfo.rentWithTwoHouses}`;
-        $template.querySelector('.rent-three-house').innerText = `Rent with three houses: ${cardInfo.rentWithThreeHouses}`;
-        $template.querySelector('.rent-four-house').innerText = `Rent with four houses: ${cardInfo.rentWithFourHouses}`;
-        $template.querySelector('.price-house').innerText = `Price for house: ${cardInfo.housePrice}`;
-        $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
-        document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+    if (cardInfo.type === "street") {
+        renderNormalCard(cardInfo, middle);
+    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax"){
+        specialCard(cardInfo, middle);
+    } else if (cardInfo.type === "utility") {
+        renderUtilityCard(cardInfo, middle);
     }
+}
+
+function renderNormalCard(cardInfo, middle) {
+    const $template = document.querySelector('main .normal-card-template').content.firstElementChild.cloneNode(true);
+    if (middle) {
+        $template.classList.add("middle");
+    }
+    $template.querySelector("h3").innerText = cardInfo.name;
+    $template.querySelector('p:first-of-type').innerText = `rent: ${cardInfo.rent}`;
+    $template.querySelector('.rent-one-house').innerText = `Rent with one house: ${cardInfo.rentWithOneHouse}`;
+    $template.querySelector('.rent-two-house').innerText = `Rent with two houses: ${cardInfo.rentWithTwoHouses}`;
+    $template.querySelector('.rent-three-house').innerText = `Rent with three houses: ${cardInfo.rentWithThreeHouses}`;
+    $template.querySelector('.rent-four-house').innerText = `Rent with four houses: ${cardInfo.rentWithFourHouses}`;
+    $template.querySelector('.price-house').innerText = `Price for house: ${cardInfo.housePrice}`;
+    $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
+    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+}
+
+function specialCard(cardInfo, middle) {
+    const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
+    if (middle) {
+        $template.classList.add("middle");
+    }
+    $template.querySelector("h3").innerText = cardInfo.name;
+    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+}
+
+function renderUtilityCard(cardInfo, middle) {
+    const $template = document.querySelector('main .utility-card-template').content.firstElementChild.cloneNode(true);
+    if (middle) {
+        $template.classList.add("middle");
+    }
+    $template.querySelector("h3").innerText = cardInfo.name;
+    $template.querySelector('.cost').innerText = `rent: ${cardInfo.cost}`;
+    $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
+    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
 

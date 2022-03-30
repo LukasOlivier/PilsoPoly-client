@@ -39,9 +39,9 @@
     <section>
         <h2>Current position:</h2>
         <div id="cards-parent">
-            <template>
+            <template class="normal-card-template">
                 <!--middle article should have class "middle"-->
-                <article class="card">
+                <article class="normal-card">
                     <h3 class="card-name"></h3>
                     <p class="rent"></p>
                     <ol>
@@ -55,6 +55,24 @@
                     <p class="mortgage"></p>
                 </article>
             </template>
+
+            <template class="special-card-template">
+                <article class="special-card">
+                    <h3 class="card-name"></h3>
+                </article>
+            </template>
+
+            <template class="utility-card-template">
+                <article class="utility-card">
+                    <h3 class="card-name"></h3>
+                    <p class="cost"></p>
+                    <p class="rent">4 or 5 times the dice roll</p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
+
+
+
 
 
             <!-- for testing purposes-->
