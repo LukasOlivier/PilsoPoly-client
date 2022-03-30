@@ -19,14 +19,11 @@ function initStartScreen() {
     document.querySelector("#rules").addEventListener("click", renderRules);
 
     document.querySelectorAll('.icon-picker').forEach(item => {
-
         item.addEventListener('click', function (e) {
             document.querySelector("#icon-interface").classList.add("hidden");
             renderIconPicker(e.currentTarget);
         });
-
         item.addEventListener('click', renderIconPicker);
-
     });
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);

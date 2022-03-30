@@ -1,17 +1,15 @@
 'use strict';
 
 function checkExistingGames(){
-    const $joinInterface = document.querySelector("#join-interface");
-    _gameID = $joinInterface.querySelector("#ID").value;
+    _gameID = _$joinInterface.querySelector("#ID").value;
     const name = {
-        playerName: $joinInterface.querySelector(".name").value.toLowerCase()
+        playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
     };
     // these checks dont see errors from the server
     // we can change this when we make our own api server.
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games?prefix=${_gameID}`)
         .then(response => {
-            console.log("checking");
             if (response.length === 0) {
                 throw new Error("There is no game with this code");
             } else if (response.length > 1) {
@@ -33,7 +31,6 @@ function checkExistingGames(){
 }
 
 function joinGame(id, name){
-    console.log("posting to server");
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
             _token = response.token;

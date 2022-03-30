@@ -1,10 +1,9 @@
 'use strict';
 
 function checkInput(){
-    const $createInterface = document.querySelector("#create-interface");
-    const numberOfPlayers = parseInt($createInterface.querySelector("#amount-of-players").value);
+    const numberOfPlayers = parseInt(_$createInterface.querySelector("#amount-of-players").value);
     const name = {
-        playerName: $createInterface.querySelector(".name").value.toLowerCase()
+        playerName: _$createInterface.querySelector(".name").value.toLowerCase()
     };
     if (isNaN(numberOfPlayers)) {
         errorHandler("Please provide a number between 2 and 8");
@@ -27,14 +26,11 @@ function createGame(numberOfPlayer, name){
         prefix: _config.prefix,
         numberOfPlayers: numberOfPlayer
     };
-    console.log(body);
     fetchFromServer('/games', 'POST', body)
         .then(response => {
-            console.log(response.id);
             _gameID = response.id;
             joinGame(_gameID, name);
         })
         .catch(errorHandler);
-
 }
 
