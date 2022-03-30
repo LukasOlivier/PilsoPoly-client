@@ -6,6 +6,7 @@ let _$joinInterface = "";
 let _$lobbyInterface = "";
 let _$iconInterface = "";
 let _$rulesInterface = "";
+let _$seeAllGamesInterface = ";"
 
 function initStartScreen() {
     _$startInterface = document.querySelector("#start-interface");
@@ -14,11 +15,14 @@ function initStartScreen() {
     _$lobbyInterface = document.querySelector("#lobby-interface");
     _$iconInterface = document.querySelector("#icon-interface");
     _$rulesInterface = document.querySelector("#rules-interface");
+    _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
 
 
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
+    document.querySelector("#show-all-games").addEventListener("click", renderAllAvailableGames);
+
 
     document.querySelectorAll('.icon-picker').forEach(item => {
         item.addEventListener('click', function (e) {
@@ -30,6 +34,14 @@ function initStartScreen() {
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
     });
+
+    _$seeAllGamesInterface.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', function (e) {
+            _$seeAllGamesInterface.classList.add("hidden");
+            _$joinInterface.style.opacity = "1";
+            _$joinInterface.querySelector("#ID").value = e.target.innerText
+        });
+    })
 }
 
 function renderJoin() {
@@ -68,14 +80,15 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     });
     // current solution to refresh the lobby, give the gameID (id) with the refresh function
     // this function just goes back to loadGameFromData..
-    _$lobbyInterface.querySelector('.refresh').addEventListener('click', function()  {
+    _$lobbyInterface.querySelector('.refresh').addEventListener('click', function () {
         refresh(id);
         console.log('Your game id is:' + _gameID);
         console.log('your player token is: ' + _token);
     });
 }
+
 // oke pls give me a better name xd
-function hideEverythingForLobby(){
+function hideEverythingForLobby() {
     _$joinInterface.classList.add("hidden");
     _$createInterface.classList.add("hidden");
     _$lobbyInterface.classList.remove("hidden");
@@ -106,6 +119,11 @@ function renderIconPicker($clickedIcon) {
 function renderRules() {
     _$startInterface.classList.add("hidden");
     _$rulesInterface.classList.remove("hidden");
+}
+
+function renderAllAvailableGames() {
+    _$joinInterface.style.opacity = "0.5";
+    _$seeAllGamesInterface.classList.remove("hidden");
 }
 
 function backButton() {
