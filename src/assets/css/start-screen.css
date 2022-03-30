@@ -9,8 +9,6 @@ img {
 }
 
 main {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,6 +34,7 @@ body {
 }
 
 #start-interface {
+    margin-top: 25vh;
     max-width: 40rem;
     display: flex;
     flex-wrap: wrap;
@@ -81,6 +80,7 @@ body {
 
 /* =========================== Join / Create -interface ===========================*/
 #join-interface, #create-interface {
+    margin-top: 25vh;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0.25rem 0.75rem;
     background: rgba(128, 128, 128, 0.7);
     text-align: center;
@@ -261,4 +261,73 @@ body {
     margin-top: 3rem;
     width: 10vw;
     height: 3vh;
+}
+/* =======================================================================*/
+#rules-interface {
+    width: 70%;
+    color: black;
+    margin: 5%;
+    padding: 1rem 1rem 1rem 1rem;
+    border: #c90b0b solid 0.1em;
+    margin-bottom: 2rem;
+    background: white;
+    background: rgba(255, 255, 255, .5)
+}
+
+
+#rules-interface p{
+    white-space: normal;
+    margin-bottom: 1rem;
+}
+
+#rules-interface h1{
+    font-size: 5em;
+    font-family: "Cardo", serif;
+    text-align: center;
+    margin-bottom: 0.5rem;
+
+}
+
+#rules-interface h2{
+    font-size: xx-large;
+    text-align: center;
+    font-family: "Cardo", serif;
+    margin-bottom: 1rem;
+}
+
+#rules-interface h3{
+    font-weight: bolder;
+    font-size: large;
+    text-align: left;
+    font-family: "Cardo", serif;
+    margin-bottom: 0.2rem;
+    color: #c90b0b;
+}
+
+#rules-interface h4{
+    font-size: 2.5em;
+    color: #c90b0b;
+    text-align: center;
+    font-family: "Cardo", serif;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#rules-interface p{
+    text-align: left;
+    margin-bottom: 2rem;
+    font-family: "Cardo", serif;
+}
+
+#rules-interface button{
+    background: white;
+    outline: none;
+    border: black 0.1rem solid;
+    border-radius: 0.2rem;
+    width: 10%;
+    height: 2rem;
+}
+#rules-interface button:hover{
+    cursor: pointer;
+    background: #dedddd;
 }

@@ -5,6 +5,7 @@ let _$createInterface = "";
 let _$joinInterface = "";
 let _$lobbyInterface = "";
 let _$iconInterface = "";
+let _$rulesInterface = "";
 
 function initStartScreen() {
     _$startInterface = document.querySelector("#start-interface");
@@ -12,6 +13,8 @@ function initStartScreen() {
     _$joinInterface = document.querySelector("#join-interface");
     _$lobbyInterface = document.querySelector("#lobby-interface");
     _$iconInterface = document.querySelector("#icon-interface");
+    _$rulesInterface = document.querySelector("#rules-interface");
+
 
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
@@ -101,7 +104,8 @@ function renderIconPicker($clickedIcon) {
 }
 
 function renderRules() {
-    console.log("Now in renderRules function");
+    _$startInterface.classList.add("hidden");
+    _$rulesInterface.classList.remove("hidden");
 }
 
 function backButton() {
