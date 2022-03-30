@@ -68,19 +68,27 @@ body{
 }
 #see-all-the-streets-with-owners .templatearticle .iconplace
 {
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
-    width: 7rem;
 }
 #see-all-the-streets-with-owners .templatearticle .iconplace p
 {
     margin-top: 0.5rem;
-    font-size: 1.3rem;
-    background-image: url("../media/pretzel.png");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-position-y: 0.4rem;
-    background-size: 1.2rem;
+    padding: 0.3rem;
+    font-size: 1rem;
+    color: white;
+    border: solid black;
+    background: #abcbdc;
+}
+#see-all-the-streets-with-owners footer
+{
+    margin: 2rem;
+    text-align: right;
+}
 
+#see-all-the-streets-with-owners footer a
+{
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    background: #543625;
+    color: white;
+    text-decoration: none;
 }
