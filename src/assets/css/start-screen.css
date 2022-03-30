@@ -166,7 +166,16 @@ body {
     background: #dedddd;
     cursor: pointer;
 }
-
+#create-interface #amount-of-players {
+    font-size: 1.2rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+/* Door Robin, excuses @Lukas alst suckt x*/
+#create-interface .name {
+    width: 100%;
+    margin-top: 2rem;
+}
 /* =======================================================================*/
 
 /* ============================= Error message ===========================*/
@@ -210,11 +219,6 @@ body {
     filter: invert(100%);
     cursor: pointer;
 }
-
-#create-interface #amount-of-players {
-    font-size: 1.2rem;
-}
-
 /* =======================================================================*/
 
 

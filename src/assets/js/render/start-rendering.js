@@ -125,15 +125,14 @@ function renderRules() {
 function renderAllAvailableGames(allGames) {
     _$joinInterface.style.opacity = "0.2";
     _$seeAllGamesInterface.classList.remove("hidden");
+    // renders all games that are PilsoPoly and that arent started.
+    // also makes the li clickable
     const $ul = _$seeAllGamesInterface.querySelector('ul');
-    console.log(allGames);
     allGames.forEach(game => {
-        const textToDisplay = game.id + game.players.length + "/" + game.numberOfPlayers;
-        console.log(textToDisplay)
-        $ul.insertAdjacentHTML("beforeend", `<li><p class="gameID">${game.id}</p><p>${game.players.length}/${game.numberOfPlayers}</p></li>`);
-    })
-
-    // _$seeAllGamesInterface.querySelector('ul').innerHTML
+        $ul.insertAdjacentHTML("beforeend", `<li id="${game.id}"><p class="gameID">${game.id}</p><p>${game.players.length}/${game.numberOfPlayers}</p></li>`);
+    });
+    const $listItems = $ul.querySelectorAll('li');
+    $listItems.forEach(item => item.addEventListener("click", fillInGameID));
 }
 
 function backButton() {

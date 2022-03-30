@@ -41,7 +41,6 @@ function joinGame(id, name){
         .catch(errorHandler);
 }
 
-
 // https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
 function fetchAllGames(){
     console.log(_config.prefix)
@@ -49,3 +48,11 @@ function fetchAllGames(){
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
         .then(response => renderAllAvailableGames(response))
 }
+
+function fillInGameID(e){
+    // hides the pop up, and fills the value from the li in the ID field
+    _$seeAllGamesInterface.classList.add("hidden");
+    _$joinInterface.style.opacity = "1";
+    _$joinInterface.querySelector("#ID").value = e.target.id;
+}
+
