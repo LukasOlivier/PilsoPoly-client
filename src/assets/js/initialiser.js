@@ -2,6 +2,8 @@
 
 let _token = null;
 let _gameID = null
+
+
 document.addEventListener('DOMContentLoaded',init);
 
 function init(){

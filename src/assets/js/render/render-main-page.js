@@ -2,9 +2,7 @@
 
 let _tiles = null;
 
-document.addEventListener("DOMContentLoaded", renderMainPage);
-
-async function renderMainPage() {
+function renderMainPage() {
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
@@ -23,7 +21,7 @@ function getTiles() {
     fetchFromServer("/tiles", "GET")
         .then(tiles => {
             _tiles = tiles;
-            console.log(tiles);
+            console.log("render cards");
             renderCards();
         });
 }
@@ -48,7 +46,6 @@ function renderCards() {
 
 function getCardById(id) {
     const toShow = createToShow(id, id-2, id+3);
-    console.log(toShow);
     for (const cardId of toShow) {
         if (cardId === id) {
             showCards(_tiles[cardId], true);
