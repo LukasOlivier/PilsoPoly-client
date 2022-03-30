@@ -34,8 +34,10 @@ function joinGame(id, name){
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
             _token = response.token;
+            localStorage.clear();
             saveToStorage("gameId", id);
             saveToStorage("token", _token);
+            saveToStorage("name", name.playerName);
             loadGameDataForLobby(id, name);
         })
         // this token is your security token.

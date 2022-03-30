@@ -1,4 +1,6 @@
-"use strict";
+// "use strict";
+
+_token = {token : loadFromStorage("token")};
 
 function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
@@ -10,14 +12,15 @@ function renderMainPage() {
 }
 
 function endTurn() {
-    console.log(_gameID);
     console.log("end");
 }
 
 function renderCards() {
     let currentTileName = null;
-    const playerName = "Bob";
-    fetchFromServer("/games/dummy", "GET")
+    const playerName = loadFromStorage("name");
+    const gameId = loadFromStorage("gameId");
+
+    fetchFromServer(`/games/${gameId}`, "GET")
         .then(res => {
             res.players.forEach(function (player) {
                 if (player.name === playerName) {
