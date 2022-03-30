@@ -58,7 +58,7 @@
     margin-top: 1.5rem;
 }
 
-#main-screen .normal-card, .special-card, .utility-card{
+#main-screen .normal-card, .special-card, .utility-card, .railroad-card{
     text-align: center;
     width: 10rem;
     padding: 1rem;

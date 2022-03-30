@@ -21,7 +21,7 @@ function getTiles() {
     fetchFromServer("/tiles", "GET")
         .then(tiles => {
             _tiles = tiles;
-            console.log("render cards");
+            console.log(tiles);
             renderCards();
         });
 }
@@ -77,10 +77,12 @@ function createToShow(id, firstId, lastId) {
 function showCards(cardInfo, middle) {
     if (cardInfo.type === "street") {
         renderNormalCard(cardInfo, middle);
-    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax"){
+    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax" || cardInfo.type === "Tax Income" || cardInfo.type === "chance" || cardInfo.type === "Go to Jail") {
         specialCard(cardInfo, middle);
     } else if (cardInfo.type === "utility") {
         renderUtilityCard(cardInfo, middle);
+    } else if (cardInfo.type === "railroad") {
+        renderRailroad(cardInfo, middle);
     }
 }
 
@@ -115,7 +117,18 @@ function renderUtilityCard(cardInfo, middle) {
         $template.classList.add("middle");
     }
     $template.querySelector("h3").innerText = cardInfo.name;
-    $template.querySelector('.cost').innerText = `rent: ${cardInfo.cost}`;
+    $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
+    $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
+    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+}
+
+function renderRailroad(cardInfo, middle) {
+    const $template = document.querySelector('main .railroad-card-template').content.firstElementChild.cloneNode(true);
+    if (middle) {
+        $template.classList.add("middle");
+    }
+    $template.querySelector("h3").innerText = cardInfo.name;
+    $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
