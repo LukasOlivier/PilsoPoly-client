@@ -115,22 +115,21 @@ function specialCard(cardInfo, middle) {
 
 function renderUtilityCard(cardInfo, middle) {
     const $template = document.querySelector('main .utility-card-template').content.firstElementChild.cloneNode(true);
-    addClassToMiddle($template, middle);
-    $template.querySelector("h3").innerText = cardInfo.name;
-    $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
-    $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
-    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+    railUtilityTemplate($template, cardInfo, middle);
 }
 
 function renderRailroad(cardInfo, middle) {
     const $template = document.querySelector('main .railroad-card-template').content.firstElementChild.cloneNode(true);
+    railUtilityTemplate($template, cardInfo, middle);
+}
+
+function railUtilityTemplate($template, cardInfo, middle) {
     addClassToMiddle($template, middle);
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.price').innerText = `rent: ${cardInfo.cost}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: ${cardInfo.mortgage}`;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
-
 
 function renderProperties() {
     console.log("render properties");
