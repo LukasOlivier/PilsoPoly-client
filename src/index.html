@@ -19,7 +19,7 @@
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-
+    <script src="assets/js/initialiser.js"></script>
     <script src="assets/js/render/render-main-page.js"></script>
 
 </head>
@@ -28,7 +28,7 @@
 
 <header>
     <button id="end-turn">End turn</button>
-    <h1>Monopoly</h1>
+    <h1 id="game-screen">Monopoly</h1>
     <div>
         <img src="images/trade.png" alt="trade" title="trade" id="trade">
         <img src="images/map.png" alt="map" title="map" id="map">
@@ -38,10 +38,10 @@
 <main>
     <section>
         <h2>Current position:</h2>
-        <div>
-            <template>
+        <div id="cards-parent">
+            <template class="normal-card-template">
                 <!--middle article should have class "middle"-->
-                <article class="card">
+                <article class="normal-card">
                     <h3 class="card-name"></h3>
                     <p class="rent"></p>
                     <ol>
@@ -56,77 +56,30 @@
                 </article>
             </template>
 
+            <template class="special-card-template">
+                <article class="special-card">
+                    <h3 class="card-name"></h3>
+                </article>
+            </template>
 
-            <!-- for testing purposes-->
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+            <template class="utility-card-template">
+                <article class="utility-card">
+                    <h3 class="card-name"></h3>
+                    <p class="price"></p>
+                    <p class="rent">4 or 5 times the dice roll</p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
 
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
+            <template class="railroad-card-template">
+                <article class="railroad-card">
+                    <h3 class="card-name"></h3>
+                    <p class="price"></p>
+                    <p class="rent"></p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
 
-            <article class="card middle">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
-
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
-
-            <article class="card">
-                <h3 class="card-name">name</h3>
-                <p class="rent">455</p>
-                <ol>
-                    <li><p class="rent-one-house">price for one house</p></li>
-                    <li><p class="rent-two-house">teeeeest</p></li>
-                    <li><p class="rent-three-house">price for one house</p></li>
-                    <li><p class="rent-four-house">price for one house</p></li>
-                    <li><p class="rent-hotel">price for one house</p></li>
-                </ol>
-                <p class="price-house">2525</p>
-                <p class="mortgage">2525</p>
-            </article>
         </div>
     </section>
 

@@ -1,6 +1,9 @@
 "use strict";
+
 let _token = null;
 let _gameID = null
+
+
 document.addEventListener('DOMContentLoaded',init);
 
 function init(){
@@ -10,5 +13,4 @@ function init(){
     else if (document.querySelector("h1").id === "game-screen"){
         renderMainPage();
     }
-    // this is the innit for the main page
 }
