@@ -13,19 +13,19 @@ function checkExistingGames(){
         .then(response => {
             console.log("checking");
             if (response.length === 0) {
-                throw "There is no game with this code";
+                throw new Error("There is no game with this code");
             } else if (response.length > 1) {
-                throw "Please fill in your code correctly";
+                throw new Error("Please fill in your code correctly");
             } else if (response[0].started === true) {
-                throw "Game already started";
+                throw new Error("Game already started");
             }
             response[0].players.forEach(player => {
                 if (player.name.toLowerCase() === name.playerName.toLowerCase()) {
-                    throw "The name is already in use";
+                    throw new Error("The name is already in use");
                 }
             });
             if (name.playerName === "") {
-                throw "Your player name cant be empty";
+                throw new Error("Your player name cant be empty");
             }
             joinGame(id, name);
         })
