@@ -1,29 +1,17 @@
 "use strict";
 
-let _tiles = null;
-
 function renderMainPage() {
-
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
-
     getTiles();
 }
 
 function endTurn() {
+    console.log(_gameID);
     console.log("end");
-}
-
-function getTiles() {
-    fetchFromServer("/tiles", "GET")
-        .then(tiles => {
-            _tiles = tiles;
-            console.log(tiles);
-            renderCards();
-        });
 }
 
 function renderCards() {
@@ -77,7 +65,7 @@ function createToShow(id, firstId, lastId) {
 function showCards(cardInfo, middle) {
     if (cardInfo.type === "street") {
         renderNormalCard(cardInfo, middle);
-    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax" || cardInfo.type === "Tax Income" || cardInfo.type === "chance" || cardInfo.type === "Go to Jail") {
+    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax" || cardInfo.type === "Tax Income" || cardInfo.type === "chance" || cardInfo.type === "Go to Jail" || cardInfo.type === "Free Parking") {
         specialCard(cardInfo, middle);
     } else if (cardInfo.type === "utility") {
         renderUtilityCard(cardInfo, middle);
