@@ -334,32 +334,25 @@
     <div id="join-interface" class="hidden">
         <h2>Enter ID</h2>
         <label for="ID">To join your friend’s game, enter their game ID</label>
-        <input type="text" name="ID" id="ID" placeholder="Game-ID" required>
-        <input type="text" name="name" class="name" placeholder="Your name" required>
+        <form method="">
+            <div id="IDWithgames">
+                <input type="text" name="ID" id="ID" placeholder="Game-ID" required>
+                <input type="button" name="show-all-games" id="show-all-games">
+            </div>
+            <input type="text" name="name" class="name" placeholder="Your name" required>
+        </form>
+
 
         <nav aria-label="navigation">
-            <input type="button" name="back" class="back-button" value="back">
-            <input type="button" name="join" class="join-button" value="join">
+            <input type="button" name="back" class="back-button" value="Back">
+            <input type="button" name="join" class="join-button" value="Join">
         </nav>
-        <input type="button" value="See all games" name="show-all-games" id="show-all-games">
-    </div >
+    </div>
     <div id="see-all-games-interface" class="hidden">
-            <h2>Current games:</h2>
-            <ul>
-                <li>Hallo ik ben een game1</li>
-                <li>Hallo ik ben een game2</li>
-                <li>Hallo ik ben een game3</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-                <li>Hallo ik ben een game</li>
-            </ul>
+        <h2>Current games:</h2>
+        <ul>
+
+        </ul>
     </div>
 
     <!-- END -->
@@ -391,8 +384,8 @@
                placeholder="How many players will join this game?" min="2" max="8" required>
 
         <nav aria-label="navigation">
-            <input type="button" name="back" class="back-button" value="back">
-            <input type="button" name="join" class="join-button" value="create">
+            <input type="button" name="back" class="back-button" value="Back">
+            <input type="button" name="join" class="join-button" value="Create">
         </nav>
     </div>
 

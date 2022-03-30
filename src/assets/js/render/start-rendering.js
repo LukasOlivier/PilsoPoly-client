@@ -123,7 +123,7 @@ function renderRules() {
 }
 
 function renderAllAvailableGames() {
-    _$joinInterface.style.opacity = "0.5";
+    _$joinInterface.style.opacity = "0.2";
     _$seeAllGamesInterface.classList.remove("hidden");
 }
 

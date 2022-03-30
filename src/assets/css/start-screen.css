@@ -14,14 +14,7 @@ main {
     justify-content: center;
     flex-direction: column;
 }
-html .back-button, html .join-button{
-    background: white;
-    border: black solid 0.1rem;
-}
-html .back-button:hover, html .join-button:hover{
-    background: #e7e7e7;
-    cursor: pointer;
-}
+
 
 /* =========================== Start-interface ===========================*/
 body {
@@ -104,15 +97,35 @@ body {
 
 #join-interface input, #create-interface input {
     border: transparent solid 0.1rem;
-    margin-top: 2rem;
     font-size: 1.5rem;
     background: #FFFFFFFF;
     outline: none;
     color: #000000FF;
     font-family: Oswald, serif;
     text-align: center;
-    height: 3rem;
+}
+#join-interface .name{
     width: 19.5rem;
+    margin-top: 1rem;
+}
+#join-interface #ID{
+    width: 100%;
+}
+#join-interface #IDWithgames{
+    margin-top: 2rem;
+    max-height: 3rem;
+    background: white;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#join-interface #show-all-games{
+    width: 3rem;
+    background: url("../media/list-icon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .player-options {
@@ -125,6 +138,11 @@ body {
     width: auto;
 }
 
+#join-interface #show-all-games:hover {
+    cursor: pointer;
+    border: black solid 0.075rem;
+}
+
 #join-interface nav, #create-interface nav {
     margin-top: 1.5rem;
     display: flex;
@@ -134,7 +152,6 @@ body {
 }
 
 #join-interface nav input, #create-interface nav input {
-    border: transparent solid 0.1rem;
     width: 4rem;
     height: 2rem;
     font-size: 1rem;
@@ -145,8 +162,9 @@ body {
     text-align: center;
 }
 
-#join-interface input:focus {
-    border: #000000FF solid 0.1rem;
+#join-interface nav input:hover, #create-interface nav input:hover {
+    background: #dedddd;
+    cursor: pointer;
 }
 
 /* =======================================================================*/
@@ -196,8 +214,8 @@ body {
 #create-interface #amount-of-players {
     font-size: 1.2rem;
 }
-/* =======================================================================*/
 
+/* =======================================================================*/
 
 
 /* =========================== Lobby-interface ===========================*/
@@ -213,6 +231,7 @@ body {
     font-size: 1.5rem;
     margin-bottom: 6rem;
 }
+
 #players {
     display: flex;
     flex-direction: row;
@@ -261,11 +280,13 @@ body {
     cursor: pointer;
     background: #dedddd;
 }
-#lobby-interface .back-button{
+
+#lobby-interface .back-button {
     margin-top: 3rem;
     width: 10vw;
     height: 3vh;
 }
+
 /* =======================================================================*/
 
 
@@ -282,12 +303,12 @@ body {
 }
 
 
-#rules-interface p{
+#rules-interface p {
     white-space: normal;
     margin-bottom: 1rem;
 }
 
-#rules-interface h1{
+#rules-interface h1 {
     font-size: 5em;
     font-family: "Cardo", serif;
     text-align: center;
@@ -295,14 +316,14 @@ body {
 
 }
 
-#rules-interface h2{
+#rules-interface h2 {
     font-size: xx-large;
     text-align: center;
     font-family: "Cardo", serif;
     margin-bottom: 1rem;
 }
 
-#rules-interface h3{
+#rules-interface h3 {
     font-weight: bolder;
     font-size: large;
     text-align: left;
@@ -311,7 +332,7 @@ body {
     color: #c90b0b;
 }
 
-#rules-interface h4{
+#rules-interface h4 {
     font-size: 2.5em;
     color: #c90b0b;
     text-align: center;
@@ -320,13 +341,13 @@ body {
     margin-bottom: 2rem;
 }
 
-#rules-interface p{
+#rules-interface p {
     text-align: left;
     margin-bottom: 2rem;
     font-family: "Cardo", serif;
 }
 
-#rules-interface button{
+#rules-interface button {
     background: white;
     outline: none;
     border: black 0.1rem solid;
@@ -334,34 +355,38 @@ body {
     width: 10%;
     height: 2rem;
 }
-#rules-interface button:hover{
+
+#rules-interface button:hover {
     cursor: pointer;
     background: #dedddd;
 }
+
 /* =======================================================================*/
 
 
 /* =========================== See-all-games-interface ===========================*/
-#see-all-games-interface{
+#see-all-games-interface {
 
     flex-direction: column;
     align-items: center;
     position: fixed;
     margin-top: 25vh;
-    border-top: #eeeeef solid 1rem;
-    border-left: #eeeeef solid 1rem;
+    border-top: #eeeeef solid 0.5rem;
+    border-left: #eeeeef solid 0.5rem;
     padding: 1rem;
     width: 20vw;
     height: 30vw;
     overflow: scroll;
     font-size: 1.5rem;
-    background: red;
+    background: #98c5da;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
-#see-all-games-interface h2{
+#see-all-games-interface h2 {
     margin-bottom: 1rem;
 }
-#see-all-games-interface li{
+
+#see-all-games-interface li {
     font-size: 1.2rem;
     text-align: center;
     width: 100%;
@@ -370,7 +395,13 @@ body {
     display: inline-block;
     padding: 1rem 0 1rem 0;
 }
-#see-all-games-interface li:hover{
-    background: #ac0b0b;
+
+#see-all-games-interface li:hover {
+    background: #4a83c4;
     cursor: pointer;
 }
+
+
+
+
+
