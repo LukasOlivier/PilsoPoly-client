@@ -19,10 +19,10 @@ function checkInput(){
         errorHandler("Your name cant be empty");
         return;
     }
-    createGame(numberOfPlayers);
+    createGame(numberOfPlayers, name);
 }
 
-function createGame(numberOfPlayer){
+function createGame(numberOfPlayer, name){
     const body = {
         prefix: _config.prefix,
         numberOfPlayers: numberOfPlayer
@@ -31,6 +31,10 @@ function createGame(numberOfPlayer){
     fetchFromServer('/games', 'POST', body)
         .then(response => {
             console.log(response.id);
-        });
+            _gameID = response.id;
+            joinGame(_gameID, name);
+        })
+        .catch(errorHandler);
+
 }
 

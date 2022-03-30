@@ -67,8 +67,14 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
-    // _$lobbyInterface.querySelector('.start-button').addEventListener("click");
-    }
+    // current solution to refresh the lobby, give the gameID (id) with the refresh function
+    // this function just goes back to loadGameFromData..
+    _$lobbyInterface.querySelector('.refresh').addEventListener('click', function()  {
+        refresh(id);
+        console.log('Your game id is:' + _gameID);
+        console.log('your player token is: ' + _token);
+    });
+}
 // oke pls give me a better name xd
 function hideEverythingForLobby(){
     _$joinInterface.classList.add("hidden");

@@ -2,14 +2,14 @@
 
 function checkExistingGames(){
     const $joinInterface = document.querySelector("#join-interface");
-    const id = $joinInterface.querySelector("#ID").value;
+    _gameID = $joinInterface.querySelector("#ID").value;
     const name = {
         playerName: $joinInterface.querySelector(".name").value.toLowerCase()
     };
     // these checks dont see errors from the server
     // we can change this when we make our own api server.
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games?prefix=${id}`)
+    fetchFromServer(`/games?prefix=${_gameID}`)
         .then(response => {
             console.log("checking");
             if (response.length === 0) {
@@ -27,20 +27,19 @@ function checkExistingGames(){
             if (name.playerName === "") {
                 throw new Error("Your player name cant be empty");
             }
-            joinGame(id, name);
+            joinGame(_gameID, name);
         })
         .catch(errorHandler);
 }
 
 function joinGame(id, name){
     console.log("posting to server");
-//    fetchFromServer(`/games/${id}/players`,'POST', name)
-//        .then(response => {
-//            _token = response.token;
-//            console.log(_token);
-//            loadGameDataForLobby(id, name);
-//        })
+    fetchFromServer(`/games/${id}/players`,'POST', name)
+        .then(response => {
+            _token = response.token;
+            console.log(_token);
+            loadGameDataForLobby(id, name);
+        })
         // this token is your security token.
-//        .catch(errorHandler);
-    loadGameDataForLobby(id, name);
+        .catch(errorHandler);
 }
