@@ -58,6 +58,13 @@
     margin-top: 1.5rem;
 }
 
+#main-screen main button {
+    display: block;
+    width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #main-screen .normal-card, .special-card, .utility-card, .railroad-card{
     text-align: center;
     width: 10rem;

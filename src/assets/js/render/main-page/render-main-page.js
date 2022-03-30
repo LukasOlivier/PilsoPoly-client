@@ -13,6 +13,7 @@ function renderMainPage() {
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
+    document.querySelector("main button").addEventListener("click", backToCurrentPosition);
 
     getTiles();
     renderPlayerInfo();
@@ -100,11 +101,7 @@ function move(value) {
     if (_tempPlayerPositionID === -1) {
         _tempPlayerPositionID = 39;
     }
-    console.log(_tempPlayerPositionID);
-    const $articles = document.querySelectorAll("#cards-parent article");
-    $articles.forEach((article) => {
-        article.remove();
-    });
+    removeCards();
     getCardById(_tempPlayerPositionID);
 }
 
@@ -114,6 +111,18 @@ function moveLeft() {
 
 function moveRight() {
     move(-1);
+}
+
+function backToCurrentPosition() {
+    removeCards();
+    getCardById(_playerPositionID);
+}
+
+function removeCards() {
+    const $articles = document.querySelectorAll("#cards-parent article");
+    $articles.forEach((article) => {
+        article.remove();
+    });
 }
 
 function showMap() {
