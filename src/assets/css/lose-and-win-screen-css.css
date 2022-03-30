@@ -8,12 +8,40 @@
     color: white;
 }
 
-#winningScreen div
+div
 {
-    width: 20%;
+    margin-top: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: 40%;
+    color: black;
+    font-size: 7rem;
+}
+#losingScreen div img
+{
+    max-width: 60%;
 }
 
 #winningScreen div img
 {
-    max-width: 10%;
+    max-width: 100%;
+}
+a
+{
+    transition: all .2s ease-in-out;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    background: rgba(84, 54, 37, 0.75);
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 2rem;
+}
+
+a:hover
+{
+    transform: scale(1.1);
+    padding: 0.7rem 2.3rem 0.7rem 2.3rem;
+    font-size: 1.4rem;
+
 }
