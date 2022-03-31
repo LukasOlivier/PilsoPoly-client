@@ -77,10 +77,6 @@
     background-color: #979797;
 }
 
-#main-screen .normal-card p {
-    margin: 1rem;
-}
-
 #main-screen .special-card h3 {
     margin-top: auto;
     margin-bottom: auto;
@@ -172,17 +168,55 @@
     transform: scale(1.5);
 }
 
+/* ======================================================================================================== */
+/* ===================================      PROCEED WITH CAUTION       ==================================== */
+/* ======================================================================================================== */
+
 #main-screen #cards-parent {
+    font-family: Calibri, serif;
     margin-top: 2rem;
     height: 50vh;
     align-items: center;
     margin-bottom: 2rem;
 }
 
+#main-screen #cards-parent article {
+    display: flex;
+    flex-direction: column;
+    border: black solid 0.1rem;
+    background: #e5e5e5;
+    border-radius: 0.2rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-align: left;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#cards-parent article::-webkit-scrollbar {
+    display: none;
+}
+
+#main-screen #cards-parent li {
+    text-align: left;
+}
+
+#cards-parent .card-name {
+    font-size: 120%;
+    margin-bottom: 1rem;
+    border: black solid 0.1rem;
+    padding: 0.5rem;
+    align-self: center;
+    width: 100%;
+}
+
 #main-screen #cards-parent article:first-of-type, #main-screen #cards-parent article:last-of-type {
     width: 10vw;
-    height: 10vw;
-    border: red solid 0.5rem;
+    height: 18vw;
+}
+
+#main-screen #cards-parent article:first-of-type img, #main-screen #cards-parent article:last-of-type img {
+    height: 1rem;
 }
 
 #main-screen #cards-parent article:first-of-type p, #main-screen #cards-parent article:last-of-type p {
@@ -190,15 +224,34 @@
 }
 
 #main-screen #cards-parent article:nth-of-type(2), #main-screen #cards-parent article:nth-of-type(4) {
-    width: 8vw;
-    height: 18vw;
-    border: blue solid 0.5rem;
+    width: 12vw;
+    height: 22vw;
+}
+
+#cards-parent article:nth-of-type(2) img, #cards-parent article:nth-of-type(4) img{
+    height: 1.5rem;
+}
+
+
+#main-screen #cards-parent article:nth-of-type(2) p, #main-screen #cards-parent article:nth-of-type(4) p {
+    font-size: 99%;
 }
 
 #main-screen #cards-parent article:nth-of-type(3) {
     width: 15vw;
     height: 100%;
-    border: pink solid 0.5rem;
+}
+
+#main-screen #cards-parent article:nth-of-type(3) img{
+    height: 2rem;
+}
+
+#main-screen #cards-parent article:nth-of-type(3) p {
+    font-size: 110%;
+}
+
+#main-screen #cards-parent {
+    text-transform: uppercase;
 }
 
 #main-screen footer img {
@@ -212,9 +265,45 @@
 #main-screen footer {
     background: rgb(178, 207, 224);
     border-top: black solid 0.1rem;
-
 }
 
-#main-screen footer .player-balance{
+#main-screen footer .player-balance {
     color: white;
+}
+
+.special-card .card-name {
+    margin-top: 1rem;
+    margin-bottom: auto;
+}
+
+.rent-one-house, .rent-two-house, .rent-three-house {
+    margin-bottom: 0.2rem;
+}
+
+
+#cards-parent article li {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.rent {
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+#cards-parent article li:last-of-type{
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+#cards-parent article li:first-of-type, #cards-parent article li:last-of-type {
+    margin-top: 0.5rem;
+}
+.price-house{
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+.mortgage{
+    margin-top: 0.5rem;
 }
