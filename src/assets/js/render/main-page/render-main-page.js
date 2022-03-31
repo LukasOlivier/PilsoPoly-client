@@ -1,7 +1,7 @@
 // "use strict";
 
 _token = {token : loadFromStorage("token")};
-_gameID = loadFromStorage("gameId");
+_gameID = "dummy"
 
 function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
