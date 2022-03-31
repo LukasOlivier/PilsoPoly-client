@@ -15,12 +15,13 @@ function rollDice(){
 function initDice(playerName, _gameId){
         fetchFromServer(`/games/${_gameId}/players/${playerName}/dice`, 'POST')
             .then(response => {
+                changeDiceRollNumber(respons.lastDiceRoll);
              console.log('you rolled' + '' + response.lastDiceRoll)
 
             })
             .catch(errorHandler);
-
-
-
 }
 
+function changeDiceRollNumber(number){
+    document.querySelector('#number').innerHTML = number;
+}
