@@ -52,8 +52,10 @@ function joinGame(id, name){
         .then(response => {
             _gameID = id;
             _token = response.token;
-            console.log("You joined a game with id: " + _gameID)
-            console.log("Your key is: " + _token)
+            localStorage.clear();
+            saveToStorage("gameId", id);
+            saveToStorage("token", _token);
+            saveToStorage("name", name.playerName);
             loadGameDataForLobby(id, name);
         })
         // this token is your security token.

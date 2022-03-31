@@ -19,8 +19,13 @@
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
+    <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+
+    <script src="assets/js/functionality/get-playboard-tiles.js"></script>
+
     <script src="assets/js/initialiser.js"></script>
-    <script src="assets/js/render/render-main-page.js"></script>
+    <script src="assets/js/render/main-page/render-main-page.js"></script>
+    <script src="assets/js/render/main-page/renderCards.js"></script>
 
 </head>
 
@@ -31,7 +36,7 @@
     <h1 id="game-screen">Monopoly</h1>
     <div>
         <img src="images/trade.png" alt="trade" title="trade" id="trade">
-        <img src="images/map.png" alt="map" title="map" id="map">
+        <a href="../src/see-all-the-streets-with-owners.html"><img src="images/map.png" alt="map" title="map" id="map"></a>
     </div>
 </header>
 
@@ -55,7 +60,6 @@
                     <p class="mortgage"></p>
                 </article>
             </template>
-
             <template class="special-card-template">
                 <article class="special-card">
                     <h3 class="card-name"></h3>
@@ -87,10 +91,13 @@
         <img src="images/arrow.jpg" alt="left-arrow" title="left-arrow" id="left-arrow">
         <img src="images/arrow.jpg" alt="right-arrow" title="right-arrow" id="right-arrow">
     </div>
+
+    <button class="hidden">back to current position!</button>
+
 </main>
 
 <footer>
-    <template>
+    <template class="player-info-template">
         <div class="info-container">
             <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
             <div>
@@ -99,162 +106,42 @@
                 </div>
                 <div class="player-properties">
                     <!-- add class "not-bought" to make grey-->
-                    <div class="square brown-1"></div>
-                    <div class="square brown-2"></div>
-                    <div class="square blue-1"></div>
-                    <div class="square blue-2"></div>
-                    <div class="square blue-3"></div>
-                    <div class="square purple-1"></div>
-                    <div class="square purple-2"></div>
-                    <div class="square purple-3"></div>
-                    <div class="square orange-1"></div>
-                    <div class="square orange-2"></div>
-                    <div class="square orange-3"></div>
-                    <div class="square red-1"></div>
-                    <div class="square red-2"></div>
-                    <div class="square red-3"></div>
-                    <div class="square yellow-1"></div>
-                    <div class="square yellow-2"></div>
-                    <div class="square yellow-3"></div>
-                    <div class="square green-1"></div>
-                    <div class="square green-2"></div>
-                    <div class="square green-3"></div>
-                    <div class="square dblue-1"></div>
-                    <div class="square dblue-2"></div>
-                    <div class="square black-1"></div>
-                    <div class="square black-2"></div>
-                    <div class="square black-3"></div>
-                    <div class="square black-4"></div>
-                    <div class="square white-1"></div>
-                    <div class="square white-2"></div>
+                    <div class="square brown-1 not-bought"></div>
+                    <div class="square brown-2 not-bought"></div>
+                    <div class="square blue-1 not-bought"></div>
+                    <div class="square blue-2 not-bought"></div>
+                    <div class="square blue-3 not-bought"></div>
+                    <div class="square purple-1 not-bought"></div>
+                    <div class="square purple-2 not-bought"></div>
+                    <div class="square purple-3 not-bought"></div>
+                    <div class="square orange-1 not-bought"></div>
+                    <div class="square orange-2 not-bought"></div>
+                    <div class="square orange-3 not-bought"></div>
+                    <div class="square red-1 not-bought"></div>
+                    <div class="square red-2 not-bought"></div>
+                    <div class="square red-3 not-bought"></div>
+                    <div class="square yellow-1 not-bought"></div>
+                    <div class="square yellow-2 not-bought"></div>
+                    <div class="square yellow-3 not-bought"></div>
+                    <div class="square green-1 not-bought"></div>
+                    <div class="square green-2 not-bought"></div>
+                    <div class="square green-3 not-bought"></div>
+                    <div class="square dblue-1 not-bought"></div>
+                    <div class="square dblue-2 not-bought"></div>
+                    <div class="square black-1 not-bought"></div>
+                    <div class="square black-2 not-bought"></div>
+                    <div class="square black-3 not-bought"></div>
+                    <div class="square black-4 not-bought"></div>
+                    <div class="square white-1 not-bought"></div>
+                    <div class="square white-2 not-bought"></div>
                 </div>
             </div>
         </div>
     </template>
-
-    <!--for testing purposes-->
-    <div class="info-container">
-        <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
-        <div>
-            <div>
-                <p>Niels: M400</p>
-            </div>
-            <div class="player-properties">
-                <!-- add class "not-bought" to make grey-->
-                <div class="square brown-1"></div>
-                <div class="square brown-2"></div>
-                <div class="square blue-1"></div>
-                <div class="square blue-2"></div>
-                <div class="square blue-3"></div>
-                <div class="square purple-1"></div>
-                <div class="square purple-2"></div>
-                <div class="square purple-3"></div>
-                <div class="square orange-1"></div>
-                <div class="square orange-2"></div>
-                <div class="square orange-3"></div>
-                <div class="square red-1"></div>
-                <div class="square red-2"></div>
-                <div class="square red-3"></div>
-                <div class="square yellow-1"></div>
-                <div class="square yellow-2"></div>
-                <div class="square yellow-3"></div>
-                <div class="square green-1"></div>
-                <div class="square green-2"></div>
-                <div class="square green-3"></div>
-                <div class="square dblue-1"></div>
-                <div class="square dblue-2"></div>
-                <div class="square black-1"></div>
-                <div class="square black-2"></div>
-                <div class="square black-3"></div>
-                <div class="square black-4"></div>
-                <div class="square white-1"></div>
-                <div class="square white-2"></div>
-            </div>
-        </div>
-    </div>
-    <div class="info-container">
-        <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
-        <div>
-            <div>
-                <p>Niels: M400</p>
-            </div>
-            <div class="player-properties">
-                <!-- add class "not-bought" to make grey-->
-                <div class="square brown-1"></div>
-                <div class="square brown-2"></div>
-                <div class="square blue-1"></div>
-                <div class="square blue-2"></div>
-                <div class="square blue-3"></div>
-                <div class="square purple-1"></div>
-                <div class="square purple-2"></div>
-                <div class="square purple-3"></div>
-                <div class="square orange-1"></div>
-                <div class="square orange-2"></div>
-                <div class="square orange-3"></div>
-                <div class="square red-1"></div>
-                <div class="square red-2"></div>
-                <div class="square red-3"></div>
-                <div class="square yellow-1"></div>
-                <div class="square yellow-2"></div>
-                <div class="square yellow-3"></div>
-                <div class="square green-1"></div>
-                <div class="square green-2"></div>
-                <div class="square green-3"></div>
-                <div class="square dblue-1"></div>
-                <div class="square dblue-2"></div>
-                <div class="square black-1"></div>
-                <div class="square black-2"></div>
-                <div class="square black-3"></div>
-                <div class="square black-4"></div>
-                <div class="square white-1"></div>
-                <div class="square white-2"></div>
-            </div>
-        </div>
-    </div>
-    <div class="info-container">
-        <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
-        <div>
-            <div>
-                <p>Niels: M400</p>
-            </div>
-            <div class="player-properties">
-                <!-- add class "not-bought" to make grey-->
-                <div class="square brown-1"></div>
-                <div class="square brown-2"></div>
-                <div class="square blue-1"></div>
-                <div class="square blue-2"></div>
-                <div class="square blue-3"></div>
-                <div class="square purple-1"></div>
-                <div class="square purple-2"></div>
-                <div class="square purple-3"></div>
-                <div class="square orange-1"></div>
-                <div class="square orange-2"></div>
-                <div class="square orange-3"></div>
-                <div class="square red-1"></div>
-                <div class="square red-2"></div>
-                <div class="square red-3"></div>
-                <div class="square yellow-1"></div>
-                <div class="square yellow-2"></div>
-                <div class="square yellow-3"></div>
-                <div class="square green-1"></div>
-                <div class="square green-2"></div>
-                <div class="square green-3"></div>
-                <div class="square dblue-1"></div>
-                <div class="square dblue-2"></div>
-                <div class="square black-1"></div>
-                <div class="square black-2"></div>
-                <div class="square black-3"></div>
-                <div class="square black-4"></div>
-                <div class="square white-1"></div>
-                <div class="square white-2"></div>
-            </div>
-        </div>
-    </div>
 </footer>
 
 <div class="errormessages">
     <p></p>
 </div>
-
 </body>
 </html>
