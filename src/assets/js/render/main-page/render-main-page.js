@@ -102,9 +102,15 @@ function move(value) {
         $button.classList.toggle("hidden");
     }
     _tempPlayerPositionID -= value;
+
+    if (_tempPlayerPositionID === 40) {
+        _tempPlayerPositionID = 0;
+    }
+
     if (_tempPlayerPositionID === -1) {
         _tempPlayerPositionID = 39;
     }
+
     removeCards();
     getCardById(_tempPlayerPositionID);
 }

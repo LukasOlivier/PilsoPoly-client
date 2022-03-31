@@ -16,7 +16,6 @@ function init() {
 
    fetchFromServer(`/games/${_gameID}`,'GET')
        .then(players => {
-           console.log(players);
            linkPlayersAndStreets(players.players);
        });
 
@@ -42,19 +41,7 @@ function searchStreet(e) {
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
 function runStreets(tiles, streetNames, sort) {
     tiles.forEach(street =>{
-    if (street.name.includes("Go")) {
-        console.log(null);}
-    else if (street.name.includes("Community")) {
-        console.log(null);}
-    else if (street.name.includes("Chance")) {
-        console.log(null);}
-    else if (street.name.includes("Jail")) {
-        console.log(null);}
-    else if (street.name.includes("Tax")) {
-        console.log(null);}
-    else if (street.name.includes("Parking")) {
-        console.log(null);}
-    else if (street.name.toLowerCase().includes(sort)) {
+    if (street.name.toLowerCase().includes(sort) && !(street.name.includes("Go") || street.name.includes("Community") || street.name.includes("Chance") || street.name.includes("Jail") || street.name.includes("Tax") || street.name.includes("Parking"))) {
         streetNames.push(street);
     }
     });
