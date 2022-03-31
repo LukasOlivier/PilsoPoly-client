@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded',init);
 function init() {
    const sortregular = "";
    const streetnames = [];
-   fetchFromServer('/games/dummy','GET').then(players => showPlayers(players.players));
+   fetchFromServer(`/games/${loadFromStorage("gameId")}`,'GET').then(players => showPlayers(players.players));
    fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnames, sortregular));
    document.querySelector('form').addEventListener('input', searchstreet);
 }
