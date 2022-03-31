@@ -97,7 +97,6 @@ function hideEverythingForLobby() {
 }
 
 function renderIconPicker($clickedIcon) {
-    console.log($clickedIcon);
     _$lobbyInterface.classList.add("hidden");
     _$iconInterface.classList.remove("hidden");
     _$iconInterface.querySelectorAll('img').forEach(item => {

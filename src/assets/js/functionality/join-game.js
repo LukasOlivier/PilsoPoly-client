@@ -47,7 +47,6 @@ function findGameByID(allGames, id){
 
 function joinGame(id, name){
     document.querySelector(".errormessages p").innerText = "";
-    console.log(id);
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
             _gameID = id;
@@ -64,7 +63,6 @@ function joinGame(id, name){
 
 // https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
 function fetchNonStartedGames(){
-    console.log(_config.prefix)
     // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
         .then(response => renderAllAvailableGames(response))
