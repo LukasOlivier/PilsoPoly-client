@@ -73,14 +73,19 @@ function createToShow(id, firstId, lastId) {
 }
 
 function showCards(cardInfo, middle) {
-    if (cardInfo.type === "street") {
-        renderNormalCard(cardInfo, middle);
-    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax" || cardInfo.type === "Tax Income" || cardInfo.type === "chance" || cardInfo.type === "Go to Jail" || cardInfo.type === "Free Parking") {
-        renderSpecialCard(cardInfo, middle);
-    } else if (cardInfo.type === "utility") {
-        renderUtilityCard(cardInfo, middle);
-    } else if (cardInfo.type === "railroad") {
-        renderRailroad(cardInfo, middle);
+    switch (cardInfo.type) {
+        case "street":
+            renderNormalCard(cardInfo, middle);
+            break;
+        case "utility":
+            renderUtilityCard(cardInfo, middle);
+            break;
+        case "railroad":
+            renderRailroad(cardInfo, middle);
+            break;
+        default:
+            renderSpecialCard(cardInfo, middle);
+            return;
     }
 }
 
