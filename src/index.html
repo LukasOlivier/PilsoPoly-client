@@ -8,24 +8,139 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700%7COswald" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo" />
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="assets/css/grid-template-properties.css">
 
     <script src="assets/js/config.js"></script>
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-    <script src="assets/js/data-connector/render/start-rendering.js"></script>
+    <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+
+    <script src="assets/js/functionality/get-playboard-tiles.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/render/main-page/render-main-page.js"></script>
+    <script src="assets/js/render/main-page/renderCards.js"></script>
 
 </head>
-<body>
-<h1>Monopoly</h1>
+
+<body id="main-screen">
+
+<header>
+    <button id="end-turn">End turn</button>
+    <h1 id="game-screen">Monopoly</h1>
+    <div>
+        <img src="images/trade.png" alt="trade" title="trade" id="trade">
+        <img src="images/map.png" alt="map" title="map" id="map">
+    </div>
+</header>
+
+<main>
+    <section>
+        <h2>Current position:</h2>
+        <div id="cards-parent">
+            <template class="normal-card-template">
+                <!--middle article should have class "middle"-->
+                <article class="normal-card">
+                    <h3 class="card-name"></h3>
+                    <p class="rent"></p>
+                    <ol>
+                        <li><p class="rent-one-house"></p></li>
+                        <li><p class="rent-two-house"></p></li>
+                        <li><p class="rent-three-house"></p></li>
+                        <li><p class="rent-four-house"></p></li>
+                        <li><p class="rent-hotel"></p></li>
+                    </ol>
+                    <p class="price-house"></p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
+
+            <template class="special-card-template">
+                <article class="special-card">
+                    <h3 class="card-name"></h3>
+                </article>
+            </template>
+
+            <template class="utility-card-template">
+                <article class="utility-card">
+                    <h3 class="card-name"></h3>
+                    <p class="price"></p>
+                    <p class="rent">4 or 5 times the dice roll</p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
+
+            <template class="railroad-card-template">
+                <article class="railroad-card">
+                    <h3 class="card-name"></h3>
+                    <p class="price"></p>
+                    <p class="rent"></p>
+                    <p class="mortgage"></p>
+                </article>
+            </template>
+
+        </div>
+    </section>
+
+    <div id="arrows">
+        <img src="images/arrow.jpg" alt="left-arrow" title="left-arrow" id="left-arrow">
+        <img src="images/arrow.jpg" alt="right-arrow" title="right-arrow" id="right-arrow">
+    </div>
+</main>
+
+<footer>
+    <template class="player-info-template">
+        <div class="info-container">
+            <img src="images/Beer-icon-orange.png" alt="icon-orange" title="icon-orange">
+            <div>
+                <div>
+                    <p class="player-balance"></p>
+                </div>
+                <div class="player-properties">
+                    <!-- add class "not-bought" to make grey-->
+                    <div class="square brown-1 not-bought"></div>
+                    <div class="square brown-2 not-bought"></div>
+                    <div class="square blue-1 not-bought"></div>
+                    <div class="square blue-2 not-bought"></div>
+                    <div class="square blue-3 not-bought"></div>
+                    <div class="square purple-1 not-bought"></div>
+                    <div class="square purple-2 not-bought"></div>
+                    <div class="square purple-3 not-bought"></div>
+                    <div class="square orange-1 not-bought"></div>
+                    <div class="square orange-2 not-bought"></div>
+                    <div class="square orange-3 not-bought"></div>
+                    <div class="square red-1 not-bought"></div>
+                    <div class="square red-2 not-bought"></div>
+                    <div class="square red-3 not-bought"></div>
+                    <div class="square yellow-1 not-bought"></div>
+                    <div class="square yellow-2 not-bought"></div>
+                    <div class="square yellow-3 not-bought"></div>
+                    <div class="square green-1 not-bought"></div>
+                    <div class="square green-2 not-bought"></div>
+                    <div class="square green-3 not-bought"></div>
+                    <div class="square dblue-1 not-bought"></div>
+                    <div class="square dblue-2 not-bought"></div>
+                    <div class="square black-1 not-bought"></div>
+                    <div class="square black-2 not-bought"></div>
+                    <div class="square black-3 not-bought"></div>
+                    <div class="square black-4 not-bought"></div>
+                    <div class="square white-1 not-bought"></div>
+                    <div class="square white-2 not-bought"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+</footer>
 
 <div class="errormessages">
     <p></p>
 </div>
+
 </body>
 </html>
