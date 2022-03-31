@@ -1,16 +1,21 @@
 'use strict';
 // name is for later :)
-function loadGameDataForLobby(id, name){
-    fetchFromServer(`/games?prefix=${id}`)
+function loadGameDataForLobby(name){
+    fetchFromServer(`/games?prefix=${_config.prefix}`)
         .then(response => {
+            const game = findGameByID(response, _gameID);
             console.log("fetching game data");
-            _gameID = response[0].id;
-            const numberOfPlayers = response[0].numberOfPlayers;
-            const playerNames = response[0].players;
-            renderLobby(id, numberOfPlayers, playerNames);
+            // api has changed?
+            console.log(_gameID);
+            console.log(game);
+            // _gameID = game.id;
+            const numberOfPlayers = game.numberOfPlayers;
+            const playerNames = game.players;
+            renderLobby(_gameID, numberOfPlayers, playerNames);
         });
 }
 
-function refresh(id){
-    loadGameDataForLobby(id)
+function refresh(){
+
+    loadGameDataForLobby()
 }

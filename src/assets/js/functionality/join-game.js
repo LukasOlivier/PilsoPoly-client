@@ -1,40 +1,59 @@
 'use strict';
 
-function checkExistingGames(){
-    _gameID = _$joinInterface.querySelector("#ID").value;
+function fetchAllGames(){
+    const id = _config.prefix + '_' + _$joinInterface.querySelector("#ID").value;
     const name = {
         playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
     };
-    // these checks dont see errors from the server
-    // we can change this when we make our own api server.
-    document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games?prefix=${_gameID}`)
-        .then(response => {
-            if (response.length === 0) {
-                throw new Error("There is no game with this code");
-            } else if (response.length > 1) {
-                throw new Error("Please fill in your code correctly");
-            } else if (response[0].started === true) {
-                throw new Error("Game already started");
+    try {
+        checkName(name);
+        fetchFromServer(`/games?prefix=${_config.prefix}`)
+            .then(response => {
+                findGameByID(response, id);
+            })
+            .catch(errorHandler);
+    }
+    catch(error) {
+        errorHandler(error);
+        return;
+    }
+    joinGame(id, name);
+}
+
+
+function checkName(name){
+    const specialchar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
+    if (name.playerName === "") {
+        throw new Error("Your name cant be empty");
+    } else if (specialchar.test(name.playerName) === true) {
+        throw new Error("Your name cant contain any special characters or numbers");
+    } else if (name.playerName.length > 10) {
+        throw new Error("Your name can only be 10 characters long");
+    }
+
+}
+function findGameByID(allGames, id){
+    for(let game of allGames){
+        if(game.id === id){
+            console.log('found with id ' + id);
+            if(game.started === true){
+                throw new Error("Game has already started (2)")
             }
-            response[0].players.forEach(player => {
-                if (player.name.toLowerCase() === name.playerName.toLowerCase()) {
-                    throw new Error("The name is already in use");
-                }
-            });
-            if (name.playerName === "") {
-                throw new Error("Your player name cant be empty");
-            }
-            joinGame(_gameID, name);
-        })
-        .catch(errorHandler);
+            return game;
+        }
+    }
+    throw new Error("There is no game with this code(2)")
 }
 
 function joinGame(id, name){
+    document.querySelector(".errormessages p").innerText = "";
+    console.log(id);
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
+            _gameID = id;
             _token = response.token;
-            console.log(_token);
+            console.log("You joined a game with id: " + _gameID)
+            console.log("Your key is: " + _token)
             loadGameDataForLobby(id, name);
         })
         // this token is your security token.
@@ -42,7 +61,7 @@ function joinGame(id, name){
 }
 
 // https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
-function fetchAllGames(){
+function fetchNonStartedGames(){
     console.log(_config.prefix)
     // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
