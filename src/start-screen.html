@@ -335,10 +335,10 @@
     <div id="join-interface" class="hidden">
         <h2>Enter ID</h2>
         <label for="ID">To join your friend’s game, enter their game ID</label>
-        <form method="">
+        <form method="post">
             <div id="IDWithgames">
                 <input type="text" name="ID" id="ID" placeholder="Game-ID" required>
-                <input type="button" name="show-all-games" id="show-all-games">
+                <input type="button" name="show-all-games" id="show-all-games" value=".">
             </div>
             <input type="text" name="name" class="name" placeholder="Your name" required>
         </form>
@@ -378,7 +378,7 @@
     <div id="create-interface" class="hidden">
         <h2>Create a game</h2>
         <label>Please fill in your name and choose an icon</label>
-        <form method="">
+        <form method="post">
         <div class="player-options">
             <input type="text" name="name" class="name" placeholder="Your name" required>
         </div>
