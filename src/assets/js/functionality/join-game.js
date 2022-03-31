@@ -1,7 +1,7 @@
 'use strict';
 
 function fetchAllGames(){
-    const id = _config.prefix + '_' + _$joinInterface.querySelector("#ID").value;
+    const id = makeID(_$joinInterface.querySelector("#ID").value);
     const name = {
         playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
     };
@@ -22,7 +22,14 @@ function fetchAllGames(){
     }
     joinGame(id, name);
 }
-
+// if the id doesnt contains the prefix, add it. ;)
+function makeID(id){
+    if (id.includes(_config.prefix)) {
+        return id;
+    } else {
+        return _config.prefix.concat("_", id);
+    }
+}
 
 function checkName(name, game){
     // Special characters are not allowed in the name
