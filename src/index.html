@@ -35,6 +35,7 @@
     <button id="end-turn">End turn</button>
     <h1 id="game-screen">Monopoly</h1>
     <div>
+        <img src="images/inventory.png" alt="inventory" title="inventory" id="inventory">
         <img src="images/trade.png" alt="trade" title="trade" id="trade">
         <a href="../src/see-all-the-streets-with-owners.html"><img src="images/map.png" alt="map" title="map" id="map"></a>
     </div>
@@ -50,16 +51,17 @@
                     <h3 class="card-name"></h3>
                     <p class="rent"></p>
                     <ol>
-                        <li><p class="rent-one-house"></p></li>
-                        <li><p class="rent-two-house"></p></li>
-                        <li><p class="rent-three-house"></p></li>
-                        <li><p class="rent-four-house"></p></li>
-                        <li><p class="rent-hotel"></p></li>
+                        <li><img src="images/1house.png" alt="1house" title="1house"> <p class="rent-one-house"></p></li>
+                        <li><img src="images/2houses.png" alt="2house" title="2house"><p class="rent-two-house"></p></li>
+                        <li><img src="images/3houses.png" alt="3house" title="3house"><p class="rent-three-house"></p></li>
+                        <li><img src="images/4houses.png" alt="4house" title="4house"><p class="rent-four-house"></p></li>
+                        <li><img src="images/hotel.png" alt="hotel" title="hotel"><p class="rent-hotel"></p></li>
                     </ol>
                     <p class="price-house"></p>
                     <p class="mortgage"></p>
                 </article>
             </template>
+
             <template class="special-card-template">
                 <article class="special-card">
                     <h3 class="card-name"></h3>
@@ -88,11 +90,12 @@
     </section>
 
     <div id="arrows">
-        <img src="images/arrow.jpg" alt="left-arrow" title="left-arrow" id="left-arrow">
-        <img src="images/arrow.jpg" alt="right-arrow" title="right-arrow" id="right-arrow">
+        <img src="images/left-arrow.jpg" alt="left-arrow" title="left-arrow" id="left-arrow">
+        <img src="images/right-arrow.png" alt="right-arrow" title="right-arrow" id="right-arrow">
     </div>
-
-    <button class="hidden">back to current position!</button>
+    <div id="back-to-current-position">
+        <button class="hidden">back to current position!</button>
+    </div>
 
 </main>
 
@@ -143,5 +146,6 @@
 <div class="errormessages">
     <p></p>
 </div>
+
 </body>
 </html>
