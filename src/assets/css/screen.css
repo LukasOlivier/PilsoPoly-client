@@ -76,10 +76,6 @@
     margin: 1rem;
 }
 
-
-/*TODO: make sure the go card is proper
-   simuleer het met de function call getCardById(0)*/
-
 #main-screen .special-card h3 {
     margin-top: auto;
     margin-bottom: auto;
