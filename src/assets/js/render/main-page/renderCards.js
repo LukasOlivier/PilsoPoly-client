@@ -19,7 +19,41 @@ function renderNormalCard(cardInfo, middle) {
 function renderSpecialCard(cardInfo, middle) {
     const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
-    $template.querySelector("h3").innerText = cardInfo.name;
+    console.log(cardInfo.type);
+    switch (cardInfo.type.toLowerCase()) {
+        case "go":
+            $template.querySelector("img").src = "images/go.png";
+            $template.style.background = "white";
+            break;
+        case "community chest":
+            $template.querySelector("img").src = "images/chest.gif";
+            $template.style.background = "white";
+            break;
+        case "chance":
+            $template.querySelector("img").src = "images/chance.png";
+            $template.style.background = "white";
+            break;
+        case "luxury tax":
+            $template.querySelector("img").src = "images/luxTax.png";
+            $template.style.background = "white";
+            break;
+        case "free parking":
+            $template.querySelector("img").src = "images/parking.png";
+            $template.style.background = "white";
+            break;
+        case "jail":
+            $template.querySelector("img").src = "images/jail.png";
+            $template.style.background = "rgb(240,124,28)";
+            break;
+        case "go to jail":
+            $template.querySelector("img").src = "images/police.png";
+            $template.style.background = "white";
+            break;
+        case "tax income":
+            $template.querySelector("img").src = "images/incomeTax.png";
+            $template.style.background = "white";
+            break;
+    }
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
@@ -32,6 +66,7 @@ function renderRailroad(cardInfo, middle) {
     const $template = document.querySelector('main .railroad-card-template').content.firstElementChild.cloneNode(true);
     railUtilityTemplate($template, cardInfo, middle);
 }
+
 
 function railUtilityTemplate($template, cardInfo, middle) {
     addClassToMiddle($template, middle);
