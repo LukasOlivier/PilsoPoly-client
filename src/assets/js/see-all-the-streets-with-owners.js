@@ -17,9 +17,11 @@ function init() {
    fetchFromServer(`/games/${_gameID}`,'GET')
        .then(players => {
            console.log(players);
-           showPlayers(players.players);
+           linkPlayersAndStreets(players.players);
        });
-   fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnames, sortregular));
+
+   fetchFromServer('/tiles','GET')
+       .then(tiles => runStreets(tiles, streetnames, sortregular));
    document.querySelector('form').addEventListener('input', searchStreet);
 }
 
@@ -81,16 +83,5 @@ function renderStreets(street) {
     if (isBought === false) {
         $template.querySelector(`div p`).innerText = "player: not bought yet";}
     document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
-}
-
-/* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
-function showPlayers(players) {
-    console.log(players);
-    players.forEach(player => {
-        const nameplayer = player.name;
-        const playerStreets = [];
-        playerStreets.push(player.properties.forEach(property => playerStreets.push(property.property)));
-        _playersBoughtProperties[nameplayer] = playerStreets;
-    });
 }
 
