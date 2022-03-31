@@ -2,48 +2,48 @@
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-areas:
-            ".       .      .        .        .     .        .       .       black-4 ."
-            ".       blue-3 purple-3 orange-3 red-3 yellow-3 green-3 .       black-3 ."
-            "brown-2 blue-2 purple-2 orange-2 red-2 yellow-2 green-2 dblue-2 black-2 white-2"
-            "brown-1 blue-1 purple-1 orange-1 red-1 yellow-1 green-1 dblue-1 black-1 white-1";
+            ".             .           .                   .           .               .              .              .          short-line-rr         ."
+            ".             connecticut virginia            new-york    illinois-avenue marvin-gardens pennsylvania   .          baltimore-and-ohio-rr ."
+            "baltic        vermont     states              tennessee   indiana-avenue  ventnor        north-carolina boardwalk  pennsylvania-rr       water-works"
+            "mediterranean oriental    saint-charles-place saint-james kentucky-avenue atlantic       pacific        park-place reading-rr            electric-company";
 }
 
 .info-container .not-bought {background-color: #979797}
 
-.brown-1 {grid-area: brown-1; background-color: saddlebrown}
-.brown-2 {grid-area: brown-2; background-color: saddlebrown}
+.mediterranean {grid-area: mediterranean; background-color: saddlebrown}
+.baltic {grid-area: baltic; background-color: saddlebrown}
 
-.blue-1 {grid-area: blue-1; background-color: blue}
-.blue-2 {grid-area: blue-2; background-color: blue}
-.blue-3 {grid-area: blue-3; background-color: blue}
+.oriental {grid-area: oriental; background-color: blue}
+.vermont {grid-area: vermont; background-color: blue}
+.connecticut {grid-area: connecticut; background-color: blue}
 
-.purple-1 {grid-area: purple-1; background-color: purple}
-.purple-2 {grid-area: purple-2; background-color: purple}
-.purple-3 {grid-area: purple-3; background-color: purple}
+.saint-charles-place {grid-area: saint-charles-place; background-color: purple}
+.states {grid-area: states; background-color: purple}
+.virginia {grid-area: virginia; background-color: purple}
 
-.orange-1 {grid-area: orange-1; background-color: orange}
-.orange-2 {grid-area: orange-2; background-color: orange}
-.orange-3 {grid-area: orange-3; background-color: orange}
+.saint-james {grid-area: saint-james; background-color: orange}
+.tennessee {grid-area: tennessee; background-color: orange}
+.new-york {grid-area: new-york; background-color: orange}
 
-.red-1 {grid-area: red-1; background-color: red}
-.red-2 {grid-area: red-2; background-color: red}
-.red-3 {grid-area: red-3; background-color: red}
+.kentucky-avenue {grid-area: kentucky-avenue; background-color: red}
+.indiana-avenue {grid-area: indiana-avenue; background-color: red}
+.illinois-avenue {grid-area: illinois-avenue; background-color: red}
 
-.yellow-1 {grid-area: yellow-1; background-color: yellow}
-.yellow-2 {grid-area: yellow-2; background-color: yellow}
-.yellow-3 {grid-area: yellow-3; background-color: yellow}
+.atlantic {grid-area: atlantic; background-color: yellow}
+.ventnor {grid-area: ventnor; background-color: yellow}
+.marvin-gardens {grid-area: marvin-gardens; background-color: yellow}
 
-.green-1 {grid-area: green-1; background-color: green}
-.green-2 {grid-area: green-2; background-color: green}
-.green-3 {grid-area: green-3; background-color: green}
+.pacific {grid-area: pacific; background-color: green}
+.north-carolina {grid-area: north-carolina; background-color: green}
+.pennsylvania {grid-area: pennsylvania; background-color: green}
 
-.dblue-1 {grid-area: dblue-1; background-color: darkblue}
-.dblue-2 {grid-area: dblue-2; background-color: darkblue}
+.park-place {grid-area: park-place; background-color: darkblue}
+.boardwalk {grid-area: boardwalk; background-color: darkblue}
 
-.black-1 {grid-area: black-1; background-color: black}
-.black-2 {grid-area: black-2; background-color: black}
-.black-3 {grid-area: black-3; background-color: black}
-.black-4 {grid-area: black-4; background-color: black}
+.reading-rr {grid-area: reading-rr; background-color: black}
+.pennsylvania-rr {grid-area: pennsylvania-rr; background-color: black}
+.baltimore-and-ohio-rr {grid-area: baltimore-and-ohio-rr; background-color: black}
+.short-line-rr {grid-area: short-line-rr; background-color: black}
 
-.white-1 {grid-area: white-1; background-color: white}
-.white-2 {grid-area: white-2; background-color: white}
+.electric-company {grid-area: electric-company; background-color: white}
+.water-works {grid-area: water-works; background-color: white}

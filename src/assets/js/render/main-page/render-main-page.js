@@ -11,7 +11,6 @@ function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
-    document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
 
@@ -98,6 +97,7 @@ function renderPlayerInfo() {
                 $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
                 document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
             });
+            renderPlayerProperties();
         });
 }
 
@@ -107,9 +107,15 @@ function move(value) {
         $button.classList.toggle("hidden");
     }
     _tempPlayerPositionID -= value;
+
+    if (_tempPlayerPositionID === 40) {
+        _tempPlayerPositionID = 0;
+    }
+
     if (_tempPlayerPositionID === -1) {
         _tempPlayerPositionID = 39;
     }
+
     removeCards();
     getCardById(_tempPlayerPositionID);
 }
@@ -135,8 +141,18 @@ function removeCards() {
     });
 }
 
-function showMap() {
-    console.log("show map");
+function renderPlayerProperties() {
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        if (player) {
+            const $container = document.querySelector(`.${player.toLowerCase()}`);
+            playerProperties[player].forEach(function (property) {
+                if (property !== null) {
+                    $container.querySelector(`.${property}`).classList.remove("not-bought");
+                }
+            });
+        }
+    }
 }
 
 function trade() {
