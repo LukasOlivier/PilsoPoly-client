@@ -11,7 +11,6 @@ function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
-    document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
 
@@ -73,14 +72,19 @@ function createToShow(id, firstId, lastId) {
 }
 
 function showCards(cardInfo, middle) {
-    if (cardInfo.type === "street") {
-        renderNormalCard(cardInfo, middle);
-    } else if (cardInfo.type === "Go" || cardInfo.type === "community chest" || cardInfo.type === "Jail" || cardInfo.type === "Luxury Tax" || cardInfo.type === "Tax Income" || cardInfo.type === "chance" || cardInfo.type === "Go to Jail" || cardInfo.type === "Free Parking") {
-        renderSpecialCard(cardInfo, middle);
-    } else if (cardInfo.type === "utility") {
-        renderUtilityCard(cardInfo, middle);
-    } else if (cardInfo.type === "railroad") {
-        renderRailroad(cardInfo, middle);
+    switch (cardInfo.type) {
+        case "street":
+            renderNormalCard(cardInfo, middle);
+            break;
+        case "utility":
+            renderUtilityCard(cardInfo, middle);
+            break;
+        case "railroad":
+            renderRailroad(cardInfo, middle);
+            break;
+        default:
+            renderSpecialCard(cardInfo, middle);
+            return;
     }
 }
 
@@ -93,6 +97,7 @@ function renderPlayerInfo() {
                 $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
                 document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
             });
+            renderPlayerProperties();
         });
 }
 
@@ -102,9 +107,15 @@ function move(value) {
         $button.classList.toggle("hidden");
     }
     _tempPlayerPositionID -= value;
+
+    if (_tempPlayerPositionID === 40) {
+        _tempPlayerPositionID = 0;
+    }
+
     if (_tempPlayerPositionID === -1) {
         _tempPlayerPositionID = 39;
     }
+
     removeCards();
     getCardById(_tempPlayerPositionID);
 }
@@ -130,8 +141,18 @@ function removeCards() {
     });
 }
 
-function showMap() {
-    console.log("show map");
+function renderPlayerProperties() {
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        if (player) {
+            const $container = document.querySelector(`.${player.toLowerCase()}`);
+            playerProperties[player].forEach(function (property) {
+                if (property !== null) {
+                    $container.querySelector(`.${property}`).classList.remove("not-bought");
+                }
+            });
+        }
+    }
 }
 
 function trade() {

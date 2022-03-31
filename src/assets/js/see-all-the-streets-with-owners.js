@@ -4,58 +4,55 @@
 const _playersBoughtProperties = {};
 
 /*load the dom in and then start function init*/
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded', init);
 
 /*fetch the streets and the players. if player puts input into the form go to function search*/
 function init() {
    const sortregular = "";
    const streetnames = [];
-   fetchFromServer('/games/dummy','GET').then(players => showPlayers(players.players));
-   fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnames, sortregular));
-   document.querySelector('form').addEventListener('input', searchstreet);
+
+   _token = {token : loadFromStorage("token")};
+   _gameID = loadFromStorage("gameId");
+
+   fetchFromServer(`/games/${_gameID}`,'GET')
+       .then(players => {
+           linkPlayersAndStreets(players.players);
+       });
+
+   fetchFromServer('/tiles','GET')
+       .then(tiles => runStreets(tiles, streetnames, sortregular));
+   document.querySelector('form').addEventListener('input', searchStreet);
 }
 
 /*if there is input, catch it => put it to lower case and go to the runstreets function*/
-function searchstreet(e) {
+function searchStreet(e) {
     const streetnamessort = [];
-    let sort = "";
-    if (e.target.value)
-    {
-        sort = e.target.value.toLowerCase();
-        fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnamessort, sort));
+    if (e.target.value) {
+        fetchFromServer('/tiles','GET')
+            .then(tiles => runStreets(tiles, streetnamessort, e.target.value.toLowerCase()));
     }
-    else
-    {fetchFromServer('/tiles','GET').then(tiles => runStreets(tiles, streetnamessort, sort));}
+    else {
+        fetchFromServer('/tiles','GET')
+            .then(tiles => runStreets(tiles, streetnamessort, ""));
+    }
 }
 
 
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
-function runStreets(tiles, streetnames, sort) {
+function runStreets(tiles, streetNames, sort) {
     tiles.forEach(street =>{
-    if (street.name.includes("Go")) {
-        console.log(null);}
-    else if (street.name.includes("Community")) {
-        console.log(null);}
-    else if (street.name.includes("Chance")) {
-        console.log(null);}
-    else if (street.name.includes("Jail")) {
-        console.log(null);}
-    else if (street.name.includes("Tax")) {
-        console.log(null);}
-    else if (street.name.includes("Parking")) {
-        console.log(null);}
-    else if (street.name.toLowerCase().includes(sort)) {
-        streetnames.push(street);
+    if (street.name.toLowerCase().includes(sort) && !(street.name.includes("Go") || street.name.includes("Community") || street.name.includes("Chance") || street.name.includes("Jail") || street.name.includes("Tax") || street.name.includes("Parking"))) {
+        streetNames.push(street);
     }
     });
     document.querySelector('.templatediv').innerHTML = "";
-    streetnames.forEach(street => renderStreets(street));
+    streetNames.forEach(street => renderStreets(street));
 }
 
 
 /* fill in the template with the api results*/
 function renderStreets(street) {
-    let isbought = false;
+    let isBought = false;
     const $template = document.querySelector('template').content.firstElementChild.cloneNode(true);
     $template.querySelector('h2').classList.add(street.color);
     $template.querySelector('h2').innerText = street.name;
@@ -67,21 +64,11 @@ function renderStreets(street) {
         const playername = key;
         value.forEach(propertie => {
             if (propertie === street.name) {
-                isbought = true;
+                isBought = true;
                 $template.querySelector(`div p`).innerText = "player: " + playername;}});
     }
-    if (isbought === false) {
+    if (isBought === false) {
         $template.querySelector(`div p`).innerText = "player: not bought yet";}
     document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
-}
-
-/* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
-function showPlayers(players) {
-    players.forEach(player => {
-        const nameplayer = player.name;
-        const playerstreets = [];
-        playerstreets.push(player.properties.forEach(property => playerstreets.push(property.property)));
-        _playersBoughtProperties[nameplayer] = playerstreets;
-    });
 }
 
