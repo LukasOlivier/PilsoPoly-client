@@ -29,7 +29,7 @@
 <main>
     <!-- Start interface -->
     <div id="start-interface">
-        <h1 id="start-screen"><img src="assets/media/logo.png" alt="Monopoly-logo"></h1>git
+        <h1 id="start-screen"><img src="assets/media/logo.png" alt="Monopoly-logo"></h1>
         <nav class="flex-container" aria-label="start-screen">
             <input type="button" name="create" title="start" id="create" value="Create Game">
             <input type="button" name="join" title="join" id="join" value="Join Game">
@@ -391,7 +391,9 @@
             <input type="button" name="join" class="join-button" value="Create">
         </nav>
     </div>
+    <!-- END -->
 
+    <!-- Lobby interface (hidden by default) -->
     <div id="lobby-interface" class="hidden">
         <h2>Game ID: <span>xxx-xxx-xxx</span></h2>
         <p></p>
@@ -404,10 +406,8 @@
         <div id="players">
 
         </div>
-        <input type="button" name="back" class="back-button" value="back">
+        <input type="button" name="back" class="back-button" value="Leave Game">
         <input type="button" name="refresh" class="refresh" value="refresh">
-        <input type="button" onclick="location.href = 'index.html';" name="start-game" class="start-button"
-               value="start">
     </div>
     <!-- END -->
 </main>
