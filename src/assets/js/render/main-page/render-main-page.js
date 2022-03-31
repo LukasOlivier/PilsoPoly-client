@@ -16,7 +16,6 @@ function renderMainPage() {
 
     getTiles();
     renderPlayerInfo();
-    renderPlayerProperties();
 }
 
 function endTurn() {
@@ -93,6 +92,7 @@ function renderPlayerInfo() {
                 $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
                 document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
             });
+            renderPlayerProperties();
         });
 }
 
@@ -139,10 +139,8 @@ function removeCards() {
 function renderPlayerProperties() {
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
-        const $container = document.querySelector(`div .${player}`);
-        $container.
-        console.log(player);
-        console.log(playerProperties[player]);
+        const $container = document.querySelector(`div.${player}`);
+
     }
 }
 
