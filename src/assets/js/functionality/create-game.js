@@ -23,6 +23,7 @@ function checkInput(){
     }
     catch (error) {
         errorHandler(error);
+        return;
     }
     createGame(numberOfPlayers, name);
 }

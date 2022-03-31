@@ -60,7 +60,6 @@ function findGameByID(allGames, id){
 }
 
 function joinGame(id, name){
-    console.log("tis ier")
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
