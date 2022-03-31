@@ -11,12 +11,12 @@ function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
-    document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
 
     getTiles();
     renderPlayerInfo();
+    renderPlayerProperties();
 }
 
 function endTurn() {
@@ -136,8 +136,14 @@ function removeCards() {
     });
 }
 
-function showMap() {
-    console.log("show map");
+function renderPlayerProperties() {
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        const $container = document.querySelector(`div .${player}`);
+        $container.
+        console.log(player);
+        console.log(playerProperties[player]);
+    }
 }
 
 function trade() {
