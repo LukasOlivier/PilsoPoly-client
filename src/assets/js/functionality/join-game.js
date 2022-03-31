@@ -10,17 +10,18 @@ function fetchAllGames(){
             .then(response => {
                 const game = findGameByID(response, id);
                 if (game.started === true) {
+                    console.log("game started")
                     throw new Error("This game has already started.")
                 }
                 checkName(name, game);
+                joinGame(id, name);
             })
-            .catch(errorHandler);
+            .catch(errorHandler)
     }
     catch(error) {
         errorHandler(error);
-        return;
     }
-    joinGame(id, name);
+
 }
 // if the id doesnt contains the prefix, add it. ;)
 function makeID(id){
@@ -33,7 +34,7 @@ function makeID(id){
 
 function checkName(name, game){
     // Special characters are not allowed in the name
-    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
+    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890é§]/;
     if (name.playerName === "") {
         throw new Error("Your name cant be empty");
     } else if (specialChar.test(name.playerName) === true) {
@@ -47,7 +48,6 @@ function checkName(name, game){
             throw new Error("This name is already in use");
         }
     })
-    console.log("names are correct")
 }
 function findGameByID(allGames, id){
     for(let game of allGames){
@@ -60,6 +60,7 @@ function findGameByID(allGames, id){
 }
 
 function joinGame(id, name){
+    console.log("tis ier")
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${id}/players`,'POST', name)
         .then(response => {
