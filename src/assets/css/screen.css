@@ -36,7 +36,10 @@
 }
 
 #main-screen h1 {
-    font-size: 2.5rem;
+    margin-left: 2rem;
+    font-size: 3rem;
+    color: white;
+    font-family: Oswald, serif;
 }
 
 #main-screen h2 {
@@ -145,7 +148,6 @@
 }
 
 #main-screen header img:hover, #main-screen button:hover {
-    -webkit-filter: drop-shadow(5px 5px 5px #222);
     filter: drop-shadow(5px 5px 5px #222);
     transform: scale(1.1);
     cursor: pointer;
@@ -154,7 +156,7 @@
 #main-screen #trade {
     border-radius: 1rem;
 }
-
-#main-screen #inventory:hover {
-
+#main-screen #center-me{
+    width: 100%;
+    text-align: center;
 }
