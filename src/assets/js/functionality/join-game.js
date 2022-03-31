@@ -1,15 +1,18 @@
 'use strict';
 
 function fetchAllGames(){
-    const id = _config.prefix + '_' + _$joinInterface.querySelector("#ID").value;
+    const id = makeID(_$joinInterface.querySelector("#ID").value);
     const name = {
         playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
     };
     try {
-        checkName(name);
         fetchFromServer(`/games?prefix=${_config.prefix}`)
             .then(response => {
-                findGameByID(response, id);
+                const game = findGameByID(response, id);
+                if (game.started === true) {
+                    throw new Error("This game has already started.")
+                }
+                checkName(name, game);
             })
             .catch(errorHandler);
     }
@@ -19,26 +22,37 @@ function fetchAllGames(){
     }
     joinGame(id, name);
 }
+// if the id doesnt contains the prefix, add it. ;)
+function makeID(id){
+    if (id.includes(_config.prefix)) {
+        return id;
+    } else {
+        return _config.prefix.concat("_", id);
+    }
+}
 
-
-function checkName(name){
-    const specialchar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
+function checkName(name, game){
+    // Special characters are not allowed in the name
+    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
     if (name.playerName === "") {
         throw new Error("Your name cant be empty");
-    } else if (specialchar.test(name.playerName) === true) {
+    } else if (specialChar.test(name.playerName) === true) {
         throw new Error("Your name cant contain any special characters or numbers");
     } else if (name.playerName.length > 10) {
         throw new Error("Your name can only be 10 characters long");
     }
-
+    // Here we check if the name that has been provided is not already in the game.
+    game.players.forEach(namesInGame => {
+        if (namesInGame.name === name.playerName) {
+            throw new Error("This name is already in use");
+        }
+    })
+    console.log("names are correct")
 }
 function findGameByID(allGames, id){
     for(let game of allGames){
         if(game.id === id){
             console.log('found with id ' + id);
-            if(game.started === true){
-                throw new Error("Game has already started (2)")
-            }
             return game;
         }
     }

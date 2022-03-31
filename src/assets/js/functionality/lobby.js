@@ -4,6 +4,10 @@ function loadGameDataForLobby(name){
     fetchFromServer(`/games?prefix=${_config.prefix}`)
         .then(response => {
             const game = findGameByID(response, _gameID);
+            if (game.started === true) {
+                console.log("THE GAME HAS STARTED");
+                window.location.href = "index.html";
+            }
             // api has changed?
             // _gameID = game.id;
             const numberOfPlayers = game.numberOfPlayers;
@@ -13,6 +17,5 @@ function loadGameDataForLobby(name){
 }
 
 function refresh(){
-
     loadGameDataForLobby()
 }
