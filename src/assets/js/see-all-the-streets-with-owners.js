@@ -7,8 +7,7 @@ const _playersBoughtProperties = {};
 document.addEventListener('DOMContentLoaded',init);
 
 /*fetch the streets and the players. if player puts input into the form go to function search*/
-function init()
-{
+function init() {
    const sortregular = "";
    const streetnames = [];
    fetchFromServer('/games/dummy','GET').then(players => showPlayers(players.players));
@@ -17,8 +16,7 @@ function init()
 }
 
 /*if there is input, catch it => put it to lower case and go to the runstreets function*/
-function searchstreet(e)
-{
+function searchstreet(e) {
     const streetnamessort = [];
     let sort = "";
     if (e.target.value)
@@ -32,23 +30,21 @@ function searchstreet(e)
 
 
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
-function runStreets(tiles, streetnames, sort)
-{
+function runStreets(tiles, streetnames, sort) {
     tiles.forEach(street =>{
-    if (street.name.includes("Go"))
-    {console.log(null);}
-    else if (street.name.includes("Community"))
-    {console.log(null);}
-    else if (street.name.includes("Chance"))
-    {console.log(null);}
-    else if (street.name.includes("Jail"))
-    {console.log(null);}
-    else if (street.name.includes("Tax"))
-    {console.log(null);}
-    else if (street.name.includes("Parking"))
-    {console.log(null);}
-    else if (street.name.toLowerCase().includes(sort))
-    {
+    if (street.name.includes("Go")) {
+        console.log(null);}
+    else if (street.name.includes("Community")) {
+        console.log(null);}
+    else if (street.name.includes("Chance")) {
+        console.log(null);}
+    else if (street.name.includes("Jail")) {
+        console.log(null);}
+    else if (street.name.includes("Tax")) {
+        console.log(null);}
+    else if (street.name.includes("Parking")) {
+        console.log(null);}
+    else if (street.name.toLowerCase().includes(sort)) {
         streetnames.push(street);
     }
     });
@@ -58,8 +54,7 @@ function runStreets(tiles, streetnames, sort)
 
 
 /* fill in the template with the api results*/
-function renderStreets(street)
-{
+function renderStreets(street) {
     let isbought = false;
     const $template = document.querySelector('template').content.firstElementChild.cloneNode(true);
     $template.querySelector('h2').classList.add(street.color);
@@ -68,8 +63,8 @@ function renderStreets(street)
     $template.querySelector('li+li').innerText= "cost:  " + street.cost;
     $template.querySelector('li+li+li').innerText= "mortage:  " + street.mortgage;
     $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
-    for (const [key, value] of Object.entries(_playersBoughtProperties))
-    {const playername = key;
+    for (const [key, value] of Object.entries(_playersBoughtProperties)) {
+        const playername = key;
         value.forEach(propertie => {
             if (propertie === street.name) {
                 isbought = true;
@@ -81,10 +76,8 @@ function renderStreets(street)
 }
 
 /* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
-function showPlayers(players)
-{
-    players.forEach(player =>
-    {
+function showPlayers(players) {
+    players.forEach(player => {
         const nameplayer = player.name;
         const playerstreets = [];
         playerstreets.push(player.properties.forEach(property => playerstreets.push(property.property)));
