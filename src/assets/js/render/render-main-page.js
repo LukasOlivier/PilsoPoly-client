@@ -3,7 +3,6 @@
 let _tiles = null;
 
 function renderMainPage() {
-
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
