@@ -53,6 +53,8 @@ function renderSpecialCard(cardInfo, middle) {
             $template.querySelector("img").src = "images/incomeTax.png";
             $template.style.background = "white";
             break;
+        default:
+            return;
     }
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
