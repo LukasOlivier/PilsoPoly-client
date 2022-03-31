@@ -130,6 +130,7 @@ function moveRight() {
 
 function backToCurrentPosition() {
     document.querySelector("main button").classList.toggle("hidden");
+    _tempPlayerPositionID = 0;
     removeCards();
     getCardById(_playerPositionID);
 }
