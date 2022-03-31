@@ -139,10 +139,14 @@ function removeCards() {
 function renderPlayerProperties() {
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
-        const $container = document.querySelector(`div.${player}`);
-        playerProperties[player].forEach(function (property) {
-            document.querySelector(`.${property}`).classList.remove("not-bought");
-        });
+        if (player) {
+            const $container = document.querySelector(`.${player.toLowerCase()}`);
+            playerProperties[player].forEach(function (property) {
+                if (property !== null) {
+                    $container.querySelector(`.${property}`).classList.remove("not-bought");
+                }
+            });
+        }
     }
 }
 

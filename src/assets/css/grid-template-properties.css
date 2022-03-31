@@ -2,48 +2,48 @@
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-areas:
-            ".             .           .                   .           .               .              .              .          Short-Line-RR         ."
-            ".             Connecticut Virginia            new-york    illinois-avenue marvin-gardens Pennsylvania   .          Baltimore-and-Ohio-RR ."
-            "Baltic        Vermont     States              Tennessee   indiana-avenue  Ventnor        north-carolina Boardwalk  pennsylvania-RR       Water-Works"
-            "Mediterranean Oriental    saint-charles-place saint-james kentucky-avenue Atlantic       Pacific        park-place reading-RR            Electric-Company";
+            ".             .           .                   .           .               .              .              .          short-line-rr         ."
+            ".             connecticut virginia            new-york    illinois-avenue marvin-gardens pennsylvania   .          baltimore-and-ohio-rr ."
+            "baltic        vermont     states              tennessee   indiana-avenue  ventnor        north-carolina boardwalk  pennsylvania-rr       water-works"
+            "mediterranean oriental    saint-charles-place saint-james kentucky-avenue atlantic       pacific        park-place reading-rr            electric-company";
 }
 
 .info-container .not-bought {background-color: #979797}
 
-.Mediterranean {grid-area: Mediterranean; background-color: saddlebrown}
-.Baltic {grid-area: Baltic; background-color: saddlebrown}
+.mediterranean {grid-area: mediterranean; background-color: saddlebrown}
+.baltic {grid-area: baltic; background-color: saddlebrown}
 
-.Oriental {grid-area: Oriental; background-color: blue}
-.Vermont {grid-area: Vermont; background-color: blue}
-.Connecticut {grid-area: Connecticut; background-color: blue}
+.oriental {grid-area: oriental; background-color: blue}
+.vermont {grid-area: vermont; background-color: blue}
+.connecticut {grid-area: connecticut; background-color: blue}
 
 .saint-charles-place {grid-area: saint-charles-place; background-color: purple}
-.States {grid-area: States; background-color: purple}
-.Virginia {grid-area: Virginia; background-color: purple}
+.states {grid-area: states; background-color: purple}
+.virginia {grid-area: virginia; background-color: purple}
 
 .saint-james {grid-area: saint-james; background-color: orange}
-.Tennessee {grid-area: Tennessee; background-color: orange}
+.tennessee {grid-area: tennessee; background-color: orange}
 .new-york {grid-area: new-york; background-color: orange}
 
 .kentucky-avenue {grid-area: kentucky-avenue; background-color: red}
 .indiana-avenue {grid-area: indiana-avenue; background-color: red}
 .illinois-avenue {grid-area: illinois-avenue; background-color: red}
 
-.Atlantic {grid-area: Atlantic; background-color: yellow}
-.Ventnor {grid-area: Ventnor; background-color: yellow}
+.atlantic {grid-area: atlantic; background-color: yellow}
+.ventnor {grid-area: ventnor; background-color: yellow}
 .marvin-gardens {grid-area: marvin-gardens; background-color: yellow}
 
-.Pacific {grid-area: Pacific; background-color: green}
+.pacific {grid-area: pacific; background-color: green}
 .north-carolina {grid-area: north-carolina; background-color: green}
-.Pennsylvania {grid-area: Pennsylvania; background-color: green}
+.pennsylvania {grid-area: pennsylvania; background-color: green}
 
 .park-place {grid-area: park-place; background-color: darkblue}
-.Boardwalk {grid-area: Boardwalk; background-color: darkblue}
+.boardwalk {grid-area: boardwalk; background-color: darkblue}
 
-.reading-RR {grid-area: reading-RR; background-color: black}
-.pennsylvania-RR {grid-area: pennsylvania-RR; background-color: black}
-.Baltimore-and-Ohio-RR {grid-area: Baltimore-and-Ohio-RR; background-color: black}
-.Short-Line-RR {grid-area: Short-Line-RR; background-color: black}
+.reading-rr {grid-area: reading-rr; background-color: black}
+.pennsylvania-rr {grid-area: pennsylvania-rr; background-color: black}
+.baltimore-and-ohio-rr {grid-area: baltimore-and-ohio-rr; background-color: black}
+.short-line-rr {grid-area: short-line-rr; background-color: black}
 
-.Electric-Company {grid-area: Electric-Company; background-color: white}
-.Water-Works {grid-area: Water-Works; background-color: white}
+.electric-company {grid-area: electric-company; background-color: white}
+.water-works {grid-area: water-works; background-color: white}
