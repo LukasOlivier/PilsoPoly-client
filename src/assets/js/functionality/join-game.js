@@ -10,7 +10,7 @@ function fetchAllGames(){
             .then(response => {
                 const game = findGameByID(response, id);
                 if (game.started === true) {
-                    throw new Error("This game has already started.")
+                    throw new Error("This game has already started.");
                 }
                 checkName(name, game);
             })

@@ -5,11 +5,11 @@ let _tempPlayerPositionID = null;
 let _$giveUpPopup = "";
 
 function renderMainPage() {
+
     _$giveUpPopup = document.querySelector("#give-up-popup");
 
     _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
-
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
@@ -22,6 +22,8 @@ function renderMainPage() {
 
     getTiles();
     renderPlayerInfo();
+    checkIfPlayerBankrupt();
+
 }
 
 function endTurn() {
@@ -164,14 +166,32 @@ function renderPlayerProperties() {
 
 function giveUp() {
     _$giveUpPopup.classList.remove("hidden");
+    document.querySelector("section").classList.add("hidden");
 }
+
 function giveUpDeny() {
+    document.querySelector("section").classList.remove("hidden");
     _$giveUpPopup.classList.add("hidden");
 }
+
 function giveUpConfirm() {
-    window.location.href = "lose-page.html";
+    window.location.href = "lose-screen.html";
 }
 
 function trade() {
     console.log("trade");
 }
+
+function checkIfPlayerBankrupt() {
+    fetchFromServer(`/games/${_gameID}`, 'GET')
+        .then(response => {
+            response.players.forEach(player => {
+                if (player.bankrupt){
+                    console.log(document.querySelector(`.${player.name}`));
+                    document.querySelector(`.${player.name}`).style.opacity = "0.5";
+                    document.querySelector(`.${player.name}`).style.color = "gray";
+                }
+            });
+        });
+}
+

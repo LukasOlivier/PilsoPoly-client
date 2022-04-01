@@ -17,7 +17,6 @@ function initStartScreen() {
     _$rulesInterface = document.querySelector("#rules-interface");
     _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
 
-
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
@@ -25,13 +24,7 @@ function initStartScreen() {
 
     _$lobbyInterface.querySelector('.refresh').addEventListener('click', refresh);
 
-    document.querySelectorAll('.icon-picker').forEach(item => {
-        item.addEventListener('click', function (e) {
-            document.querySelector("#icon-interface").classList.add("hidden");
-            renderIconPicker(e.currentTarget);
-        });
-        item.addEventListener('click', renderIconPicker);
-    });
+
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
     });
@@ -40,9 +33,9 @@ function initStartScreen() {
         item.addEventListener('click', function (e) {
             _$seeAllGamesInterface.classList.add("hidden");
             _$joinInterface.style.opacity = "1";
-            _$joinInterface.querySelector("#ID").value = e.target.innerText
+            _$joinInterface.querySelector("#ID").value = e.target.innerText;
         });
-    })
+    });
 }
 
 function renderJoin() {
@@ -70,8 +63,13 @@ function renderCreate() {
 
 
 function renderLobby(id, numberOfPlayers, playerNames) {
-    hideEverythingForLobby();
-    _$lobbyInterface.querySelector("span").innerText = id;
+    // Hide other interfaces for lobby //
+    _$joinInterface.classList.add("hidden");
+    _$createInterface.classList.add("hidden");
+    _$lobbyInterface.classList.remove("hidden");
+
+    _$lobbyInterface.querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
+    _$lobbyInterface.querySelector("span").innerText = id; //Display the ID of current game
     const playersToJoin = numberOfPlayers - playerNames.length;
     _$lobbyInterface.querySelector("p").innerText = "Waiting for " + playersToJoin + " more players to join.";
     playerNames.forEach(player => {
@@ -79,24 +77,12 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
+    document.querySelector(".icon-picker").addEventListener("click", renderIconPicker);
     // current solution to refresh the lobby, give the gameID (id) with the refresh function
     // this function just goes back to loadGameFromData..
 }
 
-// oke pls give me a better name xd
-function hideEverythingForLobby() {
-    _$joinInterface.classList.add("hidden");
-    _$createInterface.classList.add("hidden");
-    _$lobbyInterface.classList.remove("hidden");
-
-    _$createInterface.classList.add("hidden");
-    _$joinInterface.classList.add("hidden");
-    _$lobbyInterface.classList.remove("hidden");
-
-    _$lobbyInterface.querySelector("#players").innerText = "";
-}
-
-function renderIconPicker($clickedIcon) {
+function renderIconPicker(e) {
     _$lobbyInterface.classList.add("hidden");
     _$iconInterface.classList.remove("hidden");
     _$iconInterface.querySelectorAll('img').forEach(item => {
