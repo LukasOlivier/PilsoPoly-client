@@ -2,20 +2,29 @@
 
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
+let _$giveUpPopup = "";
 
 function renderMainPage() {
 
-    _token = {token : loadFromStorage("token")};
-    // _gameID = loadFromStorage("gameId");
-    _gameID = "dummy";
+    _$giveUpPopup = document.querySelector("#give-up-popup");
+
+    _token = {token: loadFromStorage("token")};
+    _gameID = loadFromStorage("gameId");
+
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
+    document.querySelector("#give-up").addEventListener("click", giveUp);
+    document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
+    document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
+
 
     getTiles();
     renderPlayerInfo();
+    checkIfPlayerBankrupt();
+
 }
 
 function endTurn() {
@@ -43,7 +52,7 @@ function renderCards() {
 }
 
 function getCardById(id) {
-    const toShow = createToShow(id, id-2, id+3);
+    const toShow = createToShow(id, id - 2, id + 3);
     for (const cardId of toShow) {
         if (cardId === id) {
             showCards(loadFromStorage("tiles")[cardId], true);
@@ -130,6 +139,7 @@ function moveRight() {
 
 function backToCurrentPosition() {
     document.querySelector("main button").classList.toggle("hidden");
+    _tempPlayerPositionID = 0;
     removeCards();
     getCardById(_playerPositionID);
 }
@@ -155,6 +165,35 @@ function renderPlayerProperties() {
     }
 }
 
+function giveUp() {
+    _$giveUpPopup.classList.remove("hidden");
+    document.querySelector("section").classList.add("hidden");
+}
+
+function giveUpDeny() {
+    document.querySelector("section").classList.remove("hidden");
+    _$giveUpPopup.classList.add("hidden");
+}
+
+function giveUpConfirm() {
+    window.location.href = "lose-screen.html";
+}
+
 function trade() {
     console.log("trade");
 }
+
+function checkIfPlayerBankrupt() {
+    fetchFromServer(`/games/${_gameID}`, 'GET')
+        .then(response => {
+            response.players.forEach(player => {
+                if (player.bankrupt) {
+                    const $container = document.querySelector(`.${player.name}`);
+                    $container.style.opacity = "0.5";
+                    $container.querySelector("p").style.color = "red";
+                    $container.querySelector("p").innerHTML = `${player.name}: BANKRUPT`;
+                }
+            });
+        });
+}
+

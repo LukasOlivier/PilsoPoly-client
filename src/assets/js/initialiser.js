@@ -13,4 +13,7 @@ function init(){
     else if (document.querySelector("h1").id === "game-screen"){
         renderMainPage();
     }
+    else if (document.querySelector("h1").id === "lose-screen"){
+        loseGame();
+    }
 }
