@@ -77,6 +77,8 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
+    // this ads a timeout every 1.5s to refresh the lobby
+    // when clicking on the back button, this timeout gets removed.
     const timoutID = setTimeout(loadGameDataForLobby, 1500);
     _$lobbyInterface.querySelector("#back-lobby").addEventListener('click',() => clearTimeout(timoutID));
 }

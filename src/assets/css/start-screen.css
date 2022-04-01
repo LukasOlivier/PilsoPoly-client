@@ -287,8 +287,19 @@ body {
 
 #lobby-interface .back-button {
     margin-top: 3rem;
-    width: 10vw;
-    height: 3vh;
+    width: 6rem;
+    height: 2rem;
+    border: none;
+    font-size: 1rem;
+    background: #FFFFFFFF;
+    outline: none;
+    color: #000000FF;
+    font-family: Oswald, serif;
+    text-align: center;
+}
+#lobby-interface .back-button:hover {
+    background: #dedddd;
+    cursor: pointer;
 }
 
 /* =======================================================================*/
@@ -365,7 +376,7 @@ body {
     background: #dedddd;
 }
 
-/* =======================================================================*/
+/* ===============================================================================*/
 
 
 /* =========================== See-all-games-interface ===========================*/
