@@ -6,8 +6,8 @@ let _tempPlayerPositionID = null;
 function renderMainPage() {
 
     _token = {token : loadFromStorage("token")};
-    _gameID = loadFromStorage("gameId");
-
+    // _gameID = loadFromStorage("gameId");
+    _gameID = "dummy";
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
@@ -32,7 +32,7 @@ function renderCards() {
                     currentTileName = player.currentTile;
                 }
             });
-            _tiles.forEach(function (tile) {
+            loadFromStorage("tiles").forEach(function (tile) {
                 if (tile.name === currentTileName) {
                     _tempPlayerPositionID = tile.position;
                     _playerPositionID = tile.position;
@@ -46,9 +46,9 @@ function getCardById(id) {
     const toShow = createToShow(id, id-2, id+3);
     for (const cardId of toShow) {
         if (cardId === id) {
-            showCards(_tiles[cardId], true);
+            showCards(loadFromStorage("tiles")[cardId], true);
         } else {
-            showCards(_tiles[cardId], false);
+            showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
 }
@@ -148,7 +148,7 @@ function renderPlayerProperties() {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
                 if (property !== null) {
-                    $container.querySelector(`.${property}`).classList.remove("not-bought");
+                    $container.querySelector(`.${property.name.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
                 }
             });
         }

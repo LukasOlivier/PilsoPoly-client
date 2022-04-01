@@ -5,8 +5,22 @@ function linkPlayersAndStreets(players) {
     players.forEach(player => {
         const playerName = player.name;
         const playerStreets = [];
-        playerStreets.push(player.properties.forEach(property => playerStreets.push(property.property.toLowerCase().replace(/\s/g, '-'))));
+        player.properties.forEach(function (property) {
+            playerStreets.push(createCardInfo(property));
+        });
         _playersBoughtProperties[playerName] = playerStreets;
     });
     saveToStorage("playerProperties", _playersBoughtProperties);
+}
+
+function createCardInfo(property) {
+    const info = {name: null, cost: null, rent: null};
+    loadFromStorage("tiles").forEach(function (tile) {
+        if (tile.name === property.property) {
+            info.name = tile.name;
+            info.cost = tile.cost;
+            info.rent = tile.rent;
+        }
+    });
+    return info;
 }

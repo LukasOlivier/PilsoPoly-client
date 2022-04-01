@@ -12,10 +12,11 @@ function init() {
    const streetnames = [];
 
    _token = {token : loadFromStorage("token")};
-   _gameID = loadFromStorage("gameId");
-
+   // _gameID = loadFromStorage("gameId");
+_gameID = "dummy";
    fetchFromServer(`/games/${_gameID}`,'GET')
        .then(players => {
+           console.log(players);
            linkPlayersAndStreets(players.players);
        });
 
@@ -61,11 +62,11 @@ function renderStreets(street) {
     $template.querySelector('li+li+li').innerText= "mortage:  " + street.mortgage;
     $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
     for (const [key, value] of Object.entries(_playersBoughtProperties)) {
-        const playername = key;
-        value.forEach(propertie => {
-            if (propertie === street.name) {
+        const playerName = key;
+        value.forEach(property => {
+            if (property === street.name) {
                 isBought = true;
-                $template.querySelector(`div p`).innerText = "player: " + playername;}});
+                $template.querySelector(`div p`).innerText = "player: " + playerName;}});
     }
     if (isBought === false) {
         $template.querySelector(`div p`).innerText = "player: not bought yet";}
