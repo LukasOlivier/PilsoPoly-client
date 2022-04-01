@@ -45,3 +45,16 @@ a:hover
     font-size: 1.4rem;
 
 }
+.errormessages p {
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: #000000 solid 0.1rem;
+    background-color: #FF0000FF;
+    text-align: center;
+}
+
+.errormessages p:empty {
+    padding: 0;
+    border: none;
+}

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
 
+
     <script src="assets/js/config.js"></script>
     <script src="assets/js/helper.js"></script>
     <script src="assets/js/data-connector/error-handler.js"></script>
@@ -35,6 +36,7 @@
     <button id="end-turn">End turn</button>
     <h1 id="game-screen">Monopoly</h1>
     <div>
+        <img src="images/give-up.png" alt="give-up" title="give-up" id="give-up">
         <img src="images/inventory.png" alt="inventory" title="inventory" id="inventory">
         <img src="images/trade.png" alt="trade" title="trade" id="trade">
         <a href="../src/see-all-the-streets-with-owners.html"><img src="images/map.png" alt="map" title="map" id="map"></a>
@@ -42,6 +44,14 @@
 </header>
 
 <main>
+    <div id="give-up-popup" class="hidden">
+        <h2>Are you sure you want to give up?</h2>
+        <p>This will turn over all your assest to your oldest debtor and yield.</p>
+        <form>
+            <input type="button" id="give-up-confirm" value="YES">
+            <input type="button" id="give-up-deny" value="NO">
+        </form>
+    </div>
     <section>
         <h2>Current position:</h2>
         <div id="cards-parent">

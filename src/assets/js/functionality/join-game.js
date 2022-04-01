@@ -10,7 +10,7 @@ function fetchAllGames(){
             .then(response => {
                 const game = findGameByID(response, id);
                 if (game.started === true) {
-                    throw new Error("This game has already started.")
+                    throw new Error("This game has already started.");
                 }
                 checkName(name, game);
             })
@@ -46,17 +46,17 @@ function checkName(name, game){
         if (namesInGame.name === name.playerName) {
             throw new Error("This name is already in use");
         }
-    })
-    console.log("names are correct")
+    });
+    console.log("names are correct");
 }
 function findGameByID(allGames, id){
-    for(let game of allGames){
+    for(const game of allGames){
         if(game.id === id){
             console.log('found with id ' + id);
             return game;
         }
     }
-    throw new Error("There is no game with this code(2)")
+    throw new Error("There is no game with this code(2)");
 }
 
 function joinGame(id, name){
@@ -79,7 +79,7 @@ function joinGame(id, name){
 function fetchNonStartedGames(){
     // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
-        .then(response => renderAllAvailableGames(response))
+        .then(response => renderAllAvailableGames(response));
 }
 
 function fillInGameID(e){

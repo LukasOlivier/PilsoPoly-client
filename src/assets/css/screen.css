@@ -39,7 +39,7 @@
 }
 
 #main-screen h1 {
-    margin-left: 2rem;
+    margin-left: 6rem;
     font-size: 3rem;
     color: white;
     font-family: Oswald, serif;
@@ -311,8 +311,45 @@ article:nth-of-type(3) img{
     margin-top: 0.5rem;
 }
 #special-card-icon{
-    width: 90%;
+    width: 80%;
     height: 50%;
     align-self: center;
     margin: auto auto auto  auto;
+}
+
+#give-up-popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 30vw;
+    height: 7vw;
+    background: white;
+    padding: 2rem;
+    border: black solid 0.1rem;
+    margin-left: 33%;
+    margin-right: 25%;
+}
+#give-up-popup h2{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+#give-up-popup input{
+    margin-top: 2rem;
+    width: 10rem;
+    height: 2rem;
+    border: black solid 0.07rem;
+    background:  white;
+}
+#give-up-popup input:hover{
+    cursor: pointer;
+    background: rgba(232, 232, 232, 0.5)
+}
+#give-up-popup #give-up-deny{
+    border: red solid 0.1rem;
+}
+#give-up-popup form{
+    width: 25rem;
+    display: flex;
+    justify-content: space-around;
 }
