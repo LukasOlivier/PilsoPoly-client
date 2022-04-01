@@ -18,9 +18,12 @@ function initStartScreen() {
     _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
 
 
+
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
+    document.querySelector("#rules-interface .back-button").addEventListener("click", backButton);
+
     document.querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
 
     _$lobbyInterface.querySelector('.refresh').addEventListener('click', refresh);
@@ -40,9 +43,9 @@ function initStartScreen() {
         item.addEventListener('click', function (e) {
             _$seeAllGamesInterface.classList.add("hidden");
             _$joinInterface.style.opacity = "1";
-            _$joinInterface.querySelector("#ID").value = e.target.innerText
+            _$joinInterface.querySelector("#ID").value = e.target.innerText;
         });
-    })
+    });
 }
 
 function renderJoin() {
@@ -131,6 +134,7 @@ function renderAllAvailableGames(allGames) {
 }
 // todo: make it so that clicking anywhere on the screen, the popup for the games dissapears....
 function backButton() {
+    _$rulesInterface.classList.add("hidden");
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$lobbyInterface.classList.add("hidden");
