@@ -2,10 +2,12 @@
 
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
+let _$giveUpPopup = "";
 
 function renderMainPage() {
+    _$giveUpPopup = document.querySelector("#give-up-popup");
 
-    _token = {token : loadFromStorage("token")};
+    _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
@@ -13,6 +15,10 @@ function renderMainPage() {
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
+    document.querySelector("#give-up").addEventListener("click", giveUp);
+    document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
+    document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
+
 
     getTiles();
     renderPlayerInfo();
@@ -43,7 +49,7 @@ function renderCards() {
 }
 
 function getCardById(id) {
-    const toShow = createToShow(id, id-2, id+3);
+    const toShow = createToShow(id, id - 2, id + 3);
     for (const cardId of toShow) {
         if (cardId === id) {
             showCards(_tiles[cardId], true);
@@ -154,6 +160,16 @@ function renderPlayerProperties() {
             });
         }
     }
+}
+
+function giveUp() {
+    _$giveUpPopup.classList.remove("hidden");
+}
+function giveUpDeny() {
+    _$giveUpPopup.classList.add("hidden");
+}
+function giveUpConfirm() {
+    window.location.href = "lose-page.html";
 }
 
 function trade() {

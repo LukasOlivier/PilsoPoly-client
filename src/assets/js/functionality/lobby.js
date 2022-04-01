@@ -17,5 +17,5 @@ function loadGameDataForLobby(name){
 }
 
 function refresh(){
-    loadGameDataForLobby()
+    loadGameDataForLobby();
 }
