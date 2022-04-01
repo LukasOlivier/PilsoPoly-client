@@ -7,6 +7,7 @@ let _$lobbyInterface = "";
 let _$iconInterface = "";
 let _$rulesInterface = "";
 let _$seeAllGamesInterface = "";
+let _$errorMessage = "";
 
 function initStartScreen() {
     _$startInterface = document.querySelector("#start-interface");
@@ -16,6 +17,7 @@ function initStartScreen() {
     _$iconInterface = document.querySelector("#icon-interface");
     _$rulesInterface = document.querySelector("#rules-interface");
     _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
+    _$errorMessage = document.querySelector(".errormessages p");
 
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
@@ -39,7 +41,7 @@ function initStartScreen() {
 }
 
 function renderJoin() {
-    document.querySelector(".errormessages p").innerHTML = "";
+    _$errorMessage.innerHTML = "";
     _$startInterface.classList.add("hidden");
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.remove("hidden");
@@ -51,12 +53,11 @@ function renderJoin() {
 }
 
 function renderCreate() {
-    document.querySelector(".errormessages p").innerHTML = "";
+    _$errorMessage.innerHTML = "";
     _$startInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$createInterface.classList.remove("hidden");
-    // should this button be named create button? and have an ID instead of a class?
-    // kept it like this for css maybe??????? IDKKKKK
+
     const $createInterface = document.querySelector("#create-interface");
     $createInterface.querySelector(".join-button").addEventListener("click", checkInput);
 }
@@ -71,7 +72,7 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     _$lobbyInterface.querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
     _$lobbyInterface.querySelector("span").innerText = id; //Display the ID of current game
     const playersToJoin = numberOfPlayers - playerNames.length;
-    _$lobbyInterface.querySelector("p").innerText = "Waiting for " + playersToJoin + " more players to join.";
+    _$lobbyInterface.querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
     playerNames.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
@@ -120,6 +121,6 @@ function backButton() {
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$lobbyInterface.classList.add("hidden");
-    document.querySelector(".errormessages p").innerHTML = "";
+    _$errorMessage.innerHTML = "";
     _$startInterface.classList.remove("hidden");
 }
