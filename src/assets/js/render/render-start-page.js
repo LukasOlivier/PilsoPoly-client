@@ -77,8 +77,8 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
-    // current solution to refresh the lobby, give the gameID (id) with the refresh function
-    // this function just goes back to loadGameFromData..
+    const timoutID = setTimeout(loadGameDataForLobby, 1500);
+    _$lobbyInterface.querySelector("#back-lobby").addEventListener('click',() => clearTimeout(timoutID));
 }
 
 // oke pls give me a better name xd
