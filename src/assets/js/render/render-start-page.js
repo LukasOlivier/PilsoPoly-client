@@ -23,8 +23,6 @@ function initStartScreen() {
     document.querySelector("#rules").addEventListener("click", renderRules);
     document.querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
 
-    _$lobbyInterface.querySelector('.refresh').addEventListener('click', refresh);
-
     document.querySelectorAll('.icon-picker').forEach(item => {
         item.addEventListener('click', function (e) {
             document.querySelector("#icon-interface").classList.add("hidden");

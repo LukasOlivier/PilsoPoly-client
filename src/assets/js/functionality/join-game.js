@@ -1,20 +1,20 @@
 'use strict';
 
 function fetchAllGames(){
-    const id = makeID(_$joinInterface.querySelector("#ID").value);
+    const gameID = makeID(_$joinInterface.querySelector("#ID").value);
     const name = {
         playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
     };
     try {
         fetchFromServer(`/games?prefix=${_config.prefix}`)
             .then(response => {
-                const game = findGameByID(response, id);
+                const game = findGameByID(response, gameID);
                 if (game.started === true) {
                     console.log("game started")
                     throw new Error("This game has already started.")
                 }
                 checkName(name, game);
-                joinGame(id, name);
+                joinGame(gameID, name);
             })
             .catch(errorHandler)
     }
@@ -24,11 +24,11 @@ function fetchAllGames(){
 
 }
 // if the id doesnt contains the prefix, add it. ;)
-function makeID(id){
-    if (id.includes(_config.prefix)) {
-        return id;
+function makeID(gameID){
+    if (gameID.includes(_config.prefix)) {
+        return gameID;
     } else {
-        return _config.prefix.concat("_", id);
+        return _config.prefix.concat("_", gameID);
     }
 }
 
@@ -49,27 +49,18 @@ function checkName(name, game){
         }
     })
 }
-function findGameByID(allGames, id){
-    for(let game of allGames){
-        if(game.id === id){
-            console.log('found with id ' + id);
-            return game;
-        }
-    }
-    throw new Error("There is no game with this code(2)")
-}
 
-function joinGame(id, name){
+function joinGame(gameID, name){
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${id}/players`,'POST', name)
+    fetchFromServer(`/games/${gameID}/players`,'POST', name)
         .then(response => {
-            _gameID = id;
+            _gameID = gameID;
             _token = response.token;
             localStorage.clear();
-            saveToStorage("gameId", id);
+            saveToStorage("gameId", gameID);
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
-            loadGameDataForLobby(id, name);
+            loadGameDataForLobby(gameID, name);
         })
         // this token is your security token.
         .catch(errorHandler);

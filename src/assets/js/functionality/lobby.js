@@ -1,6 +1,9 @@
 'use strict';
-// name is for later :)
-function loadGameDataForLobby(name){
+
+function loadGameDataForLobby(){
+    //if (_$lobbyInterface.classList.contains('hidden')){
+    //    return;
+    // }
     fetchFromServer(`/games?prefix=${_config.prefix}`)
         .then(response => {
             const game = findGameByID(response, _gameID);
@@ -8,14 +11,9 @@ function loadGameDataForLobby(name){
                 console.log("THE GAME HAS STARTED");
                 window.location.href = "index.html";
             }
-            // api has changed?
-            // _gameID = game.id;
             const numberOfPlayers = game.numberOfPlayers;
             const playerNames = game.players;
             renderLobby(_gameID, numberOfPlayers, playerNames);
-        });
-}
-
-function refresh(){
-    loadGameDataForLobby()
+            setTimeout(loadGameDataForLobby, 1500);
+        })
 }
