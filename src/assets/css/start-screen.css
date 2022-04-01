@@ -168,13 +168,13 @@ body {
 }
 #create-interface #amount-of-players {
     font-size: 1.2rem;
-    width: 100%;
+    width: 19.5rem;
     margin-top: 1rem;
 }
-/* Door Robin, excuses @Lukas alst suckt x*/
-#create-interface .name {
-    width: 100%;
-    margin-top: 2rem;
+#create-interface form{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 /* =======================================================================*/
 

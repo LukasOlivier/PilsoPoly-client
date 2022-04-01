@@ -10,8 +10,7 @@ function fetchAllGames(){
             .then(response => {
                 const game = findGameByID(response, gameID);
                 if (game.started === true) {
-                    console.log("game started")
-                    throw new Error("This game has already started.")
+                    throw new Error("This game has already started.");
                 }
                 checkName(name, game);
                 joinGame(gameID, name);
@@ -77,6 +76,6 @@ function fillInGameID(e){
     // hides the pop up, and fills the value from the li in the ID field
     _$seeAllGamesInterface.classList.add("hidden");
     _$joinInterface.style.opacity = "1";
-    _$joinInterface.querySelector("#ID").value = e.target.id;
+    _$joinInterface.querySelector("#ID").value = e.currentTarget.id;
 }
 
