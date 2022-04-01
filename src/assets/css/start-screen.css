@@ -195,6 +195,9 @@ body {
 /* =======================================================================*/
 
 /* =========================== Icon-interface ===========================*/
+#icon-interface{
+    margin-top: 25vh;
+}
 #icon-interface ul {
     display: flex;
     flex-direction: row;

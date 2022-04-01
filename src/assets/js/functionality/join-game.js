@@ -46,7 +46,7 @@ function checkName(name, game){
         if (namesInGame.name === name.playerName) {
             throw new Error("This name is already in use");
         }
-    })
+    });
 }
 
 function joinGame(gameID, name){
@@ -69,7 +69,7 @@ function joinGame(gameID, name){
 function fetchNonStartedGames(){
     // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
-        .then(response => renderAllAvailableGames(response))
+        .then(response => renderAllAvailableGames(response));
 }
 
 function fillInGameID(e){

@@ -13,4 +13,3 @@ function loadGameDataForLobby(){
             renderLobby(_gameID, numberOfPlayers, playerNames);
         })
 }
-
