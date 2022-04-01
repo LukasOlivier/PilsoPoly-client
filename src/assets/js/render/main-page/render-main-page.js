@@ -186,10 +186,11 @@ function checkIfPlayerBankrupt() {
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(response => {
             response.players.forEach(player => {
-                if (player.bankrupt){
-                    console.log(document.querySelector(`.${player.name}`));
-                    document.querySelector(`.${player.name}`).style.opacity = "0.5";
-                    document.querySelector(`.${player.name}`).style.color = "gray";
+                if (player.bankrupt) {
+                    const $container = document.querySelector(`.${player.name}`);
+                    $container.style.opacity = "0.5";
+                    $container.querySelector("p").style.color = "red";
+                    $container.querySelector("p").innerHTML = `${player.name}: BANKRUPT`;
                 }
             });
         });
