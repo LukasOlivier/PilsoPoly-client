@@ -20,6 +20,8 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
 
+    document.onkeydown = checkKey;
+
 
     getTiles();
     renderPlayerInfo();
@@ -108,6 +110,15 @@ function renderPlayerInfo() {
             });
             renderPlayerProperties();
         });
+}
+
+function checkKey(e) {
+    if (e.key === "ArrowLeft") {
+        moveLeft();
+    } else if (e.key === "ArrowRight") {
+        moveRight();
+    }
+
 }
 
 function move(value) {
