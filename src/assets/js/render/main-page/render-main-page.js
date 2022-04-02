@@ -52,7 +52,7 @@ function pollingGameState(){
             console.log(res)
             _currentGameState = res;
             if (_currentGameState.currentPlayer === _name && _currentGameState.canRoll === true) {
-                console.log("I can trade")
+                console.log("I can roll the dice")
                 document.querySelector("#roll-dice-open-dialog").classList.remove("hidden")
             } else {
                 console.log('I cant')
@@ -153,6 +153,7 @@ function move(value) {
         $button.classList.toggle("hidden");
     }
     _tempPlayerPositionID -= value;
+
 
     if (_tempPlayerPositionID === 40) {
         _tempPlayerPositionID = 0;

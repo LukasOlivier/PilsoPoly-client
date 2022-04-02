@@ -6,6 +6,9 @@ function rollDice(){
         .then(response => {
             console.log(response)
             console.log('you rolled ' + response.lastDiceRoll)
+            const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
+            console.log(totalRolled)
+            move(totalRolled)
 
         })
         .catch(errorHandler);
