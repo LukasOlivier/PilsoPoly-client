@@ -24,9 +24,6 @@ function initStartScreen() {
     document.querySelector("#rules").addEventListener("click", renderRules);
     document.querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
 
-    _$lobbyInterface.querySelector('.refresh').addEventListener('click', refresh);
-
-
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
     });
@@ -78,9 +75,10 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
-    document.querySelector(".icon-picker").addEventListener("click", renderIconPicker);
-    // current solution to refresh the lobby, give the gameID (id) with the refresh function
-    // this function just goes back to loadGameFromData..
+    // this ads a timeout every 1.5s to refresh the lobby
+    // when clicking on the back button, this timeout gets removed.
+    const timoutID = setTimeout(loadGameDataForLobby, 1500);
+    _$lobbyInterface.querySelector("#back-lobby").addEventListener('click',() => clearTimeout(timoutID));
 }
 
 function renderIconPicker(e) {

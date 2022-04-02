@@ -168,13 +168,13 @@ body {
 }
 #create-interface #amount-of-players {
     font-size: 1.2rem;
-    width: 100%;
+    width: 19.5rem;
     margin-top: 1rem;
 }
-/* Door Robin, excuses @Lukas alst suckt x*/
-#create-interface .name {
-    width: 100%;
-    margin-top: 2rem;
+#create-interface form{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 /* =======================================================================*/
 
@@ -290,8 +290,19 @@ body {
 
 #lobby-interface .back-button {
     margin-top: 3rem;
-    width: 10vw;
-    height: 3vh;
+    width: 6rem;
+    height: 2rem;
+    border: none;
+    font-size: 1rem;
+    background: #FFFFFFFF;
+    outline: none;
+    color: #000000FF;
+    font-family: Oswald, serif;
+    text-align: center;
+}
+#lobby-interface .back-button:hover {
+    background: #dedddd;
+    cursor: pointer;
 }
 
 /* =======================================================================*/
@@ -368,7 +379,7 @@ body {
     background: #dedddd;
 }
 
-/* =======================================================================*/
+/* ===============================================================================*/
 
 
 /* =========================== See-all-games-interface ===========================*/
