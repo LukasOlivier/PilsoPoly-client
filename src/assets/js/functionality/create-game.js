@@ -5,17 +5,23 @@ function checkInput(){
     const name = {
         playerName: _$createInterface.querySelector(".name").value.toLowerCase()
     };
+    let errorMessage = false;
+    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890é§]/;
     if (isNaN(numberOfPlayers)) {
-        errorHandler("Please provide a number between 2 and 8");
-        return;
+        errorMessage = "Please provide a number between 2 and 8";
     } else if (numberOfPlayers > 8) {
-        errorHandler("There can only be 8 players");
-        return;
+        errorMessage = "There can only be 8 players";
     } else if (numberOfPlayers < 2) {
-        errorHandler("There need to be at least 2 players");
-        return;
+        errorMessage = "There need to be at least 2 players";
     } else if (name.playerName === "") {
-        errorHandler("Your name cant be empty");
+        errorMessage = "Your name cant be empty";
+    } else if (specialChar.test(name.playerName) === true) {
+        errorMessage = "Your name cant contain any special characters or numbers";
+    } else if (name.playerName.length > 10) {
+        errorMessage = "Your name can only be 10 characters long";
+    }
+    if (errorMessage) {
+        errorHandler(errorMessage);
         return;
     }
     createGame(numberOfPlayers, name);

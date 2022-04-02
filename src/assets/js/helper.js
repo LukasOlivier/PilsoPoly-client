@@ -24,3 +24,13 @@ function createCardInfo(property) {
     });
     return info;
 }
+
+// This function finds a game with a specific ID in an array of games.
+function findGameByID(allGames, id){
+    for (let game of allGames){
+        if (game.id === id){
+            return game;
+        }
+    }
+    throw new Error("There is no game with this code(2)");
+}
