@@ -6,6 +6,8 @@ let _$joinInterface = "";
 let _$lobbyInterface = "";
 let _$iconInterface = "";
 let _$rulesInterface = "";
+let _$seeAllGamesInterface = "";
+let _$errorMessage = "";
 
 function initStartScreen() {
     _$startInterface = document.querySelector("#start-interface");
@@ -14,80 +16,72 @@ function initStartScreen() {
     _$lobbyInterface = document.querySelector("#lobby-interface");
     _$iconInterface = document.querySelector("#icon-interface");
     _$rulesInterface = document.querySelector("#rules-interface");
+    _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
+    _$errorMessage = document.querySelector(".errormessages p");
 
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
+    document.querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
 
-    document.querySelectorAll('.icon-picker').forEach(item => {
-        item.addEventListener('click', function (e) {
-            document.querySelector("#icon-interface").classList.add("hidden");
-            renderIconPicker(e.currentTarget);
-        });
-        item.addEventListener('click', renderIconPicker);
-    });
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
+    });
+
+    _$seeAllGamesInterface.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', function (e) {
+            _$seeAllGamesInterface.classList.add("hidden");
+            _$joinInterface.style.opacity = "1";
+            _$joinInterface.querySelector("#ID").value = e.target.innerText;
+        });
     });
 }
 
 function renderJoin() {
-    document.querySelector(".errormessages p").innerHTML = "";
+    _$errorMessage.innerHTML = "";
     _$startInterface.classList.add("hidden");
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.remove("hidden");
     document.querySelector(".errormessages").classList.remove("hidden");
+
     // join button
     const $joinInterface = document.querySelector("#join-interface");
-    $joinInterface.querySelector(".join-button").addEventListener("click", checkExistingGames);
+    $joinInterface.querySelector(".join-button").addEventListener("click", fetchAllGames);
 }
 
 function renderCreate() {
-    document.querySelector(".errormessages p").innerHTML = "";
+    _$errorMessage.innerHTML = "";
     _$startInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$createInterface.classList.remove("hidden");
-    // should this button be named create button? and have an ID instead of a class?
-    // kept it like this for css maybe??????? IDKKKKK
+
     const $createInterface = document.querySelector("#create-interface");
     $createInterface.querySelector(".join-button").addEventListener("click", checkInput);
 }
 
+
 function renderLobby(id, numberOfPlayers, playerNames) {
-    hideEverythingForLobby();
-    _$lobbyInterface.querySelector("span").innerText = id;
+    // Hide other interfaces for lobby //
+    _$joinInterface.classList.add("hidden");
+    _$createInterface.classList.add("hidden");
+    _$lobbyInterface.classList.remove("hidden");
+
+    _$lobbyInterface.querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
+    _$lobbyInterface.querySelector("span").innerText = id; //Display the ID of current game
     const playersToJoin = numberOfPlayers - playerNames.length;
-    _$lobbyInterface.querySelector("p").innerText = "Waiting for " + playersToJoin + " more players to join.";
-    // for every player in this game, clone a template and fill in the correct name etc
-    // later we will also fill in the correct icon.
+    _$lobbyInterface.querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
     playerNames.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
-    // current solution to refresh the lobby, give the gameID (id) with the refresh function
-    // this function just goes back to loadGameFromData..
-    _$lobbyInterface.querySelector('.refresh').addEventListener('click', function()  {
-        refresh(id);
-        console.log('Your game id is:' + _gameID);
-        console.log('your player token is: ' + _token);
-    });
-}
-// oke pls give me a better name xd
-function hideEverythingForLobby(){
-    _$joinInterface.classList.add("hidden");
-    _$createInterface.classList.add("hidden");
-    _$lobbyInterface.classList.remove("hidden");
-
-    _$createInterface.classList.add("hidden");
-    _$joinInterface.classList.add("hidden");
-    _$lobbyInterface.classList.remove("hidden");
-
-    _$lobbyInterface.querySelector("#players").innerText = "";
+    // this ads a timeout every 1.5s to refresh the lobby
+    // when clicking on the back button, this timeout gets removed.
+    const timoutID = setTimeout(loadGameDataForLobby, 1500);
+    _$lobbyInterface.querySelector("#back-lobby").addEventListener('click',() => clearTimeout(timoutID));
 }
 
-function renderIconPicker($clickedIcon) {
-    console.log($clickedIcon);
+function renderIconPicker(e) {
     _$lobbyInterface.classList.add("hidden");
     _$iconInterface.classList.remove("hidden");
     _$iconInterface.querySelectorAll('img').forEach(item => {
@@ -106,13 +100,25 @@ function renderRules() {
     _$startInterface.classList.add("hidden");
     _$rulesInterface.classList.remove("hidden");
 }
-// this function is for all back buttons in the starting screen.
+
+function renderAllAvailableGames(allGames) {
+    _$joinInterface.style.opacity = "0.2";
+    _$seeAllGamesInterface.classList.remove("hidden");
+    // renders all games that are PilsoPoly and that arent started.
+    // also makes the li clickable
+    const $ul = _$seeAllGamesInterface.querySelector('ul');
+    $ul.innerHTML = "";
+    allGames.forEach(game => {
+        $ul.insertAdjacentHTML("beforeend", `<li id="${game.id}"><p class="gameID">${game.id}</p><p>${game.players.length}/${game.numberOfPlayers}</p></li>`);
+    });
+    const $listItems = $ul.querySelectorAll('li');
+    $listItems.forEach(item => item.addEventListener("click", fillInGameID));
+}
+// todo: make it so that clicking anywhere on the screen, the popup for the games dissapears....
 function backButton() {
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$lobbyInterface.classList.add("hidden");
-    document.querySelector(".errormessages p").innerHTML = "";
+    _$errorMessage.innerHTML = "";
     _$startInterface.classList.remove("hidden");
 }
-
-

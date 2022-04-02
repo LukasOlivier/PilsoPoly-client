@@ -1,16 +1,15 @@
 'use strict';
-// name is for later :)
-function loadGameDataForLobby(id, name){
-    fetchFromServer(`/games?prefix=${id}`)
-        .then(response => {
-            console.log("fetching game data");
-            _gameID = response[0].id;
-            const numberOfPlayers = response[0].numberOfPlayers;
-            const playerNames = response[0].players;
-            renderLobby(id, numberOfPlayers, playerNames);
-        });
-}
 
-function refresh(id){
-    loadGameDataForLobby(id)
+function loadGameDataForLobby(){
+    fetchFromServer(`/games?prefix=${_config.prefix}`)
+        .then(response => {
+            const game = findGameByID(response, _gameID);
+            if (game.started === true) {
+                console.log("THE GAME HAS STARTED");
+                window.location.href = "index.html";
+            }
+            const numberOfPlayers = game.numberOfPlayers;
+            const playerNames = game.players;
+            renderLobby(_gameID, numberOfPlayers, playerNames);
+        })
 }

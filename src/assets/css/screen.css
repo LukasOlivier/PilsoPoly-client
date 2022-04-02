@@ -1,14 +1,21 @@
-#main-screen body {
-    background-color: #ffffff;
+.hidden {
+    display: none !important;
+}
+#main-screen {
+    background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414zm16 0L90 80.414 95.586 86H84.414zm16 0L106 80.414 111.586 86h-11.172zm-8-6h11.173L98 85.586 92.414 80zM82 85.586L87.586 80H76.414L82 85.586zM17.414 0L.707 16.707 0 17.414V0h17.414zM4.28 0L0 12.838V0h4.28zm10.306 0L2.288 12.298 6.388 0h8.198zM180 17.414L162.586 0H180v17.414zM165.414 0l12.298 12.298L173.612 0h-8.198zM180 12.838L175.72 0H180v12.838zM0 163h16.413l.5.5 7.294 7.293L25.414 172l-8 8H0v-17zm0 10h6.613l-2.334 7H0v-7zm14.586 7l7-7H8.72l-2.333 7h8.2zM0 165.414L5.586 171H0v-5.586zM10.414 171L16 165.414 21.586 171H10.414zm-8-6h11.172L8 170.586 2.414 165zM180 163h-16.413l-7.794 7.793-1.207 1.207 8 8H180v-17zm-14.586 17l-7-7h12.865l2.333 7h-8.2zM180 173h-6.613l2.334 7H180v-7zm-21.586-2l5.586-5.586 5.586 5.586h-11.172zM180 165.414L174.414 171H180v-5.586zm-8 5.172l5.586-5.586h-11.172l5.586 5.586zM152.933 25.653l1.414 1.414-33.94 33.942-1.416-1.416 33.943-33.94zm1.414 127.28l-1.414 1.414-33.942-33.94 1.416-1.416 33.94 33.943zm-127.28 1.414l-1.414-1.414 33.94-33.942 1.416 1.416-33.943 33.94zm-1.414-127.28l1.414-1.414 33.942 33.94-1.416 1.416-33.94-33.943zM0 85c2.21 0 4 1.79 4 4s-1.79 4-4 4v-8zm180 0c-2.21 0-4 1.79-4 4s1.79 4 4 4v-8zM94 0c0 2.21-1.79 4-4 4s-4-1.79-4-4h8zm0 180c0-2.21-1.79-4-4-4s-4 1.79-4 4h8z' fill='%23000000' fill-opacity='0.06' fill-rule='evenodd'/%3E%3C/svg%3E");
     color: #000000;
-    font-family: Cardo sans-serif;
     font-size: 1rem;
+    font-family: Oswald, serif;
 }
 
 #main-screen header {
+    background: rgb(178, 207, 224);
+    padding: 1rem 0 1rem 0;
+    border-bottom: black solid 0.1rem;
     display: flex;
-    justify-content: space-between;
-    margin: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 #main-screen body {
@@ -32,7 +39,10 @@
 }
 
 #main-screen h1 {
-    font-size: 2.5rem;
+    margin-left: 6rem;
+    font-size: 3rem;
+    color: white;
+    font-family: Oswald, serif;
 }
 
 #main-screen h2 {
@@ -45,12 +55,17 @@
     height: 2.5rem;
 }
 
-#main-screen img {
-    margin: auto 0.5rem 0.5rem 0.5rem;
-    height: 3rem;
+#main-screen header img {
     width: 3rem;
+    height: 3rem;
+    margin-left: 1rem;
 }
 
+#arrows img {
+    transition: all .2s ease-in-out;
+    width: 3rem;
+    height: 3rem;
+}
 
 #main-screen section div {
     display: flex;
@@ -58,20 +73,12 @@
     margin-top: 1.5rem;
 }
 
-#main-screen .normal-card, .special-card, .utility-card, .railroad-card{
+#main-screen .normal-card, .special-card, .utility-card, .railroad-card {
     text-align: center;
     width: 10rem;
     padding: 1rem;
     background-color: #979797;
 }
-
-#main-screen .normal-card p {
-    margin: 1rem;
-}
-
-
-/*TODO: make sure the go card is proper
-   simuleer het met de function call getCardById(0)*/
 
 #main-screen .special-card h3 {
     margin-top: auto;
@@ -83,15 +90,12 @@
 }
 
 #main-screen #arrows {
-    width: 8.25rem;
     margin-top: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-#main-screen #arrows img:last-of-type {
-    transform: scaleX(-1);
-}
 
 #main-screen .info-container {
     display: flex;
@@ -104,7 +108,7 @@
     color: black;
 }
 
-#main-screen .info-container>div {
+#main-screen .info-container > div {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -117,4 +121,235 @@
     border: solid 0.065rem;
     justify-content: center;
     align-items: center;
+}
+
+#main-screen header button {
+    transition: all .2s ease-in-out;
+    border: none;
+    background: white;
+    margin-left: 2rem;
+    margin-right: auto;
+}
+
+#main-screen header div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+#main-screen header img {
+    transition: all .2s ease-in-out;
+    filter: invert(100%);
+}
+
+#main-screen header img:hover, #main-screen button:hover, #main-screen #back-to-current-position button:hover {
+    filter: drop-shadow(0px 0px 0.5rem #222);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#main-screen #trade {
+    border-radius: 1rem;
+}
+
+#main-screen #back-to-current-position {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+#main-screen #back-to-current-position button {
+    transition: all .2s ease-in-out;
+    background: white;
+    border: black solid 0.1rem;
+}
+
+#arrows img:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+/* ======================================================================================================== */
+/* ===================================      PROCEED WITH CAUTION       ==================================== */
+/* ======================================================================================================== */
+
+#main-screen #cards-parent {
+    font-family: Calibri, serif;
+    margin-top: 2rem;
+    height: 50vh;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#main-screen #cards-parent article {
+    display: flex;
+    flex-direction: column;
+    border: black solid 0.1rem;
+    background: #e5e5e5;
+    border-radius: 0.2rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-align: left;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#cards-parent article::-webkit-scrollbar {
+    display: none;
+}
+
+#main-screen #cards-parent li {
+    text-align: left;
+}
+
+#cards-parent .card-name {
+    font-size: 120%;
+    margin-bottom: 1rem;
+    border: black solid 0.1rem;
+    padding: 0.5rem;
+    align-self: center;
+    width: 100%;
+}
+
+#main-screen #cards-parent article:first-of-type, #main-screen #cards-parent article:last-of-type {
+    width: 10vw;
+    height: 18vw;
+}
+
+article:first-of-type img, article:last-of-type img {
+    height: 1rem;
+}
+
+#main-screen #cards-parent article:first-of-type p, #main-screen #cards-parent article:last-of-type p {
+    font-size: 80%;
+}
+
+#main-screen #cards-parent article:nth-of-type(2), #main-screen #cards-parent article:nth-of-type(4) {
+    width: 12vw;
+    height: 22vw;
+}
+
+article:nth-of-type(2) img, article:nth-of-type(4) img{
+    height: 1.5rem;
+}
+
+
+#main-screen #cards-parent article:nth-of-type(2) p, #main-screen #cards-parent article:nth-of-type(4) p {
+    font-size: 99%;
+}
+
+#main-screen #cards-parent article:nth-of-type(3) {
+    width: 15vw;
+    height: 100%;
+}
+
+article:nth-of-type(3) img{
+    height: 2rem;
+}
+
+#main-screen #cards-parent article:nth-of-type(3) p {
+    font-size: 110%;
+}
+
+#main-screen #cards-parent {
+    text-transform: uppercase;
+}
+
+#main-screen footer img {
+    width: 3rem;
+    height: 3rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 1rem;
+}
+
+#main-screen footer {
+    background: rgb(178, 207, 224);
+    border-top: black solid 0.1rem;
+}
+
+#main-screen footer .player-balance {
+    color: white;
+}
+
+.special-card .card-name {
+    margin-top: 1rem;
+    margin-bottom: auto;
+}
+
+.rent-one-house, .rent-two-house, .rent-three-house {
+    margin-bottom: 0.2rem;
+}
+
+
+#cards-parent article li {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.rent {
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+#cards-parent article li:last-of-type{
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+#cards-parent article li:first-of-type, #cards-parent article li:last-of-type {
+    margin-top: 0.5rem;
+}
+.price-house{
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+.mortgage{
+    margin-top: 0.5rem;
+}
+#special-card-icon{
+    width: 80%;
+    height: 50%;
+    align-self: center;
+    margin: auto auto auto  auto;
+}
+
+#give-up-popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 30vw;
+    height: 7vw;
+    background: white;
+    padding: 2rem;
+    border: black solid 0.1rem;
+    margin-left: 33%;
+    margin-right: 25%;
+}
+#give-up-popup h2{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+#give-up-popup input{
+    margin-top: 2rem;
+    width: 10rem;
+    height: 2rem;
+    border: black solid 0.07rem;
+    background:  white;
+}
+#give-up-popup input:hover{
+    cursor: pointer;
+    background: rgba(232, 232, 232, 0.5)
+}
+#give-up-popup #give-up-deny{
+    border: red solid 0.1rem;
+}
+#give-up-popup form{
+    width: 25rem;
+    display: flex;
+    justify-content: space-around;
 }
