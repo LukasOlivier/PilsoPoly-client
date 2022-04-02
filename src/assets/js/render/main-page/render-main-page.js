@@ -13,6 +13,8 @@ function renderMainPage() {
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
+    document.querySelector("main").addEventListener("wheel", wheelEvent);
+    document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
     document.querySelector("#give-up").addEventListener("click", giveUp);
@@ -108,7 +110,7 @@ function renderPlayerInfo() {
             renderPlayerProperties();
         });
 }
-
+// All move functions should be replaced to a different file..
 function move(value) {
     const $button = document.querySelector("main button");
     if ($button.classList.contains("hidden")) {
@@ -126,6 +128,23 @@ function move(value) {
 
     removeCards();
     getCardById(_tempPlayerPositionID);
+}
+
+function wheelEvent(e) {
+    if (e.deltaY < 0) {
+        moveRight();
+    } else {
+        moveLeft();
+    }
+}
+
+function keyPressEvent(e){
+    // a and q for move left for the fellow qwerty users..
+    if (e.key === 'ArrowRight' || e.key === 'd') {
+        moveRight();
+    } else if (e.key === 'ArrowLeft' || e.key === 'q' || e.key === 'a') {
+        moveLeft();
+    }
 }
 
 function moveLeft() {
