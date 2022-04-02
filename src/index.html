@@ -23,6 +23,7 @@
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
 
     <script src="assets/js/functionality/get-playboard-tiles.js"></script>
+    <script src="assets/js/functionality/roll-dice.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
@@ -34,6 +35,7 @@
 
 <header>
     <button id="end-turn">End turn</button>
+    <button id="roll-dice-open-dialog" class="hidden">Roll the dice</button>
     <h1 id="game-screen">Monopoly</h1>
     <div>
         <img src="images/give-up.png" alt="give-up" title="give-up" id="give-up">
@@ -156,6 +158,11 @@
 <div class="errormessages">
     <p></p>
 </div>
+<dialog id="roll-dice-dialog">
+    <p>Rolling the dice</p>
+    <button id="cancel-roll-dice">Cancel</button>
+    <button id="roll-dice">Roll the dice</button>
+</dialog>
 
 </body>
 </html>

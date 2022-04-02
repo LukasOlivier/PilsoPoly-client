@@ -3,13 +3,15 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$giveUpPopup = "";
-
+let _currentGameState = null;
 function renderMainPage() {
 
     _$giveUpPopup = document.querySelector("#give-up-popup");
 
     _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
+    _name = loadFromStorage("name")
+
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
@@ -21,12 +23,45 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
 
+    // roll-dice-dialog
+    document.querySelector("#roll-dice-open-dialog").addEventListener('click', () => {
+        document.querySelector("#roll-dice-dialog").open = true;
+    } )
+    document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
+        document.querySelector("#roll-dice-dialog").open = false;
+    } )
+    document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
+    // mijn idee => render alles voor eerste keer -> fetch eenmalig en steek dit in _currenGameState
+    // Daarna, start met polling en steek daar dan een hoop switch cases in,
+    // ALS er iets verandert, render enkel dat opnieuw...
     getTiles();
     renderPlayerInfo();
     checkIfPlayerBankrupt();
 
+
+
+    pollingGameState();
 }
+
+function pollingGameState(){
+    // This needs to be on a diff place for sure!!
+
+    fetchFromServer(`/games/${_gameID}`, "GET")
+        .then(res => {
+            console.log(res)
+            _currentGameState = res;
+            if (_currentGameState.currentPlayer === _name && _currentGameState.canRoll === true) {
+                console.log("I can trade")
+                document.querySelector("#roll-dice-open-dialog").classList.remove("hidden")
+            } else {
+                console.log('I cant')
+                document.querySelector("#roll-dice-open-dialog").classList.add("hidden")
+            }
+            setTimeout(pollingGameState, 10000)
+        })
+}
+
 
 function endTurn() {
     console.log("end");
@@ -101,6 +136,7 @@ function showCards(cardInfo, middle) {
 function renderPlayerInfo() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
+            console.log(res)
             res.players.forEach(function (player) {
                 const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
                 $template.classList.add(player.name.toLowerCase());
