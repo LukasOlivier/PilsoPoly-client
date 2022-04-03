@@ -6,24 +6,18 @@ document.addEventListener('DOMContentLoaded', init);
 /*fetch the streets and the players. if player puts input into the form go to function search*/
 function init() {
     const streetNames = [];
-
     _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
-
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
         });
-
-
     runStreets(loadFromStorage("tiles"), streetNames, "");
-
     document.querySelector('form').addEventListener('input', searchStreet);
 }
 
 /*if there is input, catch it => put it to lower case and go to the runstreets function*/
 function searchStreet(e) {
-    console.log(e.target.value);
     const streetNames = [];
     if (e.target.value) {
         runStreets(loadFromStorage("tiles"), streetNames, e.target.value.toLowerCase());
@@ -75,4 +69,3 @@ function renderStreets(street) {
     }
     document.querySelector('#card-container').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
-
