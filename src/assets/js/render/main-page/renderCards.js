@@ -26,23 +26,18 @@ function renderSpecialCard(cardInfo, middle) {
     switch (cardInfo.type.toLowerCase()) {
         case "go":
             $template.querySelector("img").src = "images/go.png";
-            $template.style.background = "white";
             break;
         case "community chest":
             $template.querySelector("img").src = "images/chest.gif";
-            $template.style.background = "white";
             break;
         case "chance":
             $template.querySelector("img").src = "images/chance.png";
-            $template.style.background = "white";
             break;
         case "luxury tax":
             $template.querySelector("img").src = "images/luxTax.png";
-            $template.style.background = "white";
             break;
         case "free parking":
             $template.querySelector("img").src = "images/parking.png";
-            $template.style.background = "white";
             break;
         case "jail":
             $template.querySelector("img").src = "images/jail.png";
@@ -50,11 +45,9 @@ function renderSpecialCard(cardInfo, middle) {
             break;
         case "go to jail":
             $template.querySelector("img").src = "images/police.png";
-            $template.style.background = "white";
             break;
         case "tax income":
             $template.querySelector("img").src = "images/incomeTax.png";
-            $template.style.background = "white";
             break;
         default:
             return;
