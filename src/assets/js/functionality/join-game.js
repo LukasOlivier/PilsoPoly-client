@@ -1,39 +1,39 @@
 'use strict';
 
 function fetchAllGames(){
-    const id = makeID(_$joinInterface.querySelector("#ID").value);
+    const gameID = makeID(_$joinInterface.querySelector("#ID").value);
     const name = {
         playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
     };
     try {
         fetchFromServer(`/games?prefix=${_config.prefix}`)
             .then(response => {
-                const game = findGameByID(response, id);
+                const game = findGameByID(response, gameID);
                 if (game.started === true) {
-                    throw new Error("This game has already started.")
+                    throw new Error("This game has already started.");
                 }
                 checkName(name, game);
+                joinGame(gameID, name);
             })
-            .catch(errorHandler);
+            .catch(errorHandler)
     }
     catch(error) {
         errorHandler(error);
-        return;
     }
-    joinGame(id, name);
+
 }
 // if the id doesnt contains the prefix, add it. ;)
-function makeID(id){
-    if (id.includes(_config.prefix)) {
-        return id;
+function makeID(gameID){
+    if (gameID.includes(_config.prefix)) {
+        return gameID;
     } else {
-        return _config.prefix.concat("_", id);
+        return _config.prefix.concat("_", gameID);
     }
 }
 
 function checkName(name, game){
     // Special characters are not allowed in the name
-    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
+    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890é§]/;
     if (name.playerName === "") {
         throw new Error("Your name cant be empty");
     } else if (specialChar.test(name.playerName) === true) {
@@ -46,30 +46,20 @@ function checkName(name, game){
         if (namesInGame.name === name.playerName) {
             throw new Error("This name is already in use");
         }
-    })
-    console.log("names are correct")
-}
-function findGameByID(allGames, id){
-    for(let game of allGames){
-        if(game.id === id){
-            console.log('found with id ' + id);
-            return game;
-        }
-    }
-    throw new Error("There is no game with this code(2)")
+    });
 }
 
-function joinGame(id, name){
+function joinGame(gameID, name){
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${id}/players`,'POST', name)
+    fetchFromServer(`/games/${gameID}/players`,'POST', name)
         .then(response => {
-            _gameID = id;
+            _gameID = gameID;
             _token = response.token;
             localStorage.clear();
-            saveToStorage("gameId", id);
+            saveToStorage("gameId", gameID);
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
-            loadGameDataForLobby(id, name);
+            loadGameDataForLobby(gameID, name);
         })
         // this token is your security token.
         .catch(errorHandler);
@@ -79,13 +69,13 @@ function joinGame(id, name){
 function fetchNonStartedGames(){
     // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
-        .then(response => renderAllAvailableGames(response))
+        .then(response => renderAllAvailableGames(response));
 }
 
 function fillInGameID(e){
     // hides the pop up, and fills the value from the li in the ID field
     _$seeAllGamesInterface.classList.add("hidden");
     _$joinInterface.style.opacity = "1";
-    _$joinInterface.querySelector("#ID").value = e.target.id;
+    _$joinInterface.querySelector("#ID").value = e.currentTarget.id;
 }
 

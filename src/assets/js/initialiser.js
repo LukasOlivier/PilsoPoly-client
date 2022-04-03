@@ -2,6 +2,7 @@
 
 let _token = null;
 let _gameID = null;
+let _tiles = null;
 
 document.addEventListener('DOMContentLoaded',init);
 
@@ -11,5 +12,8 @@ function init(){
     }
     else if (document.querySelector("h1").id === "game-screen"){
         renderMainPage();
+    }
+    else if (document.querySelector("h1").id === "lose-screen"){
+        loseGame();
     }
 }

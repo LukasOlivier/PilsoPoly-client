@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/start-screen.css">
 
     <script src="assets/js/config.js"></script>
+    <script src="assets/js/helper.js"></script>
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
@@ -378,9 +379,7 @@
         <h2>Create a game</h2>
         <label>Please fill in your name and choose an icon</label>
         <form method="post">
-        <div class="player-options">
-            <input type="text" name="name" class="name" placeholder="Your name" required>
-        </div>
+        <input type="text" name="name" class="name" placeholder="Your name" required>
         <input type="number" name="amount-of-players" id="amount-of-players"
                placeholder="How many players will join this game?" min="2" max="8" required>
         </form>
@@ -405,8 +404,7 @@
         <div id="players">
 
         </div>
-        <input type="button" name="back" class="back-button" value="Leave Game">
-        <input type="button" name="refresh" class="refresh" value="refresh">
+        <input type="button" name="back" class="back-button" id="back-lobby" value="Leave Game">
     </div>
     <!-- END -->
 </main>

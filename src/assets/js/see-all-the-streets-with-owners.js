@@ -1,74 +1,71 @@
 "use strict";
 
-/*global variable because i saw no way of adding him into the functions*/
-const _playersBoughtProperties = {};
-
 /*load the dom in and then start function init*/
 document.addEventListener('DOMContentLoaded', init);
 
 /*fetch the streets and the players. if player puts input into the form go to function search*/
 function init() {
-   const sortregular = "";
-   const streetnames = [];
-
-   _token = {token : loadFromStorage("token")};
-   _gameID = loadFromStorage("gameId");
-
-   fetchFromServer(`/games/${_gameID}`,'GET')
-       .then(players => {
-           linkPlayersAndStreets(players.players);
-       });
-
-   fetchFromServer('/tiles','GET')
-       .then(tiles => runStreets(tiles, streetnames, sortregular));
-   document.querySelector('form').addEventListener('input', searchStreet);
+    const streetNames = [];
+    _token = {token: loadFromStorage("token")};
+    _gameID = loadFromStorage("gameId");
+    fetchFromServer(`/games/${_gameID}`, 'GET')
+        .then(players => {
+            linkPlayersAndStreets(players.players);
+        });
+    runStreets(loadFromStorage("tiles"), streetNames, "");
+    document.querySelector('form').addEventListener('input', searchStreet);
 }
 
 /*if there is input, catch it => put it to lower case and go to the runstreets function*/
 function searchStreet(e) {
-    const streetnamessort = [];
+    const streetNames = [];
     if (e.target.value) {
-        fetchFromServer('/tiles','GET')
-            .then(tiles => runStreets(tiles, streetnamessort, e.target.value.toLowerCase()));
-    }
-    else {
-        fetchFromServer('/tiles','GET')
-            .then(tiles => runStreets(tiles, streetnamessort, ""));
+        runStreets(loadFromStorage("tiles"), streetNames, e.target.value.toLowerCase());
+    } else {
+        runStreets(loadFromStorage("tiles"), streetNames, "");
     }
 }
 
 
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
 function runStreets(tiles, streetNames, sort) {
-    tiles.forEach(street =>{
-    if (street.name.toLowerCase().includes(sort) && !(street.name.includes("Go") || street.name.includes("Community") || street.name.includes("Chance") || street.name.includes("Jail") || street.name.includes("Tax") || street.name.includes("Parking"))) {
-        streetNames.push(street);
-    }
+    removeTemplate("#card-container article");
+    tiles.forEach(street => {
+        if (street.name.toLowerCase().includes(sort) && (street.type !== "utility" || street.type !== "railroad") && (street.type === "street")) {
+            streetNames.push(street);
+        }
     });
-    document.querySelector('.templatediv').innerHTML = "";
-    streetNames.forEach(street => renderStreets(street));
+    removeTemplate("#card-template article");
+    streetNames.forEach(function (street) {
+       renderStreets(street);
+    });
 }
 
 
 /* fill in the template with the api results*/
+//TODO : make other function to create the template.
 function renderStreets(street) {
     let isBought = false;
-    const $template = document.querySelector('template').content.firstElementChild.cloneNode(true);
-    $template.querySelector('h2').classList.add(street.color);
-    $template.querySelector('h2').innerText = street.name;
-    $template.querySelector('li').innerText= "positie:  " + street.position;
-    $template.querySelector('li+li').innerText= "cost:  " + street.cost;
-    $template.querySelector('li+li+li').innerText= "mortage:  " + street.mortgage;
-    $template.querySelector('li+li+li+li').innerText= "rent:  " + street.rent;
-    for (const [key, value] of Object.entries(_playersBoughtProperties)) {
-        const playername = key;
-        value.forEach(propertie => {
-            if (propertie === street.name) {
-                isBought = true;
-                $template.querySelector(`div p`).innerText = "player: " + playername;}});
+    const $template = document.querySelector('.card-template').content.firstElementChild.cloneNode(true);
+    $template.querySelector('.name').classList.add(street.color);
+    $template.querySelector('.name').innerText = street.name;
+    $template.querySelector('.position').innerText = "position:  " + street.position;
+    $template.querySelector('.cost').innerText = "cost:  " + street.cost;
+    $template.querySelector('.mortgage').innerText = "mortgage:  " + street.mortgage;
+    $template.querySelector('.rent').innerText = "rent:  " + street.rent;
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        if (player) {
+            playerProperties[player].forEach(function (property) {
+                if (property.name === street.name) {
+                    isBought = true;
+                    $template.querySelector(`p`).innerText = "player: " + player;
+                }
+            });
+            if (isBought === false) {
+                $template.querySelector(`p`).innerText = "not bought yet";
+            }
+        }
     }
-    if (isBought === false) {
-        $template.querySelector(`div p`).innerText = "player: not bought yet";}
-    document.querySelector('.templatediv').insertAdjacentHTML("beforeend", $template.outerHTML);
+    document.querySelector('#card-container').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
-
