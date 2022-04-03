@@ -20,8 +20,6 @@ function renderMainPage() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
-
-
     getTiles();
     renderPlayerInfo();
     checkIfPlayerBankrupt();
