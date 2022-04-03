@@ -1,5 +1,13 @@
 "use strict";
 
+function checkKey(e) {
+    if (e.key === "ArrowLeft") {
+        moveLeft();
+    } else if (e.key === "ArrowRight") {
+        moveRight();
+    }
+}
+
 function move(value) {
     const $button = document.querySelector("main button");
     if ($button.classList.contains("hidden")) {

@@ -114,19 +114,6 @@ function renderPlayerInfo() {
         });
 }
 
-function checkKey(e) {
-    if (e.key === "ArrowLeft") {
-        moveLeft();
-    } else if (e.key === "ArrowRight") {
-        moveRight();
-    }
-}
-
-
-// TODO: All move functions should be replaced to a different file..
-
-
-
 function renderPlayerProperties() {
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
