@@ -15,7 +15,7 @@ function move(value) {
         _tempPlayerPositionID = 39;
     }
 
-    removeCards();
+    removeTemplate("#cards-parent article");
     getCardById(_tempPlayerPositionID);
 }
 
@@ -47,13 +47,6 @@ function moveRight() {
 function backToCurrentPosition() {
     document.querySelector("main button").classList.toggle("hidden");
     _tempPlayerPositionID = 0;
-    removeCards();
+    removeTemplate("#cards-parent article");
     getCardById(_playerPositionID);
-}
-
-function removeCards() {
-    const $articles = document.querySelectorAll("#cards-parent article");
-    $articles.forEach((article) => {
-        article.remove();
-    });
 }

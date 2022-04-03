@@ -19,8 +19,8 @@
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
-
 </head>
+
 <body id="see-all-the-streets-with-owners">
 <header>
     <h1>all the streets are located</h1>
@@ -29,17 +29,18 @@
         <input type="text" id="name" placeholder="type in the name of the street">
     </form>
 </header>
+<main>
     <section>
         <h2>Streets</h2>
-        <div>
-            <template>
-                <article class="templatearticle">
-                    <h2></h2>
+        <div id="card-container">
+            <template class="card-template">
+                <article>
+                    <h2 class="name"></h2>
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li class="position"></li>
+                        <li class="cost"></li>
+                        <li class="mortgage"></li>
+                        <li class="rent"></li>
                     </ul>
                     <div class="iconplace">
                         <p></p>
@@ -47,9 +48,8 @@
                 </article>
             </template>
         </div>
-        <div class="templatediv">
-        </div>
     </section>
+</main>
 <footer>
     <a href="../src/index.html">Back to game screen</a>
 </footer>

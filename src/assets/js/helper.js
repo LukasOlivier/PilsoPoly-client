@@ -2,15 +2,16 @@
 
 /* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
 function linkPlayersAndStreets(players) {
+    const playersBoughtProperties = {};
     players.forEach(player => {
         const playerName = player.name;
         const playerStreets = [];
         player.properties.forEach(function (property) {
             playerStreets.push(createCardInfo(property));
         });
-        _playersBoughtProperties[playerName] = playerStreets;
+        playersBoughtProperties[playerName] = playerStreets;
     });
-    saveToStorage("playerProperties", _playersBoughtProperties);
+    saveToStorage("playerProperties", playersBoughtProperties);
 }
 
 function createCardInfo(property) {
@@ -23,6 +24,13 @@ function createCardInfo(property) {
         }
     });
     return info;
+}
+
+function removeTemplate(container) {
+    const $articles = document.querySelectorAll(container);
+    $articles.forEach((article) => {
+        article.remove();
+    });
 }
 
 // This function finds a game with a specific ID in an array of games.
