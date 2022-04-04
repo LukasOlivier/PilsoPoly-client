@@ -25,7 +25,6 @@ function renderMainPage() {
     getTiles();
     renderPlayerInfo();
     checkIfPlayerBankrupt();
-
 }
 
 function endTurn() {
