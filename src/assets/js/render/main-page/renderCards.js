@@ -19,7 +19,6 @@ function renderNormalCard(cardInfo, middle) {
 function renderSpecialCard(cardInfo, middle) {
     const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
-    console.log(cardInfo.type);
     switch (cardInfo.type.toLowerCase()) {
         case "go":
             $template.querySelector("img").src = "images/go.png";
