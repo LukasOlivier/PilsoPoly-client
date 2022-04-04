@@ -46,7 +46,6 @@ function renderMainPage() {
 
 function pollingGameState(){
     // This needs to be on a diff place for sure!!
-
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
             console.log(res)
