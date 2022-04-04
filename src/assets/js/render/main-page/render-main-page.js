@@ -117,7 +117,7 @@ function renderPlayerProperties() {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
                 if (property !== null) {
-                    $container.querySelector(`.${property.name.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
+                    $container.querySelector(`.${property.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
                 }
             });
         }
