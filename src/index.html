@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
+    <link rel="stylesheet" href="assets/css/Buying-propertie-popup.css">
 
 
     <script src="assets/js/config.js"></script>
@@ -28,6 +29,7 @@
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
+    <script src="assets/js/functionality/buy-propertie.js"></script>
 
 </head>
 
@@ -45,6 +47,17 @@
 </header>
 
 <main>
+    <div id="buy-propertie-popup" >
+        <article>
+            <h2>Title</h2>
+            <p>do you want to buy this property</p>
+            <p>price: </p>
+        </article>
+        <form action="">
+            <button class="Buy" >Buy</button>
+            <button class="Auction">Auction</button>
+        </form>
+    </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
         <p>This will turn over all your assest to your oldest debtor and yield.</p>

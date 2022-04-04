@@ -1,60 +1,25 @@
-.hidden {
-    display: none;
-    visibility: hidden;
-}
-
-#trade-popup {
+#buy-propertie-popup{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: fixed;
-    width: 30%;
+    width: 25rem;
+    height: 8rem;
+    margin-left: 38.5%;
+    margin-top: 10%;
     background: rgb(178, 207, 224);
-    margin: 5% 35% 20rem;
-    height: 44.5rem;
+    text-align: center;
 }
-.pickedName
-{
-    background: white;
+#buy-propertie-popup p,h2{
+    margin: 0.3rem;
 }
-#trade-popup .first-part-dialog
-{
-    height: 80%;
-}
-
-#trade-popup .player-list-picker{
-    height: 60%;
-}
-#trade-popup .player-list-picker .dialog-div-to-display-all-players{
-    height: 60% ;
-}
-
-#trade-popup .player-list-picker .dialog-div-to-display-all-players ul{
-    height: 100%;
-    margin-top: 1rem;
-
-}
-#trade-popup .player-list-picker .dialog-div-to-display-all-players ul li{
-    padding: 0.5rem;
-    font-size: 1.3rem;
-}
-#trade-popup .player-list-picker .dialog-div-to-display-all-players ul li:hover{
-    padding: 0.7rem;
-    font-size: 1.5rem;
-    background: white;
-}
-.buttons-trade
-{
+#buy-propertie-popup form{
     display: flex;
     justify-content: space-between;
-}
-.buttons-trade button
-{
-    margin: 1rem;
-    background: white;
-    border: none;
-    display: block;
+    padding: 0.3rem;
 }
 
-.dialog-div-to-display-all-streets
-{
-    margin-top: 5rem;
-    height: 50%;
+#buy-propertie-popup form button{
+    background: white;
+    border: none;
 }
