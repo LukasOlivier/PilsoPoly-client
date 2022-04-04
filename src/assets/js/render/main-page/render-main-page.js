@@ -10,6 +10,7 @@ function renderMainPage() {
 
     _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
+
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
@@ -20,6 +21,7 @@ function renderMainPage() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
+
     getTiles();
     renderPlayerInfo();
     checkIfPlayerBankrupt();
@@ -40,7 +42,7 @@ function renderCards() {
                     currentTileName = player.currentTile;
                 }
             });
-            _tiles.forEach(function (tile) {
+            loadFromStorage("tiles").forEach(function (tile) {
                 if (tile.name === currentTileName) {
                     _tempPlayerPositionID = tile.position;
                     _playerPositionID = tile.position;
@@ -54,9 +56,9 @@ function getCardById(id) {
     const toShow = createToShow(id, id - 2, id + 3);
     for (const cardId of toShow) {
         if (cardId === id) {
-            showCards(_tiles[cardId], true);
+            showCards(loadFromStorage("tiles")[cardId], true);
         } else {
-            showCards(_tiles[cardId], false);
+            showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
 }
@@ -108,64 +110,6 @@ function renderPlayerInfo() {
             renderPlayerProperties();
         });
 }
-// All move functions should be replaced to a different file..
-function move(value) {
-    const $button = document.querySelector("main button");
-    if ($button.classList.contains("hidden")) {
-        $button.classList.toggle("hidden");
-    }
-    _tempPlayerPositionID -= value;
-
-    if (_tempPlayerPositionID === 40) {
-        _tempPlayerPositionID = 0;
-    }
-
-    if (_tempPlayerPositionID === -1) {
-        _tempPlayerPositionID = 39;
-    }
-
-    removeCards();
-    getCardById(_tempPlayerPositionID);
-}
-
-function wheelEvent(e) {
-    if (e.deltaY < 0) {
-        moveRight();
-    } else {
-        moveLeft();
-    }
-}
-
-function keyPressEvent(e){
-    // a and q for move left for the fellow qwerty users..
-    if (e.key === 'ArrowRight' || e.key === 'd') {
-        moveRight();
-    } else if (e.key === 'ArrowLeft' || e.key === 'q' || e.key === 'a') {
-        moveLeft();
-    }
-}
-
-function moveLeft() {
-    move(1);
-}
-
-function moveRight() {
-    move(-1);
-}
-
-function backToCurrentPosition() {
-    document.querySelector("main button").classList.toggle("hidden");
-    _tempPlayerPositionID = 0;
-    removeCards();
-    getCardById(_playerPositionID);
-}
-
-function removeCards() {
-    const $articles = document.querySelectorAll("#cards-parent article");
-    $articles.forEach((article) => {
-        article.remove();
-    });
-}
 
 function renderPlayerProperties() {
     const playerProperties = loadFromStorage("playerProperties");
@@ -174,7 +118,7 @@ function renderPlayerProperties() {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
                 if (property !== null) {
-                    $container.querySelector(`.${property}`).classList.remove("not-bought");
+                    $container.querySelector(`.${property.name.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
                 }
             });
         }
