@@ -12,10 +12,8 @@ function renderNormalCard(cardInfo, middle) {
     $template.querySelector('.rent-hotel').innerText = `M${cardInfo.rentWithHotel}`;
     $template.querySelector('.price-house').innerText = `Price for house: M${cardInfo.housePrice}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
-    $template.querySelector('.card-name').style.background = `${cardInfo.color}`;
-    if (cardInfo.color.includes("DARK") || cardInfo.color === "PURPLE") {
-        $template.querySelector('.card-name').style.color = `white`;
-    }
+    $template.querySelector('.card-name').classList.add(cardInfo.color)
+
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
