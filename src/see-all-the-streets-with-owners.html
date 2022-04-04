@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>map</title>
+    <title>Map</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/see-all-the-streets-with-owner.css">
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700%7COswald" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo"/>
 
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
 
@@ -23,14 +25,15 @@
 
 <body id="see-all-the-streets-with-owners">
 <header>
-    <h1>all the streets are located</h1>
-    <form>
-        <label for="name"></label>
-        <input type="text" id="name" placeholder="type in the name of the street">
-    </form>
+    <h1>Overview of all properties</h1>
+    <div>
+        <a href="../src/index.html">Back to game screen</a>
+        <form>
+            <input type="text" id="name" placeholder="Search for a street">
+        </form>
+    </div>
 </header>
 <main>
-
     <section>
         <h2>Streets</h2>
         <div id="card-container">
@@ -51,8 +54,6 @@
         </div>
     </section>
 </main>
-<footer>
-    <a href="../src/index.html">Back to game screen</a>
-</footer>
+
 </body>
 </html>

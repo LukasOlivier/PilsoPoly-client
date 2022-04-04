@@ -24,17 +24,17 @@
 
 .oriental {
     grid-area: oriental;
-    background-color: blue
+    background-color: lightblue;
 }
 
 .vermont {
     grid-area: vermont;
-    background-color: blue
+    background-color: lightblue;
 }
 
 .connecticut {
     grid-area: connecticut;
-    background-color: blue
+    background-color: lightblue;
 }
 
 .saint-charles-place {
