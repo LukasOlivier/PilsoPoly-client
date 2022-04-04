@@ -15,7 +15,7 @@ body {
     font-size: 3rem;
 }
 
-#see-all-the-streets-with-owners section>h2 {
+#see-all-the-streets-with-owners section > h2 {
     background: #abcbdc;
     border: solid black;
     text-align: center;
@@ -78,6 +78,7 @@ body {
 .VIOLET {
     background: rgba(238, 130, 238, 0.9);
 }
+
 #see-all-the-streets-with-owners article .WHITE {
     background: rgba(255, 255, 255, 0.8);
     color: black;
