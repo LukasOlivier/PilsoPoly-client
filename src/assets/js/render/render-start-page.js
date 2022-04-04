@@ -19,9 +19,12 @@ function initStartScreen() {
     _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
     _$errorMessage = document.querySelector(".errormessages p");
 
+
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
+    document.querySelector("#rules-interface .back-button").addEventListener("click", backButton);
+
     document.querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
 
     document.querySelectorAll('.back-button').forEach(item => {
@@ -116,6 +119,7 @@ function renderAllAvailableGames(allGames) {
 }
 // todo: make it so that clicking anywhere on the screen, the popup for the games dissapears....
 function backButton() {
+    _$rulesInterface.classList.add("hidden");
     _$createInterface.classList.add("hidden");
     _$joinInterface.classList.add("hidden");
     _$lobbyInterface.classList.add("hidden");

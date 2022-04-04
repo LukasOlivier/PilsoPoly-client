@@ -37,22 +37,23 @@ function runStreets(tiles, streetNames, sort) {
     });
     removeTemplate("#card-template article");
     streetNames.forEach(function (street) {
-       renderStreets(street);
+        renderStreets(street);
     });
 }
 
 
 /* fill in the template with the api results*/
+
 //TODO : make other function to create the template.
 function renderStreets(street) {
     let isBought = false;
     const $template = document.querySelector('.card-template').content.firstElementChild.cloneNode(true);
     $template.querySelector('.name').classList.add(street.color);
     $template.querySelector('.name').innerText = street.name;
-    $template.querySelector('.position').innerText = "position:  " + street.position;
-    $template.querySelector('.cost').innerText = "cost:  " + street.cost;
-    $template.querySelector('.mortgage').innerText = "mortgage:  " + street.mortgage;
-    $template.querySelector('.rent').innerText = "rent:  " + street.rent;
+    $template.querySelector('.position').innerText = `Position: M${street.position}`;
+    $template.querySelector('.cost').innerText = `Cost: M${street.cost}`;
+    $template.querySelector('.mortgage').innerText = `Mortgage: M${street.position}`;
+    $template.querySelector('.rent').innerText = `Rent: M${street.position}`;
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
         if (player) {

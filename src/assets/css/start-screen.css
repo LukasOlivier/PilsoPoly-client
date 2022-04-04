@@ -288,7 +288,7 @@ body {
     background: #dedddd;
 }
 
-#lobby-interface .back-button {
+#lobby-interface .back-button, #rules-interface .back-button {
     margin-top: 3rem;
     width: 6rem;
     height: 2rem;
@@ -317,11 +317,18 @@ body {
     border: #c90b0b solid 0.1em;
     margin-bottom: 2rem;
     background: white;
-    background: rgba(255, 255, 255, .5)
+    background: rgba(255, 255, 255, .5);
 }
-
-
+#rules-interface .back-button:hover{
+    cursor: pointer;
+    background: #dedddd;
+}
+#rules-interface span{
+    font-style: italic;
+    display: block;
+}
 #rules-interface p {
+    line-height: 1.5rem;
     white-space: normal;
     margin-bottom: 1rem;
 }
@@ -420,8 +427,3 @@ body {
     background: #4a83c4;
     cursor: pointer;
 }
-
-
-
-
-

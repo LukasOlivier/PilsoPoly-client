@@ -22,13 +22,9 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
 
-    document.onkeydown = checkKey;
-
-
     getTiles();
     renderPlayerInfo();
     checkIfPlayerBankrupt();
-
 }
 
 function endTurn() {
