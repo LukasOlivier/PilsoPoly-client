@@ -31,7 +31,7 @@ function searchStreet(e) {
 function runStreets(tiles, streetNames, sort) {
     removeTemplate("#card-container article");
     tiles.forEach(street => {
-        if (street.name.toLowerCase().includes(sort) && (street.type !== "utility" || street.type !== "railroad") && (street.type === "street")) {
+        if (street.name.toLowerCase().includes(sort) && (street.type === "utility" || street.type === "railroad" || street.type === "street")) {
             streetNames.push(street);
         }
     });

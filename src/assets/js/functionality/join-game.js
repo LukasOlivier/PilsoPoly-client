@@ -15,7 +15,7 @@ function fetchAllGames(){
                 checkName(name, game);
                 joinGame(gameID, name);
             })
-            .catch(errorHandler)
+            .catch(errorHandler);
     }
     catch(error) {
         errorHandler(error);

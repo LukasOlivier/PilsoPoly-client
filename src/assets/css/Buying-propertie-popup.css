@@ -11,7 +11,7 @@
     text-align: center;
 }
 #buy-propertie-popup p,h2{
-    margin: 0.3rem;
+    margin: 0.5rem;
 }
 #buy-propertie-popup form{
     display: flex;
@@ -22,4 +22,5 @@
 #buy-propertie-popup form button{
     background: white;
     border: none;
+    margin: 0.3rem;
 }

@@ -28,6 +28,7 @@ function renderMainPage() {
     getTiles();
     renderPlayerInfo();
     checkIfPlayerBankrupt();
+    chooseBuyOrAuction();
 
 }
 
