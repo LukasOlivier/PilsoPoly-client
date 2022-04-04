@@ -27,6 +27,7 @@ function searchStreet(e) {
 }
 
 
+
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
 function runStreets(tiles, streetNames, sort) {
     removeTemplate("#card-container article");
