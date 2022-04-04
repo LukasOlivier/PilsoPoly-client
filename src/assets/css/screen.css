@@ -213,6 +213,9 @@
     padding: 0.5rem;
     align-self: center;
     width: 100%;
+    color: white;
+    font-family: "Oswald", serif;
+    text-align: center;
 }
 
 #main-screen #cards-parent article:first-of-type, #main-screen #cards-parent article:last-of-type {
@@ -384,4 +387,39 @@ article:nth-of-type(3) img {
     width: 25rem;
     display: flex;
     justify-content: space-around;
+}
+.PURPLE {
+    background: rgba(161, 27, 161, 0.5);
+}
+
+.BLACK {
+    background: rgba(16, 15, 15, 0.6);
+}
+
+.LIGHTBLUE {
+    background: #abcbdc;
+}
+
+.VIOLET {
+    background: rgba(238, 130, 238, 0.9);
+}
+
+.ORANGE {
+    background: rgba(255, 165, 0, 0.5);
+}
+
+.RED {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.YELLOW {
+    background: rgba(255, 255, 0, 0.35);
+}
+
+.DARKGREEN {
+    background: rgba(0, 100, 0, 0.5);
+}
+
+.DARKBLUE {
+    background: rgba(0, 0, 139, 0.6);
 }
