@@ -37,12 +37,13 @@ function runStreets(tiles, streetNames, sort) {
     });
     removeTemplate("#card-template article");
     streetNames.forEach(function (street) {
-       renderStreets(street);
+        renderStreets(street);
     });
 }
 
 
 /* fill in the template with the api results*/
+
 //TODO : make other function to create the template.
 function renderStreets(street) {
     let isBought = false;

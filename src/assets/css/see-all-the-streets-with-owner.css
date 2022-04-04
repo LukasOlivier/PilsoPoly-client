@@ -20,7 +20,7 @@ body {
     text-decoration: underline;
 }
 
-#see-all-the-streets-with-owners section>h2 {
+#see-all-the-streets-with-owners section > h2 {
     background: #abcbdc;
     border: solid black;
     text-align: center;
@@ -28,12 +28,14 @@ body {
     color: white;
     font-size: 1.5rem;
 }
-#see-all-the-streets-with-owners header div{
+
+#see-all-the-streets-with-owners header div {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 #see-all-the-streets-with-owners header input {
     border: transparent solid 0.1rem;
     margin-top: 0.5rem;
@@ -89,6 +91,7 @@ body {
 .VIOLET {
     background: rgba(238, 130, 238, 0.9);
 }
+
 #see-all-the-streets-with-owners article .WHITE {
     background: rgba(255, 255, 255, 0.8);
     color: black;
