@@ -71,11 +71,11 @@ function utilityAndRailroadTemplate($template, cardInfo, middle) {
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
-    if(cardInfo.name.includes("RR")){
+    if (cardInfo.name.includes("RR")) {
         $template.querySelector('.card-icon').src = `images/railroad.png`;
-    }else if(cardInfo.name.includes("Electric")){
+    } else if (cardInfo.name.includes("Electric")) {
         $template.querySelector('.card-icon').src = `images/electric.jpg`;
-    }else{
+    } else {
         $template.querySelector('.card-icon').src = `images/water.png`;
     }
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
