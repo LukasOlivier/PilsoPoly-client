@@ -7,13 +7,13 @@ let _tiles = null;
 document.addEventListener('DOMContentLoaded',init);
 
 function init(){
-    if (document.querySelector("h1").id === "start-screen") {
+    if (document.querySelector("body").id === "start-screen") {
         initStartScreen();
     }
-    else if (document.querySelector("h1").id === "game-screen"){
+    else if (document.querySelector("body").id === "main-screen"){
         renderMainPage();
     }
-    else if (document.querySelector("h1").id === "lose-screen"){
+    else if (document.querySelector("body").id === "lose-screen"){
         loseGame();
     }
 }
