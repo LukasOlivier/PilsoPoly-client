@@ -176,7 +176,6 @@ article:nth-of-type(3) img {
 }
 
 #main-screen #arrows {
-    margin-top: 0.5rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -267,6 +266,8 @@ article:nth-of-type(3) img {
 }
 
 #main-screen #cards-parent article {
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     border: black solid 0.1rem;
@@ -414,4 +415,12 @@ article:nth-of-type(3) img {
 
 .DARKBLUE {
     background: rgba(0, 0, 139, 0.6);
+}
+.player-pos{
+    margin-top: 1rem;
+    color: limegreen;
+}
+.player-bought{
+    margin-top: 1rem;
+    color: red;
 }

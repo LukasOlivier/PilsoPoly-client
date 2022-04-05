@@ -3,9 +3,11 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$giveUpPopup = "";
-
+const _$containers = {
+    cardsParent: ""
+};
 function renderMainPage() {
-
+    _$containers["cardsParent"] = document.querySelector("#cards-parent");
     _$giveUpPopup = document.querySelector("#give-up-popup");
 
     _token = {token: loadFromStorage("token")};
@@ -60,6 +62,8 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
+    checkPlayerPosition();
+    checkIfBought();
 }
 
 function createToShow(id, firstId, lastId) {
@@ -127,6 +131,7 @@ function renderPlayerProperties() {
 function giveUp() {
     _$giveUpPopup.classList.remove("hidden");
     document.querySelector("section").classList.add("hidden");
+
 }
 
 function giveUpDeny() {
@@ -156,3 +161,31 @@ function checkIfPlayerBankrupt() {
         });
 }
 
+function checkPlayerPosition() {
+    fetchFromServer(`/games/${_gameID}`)
+        .then(response => {
+            const playersInfo = response.players;
+            playersInfo.forEach(player => {
+                // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
+                if (document.querySelector(`#${player.currentTile}`) !== null && !player.bankrupt) {
+                    document.querySelector(`#${player.currentTile} .player-pos`).classList.remove('hidden');
+                    document.querySelector(`#${player.currentTile} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
+                }
+            });
+        });
+}
+
+function checkIfBought() {
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        if (player) {
+            playerProperties[player].forEach(function (property) {
+                if (property !== null) {
+                    document.querySelector(`#${property}`).style.border = "red solid 0.2rem";
+                    document.querySelector(`#${property} .player-bought`).classList.remove("hidden");
+                    document.querySelector(`#${property} .player-bought`).insertAdjacentHTML("beforeend", player);
+                }
+            });
+        }
+    }
+}
