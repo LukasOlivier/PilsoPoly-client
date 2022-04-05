@@ -6,6 +6,7 @@ let _$giveUpPopup = "";
 const _$containers = {
     cardsParent: ""
 };
+
 function renderMainPage() {
     _$containers["cardsParent"] = document.querySelector("#cards-parent");
     _$giveUpPopup = document.querySelector("#give-up-popup");
@@ -121,7 +122,7 @@ function renderPlayerProperties() {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
                 if (property !== null) {
-                    $container.querySelector(`.${property.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
+                    $container.querySelector(`.${nameToId(property)}`).classList.remove("not-bought");
                 }
             });
         }
@@ -167,9 +168,9 @@ function checkPlayerPosition() {
             const playersInfo = response.players;
             playersInfo.forEach(player => {
                 // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
-                if (document.querySelector(`#${player.currentTile}`) !== null && !player.bankrupt) {
-                    document.querySelector(`#${player.currentTile} .player-pos`).classList.remove('hidden');
-                    document.querySelector(`#${player.currentTile} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
+                if (document.querySelector(`#${nameToId(player.currentTile)}`) !== null && !player.bankrupt) {
+                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).classList.remove('hidden');
+                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
                 }
             });
         });
@@ -180,10 +181,11 @@ function checkIfBought() {
     for (const player in playerProperties) {
         if (player) {
             playerProperties[player].forEach(function (property) {
-                if (property !== null) {
+                if (property !== null && document.querySelector(`#${property}`) !== null) {
                     document.querySelector(`#${property}`).style.border = "red solid 0.2rem";
                     document.querySelector(`#${property} .player-bought`).classList.remove("hidden");
-                    document.querySelector(`#${property} .player-bought`).insertAdjacentHTML("beforeend", player);
+                    document.querySelector(`#${property} .price`).classList.add("hidden");
+                    document.querySelector(`#${property} .player-bought`).insertAdjacentHTML("beforeend",`${player}`);
                 }
             });
         }

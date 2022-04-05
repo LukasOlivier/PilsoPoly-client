@@ -42,3 +42,6 @@ function findGameByID(allGames, id){
     }
     throw new Error("There is no game with this code(2)");
 }
+function nameToId(name){
+    return name.toLowerCase().replace(/\s/g, "-");
+}

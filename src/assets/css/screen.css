@@ -1,3 +1,14 @@
+.player-pos {
+    color: limegreen;
+    margin-top: auto;
+    text-align: center;
+}
+
+#cards-parent .player-bought {
+    color: red;
+    text-align: center;
+}
+
 #main-screen .info-container p {
     font-size: 1.2rem;
     font-weight: bold;
@@ -9,7 +20,7 @@
     flex-direction: column;
     border: black solid 0.1rem;
     background: white;
-
+    overflow: hidden;
     border-radius: 0.2rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     text-align: left;
@@ -30,15 +41,24 @@ article:first-of-type img, article:last-of-type img {
     height: 1rem;
 }
 
-#main-screen #cards-parent article:first-of-type p, #main-screen #cards-parent article:last-of-type p {
+article:first-of-type p, article:last-of-type p {
     font-size: 80%;
 }
 
-#main-screen #cards-parent article:first-of-type .price, #main-screen #cards-parent article:last-of-type .price {
+article:first-of-type .player-pos, article:last-of-type .player-pos,article:first-of-type .player-bought,article:last-of-type .player-bought{
+    font-size: 60%;
+}
+article:nth-of-type(2) .player-pos, article:nth-of-type(4) .player-pos,article:nth-of-type(2) .player-bought,article:nth-of-type(4) .player-bought{
+    font-size: 70%;
+}
+article:nth-of-type(3) .player-pos,article:nth-of-type(3) .player-bought{
+    font-size: 100%;
+}
+article:first-of-type .price, article:last-of-type .price {
     font-size: 100%;
 }
 
-#main-screen #cards-parent article:nth-of-type(2), #main-screen #cards-parent article:nth-of-type(4) {
+article:nth-of-type(2), article:nth-of-type(4) {
     width: 12vw;
     height: 22vw;
 }
@@ -48,15 +68,15 @@ article:nth-of-type(2) img, article:nth-of-type(4) img {
 }
 
 
-#main-screen #cards-parent article:nth-of-type(2) p, #main-screen #cards-parent article:nth-of-type(4) p {
+article:nth-of-type(2) p, article:nth-of-type(4) p {
     font-size: 99%;
 }
 
-#main-screen #cards-parent article:nth-of-type(2) .price, #main-screen #cards-parent article:nth-of-type(4) .price {
+article:nth-of-type(2) .price, article:nth-of-type(4) .price {
     font-size: 120%;
 }
 
-#main-screen #cards-parent article:nth-of-type(3) {
+article:nth-of-type(3) {
     width: 15vw;
     height: 100%;
 }
@@ -65,11 +85,11 @@ article:nth-of-type(3) img {
     height: 2rem;
 }
 
-#main-screen #cards-parent article:nth-of-type(3) p {
+article:nth-of-type(3) p {
     font-size: 110%;
 }
 
-#main-screen #cards-parent article:nth-of-type(3) .price {
+article:nth-of-type(3) .price {
     font-size: 130%;
 }
 
