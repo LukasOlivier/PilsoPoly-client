@@ -1,5 +1,6 @@
 "use strict";
 
+
 function renderNormalCard(cardInfo, middle) {
     const $template = document.querySelector('main .normal-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
@@ -12,15 +13,17 @@ function renderNormalCard(cardInfo, middle) {
     $template.querySelector('.rent-hotel').innerText = `M${cardInfo.rentWithHotel}`;
     $template.querySelector('.price-house').innerText = `Price for house: M${cardInfo.housePrice}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
-    $template.querySelector('.card-name').classList.add(cardInfo.color)
-
+    $template.querySelector('.card-name').classList.add(cardInfo.color);
+    $template.id = `${cardInfo.name}`;
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
-    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+    _$containers["cardsParent"].insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
 function renderSpecialCard(cardInfo, middle) {
     const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
+    $template.id = `${cardInfo.name}`;
+
     switch (cardInfo.type.toLowerCase()) {
         case "go":
             $template.querySelector("img").src = "images/go.png";
@@ -50,7 +53,7 @@ function renderSpecialCard(cardInfo, middle) {
         default:
             return;
     }
-    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+    _$containers["cardsParent"].insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
 function renderUtilityCard(cardInfo, middle) {
@@ -66,17 +69,19 @@ function renderRailroad(cardInfo, middle) {
 
 function utilityAndRailroadTemplate($template, cardInfo, middle) {
     addClassToMiddle($template, middle);
+    const $icon = $template.querySelector('.card-icon');
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
     if (cardInfo.name.includes("RR")) {
-        $template.querySelector('.card-icon').src = `images/railroad.png`;
+        $icon.src = `images/railroad.png`;
     } else if (cardInfo.name.includes("Electric")) {
-        $template.querySelector('.card-icon').src = `images/electric.jpg`;
+        $icon.src = `images/electric.jpg`;
     } else {
-        $template.querySelector('.card-icon').src = `images/water.png`;
+        $icon.src = `images/water.png`;
     }
-    document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
+    $template.id = `${cardInfo.name}`;
+    _$containers["cardsParent"].insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
 

@@ -93,7 +93,6 @@
 }
 
 #main-screen #arrows {
-    margin-top: 0.5rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -183,10 +182,12 @@
     margin-top: 2rem;
     height: 50vh;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 
 #main-screen #cards-parent article {
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     border: black solid 0.1rem;
@@ -194,10 +195,7 @@
 
     border-radius: 0.2rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    text-align: left;
-    overflow: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+
 }
 
 #cards-parent article::-webkit-scrollbar {
@@ -285,6 +283,8 @@ article:nth-of-type(3) img {
 }
 
 #main-screen footer {
+    padding-bottom: 1rem;
+    height: 10vh;
     background: rgb(178, 207, 224);
     border-top: black solid 0.1rem;
 }
@@ -425,4 +425,12 @@ article:nth-of-type(3) img {
 
 .DARKBLUE {
     background: rgba(0, 0, 139, 0.6);
+}
+.player-pos{
+    margin-top: 1rem;
+    color: limegreen;
+}
+.player-bought{
+    margin-top: 1rem;
+    color: red;
 }

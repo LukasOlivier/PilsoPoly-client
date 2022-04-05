@@ -35,7 +35,7 @@ function removeTemplate(container) {
 
 // This function finds a game with a specific ID in an array of games.
 function findGameByID(allGames, id){
-    for (let game of allGames){
+    for (const game of allGames){
         if (game.id === id){
             return game;
         }
