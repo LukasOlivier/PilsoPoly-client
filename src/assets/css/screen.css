@@ -1,3 +1,26 @@
+#main-screen .info-container p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+}
+
+#main-screen #cards-parent article {
+    display: flex;
+    flex-direction: column;
+    border: black solid 0.1rem;
+    background: white;
+
+    border-radius: 0.2rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    text-align: left;
+}
+
+#main-screen #cards-parent .price {
+    font-weight: bolder;
+    margin-top: auto;
+    align-self: center;
+}
+
 #main-screen #cards-parent article:first-of-type, #main-screen #cards-parent article:last-of-type {
     width: 10vw;
     height: 18vw;
@@ -109,18 +132,18 @@ article:nth-of-type(3) img {
     height: 2.5rem;
 }
 
+#arrows img {
+    transition: all .2s ease-in-out;
+    width: 3rem;
+    height: 3rem;
+}
+
 #main-screen footer img {
     width: 3rem;
     height: 3rem;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 1rem;
-}
-
-#arrows img {
-    transition: all .2s ease-in-out;
-    width: 3rem;
-    height: 3rem;
 }
 
 #main-screen header img {
@@ -188,11 +211,6 @@ article:nth-of-type(3) img {
     padding: 0.8rem;
 }
 
-#main-screen .info-container p {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: black;
-}
 
 #main-screen header div {
     display: flex;
@@ -225,6 +243,12 @@ article:nth-of-type(3) img {
     margin-right: auto;
 }
 
+#main-screen header img:hover, #main-screen button:hover, #main-screen #back-to-current-position button:hover {
+    filter: drop-shadow(0px 0px 0.5rem #222);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
 #main-screen #back-to-current-position button {
     transition: all .2s ease-in-out;
     background: white;
@@ -236,11 +260,6 @@ article:nth-of-type(3) img {
     transform: scale(1.5);
 }
 
-#main-screen header img:hover, #main-screen button:hover, #main-screen #back-to-current-position button:hover {
-    filter: drop-shadow(0px 0px 0.5rem #222);
-    transform: scale(1.1);
-    cursor: pointer;
-}
 
 #main-screen #trade {
     border-radius: 1rem;
@@ -266,16 +285,6 @@ article:nth-of-type(3) img {
     margin-bottom: 2rem;
 }
 
-#main-screen #cards-parent article {
-    display: flex;
-    flex-direction: column;
-    border: black solid 0.1rem;
-    background: white;
-
-    border-radius: 0.2rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    text-align: left;
-}
 
 #cards-parent article li {
     display: flex;
@@ -283,6 +292,15 @@ article:nth-of-type(3) img {
     flex-direction: row;
     align-items: center;
     margin-bottom: 0.5rem;
+}
+
+#cards-parent article li:last-of-type {
+    padding-bottom: 0.5rem;
+    border-bottom: solid black 0.1rem;
+}
+
+#cards-parent article li:first-of-type, #cards-parent article li:last-of-type {
+    margin-top: 0.5rem;
 }
 
 #main-screen #cards-parent li {
@@ -304,14 +322,6 @@ article:nth-of-type(3) img {
     border-bottom: solid black 0.1rem;
 }
 
-#cards-parent article li:last-of-type {
-    padding-bottom: 0.5rem;
-    border-bottom: solid black 0.1rem;
-}
-
-#cards-parent article li:first-of-type, #cards-parent article li:last-of-type {
-    margin-top: 0.5rem;
-}
 
 .price-house {
     padding-bottom: 0.5rem;
@@ -330,11 +340,6 @@ article:nth-of-type(3) img {
     margin: auto auto auto auto;
 }
 
-#main-screen #cards-parent .price {
-    font-weight: bolder;
-    margin-top: auto;
-    align-self: center;
-}
 
 /* GIVE UP POP-UP */
 #give-up-popup {
