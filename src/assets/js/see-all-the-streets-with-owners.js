@@ -8,7 +8,7 @@ function init() {
     const streetNames = [];
     _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
-    fetchFromServer(`/games/${_gameID}`, 'GET')
+    fetchFromServer(`/games/dummy`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
         });

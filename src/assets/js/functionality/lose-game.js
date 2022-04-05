@@ -1,6 +1,5 @@
 'use strict';
 
-
 function loseGame(){
     const gameID = loadFromStorage("gameId");
     const playerName = loadFromStorage("name");
