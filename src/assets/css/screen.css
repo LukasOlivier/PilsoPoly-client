@@ -135,16 +135,16 @@
 }
 
 #main-screen header .disabled {
-    background-color: orange;
+    background-color: grey;
     transition-property: none;
-
+    opacity: 50%;
 }
 
 #main-screen header .disabled:hover {
-    border: none;
     color: black;
     filter: none;
     transform: scale(1);
+    cursor: auto;
 
 }
 

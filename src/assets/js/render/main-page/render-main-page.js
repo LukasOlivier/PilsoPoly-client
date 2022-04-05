@@ -25,9 +25,6 @@ function renderMainPage() {
 
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
-    // mijn idee => render alles voor eerste keer -> fetch eenmalig en steek dit in _currenGameState
-    // Daarna, start met polling en steek daar dan een hoop switch cases in,
-    // ALS er iets verandert, render enkel dat opnieuw...
     getTiles();
     renderFirstTime();
 
@@ -49,6 +46,7 @@ function pollingGameState(){
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
+            console.log(res)
             const newGameState = res;
             checkGameStates(newGameState)
             setTimeout(pollingGameState, 10000)
@@ -57,7 +55,8 @@ function pollingGameState(){
 
 function checkGameStates(newState){
     if (newState.currentPlayer !== _currentGameState.currentPlayer) {
-        console.log('Its your turn')
+        // This means that a turn was ended and its someone else its turn
+
         checkIfPlayerCanRoll(newState)
     }
 }

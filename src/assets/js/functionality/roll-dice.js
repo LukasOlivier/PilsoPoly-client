@@ -20,21 +20,18 @@ function readyToRoll(){
 }
 
 function rollDice(){
-    const test = {
-        lastDiceRoll : [1, 1]
-    }
-    checkIfRolledTwice(test)
-
     fetchFromServer(`/games/${_gameID}/players/${_name}/dice`, 'POST')
         .then(response => {
+            renderCards();
             checkIfRolledTwice(response);
-           renderCards();
         })
         .catch(errorHandler);
 }
 
 function changeDiceRollNumber(text){
     document.querySelector('#roll-dice-dialog p').innerText = text;
+    document.querySelector("#location").innerText = 'You landed at ' + _playerPositionID;
+    console.log(_tempPlayerPositionID)
     document.querySelector("#cancel-roll-dice").innerText = "Oké";
     document.querySelector("#roll-dice").classList.add("hidden");
 }
@@ -46,6 +43,7 @@ function checkIfRolledTwice(response) {
         text = "You rolled a double " + response.lastDiceRoll[0] + ". You can throw again!";
         changeDiceRollNumber(text);
     } else {
+        document.querySelector("#roll-dice-open-dialog").classList.add("disabled");
         text = "You threw " + totalRolled + "!";
         changeDiceRollNumber(text);
     }
