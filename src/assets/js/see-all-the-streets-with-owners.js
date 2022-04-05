@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     const streetNames = [];
     _token = {token: loadFromStorage("token")};
-    _gameID = loadFromStorage("gameId");
+    _gameID = "dummy";
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
