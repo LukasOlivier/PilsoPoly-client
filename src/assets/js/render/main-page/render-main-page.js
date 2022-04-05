@@ -65,6 +65,7 @@ function getCardById(id) {
     }
     checkPlayerPosition();
     checkIfBought();
+    checkIfMortgaged();
 }
 
 function createToShow(id, firstId, lastId) {
@@ -184,6 +185,8 @@ function checkIfBought() {
                 if (property.name !== null && document.querySelector(`#${nameToId(property.name)}`) !== null) {
                     document.querySelector(`#${nameToId(property.name)} .player-bought`).classList.remove("hidden");
                     document.querySelector(`#${nameToId(property.name)} .price`).classList.add("hidden");
+                    document.querySelector(`#${nameToId(property.name)}`).style.border = "red solid 0.1rem";
+
                     document.querySelector(`#${nameToId(property.name)} .player-bought`).insertAdjacentHTML("beforeend",`${player}`);
                 }
             });
@@ -191,4 +194,20 @@ function checkIfBought() {
     }
 }
 
+function checkIfMortgaged() {
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        if (player) {
+            playerProperties[player].forEach(function (property) {
+                if (property.mortgage === true && document.querySelector(`#${nameToId(property.name)}`) !== null) {
+                    document.querySelector(`#${nameToId(property.name)} .player-bought`).classList.add("hidden");
+                    document.querySelector(`#${nameToId(property.name)} .price`).classList.add("hidden");
+                    document.querySelector(`#${nameToId(property.name)} .player-mortgaged`).classList.remove("hidden");
+                    document.querySelector(`#${nameToId(property.name)}`).style.border = "orange solid 0.1rem";
+                    document.querySelector(`#${nameToId(property.name)} .player-mortgaged`).insertAdjacentHTML("beforeend",`${player}`);
+                }
+            });
+        }
+    }
+}
 

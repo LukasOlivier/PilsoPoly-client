@@ -4,12 +4,16 @@
     text-align: center;
 }
 
-#cards-parent .player-bought {
+.player-bought {
     margin-top: auto;
     color: red;
     text-align: center;
 }
-
+.player-mortgaged {
+    margin-top: auto;
+    color: orange;
+    text-align: center;
+}
 #main-screen .info-container p {
     font-size: 1.2rem;
     font-weight: bold;
