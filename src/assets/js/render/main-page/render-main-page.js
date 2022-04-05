@@ -12,7 +12,7 @@ function renderMainPage() {
     _$giveUpPopup = document.querySelector("#give-up-popup");
 
     _token = {token: loadFromStorage("token")};
-    _gameID = loadFromStorage("gameId");
+    _gameID = "dummy";
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
@@ -121,8 +121,8 @@ function renderPlayerProperties() {
         if (player) {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
-                if (property !== null) {
-                    $container.querySelector(`.${nameToId(property)}`).classList.remove("not-bought");
+                if (property.name !== null) {
+                    $container.querySelector(`.${nameToId(property.name)}`).classList.remove("not-bought");
                 }
             });
         }
@@ -181,13 +181,14 @@ function checkIfBought() {
     for (const player in playerProperties) {
         if (player) {
             playerProperties[player].forEach(function (property) {
-                if (property !== null && document.querySelector(`#${property}`) !== null) {
-                    document.querySelector(`#${property}`).style.border = "red solid 0.2rem";
-                    document.querySelector(`#${property} .player-bought`).classList.remove("hidden");
-                    document.querySelector(`#${property} .price`).classList.add("hidden");
-                    document.querySelector(`#${property} .player-bought`).insertAdjacentHTML("beforeend",`${player}`);
+                if (property.name !== null && document.querySelector(`#${nameToId(property.name)}`) !== null) {
+                    document.querySelector(`#${nameToId(property.name)} .player-bought`).classList.remove("hidden");
+                    document.querySelector(`#${nameToId(property.name)} .price`).classList.add("hidden");
+                    document.querySelector(`#${nameToId(property.name)} .player-bought`).insertAdjacentHTML("beforeend",`${player}`);
                 }
             });
         }
     }
 }
+
+

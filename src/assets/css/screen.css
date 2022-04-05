@@ -5,6 +5,7 @@
 }
 
 #cards-parent .player-bought {
+    margin-top: auto;
     color: red;
     text-align: center;
 }
@@ -16,6 +17,7 @@
 }
 
 #main-screen #cards-parent article {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     border: black solid 0.1rem;
@@ -202,21 +204,11 @@ article:nth-of-type(3) .price {
     color: black;
 }
 
-#main-screen .normal-card, .special-card, .utility-card, .railroad-card {
-    text-align: center;
-    width: 10rem;
-    padding: 1rem;
-    background-color: #979797;
-}
-
 #main-screen .special-card h3 {
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#main-screen .middle {
-    width: 15rem;
-}
 
 #main-screen #arrows {
     margin-top: 0.5rem;
