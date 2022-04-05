@@ -21,6 +21,9 @@ function createCardInfo(property) {
             info.name = tile.name;
             info.cost = tile.cost;
             info.rent = tile.rent;
+            info.mortgage = property.mortgage;
+            info.houseCount = property.houseCount;
+            info.hotelCount = property.hotelCount;
         }
     });
     return info;
