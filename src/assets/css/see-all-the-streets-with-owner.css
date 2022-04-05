@@ -19,6 +19,13 @@ body {
     font-size: 3rem;
     text-decoration: underline;
 }
+article h2 {
+    border: solid black;
+    text-align: center;
+    padding: 0.3rem;
+    color: white;
+    font-family: "Oswald", serif;
+}
 
 #see-all-the-streets-with-owners section > h2 {
     background: #abcbdc;
@@ -117,14 +124,6 @@ body {
 
 .DARKBLUE {
     background: rgba(0, 0, 139, 0.6);
-}
-
-article h2 {
-    border: solid black;
-    text-align: center;
-    padding: 0.3rem;
-    color: white;
-    font-family: "Oswald", serif;
 }
 
 #see-all-the-streets-with-owners article li {

@@ -327,7 +327,9 @@ body {
 #rules-interface p {
     line-height: 1.5rem;
     white-space: normal;
-    margin-bottom: 1rem;
+    text-align: left;
+    margin-bottom: 2rem;
+    font-family: "Cardo", serif;
 }
 
 #rules-interface h1 {
@@ -361,12 +363,6 @@ body {
     font-family: "Cardo", serif;
     margin-top: 1rem;
     margin-bottom: 2rem;
-}
-
-#rules-interface p {
-    text-align: left;
-    margin-bottom: 2rem;
-    font-family: "Cardo", serif;
 }
 
 #rules-interface button {
