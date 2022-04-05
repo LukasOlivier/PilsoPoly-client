@@ -315,7 +315,6 @@ body {
     border: #c90b0b solid 0.1em;
     margin-bottom: 2rem;
     background: white;
-    background: rgba(255, 255, 255, .5);
 }
 #rules-interface .back-button:hover{
     cursor: pointer;

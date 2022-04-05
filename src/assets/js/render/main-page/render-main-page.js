@@ -3,9 +3,11 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$giveUpPopup = "";
-
+const _$containers = {
+    cardsParent: ""
+};
 function renderMainPage() {
-
+    _$containers["cardsParent"] = document.querySelector("#cards-parent");
     _$giveUpPopup = document.querySelector("#give-up-popup");
 
     _token = {token: loadFromStorage("token")};

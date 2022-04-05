@@ -11,5 +11,5 @@ function loadGameDataForLobby(){
             const numberOfPlayers = game.numberOfPlayers;
             const playerNames = game.players;
             renderLobby(_gameID, numberOfPlayers, playerNames);
-        })
+        });
 }
