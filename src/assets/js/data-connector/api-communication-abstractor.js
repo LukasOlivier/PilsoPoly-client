@@ -1,5 +1,4 @@
 "use strict";
-
 function fetchFromServer(path, httpVerb, requestBody){
     const options = constructOptions(httpVerb, requestBody);
 

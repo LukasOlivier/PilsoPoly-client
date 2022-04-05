@@ -1,9 +1,9 @@
 'use strict';
 
-function fetchAllGames(){
-    const gameID = makeID(_$joinInterface.querySelector("#ID").value);
+function fetchAllGames() {
+    const gameID = makeID(_$containers["joinInterface"].querySelector("#ID").value);
     const name = {
-        playerName: _$joinInterface.querySelector(".name").value.toLowerCase()
+        playerName: _$containers["joinInterface"].querySelector(".name").value.toLowerCase()
     };
     try {
         fetchFromServer(`/games?prefix=${_config.prefix}`)
@@ -16,14 +16,14 @@ function fetchAllGames(){
                 joinGame(gameID, name);
             })
             .catch(errorHandler);
-    }
-    catch(error) {
+    } catch (error) {
         errorHandler(error);
     }
 
 }
+
 // if the id doesnt contains the prefix, add it. ;)
-function makeID(gameID){
+function makeID(gameID) {
     if (gameID.includes(_config.prefix)) {
         return gameID;
     } else {
@@ -31,7 +31,7 @@ function makeID(gameID){
     }
 }
 
-function checkName(name, game){
+function checkName(name, game) {
     // Special characters are not allowed in the name
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890é§]/;
     if (name.playerName === "") {
@@ -49,9 +49,9 @@ function checkName(name, game){
     });
 }
 
-function joinGame(gameID, name){
+function joinGame(gameID, name) {
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${gameID}/players`,'POST', name)
+    fetchFromServer(`/games/${gameID}/players`, 'POST', name)
         .then(response => {
             _gameID = gameID;
             _token = response.token;
@@ -66,16 +66,16 @@ function joinGame(gameID, name){
 }
 
 // https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
-function fetchNonStartedGames(){
+function fetchNonStartedGames() {
     // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
         .then(response => renderAllAvailableGames(response));
 }
 
-function fillInGameID(e){
+function fillInGameID(e) {
     // hides the pop up, and fills the value from the li in the ID field
-    _$seeAllGamesInterface.classList.add("hidden");
-    _$joinInterface.style.opacity = "1";
-    _$joinInterface.querySelector("#ID").value = e.currentTarget.id;
+    _$containers["seeAllGamesInterface"].classList.add("hidden");
+    _$containers["joinInterface"].style.opacity = "1";
+    _$containers["joinInterface"].querySelector("#ID").value = e.currentTarget.id;
 }
 

@@ -3,16 +3,13 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$giveUpPopup = "";
-const _$containers = {
-    cardsParent: ""
-};
+
 
 function renderMainPage() {
     _$containers["cardsParent"] = document.querySelector("#cards-parent");
     _$giveUpPopup = document.querySelector("#give-up-popup");
-
     _token = {token: loadFromStorage("token")};
-    _gameID = "dummy";
+    _gameID = loadFromStorage("gameId");
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
@@ -65,7 +62,6 @@ function getCardById(id) {
     }
     checkPlayerPosition();
     checkIfBought();
-    checkIfMortgaged();
 }
 
 function createToShow(id, firstId, lastId) {

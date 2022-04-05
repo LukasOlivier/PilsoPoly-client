@@ -409,8 +409,8 @@ body {
     border-top: #eeeeef solid 0.5rem;
     border-left: #eeeeef solid 0.5rem;
     padding: 1rem;
-    width: 20vw;
-    height: 30vw;
+    width: 30vw;
+    height: 50vh;
     overflow: scroll;
     font-size: 1.5rem;
     background: #98c5da;

@@ -27,7 +27,6 @@
     flex-direction: column;
     border: black solid 0.1rem;
     background: white;
-
     border-radius: 0.2rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0 0.313rem 0.938rem;
     text-align: left;
@@ -400,7 +399,9 @@ footer .player-balance {
     display: flex;
     justify-content: space-around;
 }
-
+#cards-parent #jail{
+    background-color: rgb(240,124,28);
+}
 .PURPLE {
     background: rgba(161, 27, 161, 0.5);
 }
