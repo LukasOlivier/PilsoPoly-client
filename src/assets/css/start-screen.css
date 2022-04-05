@@ -75,7 +75,6 @@ body {
 #join-interface, #create-interface {
     margin-top: 25vh;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0.25rem 0.75rem;
-    background: rgba(128, 128, 128, 0.7);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -256,7 +255,6 @@ body {
     height: 30vh;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0.25rem 0.75rem;
-    background: rgba(128, 128, 128, 0.7);
     display: flex;
     padding: 1rem;
     gap: 3rem;
@@ -317,7 +315,6 @@ body {
     border: #c90b0b solid 0.1em;
     margin-bottom: 2rem;
     background: white;
-    background: rgba(255, 255, 255, .5);
 }
 #rules-interface .back-button:hover{
     cursor: pointer;
@@ -330,7 +327,9 @@ body {
 #rules-interface p {
     line-height: 1.5rem;
     white-space: normal;
-    margin-bottom: 1rem;
+    text-align: left;
+    margin-bottom: 2rem;
+    font-family: "Cardo", serif;
 }
 
 #rules-interface h1 {
@@ -366,12 +365,6 @@ body {
     margin-bottom: 2rem;
 }
 
-#rules-interface p {
-    text-align: left;
-    margin-bottom: 2rem;
-    font-family: "Cardo", serif;
-}
-
 #rules-interface button {
     background: white;
     outline: none;
@@ -385,7 +378,6 @@ body {
     cursor: pointer;
     background: #dedddd;
 }
-
 /* ===============================================================================*/
 
 

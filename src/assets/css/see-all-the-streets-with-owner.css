@@ -4,24 +4,43 @@ body {
 }
 
 #see-all-the-streets-with-owners header {
+    display: flex;
     color: white;
     padding: 1rem;
     background: #abcbdc;
     margin-bottom: 2rem;
     border-bottom: solid black;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #see-all-the-streets-with-owners header h1 {
     font-size: 3rem;
+    text-decoration: underline;
+}
+article h2 {
+    border: solid black;
+    text-align: center;
+    padding: 0.3rem;
+    color: white;
+    font-family: "Oswald", serif;
 }
 
-#see-all-the-streets-with-owners section>h2 {
+#see-all-the-streets-with-owners section > h2 {
     background: #abcbdc;
     border: solid black;
     text-align: center;
     padding: 0.3rem;
     color: white;
     font-size: 1.5rem;
+}
+
+#see-all-the-streets-with-owners header div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #see-all-the-streets-with-owners header input {
@@ -36,6 +55,7 @@ body {
     height: 3rem;
     width: 19.5rem;
 }
+
 
 #see-all-the-streets-with-owners #card-container {
     display: flex;
@@ -61,6 +81,7 @@ body {
     transform: scale(1.1);
     width: 18rem;
     height: 18rem;
+    font-size: 1.5rem;
 }
 
 .PURPLE {
@@ -78,6 +99,7 @@ body {
 .VIOLET {
     background: rgba(238, 130, 238, 0.9);
 }
+
 #see-all-the-streets-with-owners article .WHITE {
     background: rgba(255, 255, 255, 0.8);
     color: black;
@@ -93,6 +115,7 @@ body {
 
 .YELLOW {
     background: rgba(255, 255, 0, 0.35);
+    color: black;
 }
 
 .DARKGREEN {
@@ -101,13 +124,6 @@ body {
 
 .DARKBLUE {
     background: rgba(0, 0, 139, 0.6);
-}
-
-#see-all-the-streets-with-owners article h2 {
-    border: solid black;
-    text-align: center;
-    padding: 0.3rem;
-    color: white;
 }
 
 #see-all-the-streets-with-owners article li {
@@ -132,16 +148,20 @@ body {
     text-align: right;
 }
 
-#see-all-the-streets-with-owners footer a {
+#see-all-the-streets-with-owners a {
     transition: all .2s ease-in-out;
     padding: 0.5rem 2rem 0.5rem 2rem;
     background: rgba(84, 54, 37, 0.75);
     font-size: 1rem;
     color: white;
     text-decoration: none;
+    margin-right: auto;
+    margin-left: 0;
+    line-height: 3rem;
+    font-family: "Oswald", serif;
 }
 
-#see-all-the-streets-with-owners footer a:hover {
+#see-all-the-streets-with-owners a:hover {
     transform: scale(1.1);
     padding: 0.7rem 2.3rem 0.7rem 2.3rem;
     font-size: 1.4rem;
