@@ -60,6 +60,7 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
+    checkPlayerPosition();
 }
 
 function createToShow(id, firstId, lastId) {
@@ -156,3 +157,17 @@ function checkIfPlayerBankrupt() {
         });
 }
 
+function checkPlayerPosition() {
+    fetchFromServer(`/games/${_gameID}`)
+        .then(response => {
+            const playersInfo = response.players
+            playersInfo.forEach(player => {
+                // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
+                if (document.querySelector(`#${player.currentTile}`) !== null && !player.bankrupt) {
+                    document.querySelector(`#${player.currentTile} .player-pos`).classList.remove('hidden');
+                    document.querySelector(`#${player.currentTile} .player-pos`).insertAdjacentHTML("beforeend",`${player.name} `)
+                    document.querySelector(`#${player.currentTile}`).style.border = "lime solid 0.2rem"
+                }
+            })
+        })
+}
