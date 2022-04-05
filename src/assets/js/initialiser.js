@@ -12,7 +12,6 @@ const _$containers = {
 };
 let _token = null;
 let _gameID = null;
-let _tiles = null;
 
 document.addEventListener('DOMContentLoaded', init);
 

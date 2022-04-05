@@ -4,7 +4,7 @@ let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$giveUpPopup = "";
 _token = {token: loadFromStorage("token")};
-_gameID = "dummy";
+_gameID = loadFromStorage("gameId");
 
 function renderMainPage() {
     _$containers["cardsParent"] = document.querySelector("#cards-parent");
