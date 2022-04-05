@@ -1,5 +1,4 @@
-function seeIfStreetIsBuyable()
-{
+function seeIfStreetIsBuyable() {
     let currentTileName = null;
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}`, "GET")
@@ -22,22 +21,29 @@ function seeIfStreetIsBuyable()
 }
 
 
-
+//document.querySelector(`#buy-propertie-popup .Auction`).addEventListener('click', auctionPropertie); add this when auction comes to
 function chooseBuyOrAuction()
 {
     seeIfStreetIsBuyable();
+    console.log(loadFromStorage("playerProperties"));
+    console.log(loadFromStorage("tiles"));
     document.querySelector(`#buy-propertie-popup .Buy`).addEventListener('click', buyPropertie);
-    document.querySelector(`#buy-propertie-popup .Auction`).addEventListener('click', auctionPropertie);
 }
 
 function buyPropertie() {
     const currentTileName = loadFromStorage("currentTileName");
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTileName}`,'POST');
+    updatePlayerProperties();
+}
+
+function updatePlayerProperties(){
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
+            console.log("het werkt");
         });
+    document.querySelector(`#buy-propertie-popup`).classList.add("hidden");
 }
 
-function auctionPropertie() {}
+
