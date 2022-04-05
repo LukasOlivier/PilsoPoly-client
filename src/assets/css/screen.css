@@ -131,6 +131,22 @@
     margin-right: auto;
 }
 
+#main-screen header .disabled {
+    background-color: orange;
+    transition-property: none;
+
+}
+
+#main-screen header .disabled:hover {
+    border: none;
+    color: black;
+    filter: none;
+    transform: scale(1);
+
+}
+
+
+
 #main-screen header div {
     display: flex;
     align-items: center;

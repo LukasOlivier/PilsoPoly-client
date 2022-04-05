@@ -12,7 +12,6 @@ function renderMainPage() {
     _gameID = loadFromStorage("gameId");
     _name = loadFromStorage("name")
 
-    document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("main").addEventListener("wheel", wheelEvent);
@@ -23,26 +22,33 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
 
-    // roll-dice-dialog
     document.querySelector("#roll-dice-open-dialog").addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").open = true;
+        document.querySelector("#roll-dice-dialog").showModal();
     } )
     document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").open = false;
+        document.querySelector("#roll-dice-dialog").hide();
     } )
+
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
     // mijn idee => render alles voor eerste keer -> fetch eenmalig en steek dit in _currenGameState
     // Daarna, start met polling en steek daar dan een hoop switch cases in,
     // ALS er iets verandert, render enkel dat opnieuw...
     getTiles();
-    renderPlayerInfo();
-    checkIfPlayerBankrupt();
-
+    renderFirstTime();
 
 
     pollingGameState();
 }
+
+function renderFirstTime(){
+    fetchFromServer(`/games/${_gameID}`, "GET")
+        .then(res => {
+            renderPlayerInfo(res);
+            checkIfPlayerBankrupt(res);
+        })
+}
+
 
 function pollingGameState(){
     // This needs to be on a diff place for sure!!
@@ -51,11 +57,12 @@ function pollingGameState(){
             console.log(res)
             _currentGameState = res;
             if (_currentGameState.currentPlayer === _name && _currentGameState.canRoll === true) {
+                readyToRoll();
                 console.log("I can roll the dice")
-                document.querySelector("#roll-dice-open-dialog").classList.remove("hidden")
+                document.querySelector("#roll-dice-open-dialog").classList.remove("disabled");
             } else {
                 console.log('I cant')
-                document.querySelector("#roll-dice-open-dialog").classList.add("hidden")
+                document.querySelector("#roll-dice-open-dialog").classList.add("disabled");
             }
             setTimeout(pollingGameState, 10000)
         })
@@ -132,19 +139,18 @@ function showCards(cardInfo, middle) {
     }
 }
 
-function renderPlayerInfo() {
-    fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(res => {
-            console.log(res)
-            res.players.forEach(function (player) {
-                const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
-                $template.classList.add(player.name.toLowerCase());
-                $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
-                document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
-            });
-            renderPlayerProperties();
-        });
+function renderPlayerInfo(res) {
+    console.log(res)
+    res.players.forEach(function (player) {
+        const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
+        $template.classList.add(player.name.toLowerCase());
+        $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
+        document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
+    });
+    renderPlayerProperties();
 }
+
+
 // All move functions should be replaced to a different file..
 function move(value) {
     const $button = document.querySelector("main button");
@@ -237,17 +243,15 @@ function trade() {
     console.log("trade");
 }
 
-function checkIfPlayerBankrupt() {
-    fetchFromServer(`/games/${_gameID}`, 'GET')
-        .then(response => {
-            response.players.forEach(player => {
-                if (player.bankrupt) {
-                    const $container = document.querySelector(`.${player.name}`);
-                    $container.style.opacity = "0.5";
-                    $container.querySelector("p").style.color = "red";
-                    $container.querySelector("p").innerHTML = `${player.name}: BANKRUPT`;
-                }
-            });
-        });
+function checkIfPlayerBankrupt(response) {
+    response.players.forEach(player => {
+        if (player.bankrupt) {
+            const $container = document.querySelector(`.${player.name}`);
+            $container.style.opacity = "0.5";
+            $container.querySelector("p").style.color = "red";
+            $container.querySelector("p").innerHTML = `${player.name}: BANKRUPT`;
+        }
+    });
 }
+
 

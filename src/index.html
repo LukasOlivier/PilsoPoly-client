@@ -34,8 +34,7 @@
 <body id="main-screen">
 
 <header>
-    <button id="end-turn">End turn</button>
-    <button id="roll-dice-open-dialog" class="hidden">Roll the dice</button>
+    <button id="roll-dice-open-dialog">Roll the dice</button>
     <h1 id="game-screen">Monopoly</h1>
     <div>
         <img src="images/give-up.png" alt="give-up" title="give-up" id="give-up">
@@ -56,6 +55,12 @@
     </div>
     <section>
         <h2>Current position:</h2>
+        <dialog id="roll-dice-dialog">
+            <p>Rolling the dice</p>
+            <button id="cancel-roll-dice">Cancel</button>
+            <button id="roll-dice">Roll the dice</button>
+        </dialog>
+
         <div id="cards-parent">
             <template class="normal-card-template">
                 <!--middle article should have class "middle"-->
@@ -158,11 +163,6 @@
 <div class="errormessages">
     <p></p>
 </div>
-<dialog id="roll-dice-dialog">
-    <p>Rolling the dice</p>
-    <button id="cancel-roll-dice">Cancel</button>
-    <button id="roll-dice">Roll the dice</button>
-</dialog>
 
 </body>
 </html>

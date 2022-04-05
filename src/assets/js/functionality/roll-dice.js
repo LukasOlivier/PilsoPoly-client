@@ -1,6 +1,15 @@
 'use strict';
 
 
+function readyToRoll(){
+    document.querySelector("#roll-dice-open-dialog").addEventListener('click', () => {
+        document.querySelector("#roll-dice-dialog").showModal();
+    } )
+    document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
+        document.querySelector("#roll-dice-dialog").hide();
+    } )
+}
+
 function rollDice(){
     fetchFromServer(`/games/${_gameID}/players/${_name}/dice`, 'POST')
         .then(response => {
