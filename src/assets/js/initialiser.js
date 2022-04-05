@@ -10,9 +10,9 @@ const _$containers = {
     seeAllGamesInterface: "",
     errorMessage: "",
 };
-let _token = null;
-let _gameID = null;
-let _tiles = null;
+const _token = null;
+const _gameID = null;
+const _tiles = null;
 
 document.addEventListener('DOMContentLoaded', init);
 
