@@ -17,17 +17,11 @@ function renderMainPage() {
     document.querySelector("main").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#trade").addEventListener("click", trade);
-    document.querySelector("main button").addEventListener("click", backToCurrentPosition);
+    document.querySelector("#back-to-current-position button").addEventListener("click", backToCurrentPosition);
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
 
-    document.querySelector("#roll-dice-open-dialog").addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").showModal();
-    } )
-    document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").hide();
-    } )
 
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
@@ -37,8 +31,6 @@ function renderMainPage() {
     getTiles();
     renderFirstTime();
 
-
-    pollingGameState();
 }
 
 function renderFirstTime(){
@@ -46,6 +38,9 @@ function renderFirstTime(){
         .then(res => {
             renderPlayerInfo(res);
             checkIfPlayerBankrupt(res);
+            checkIfPlayerCanRoll(res);
+            _currentGameState = res;
+            pollingGameState();
         })
 }
 
@@ -54,26 +49,25 @@ function pollingGameState(){
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
-            console.log(res)
-            _currentGameState = res;
-            if (_currentGameState.currentPlayer === _name && _currentGameState.canRoll === true) {
-                readyToRoll();
-                console.log("I can roll the dice")
-                document.querySelector("#roll-dice-open-dialog").classList.remove("disabled");
-            } else {
-                console.log('I cant')
-                document.querySelector("#roll-dice-open-dialog").classList.add("disabled");
-            }
+            const newGameState = res;
+            checkGameStates(newGameState)
             setTimeout(pollingGameState, 10000)
         })
 }
 
+function checkGameStates(newState){
+    if (newState.currentPlayer !== _currentGameState.currentPlayer) {
+        console.log('Its your turn')
+        checkIfPlayerCanRoll(newState)
+    }
+}
 
 function endTurn() {
     console.log("end");
 }
 
 function renderCards() {
+    removeTemplate("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}`, "GET")
@@ -140,7 +134,6 @@ function showCards(cardInfo, middle) {
 }
 
 function renderPlayerInfo(res) {
-    console.log(res)
     res.players.forEach(function (player) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.classList.add(player.name.toLowerCase());

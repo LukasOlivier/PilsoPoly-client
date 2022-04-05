@@ -1,29 +1,52 @@
 'use strict';
 
+function checkIfPlayerCanRoll(gameState){
+    if (gameState.currentPlayer === _name && gameState.canRoll === true) {
+        console.log('and you can roll')
+        readyToRoll();
+        document.querySelector("#roll-dice-open-dialog").classList.remove("disabled");
+    } else {
+        document.querySelector("#roll-dice-open-dialog").classList.add("disabled");
+    }
+}
 
 function readyToRoll(){
     document.querySelector("#roll-dice-open-dialog").addEventListener('click', () => {
         document.querySelector("#roll-dice-dialog").showModal();
-    } )
+    })
     document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").hide();
-    } )
+        document.querySelector("#roll-dice-dialog").close();
+    })
 }
 
 function rollDice(){
+    const test = {
+        lastDiceRoll : [1, 1]
+    }
+    checkIfRolledTwice(test)
+
     fetchFromServer(`/games/${_gameID}/players/${_name}/dice`, 'POST')
         .then(response => {
-            console.log(response)
-            console.log('you rolled ' + response.lastDiceRoll)
-            const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
-            console.log(totalRolled)
-            move(totalRolled)
-
+            checkIfRolledTwice(response);
+           renderCards();
         })
         .catch(errorHandler);
 }
 
+function changeDiceRollNumber(text){
+    document.querySelector('#roll-dice-dialog p').innerText = text;
+    document.querySelector("#cancel-roll-dice").innerText = "Oké";
+    document.querySelector("#roll-dice").classList.add("hidden");
+}
 
-function changeDiceRollNumber(number){
-    document.querySelector('#number').innerHTML = number;
+function checkIfRolledTwice(response) {
+    const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
+    let text = "";
+    if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
+        text = "You rolled a double " + response.lastDiceRoll[0] + ". You can throw again!";
+        changeDiceRollNumber(text);
+    } else {
+        text = "You threw " + totalRolled + "!";
+        changeDiceRollNumber(text);
+    }
 }
