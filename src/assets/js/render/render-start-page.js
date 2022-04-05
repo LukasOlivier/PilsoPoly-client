@@ -1,43 +1,24 @@
 "use strict";
-const _$interfaces = {
-    startInterface: "",
-    createInterface: "",
-    joinInterface: "",
-    lobbyInterface: "",
-    iconInterface: "",
-    rulesInterface: "",
-    seeAllGamesInterface: "",
-    errorMessage: "",
-};
+let _$interfaces = {};
 
 function initStartScreen() {
-    _$interfaces.createInterface = document.querySelector("#create-interface");
-    _$interfaces.startInterface = document.querySelector("#start-interface");
-    _$interfaces.joinInterface = document.querySelector("#join-interface");
-    _$interfaces.lobbyInterface = document.querySelector("#lobby-interface");
-    _$interfaces.iconInterface = document.querySelector("#icon-interface");
-    _$interfaces.rulesInterface = document.querySelector("#rules-interface");
-    _$interfaces.seeAllGamesInterface = document.querySelector("#see-all-games-interface");
-    _$interfaces.errorMessage = document.querySelector(".errormessages p");
-
-
+    _$interfaces = {
+        startInterface: document.querySelector("#start-interface"),
+        createInterface: document.querySelector("#create-interface"),
+        joinInterface: document.querySelector("#join-interface"),
+        lobbyInterface: document.querySelector("#lobby-interface"),
+        iconInterface: document.querySelector("#icon-interface"),
+        rulesInterface: document.querySelector("#rules-interface"),
+        seeAllGamesInterface: document.querySelector("#see-all-games-interface"),
+        errorMessage: document.querySelector(".errormessages p"),
+    };
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
     document.querySelector("#rules-interface .back-button").addEventListener("click", backButton);
-
     _$interfaces["joinInterface"].querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
-
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
-    });
-
-    _$interfaces.seeAllGamesInterface.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', function (e) {
-            __$interfaces.seeAllGamesInterface.classList.add("hidden");
-            _$co_$interfaces.joinInterface.style.opacity = "1";
-            _$co_$interfaces.joinInterface.querySelector("#ID").value = e.target.innerText;
-        });
     });
 }
 

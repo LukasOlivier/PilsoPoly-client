@@ -1,15 +1,5 @@
 "use strict";
-const _$containers = {
-    cardsParent: "",
-    startInterface: "",
-    createInterface: "",
-    joinInterface: "",
-    lobbyInterface: "",
-    iconInterface: "",
-    rulesInterface: "",
-    seeAllGamesInterface: "",
-    errorMessage: "",
-};
+
 let _token = null;
 let _gameID = null;
 
