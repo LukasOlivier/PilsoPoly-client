@@ -122,8 +122,11 @@ function renderPlayerProperties() {
         if (player) {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
-                if (property.name !== null) {
+                // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
+                if (!property.mortgage && property.name !== null) {
                     $container.querySelector(`.${nameToId(property.name)}`).classList.remove("not-bought");
+                } else if (property.mortgage && property.name !== null) {
+                    $container.querySelector(`.${nameToId(property.name)}`).classList.add("mortgaged");
                 }
             });
         }
@@ -182,32 +185,22 @@ function checkIfBought() {
     for (const player in playerProperties) {
         if (player) {
             playerProperties[player].forEach(function (property) {
-                if (property.name !== null && document.querySelector(`#${nameToId(property.name)}`) !== null) {
-                    document.querySelector(`#${nameToId(property.name)} .player-bought`).classList.remove("hidden");
-                    document.querySelector(`#${nameToId(property.name)} .price`).classList.add("hidden");
-                    document.querySelector(`#${nameToId(property.name)}`).style.border = "red solid 0.1rem";
-
-                    document.querySelector(`#${nameToId(property.name)} .player-bought`).insertAdjacentHTML("beforeend",`${player}`);
+                const $propertyCard = document.querySelector(`#${nameToId(property.name)}`);
+                // first statement checks if card is bought, second statement checks if this card is currently rendered in
+                if (property.name !== null && $propertyCard !== null && property.mortgage) {
+                    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
+                    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
+                    $propertyCard.style.border = "orange solid 0.1rem";
+                    $propertyCard.querySelector(`.player-mortgaged`).insertAdjacentHTML("beforeend", `${player}`);
+                    // if its bought but not mortgaged (active)
+                    // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
+                } else if (property.name !== null && $propertyCard !== null) {
+                    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
+                    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
+                    $propertyCard.style.border = "red solid 0.1rem";
+                    $propertyCard.querySelector(`.player-bought`).insertAdjacentHTML("beforeend", `${player}`);
                 }
             });
         }
     }
 }
-
-function checkIfMortgaged() {
-    const playerProperties = loadFromStorage("playerProperties");
-    for (const player in playerProperties) {
-        if (player) {
-            playerProperties[player].forEach(function (property) {
-                if (property.mortgage === true && document.querySelector(`#${nameToId(property.name)}`) !== null) {
-                    document.querySelector(`#${nameToId(property.name)} .player-bought`).classList.add("hidden");
-                    document.querySelector(`#${nameToId(property.name)} .price`).classList.add("hidden");
-                    document.querySelector(`#${nameToId(property.name)} .player-mortgaged`).classList.remove("hidden");
-                    document.querySelector(`#${nameToId(property.name)}`).style.border = "orange solid 0.1rem";
-                    document.querySelector(`#${nameToId(property.name)} .player-mortgaged`).insertAdjacentHTML("beforeend",`${player}`);
-                }
-            });
-        }
-    }
-}
-
