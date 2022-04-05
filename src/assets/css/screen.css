@@ -430,3 +430,7 @@ article:nth-of-type(3) img {
     margin-top: 1rem;
     color: limegreen;
 }
+.player-bought{
+    margin-top: 1rem;
+    color: red;
+}

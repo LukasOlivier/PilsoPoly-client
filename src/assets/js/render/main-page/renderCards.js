@@ -12,8 +12,8 @@ function renderNormalCard(cardInfo, middle) {
     $template.querySelector('.rent-hotel').innerText = `M${cardInfo.rentWithHotel}`;
     $template.querySelector('.price-house').innerText = `Price for house: M${cardInfo.housePrice}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
-    $template.querySelector('.card-name').classList.add(cardInfo.color)
-    $template.id = `${cardInfo.name}`
+    $template.querySelector('.card-name').classList.add(cardInfo.color);
+    $template.id = `${cardInfo.name}`;
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
@@ -21,7 +21,7 @@ function renderNormalCard(cardInfo, middle) {
 function renderSpecialCard(cardInfo, middle) {
     const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
-    $template.id = `${cardInfo.name}`
+    $template.id = `${cardInfo.name}`;
 
     switch (cardInfo.type.toLowerCase()) {
         case "go":
@@ -78,7 +78,7 @@ function utilityAndRailroadTemplate($template, cardInfo, middle) {
     } else {
         $template.querySelector('.card-icon').src = `images/water.png`;
     }
-    $template.id = `${cardInfo.name}`
+    $template.id = `${cardInfo.name}`;
     document.querySelector('#cards-parent').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 
@@ -88,4 +88,3 @@ function addClassToMiddle($template, middle) {
         $template.classList.add("middle");
     }
 }
-
