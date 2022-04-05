@@ -1,14 +1,15 @@
 'use strict';
 
-function loseGame(){
-    const gameID = loadFromStorage("gameId");
+function loseGame() {
     const playerName = loadFromStorage("name");
-    _token = {token:loadFromStorage("token")};
-
-    fetchFromServer(`/games/${gameID}/players/${playerName}/bankruptcy`,'POST')
-        .then(() => localStorage.clear())
+    fetchFromServer(`/games/${_gameID}/players/${playerName}/bankruptcy`, 'POST')
+        .then(() => {
+            localStorage.clear();
+            window.location.href = "lose-screen.html";
+        })
         .catch(() => {
             errorHandler("Something went wrong at our side :(");
             localStorage.clear();
+            window.location.href = "lose-screen.html";
         });
 }

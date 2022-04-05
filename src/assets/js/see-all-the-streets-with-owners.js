@@ -1,14 +1,8 @@
 "use strict";
 
-/*load the dom in and then start function init*/
-document.addEventListener('DOMContentLoaded', init);
-
 /*fetch the streets and the players. if player puts input into the form go to function search*/
-function init() {
+function initMap() {
     const streetNames = [];
-    _token = {token: loadFromStorage("token")};
-    _gameID = "dummy";
-
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);

@@ -12,7 +12,7 @@ const _$containers = {
 };
 let _token = null;
 let _gameID = null;
-let  _tiles = null;
+let _tiles = null;
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -21,7 +21,7 @@ function init() {
         initStartScreen();
     } else if (document.querySelector("body").id === "main-screen") {
         renderMainPage();
-    } else if (document.querySelector("body").id === "lose-screen") {
-        loseGame();
+    } else if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
+        initMap();
     }
 }
