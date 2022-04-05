@@ -11,6 +11,9 @@
 .info-container .not-bought {
     background-color: #979797
 }
+.info-container .mortgaged {
+    opacity: 0.4;
+}
 
 .mediterranean {
     grid-area: mediterranean;

@@ -6,6 +6,7 @@ let _$giveUpPopup = "";
 const _$containers = {
     cardsParent: ""
 };
+
 function renderMainPage() {
     _$containers["cardsParent"] = document.querySelector("#cards-parent");
     _$giveUpPopup = document.querySelector("#give-up-popup");
@@ -66,6 +67,9 @@ function getCardById(id) {
     }
     checkPlayerPosition();
     checkIfBought();
+    checkIfMortgaged();
+}
+function checkIfMortgaged() {
 }
 
 function createToShow(id, firstId, lastId) {
@@ -122,8 +126,11 @@ function renderPlayerProperties() {
         if (player) {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
-                if (property !== null) {
-                    $container.querySelector(`.${property.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
+                // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
+                if (!property.mortgage && property.name !== null) {
+                    $container.querySelector(`.${nameToId(property.name)}`).classList.remove("not-bought");
+                } else if (property.mortgage && property.name !== null) {
+                    $container.querySelector(`.${nameToId(property.name)}`).classList.add("mortgaged");
                 }
             });
         }
@@ -169,9 +176,9 @@ function checkPlayerPosition() {
             const playersInfo = response.players;
             playersInfo.forEach(player => {
                 // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
-                if (document.querySelector(`#${player.currentTile}`) !== null && !player.bankrupt) {
-                    document.querySelector(`#${player.currentTile} .player-pos`).classList.remove('hidden');
-                    document.querySelector(`#${player.currentTile} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
+                if (document.querySelector(`#${nameToId(player.currentTile)}`) !== null && !player.bankrupt) {
+                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).classList.remove('hidden');
+                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
                 }
             });
         });
@@ -182,10 +189,20 @@ function checkIfBought() {
     for (const player in playerProperties) {
         if (player) {
             playerProperties[player].forEach(function (property) {
-                if (property !== null) {
-                    document.querySelector(`#${property}`).style.border = "red solid 0.2rem";
-                    document.querySelector(`#${property} .player-bought`).classList.remove("hidden");
-                    document.querySelector(`#${property} .player-bought`).insertAdjacentHTML("beforeend", player);
+                const $propertyCard = document.querySelector(`#${nameToId(property.name)}`);
+                // first statement checks if card is bought, second statement checks if this card is currently rendered in
+                if (property.name !== null && $propertyCard !== null && property.mortgage) {
+                    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
+                    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
+                    $propertyCard.style.border = "orange solid 0.1rem";
+                    $propertyCard.querySelector(`.player-mortgaged`).insertAdjacentHTML("beforeend", `${player}`);
+                    // if its bought but not mortgaged (active)
+                    // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
+                } else if (property.name !== null && $propertyCard !== null) {
+                    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
+                    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
+                    $propertyCard.style.border = "red solid 0.1rem";
+                    $propertyCard.querySelector(`.player-bought`).insertAdjacentHTML("beforeend", `${player}`);
                 }
             });
         }

@@ -24,7 +24,7 @@ function seeIfStreetIsBuyable() {
 //document.querySelector(`#buy-propertie-popup .Auction`).addEventListener('click', auctionPropertie); add this when auction comes to
 function chooseBuyOrAuction()
 {
-    //seeIfStreetIsBuyable();
+    seeIfStreetIsBuyable();
     console.log(loadFromStorage("playerProperties"));
     console.log(loadFromStorage("tiles"));
     document.querySelector(`#buy-propertie-popup .Buy`).addEventListener('click', buyPropertie);
