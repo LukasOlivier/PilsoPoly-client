@@ -1,9 +1,9 @@
 'use strict';
 
 function fetchAllGames() {
-    const gameID = makeID(_$containers["joinInterface"].querySelector("#ID").value);
+    const gameID = makeID(_$interfaces["joinInterface"].querySelector("#ID").value);
     const name = {
-        playerName: _$containers["joinInterface"].querySelector(".name").value.toLowerCase()
+        playerName: _$interfaces["joinInterface"].querySelector(".name").value.toLowerCase()
     };
     try {
         fetchFromServer(`/games?prefix=${_config.prefix}`)
@@ -74,8 +74,8 @@ function fetchNonStartedGames() {
 
 function fillInGameID(e) {
     // hides the pop up, and fills the value from the li in the ID field
-    _$containers["seeAllGamesInterface"].classList.add("hidden");
-    _$containers["joinInterface"].style.opacity = "1";
-    _$containers["joinInterface"].querySelector("#ID").value = e.currentTarget.id;
+    _$interfaces["seeAllGamesInterface"].classList.add("hidden");
+    _$interfaces["joinInterface"].style.opacity = "1";
+    _$interfaces["joinInterface"].querySelector("#ID").value = e.currentTarget.id;
 }
 

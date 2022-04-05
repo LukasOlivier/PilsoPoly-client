@@ -1,9 +1,9 @@
 'use strict';
 
 function getInputValues() {
-    const numberOfPlayers = parseInt(_$containers["createInterface"].querySelector("#amount-of-players").value);
+    const numberOfPlayers = parseInt(_$interfaces["createInterface"].querySelector("#amount-of-players").value);
     const name = {
-        playerName: _$containers["createInterface"].querySelector(".name").value.toLowerCase()
+        playerName: _$interfaces["createInterface"].querySelector(".name").value.toLowerCase()
     };
     const errorMessage = checkInput(numberOfPlayers, name);
     if (errorMessage !== "") {
