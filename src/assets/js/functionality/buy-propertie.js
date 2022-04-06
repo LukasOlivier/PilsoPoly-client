@@ -25,7 +25,6 @@ function updatePlayerProperties(){
 // refresh the page so that the bought tiles automatically update
 function refreshPage(){
     makeBuyPoppupHidden();
-    location.reload();
 }
 
 // make the div where you can push the button buy display none
