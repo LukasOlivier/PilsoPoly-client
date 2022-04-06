@@ -1,3 +1,4 @@
+// check if the currentile is buyable and upload the tile to the local storage
 function seeIfStreetIsBuyable() {
     let currentTileName = null;
     const playerName = loadFromStorage("name");
@@ -11,7 +12,7 @@ function seeIfStreetIsBuyable() {
                     tiles.forEach(street => {
                         if (street.name === currentTileName){
                             if (street.type === "utility" || street.type === "railroad" || street.type === "street"){
-                                document.querySelector(`#buy-propertie-popup`).classList.remove("hidden");
+                                checkIfStreetIsAlreadyBought(currentTileName, playerName);
                             }
                         }
                     });
@@ -20,16 +21,36 @@ function seeIfStreetIsBuyable() {
         });
 }
 
+// check if the street is already bought or not
+function checkIfStreetIsAlreadyBought(currentTileName, playerName){
+    const listOfAllBoughtStreets = loadFromStorage("playerProperties");
+    let boolean = true;
+    for (const player in listOfAllBoughtStreets) {
+        if (player){
+            listOfAllBoughtStreets[player].forEach(propertie => {
+                if (propertie.name === currentTileName){
+                    boolean = false;
+                    document.querySelector(`#buy-propertie-popup`).classList.add("hidden");
+                    if (player !== playerName){
+                        playerNeedsToPayRent();
+                    }
+                }
+            });
+        }
+    }
+    if (boolean === true){
+        chooseBuyOrAuction();
+    }
+}
 
-//document.querySelector(`#buy-propertie-popup .Auction`).addEventListener('click', auctionPropertie); add this when auction comes to
+// choose if you want to buy or if you want to auction
 function chooseBuyOrAuction()
 {
     seeIfStreetIsBuyable();
-    console.log(loadFromStorage("playerProperties"));
-    console.log(loadFromStorage("tiles"));
     document.querySelector(`#buy-propertie-popup .Buy`).addEventListener('click', buyPropertie);
 }
 
+// buy the propertie
 function buyPropertie() {
     const currentTileName = loadFromStorage("currentTileName");
     const playerName = loadFromStorage("name");
@@ -37,13 +58,17 @@ function buyPropertie() {
     updatePlayerProperties();
 }
 
+
+// update the playerpropertie dictionary in the local storage
 function updatePlayerProperties(){
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
-            console.log("het werkt");
         });
     document.querySelector(`#buy-propertie-popup`).classList.add("hidden");
 }
 
 
+function playerNeedsToPayRent(){
+    console.log("pay rent functionality comes here");
+}
