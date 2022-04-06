@@ -2,18 +2,15 @@
 
 let _token = null;
 let _gameID = null;
-let _tiles = null;
 
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded', init);
 
-function init(){
-    if (document.querySelector("h1").id === "start-screen") {
+function init() {
+    if (document.querySelector("body").id === "start-screen") {
         initStartScreen();
-    }
-    else if (document.querySelector("h1").id === "game-screen"){
+    } else if (document.querySelector("body").id === "main-screen") {
         renderMainPage();
-    }
-    else if (document.querySelector("h1").id === "lose-screen"){
-        loseGame();
+    } else if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
+        initMap();
     }
 }

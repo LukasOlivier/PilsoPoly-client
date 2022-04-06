@@ -1,78 +1,55 @@
 "use strict";
-
-let _$startInterface = "";
-let _$createInterface = "";
-let _$joinInterface = "";
-let _$lobbyInterface = "";
-let _$iconInterface = "";
-let _$rulesInterface = "";
-let _$seeAllGamesInterface = "";
-let _$errorMessage = "";
+let _$interfaces = {};
 
 function initStartScreen() {
-    _$startInterface = document.querySelector("#start-interface");
-    _$createInterface = document.querySelector("#create-interface");
-    _$joinInterface = document.querySelector("#join-interface");
-    _$lobbyInterface = document.querySelector("#lobby-interface");
-    _$iconInterface = document.querySelector("#icon-interface");
-    _$rulesInterface = document.querySelector("#rules-interface");
-    _$seeAllGamesInterface = document.querySelector("#see-all-games-interface");
-    _$errorMessage = document.querySelector(".errormessages p");
-
-
+    _$interfaces = {
+        startInterface: document.querySelector("#start-interface"),
+        createInterface: document.querySelector("#create-interface"),
+        joinInterface: document.querySelector("#join-interface"),
+        lobbyInterface: document.querySelector("#lobby-interface"),
+        iconInterface: document.querySelector("#icon-interface"),
+        rulesInterface: document.querySelector("#rules-interface"),
+        seeAllGamesInterface: document.querySelector("#see-all-games-interface"),
+        errorMessage: document.querySelector(".errormessages p"),
+    };
     document.querySelector("#join").addEventListener("click", renderJoin);
     document.querySelector("#create").addEventListener("click", renderCreate);
     document.querySelector("#rules").addEventListener("click", renderRules);
     document.querySelector("#rules-interface .back-button").addEventListener("click", backButton);
-
-    document.querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
-
+    _$interfaces["joinInterface"].querySelector("#show-all-games").addEventListener("click", fetchNonStartedGames);
     document.querySelectorAll('.back-button').forEach(item => {
         item.addEventListener('click', backButton);
-    });
-
-    _$seeAllGamesInterface.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', function (e) {
-            _$seeAllGamesInterface.classList.add("hidden");
-            _$joinInterface.style.opacity = "1";
-            _$joinInterface.querySelector("#ID").value = e.target.innerText;
-        });
     });
 }
 
 function renderJoin() {
-    _$errorMessage.innerHTML = "";
-    _$startInterface.classList.add("hidden");
-    _$createInterface.classList.add("hidden");
-    _$joinInterface.classList.remove("hidden");
-    document.querySelector(".errormessages").classList.remove("hidden");
+    _$interfaces["errorMessage"].innerHTML = "";
+    _$interfaces["errorMessage"].classList.remove("hidden");
+    _$interfaces["startInterface"].classList.add("hidden");
+    _$interfaces["joinInterface"].classList.remove("hidden");
 
     // join button
-    const $joinInterface = document.querySelector("#join-interface");
-    $joinInterface.querySelector(".join-button").addEventListener("click", fetchAllGames);
+    _$interfaces["joinInterface"].querySelector(".join-button").addEventListener("click", fetchAllGames);
 }
 
 function renderCreate() {
-    _$errorMessage.innerHTML = "";
-    _$startInterface.classList.add("hidden");
-    _$joinInterface.classList.add("hidden");
-    _$createInterface.classList.remove("hidden");
-
-    const $createInterface = document.querySelector("#create-interface");
-    $createInterface.querySelector(".join-button").addEventListener("click", checkInput);
+    _$interfaces["errorMessage"].innerHTML = "";
+    _$interfaces["startInterface"].classList.add("hidden");
+    _$interfaces["createInterface"].classList.remove("hidden");
+    _$interfaces["createInterface"].querySelector(".join-button").addEventListener("click", getInputValues);
 }
 
 
 function renderLobby(id, numberOfPlayers, playerNames) {
     // Hide other interfaces for lobby //
-    _$joinInterface.classList.add("hidden");
-    _$createInterface.classList.add("hidden");
-    _$lobbyInterface.classList.remove("hidden");
+    _$interfaces["joinInterface"].classList.add("hidden");
+    _$interfaces["createInterface"].classList.add("hidden");
+    _$interfaces["lobbyInterface"].classList.remove("hidden");
 
-    _$lobbyInterface.querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
-    _$lobbyInterface.querySelector("span").innerText = id; //Display the ID of current game
+    _$interfaces["lobbyInterface"].querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
+    _$interfaces["lobbyInterface"].querySelector("span").innerText = id; //Display the ID of current game
     const playersToJoin = numberOfPlayers - playerNames.length;
-    _$lobbyInterface.querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
+    _$interfaces["lobbyInterface"].querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
     playerNames.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
@@ -81,18 +58,18 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     // this ads a timeout every 1.5s to refresh the lobby
     // when clicking on the back button, this timeout gets removed.
     const timoutID = setTimeout(loadGameDataForLobby, 1500);
-    _$lobbyInterface.querySelector("#back-lobby").addEventListener('click',() => clearTimeout(timoutID));
+    _$interfaces.lobbyInterface.querySelector("#back-lobby").addEventListener('click', () => clearTimeout(timoutID));
 }
 
 function renderIconPicker(e) {
-    _$lobbyInterface.classList.add("hidden");
-    _$iconInterface.classList.remove("hidden");
-    _$iconInterface.querySelectorAll('img').forEach(item => {
+    _$interfaces.lobbyInterface.classList.add("hidden");
+    _$interfaces.iconInterface.classList.remove("hidden");
+    _$interfaces.iconInterface.querySelectorAll('img').forEach(item => {
         item.addEventListener('click', event => {
             const icon = event.target.id;
             // this is the currently selected icon.
-            _$lobbyInterface.classList.remove("hidden");
-            _$iconInterface.classList.add("hidden");
+            _$interfaces.lobbyInterface.classList.remove("hidden");
+            _$interfaces.iconInterface.classList.add("hidden");
             $clickedIcon.src = `assets/media/${icon}.png`;
             document.querySelector(`${previousScreen} button`).innerHTML = `<img src="assets/media/${icon}.png" alt="${icon}" id="${icon}">`;
         });
@@ -100,16 +77,16 @@ function renderIconPicker(e) {
 }
 
 function renderRules() {
-    _$startInterface.classList.add("hidden");
-    _$rulesInterface.classList.remove("hidden");
+    _$interfaces["startInterface"].classList.add("hidden");
+    _$interfaces["rulesInterface"].classList.remove("hidden");
 }
 
 function renderAllAvailableGames(allGames) {
-    _$joinInterface.style.opacity = "0.2";
-    _$seeAllGamesInterface.classList.remove("hidden");
-    // renders all games that are PilsoPoly and that arent started.
+    _$interfaces["joinInterface"].style.opacity = "0.2";
+    _$interfaces["seeAllGamesInterface"].classList.remove("hidden");
+    // renders all games that are PilsoPoly and that haven't started.
     // also makes the li clickable
-    const $ul = _$seeAllGamesInterface.querySelector('ul');
+    const $ul = _$interfaces["seeAllGamesInterface"].querySelector('ul');
     $ul.innerHTML = "";
     allGames.forEach(game => {
         $ul.insertAdjacentHTML("beforeend", `<li id="${game.id}"><p class="gameID">${game.id}</p><p>${game.players.length}/${game.numberOfPlayers}</p></li>`);
@@ -119,10 +96,10 @@ function renderAllAvailableGames(allGames) {
 }
 
 function backButton() {
-    _$rulesInterface.classList.add("hidden");
-    _$createInterface.classList.add("hidden");
-    _$joinInterface.classList.add("hidden");
-    _$lobbyInterface.classList.add("hidden");
-    _$errorMessage.innerHTML = "";
-    _$startInterface.classList.remove("hidden");
+    _$interfaces["startInterface"].classList.remove("hidden");
+    _$interfaces["rulesInterface"].classList.add("hidden");
+    _$interfaces["joinInterface"].classList.add("hidden");
+    _$interfaces["createInterface"].classList.add("hidden");
+    _$interfaces["lobbyInterface"].classList.add("hidden");
+    _$interfaces["errorMessage"].innerHTML = "";
 }

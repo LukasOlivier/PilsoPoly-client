@@ -2,18 +2,16 @@
 
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
-let _$giveUpPopup = "";
-const _$containers = {
-    cardsParent: ""
-};
+let _$containers = {};
+_token = {token: loadFromStorage("token")};
+_gameID = loadFromStorage("gameId");
 
 function renderMainPage() {
-    _$containers["cardsParent"] = document.querySelector("#cards-parent");
-    _$giveUpPopup = document.querySelector("#give-up-popup");
-
-    _token = {token: loadFromStorage("token")};
-    _gameID = "dummy";
-
+    _$containers = {
+        giveUpPopup: document.querySelector("#give-up-popup"),
+        cardsParent: document.querySelector("#cards-parent")
+    };
+    document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
@@ -23,7 +21,7 @@ function renderMainPage() {
     document.querySelector("main button").addEventListener("click", backToCurrentPosition);
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
-    document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
+    document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
 
     getTiles();
     renderPlayerInfo();
@@ -65,7 +63,6 @@ function getCardById(id) {
     }
     checkPlayerPosition();
     checkIfBought();
-    checkIfMortgaged();
 }
 
 function createToShow(id, firstId, lastId) {
@@ -132,22 +129,19 @@ function renderPlayerProperties() {
         }
     }
 }
-
+function showMap(){
+    window.location.href = "see-all-the-streets-with-owners.html";
+}
 function giveUp() {
-    _$giveUpPopup.classList.remove("hidden");
+    _$containers["giveUpPopup"].classList.remove("hidden");
     document.querySelector("section").classList.add("hidden");
 
 }
 
 function giveUpDeny() {
     document.querySelector("section").classList.remove("hidden");
-    _$giveUpPopup.classList.add("hidden");
+    _$containers["giveUpPopup"].classList.add("hidden");
 }
-
-function giveUpConfirm() {
-    window.location.href = "lose-screen.html";
-}
-
 function trade() {
     console.log("trade");
 }
