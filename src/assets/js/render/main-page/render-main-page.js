@@ -12,7 +12,6 @@ function renderMainPage() {
         cardsParent: document.querySelector("#cards-parent")
     };
     document.querySelector("#map").addEventListener("click", showMap);
-    document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("main").addEventListener("wheel", wheelEvent);
@@ -57,13 +56,9 @@ function pollingGameState(){
 function checkGameStates(newState){
     if (newState.currentPlayer !== _currentGameState.currentPlayer) {
         // This means that a turn was ended and its someone else its turn
-
         checkIfPlayerCanRoll(newState)
     }
-}
-
-function endTurn() {
-    console.log("end");
+    console.log(newState)
 }
 
 function renderCards() {
@@ -72,6 +67,7 @@ function renderCards() {
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
+            // we change this tis to getCurrentTileName
             res.players.forEach(function (player) {
                 if (player.name === playerName) {
                     currentTileName = player.currentTile;
@@ -96,7 +92,7 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
-    checkPlayerPosition();
+    checkIfPlayerOnTile();
     checkIfBought();
 }
 
@@ -161,22 +157,6 @@ function renderPlayerProperties() {
         }
     }
 }
-function showMap(){
-    window.location.href = "see-all-the-streets-with-owners.html";
-}
-function giveUp() {
-    _$containers["giveUpPopup"].classList.remove("hidden");
-    document.querySelector("section").classList.add("hidden");
-
-}
-
-function giveUpDeny() {
-    document.querySelector("section").classList.remove("hidden");
-    _$containers["giveUpPopup"].classList.add("hidden");
-}
-function trade() {
-    console.log("trade");
-}
 
 function checkIfPlayerBankrupt(response) {
     response.players.forEach(player => {
@@ -189,7 +169,7 @@ function checkIfPlayerBankrupt(response) {
     });
 }
 
-function checkPlayerPosition() {
+function checkIfPlayerOnTile() {
     fetchFromServer(`/games/${_gameID}`)
         .then(response => {
             const playersInfo = response.players;
@@ -226,4 +206,21 @@ function checkIfBought() {
             });
         }
     }
+}
+
+function showMap(){
+    window.location.href = "see-all-the-streets-with-owners.html";
+}
+function giveUp() {
+    _$containers["giveUpPopup"].classList.remove("hidden");
+    document.querySelector("section").classList.add("hidden");
+
+}
+
+function giveUpDeny() {
+    document.querySelector("section").classList.remove("hidden");
+    _$containers["giveUpPopup"].classList.add("hidden");
+}
+function trade() {
+    console.log("trade");
 }

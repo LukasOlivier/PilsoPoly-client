@@ -1,7 +1,8 @@
 'use strict';
 
 function checkIfPlayerCanRoll(gameState){
-    if (gameState.currentPlayer === _name && gameState.canRoll === true) {
+    const playerName = loadFromStorage("name");
+    if (gameState.currentPlayer === playerName && gameState.canRoll === true) {
         console.log('and you can roll')
         readyToRoll();
         document.querySelector("#roll-dice-open-dialog").classList.remove("disabled");
@@ -20,7 +21,8 @@ function readyToRoll(){
 }
 
 function rollDice(){
-    fetchFromServer(`/games/${_gameID}/players/${_name}/dice`, 'POST')
+    const playerName = loadFromStorage("name");
+    fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
         .then(response => {
             renderCards();
             checkIfRolledTwice(response);
