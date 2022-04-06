@@ -2,7 +2,7 @@
 
 
 function move(value) {
-    const $button = document.querySelector("main button");
+    const $button = document.querySelector("#back-to-current-position button");
     if ($button.classList.contains("hidden")) {
         $button.classList.toggle("hidden");
     }
@@ -46,7 +46,7 @@ function moveRight() {
 }
 
 function backToCurrentPosition() {
-    document.querySelector("main button").classList.toggle("hidden");
+    document.querySelector("#back-to-current-position button").classList.toggle("hidden");
     _tempPlayerPositionID = 0;
     removeTemplate("#cards-parent article");
     getCardById(_playerPositionID);

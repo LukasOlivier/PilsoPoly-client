@@ -1,4 +1,4 @@
-#main-screen .player-properties {
+.player-properties {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-areas:

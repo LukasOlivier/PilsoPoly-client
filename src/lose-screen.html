@@ -15,17 +15,24 @@
     <link rel="stylesheet" href="assets/css/lose-and-win-screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
 
-    <script src="assets/js/initialiser.js"></script>
     <script src="assets/js/config.js"></script>
     <script src="assets/js/helper.js"></script>
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+
+    <script src="assets/js/functionality/get-playboard-tiles.js"></script>
+
+    <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/render/main-page/render-main-page.js"></script>
+    <script src="assets/js/render/main-page/renderCards.js"></script>
+    <script src="assets/js/render/main-page/move-player.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
+
 </head>
-<body class="losing-and-winning-screen" id="losingScreen">
+<body class="losing-and-winning-screen" id="lose-screen">
 <div >
-    <h1 id="lose-screen"><img src="../src/assets/media/loser.png" alt="loser" title="loser"></h1>
+    <h1><img src="../src/assets/media/loser.png" alt="loser" title="loser"></h1>
     <h2>you lost</h2>
     <p>you are very bad</p>
     <a href="../src/start-screen.html">go back to start screen</a>

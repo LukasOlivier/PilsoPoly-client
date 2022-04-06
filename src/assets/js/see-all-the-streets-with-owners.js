@@ -1,13 +1,11 @@
 "use strict";
 
-/*load the dom in and then start function init*/
-document.addEventListener('DOMContentLoaded', init);
-
 /*fetch the streets and the players. if player puts input into the form go to function search*/
-function init() {
+function initMap() {
     const streetNames = [];
     _token = {token: loadFromStorage("token")};
     fetchFromServer(`/games/${loadFromStorage("gameId")}`, 'GET')
+    fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
         });
@@ -24,7 +22,6 @@ function searchStreet(e) {
         runStreets(loadFromStorage("tiles"), streetNames, "");
     }
 }
-
 
 
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
@@ -44,9 +41,7 @@ function runStreets(tiles, streetNames, sort) {
 
 /* fill in the template with the api results*/
 
-//TODO : make other function to create the template.
 function renderStreets(street) {
-    let isBought = false;
     const $template = document.querySelector('.card-template').content.firstElementChild.cloneNode(true);
     $template.querySelector('.name').classList.add(street.color);
     $template.querySelector('.name').innerText = street.name;
@@ -54,19 +49,21 @@ function renderStreets(street) {
     $template.querySelector('.cost').innerText = `Cost: M${street.cost}`;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${street.position}`;
     $template.querySelector('.rent').innerText = `Rent: M${street.position}`;
+    $template.querySelector(`p`).innerText = checkIfBought(street);
+    document.querySelector('#card-container').insertAdjacentHTML("beforeend", $template.outerHTML);
+}
+
+function checkIfBought(street) {
+    let boughtBy = "";
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
         if (player) {
             playerProperties[player].forEach(function (property) {
                 if (property.name === street.name) {
-                    isBought = true;
-                    $template.querySelector(`p`).innerText = "player: " + player;
+                    boughtBy = `Bought by: ${player}`;
                 }
             });
-            if (isBought === false) {
-                $template.querySelector(`p`).innerText = "not bought yet";
-            }
         }
     }
-    document.querySelector('#card-container').insertAdjacentHTML("beforeend", $template.outerHTML);
+    return boughtBy;
 }

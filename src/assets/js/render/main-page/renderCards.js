@@ -23,36 +23,7 @@ function renderSpecialCard(cardInfo, middle) {
     const $template = document.querySelector('main .special-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
     $template.id = `${nameToId(cardInfo.name)}`;
-
-    switch (cardInfo.type.toLowerCase()) {
-        case "go":
-            $template.querySelector("img").src = "images/go.png";
-            break;
-        case "community chest":
-            $template.querySelector("img").src = "images/chest.gif";
-            break;
-        case "chance":
-            $template.querySelector("img").src = "images/chance.png";
-            break;
-        case "luxury tax":
-            $template.querySelector("img").src = "images/luxTax.png";
-            break;
-        case "free parking":
-            $template.querySelector("img").src = "images/parking.png";
-            break;
-        case "jail":
-            $template.querySelector("img").src = "images/jail.png";
-            $template.style.background = "rgb(240,124,28)";
-            break;
-        case "go to jail":
-            $template.querySelector("img").src = "images/police.png";
-            break;
-        case "tax income":
-            $template.querySelector("img").src = "images/incomeTax.png";
-            break;
-        default:
-            return;
-    }
+    $template.querySelector("img").src = `images/${cardInfo.type.toLowerCase()}.png`;
     _$containers["cardsParent"].insertAdjacentHTML("beforeend", $template.outerHTML);
 }
 

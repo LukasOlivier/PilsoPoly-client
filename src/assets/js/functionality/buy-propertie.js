@@ -47,7 +47,7 @@ function checkIfStreetIsAlreadyBought(currentTileName, playerName){
 // choose if you want to buy or if you want to auction
 function chooseBuyOrAuction()
 {
-    console.log("twerkt");
+    seeIfStreetIsBuyable();
     document.querySelector(`#buy-propertie-popup .Buy`).addEventListener('click', buyPropertie);
 }
 
