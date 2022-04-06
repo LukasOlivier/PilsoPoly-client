@@ -23,6 +23,7 @@ function updatePlayerProperties(){
     refreshPage();
 }
 
+// refresh the page so that the bought tiles automatically update
 function refreshPage(){
     makeBuyPoppupHidden();
     location.reload();
