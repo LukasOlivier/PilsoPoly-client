@@ -1,10 +1,10 @@
 // "use strict";
-
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
 _token = {token: loadFromStorage("token")};
-_gameID = loadFromStorage("gameId");
+_gameID = "dummy";
+let _previousGameState = null;
 
 function renderMainPage() {
     _$containers = {
@@ -21,66 +21,59 @@ function renderMainPage() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
-
-
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
-
-    getTiles();
     renderFirstTime();
-
 }
 
-function renderFirstTime(){
+function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(res => {
-            renderPlayerInfo(res);
-            checkIfPlayerBankrupt(res);
-            checkIfPlayerCanRoll(res);
-            _currentGameState = res;
+        .then(currentGameInfo => {
+            renderPlayerInfo(currentGameInfo);
+            checkIfPlayerBankrupt(currentGameInfo);
+            checkIfPlayerCanRoll(currentGameInfo);
+            _previousGameState = currentGameInfo;
             pollingGameState();
-        })
+        });
 }
 
-
-function pollingGameState(){
+function pollingGameState() {
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(res => {
-            console.log(res)
-            const newGameState = res;
-            checkGameStates(newGameState)
-            setTimeout(pollingGameState, 10000)
-        })
+        .then(currentGameInfo => {
+            getTiles(currentGameInfo);
+            checkGameStates(currentGameInfo);
+            checkIfBought(currentGameInfo);
+            checkIfPlayerOnTile(currentGameInfo);
+            setTimeout(pollingGameState, 5000);
+        });
 }
 
-function checkGameStates(newState){
-    if (newState.currentPlayer !== _currentGameState.currentPlayer) {
+function checkGameStates(currentGameInfo) {
+    if (currentGameInfo.currentPlayer !== _previousGameState.currentPlayer) {
         // This means that a turn was ended and its someone else its turn
-        checkIfPlayerCanRoll(newState)
+        checkIfPlayerCanRoll(currentGameInfo);
     }
-    console.log(newState)
 }
 
-function renderCards() {
+function renderCards(currentGameInfo) {
     removeTemplate("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");
-    fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(res => {
-            // we change this tis to getCurrentTileName
-            res.players.forEach(function (player) {
-                if (player.name === playerName) {
-                    currentTileName = player.currentTile;
-                }
-            });
-            loadFromStorage("tiles").forEach(function (tile) {
-                if (tile.name === currentTileName) {
-                    _tempPlayerPositionID = tile.position;
-                    _playerPositionID = tile.position;
-                    getCardById(tile.position);
-                }
-            });
-        });
+    console.log(playerName);
+    // Find the current tile of the player
+    currentGameInfo.players.forEach(function (player) {
+        if (player.name === playerName) {
+            currentTileName = player.currentTile;
+        }
+    });
+    // Find that tile in localStorage
+    loadFromStorage("tiles").forEach(function (tile) {
+        if (tile.name === currentTileName) {
+            _tempPlayerPositionID = tile.position;
+            _playerPositionID = tile.position;
+            getCardById(tile.position);
+        }
+    });
 }
 
 function getCardById(id) {
@@ -92,8 +85,7 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
-    checkIfPlayerOnTile();
-    checkIfBought();
+
 }
 
 function createToShow(id, firstId, lastId) {
@@ -131,86 +123,55 @@ function showCards(cardInfo, middle) {
     }
 }
 
-function renderPlayerInfo(res) {
-    res.players.forEach(function (player) {
+function renderPlayerInfo(currentGameInfo) {
+    currentGameInfo.players.forEach(function (player) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.classList.add(player.name.toLowerCase());
         $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
     });
-    renderPlayerProperties();
 }
 
-function renderPlayerProperties() {
-    const playerProperties = loadFromStorage("playerProperties");
-    for (const player in playerProperties) {
-        if (player) {
-            const $container = document.querySelector(`.${player.toLowerCase()}`);
-            playerProperties[player].forEach(function (property) {
-                // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
-                if (!property.mortgage && property.name !== null) {
-                    $container.querySelector(`.${nameToId(property.name)}`).classList.remove("not-bought");
-                } else if (property.mortgage && property.name !== null) {
-                    $container.querySelector(`.${nameToId(property.name)}`).classList.add("mortgaged");
-                }
-            });
-        }
-    }
+function renderBoughtFooter(property, playerName) {
+    document.querySelector(`.${playerName.toLowerCase()}`).querySelector(`.${property}`).classList.remove("not-bought");
 }
 
-function checkIfPlayerBankrupt(response) {
-    response.players.forEach(player => {
-        if (player.bankrupt) {
-            const $container = document.querySelector(`.${player.name}`);
-            $container.style.opacity = "0.5";
-            $container.querySelector("p").style.color = "red";
-            $container.querySelector("p").innerHTML = `${player.name}: BANKRUPT`;
-        }
-    });
+function renderMortgagedFooter(property, playerName) {
+    document.querySelector(`.${playerName.toLowerCase()}`).querySelector(`.${property}`).classList.remove("not-bought");
+    document.querySelector(`.${playerName.toLowerCase()}`).querySelector(`.${property}`).classList.add("mortgaged");
 }
 
-function checkIfPlayerOnTile() {
-    fetchFromServer(`/games/${_gameID}`)
-        .then(response => {
-            const playersInfo = response.players;
-            playersInfo.forEach(player => {
-                // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
-                if (document.querySelector(`#${nameToId(player.currentTile)}`) !== null && !player.bankrupt) {
-                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).classList.remove('hidden');
-                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
-                }
-            });
-        });
+function renderMortgagedMain($propertyCard, playerName) {
+    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
+    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
+    $propertyCard.style.border = "orange solid 0.1rem";
+    $propertyCard.querySelector(`.player-mortgaged`).innerText = playerName;
 }
 
-function checkIfBought() {
-    const playerProperties = loadFromStorage("playerProperties");
-    for (const player in playerProperties) {
-        if (player) {
-            playerProperties[player].forEach(function (property) {
-                const $propertyCard = document.querySelector(`#${nameToId(property.name)}`);
-                // first statement checks if card is bought, second statement checks if this card is currently rendered in
-                if (property.name !== null && $propertyCard !== null && property.mortgage) {
-                    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
-                    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
-                    $propertyCard.style.border = "orange solid 0.1rem";
-                    $propertyCard.querySelector(`.player-mortgaged`).insertAdjacentHTML("beforeend", `${player}`);
-                    // if its bought but not mortgaged (active)
-                    // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
-                } else if (property.name !== null && $propertyCard !== null) {
-                    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
-                    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
-                    $propertyCard.style.border = "red solid 0.1rem";
-                    $propertyCard.querySelector(`.player-bought`).insertAdjacentHTML("beforeend", `${player}`);
-                }
-            });
-        }
-    }
+function renderBoughtMain($propertyCard, playerName) {
+    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
+    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
+    $propertyCard.style.border = "red solid 0.1rem";
+    $propertyCard.querySelector(`.player-bought`).innerText = playerName;
 }
 
-function showMap(){
+function renderPlayerBankrupt(playerName) {
+    const $container = document.querySelector(`.${playerName}`);
+    $container.style.opacity = "0.5";
+    $container.querySelector("p").style.color = "red";
+    $container.querySelector("p").innerHTML = `${playerName}: BANKRUPT`;
+}
+
+function renderPlayerOnTile(tile, playerName) {
+    document.querySelector(`#${tile} .player-pos`).classList.remove('hidden');
+    document.querySelector(`#${tile} .player-pos`).innerText = playerName;
+}
+
+
+function showMap() {
     window.location.href = "see-all-the-streets-with-owners.html";
 }
+
 function giveUp() {
     _$containers["giveUpPopup"].classList.remove("hidden");
     document.querySelector("section").classList.add("hidden");
@@ -221,6 +182,7 @@ function giveUpDeny() {
     document.querySelector("section").classList.remove("hidden");
     _$containers["giveUpPopup"].classList.add("hidden");
 }
+
 function trade() {
     console.log("trade");
 }
