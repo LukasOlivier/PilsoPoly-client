@@ -7,6 +7,7 @@ function checkIfBought(gameInfo) {
             // in case no properties are bought yet, property is 'null'
             if (property !== null) {
                 const $propertyCard = document.querySelector(`#${nameToId(property.property)}`);
+                // $propertyCard doesn't need to be checked because the footer is always rendered in
                 // Is the card mortgaged? Else render it as bought.
                 if (property.mortgage) {
                     renderMortgagedFooter(nameToId(property.property), player.name.toLowerCase());

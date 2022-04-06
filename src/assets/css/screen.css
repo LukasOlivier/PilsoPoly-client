@@ -23,6 +23,7 @@
 }
 
 #cards-parent article {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     border: black solid 0.1rem;
@@ -325,11 +326,6 @@ header div {
     justify-content: center;
 }
 
-
-/* ======================================================================================================== */
-/* ===================================      PROCEED WITH CAUTION       ==================================== */
-/* ======================================================================================================== */
-
 #cards-parent {
     font-family: Calibri, serif;
     margin-top: 2rem;
@@ -433,9 +429,7 @@ footer .player-balance {
 dialog {
     background-color: #98c5da;
 }
-/*
 
- */
 #cards-parent #jail{
     background-color: rgb(240,124,28);
 }

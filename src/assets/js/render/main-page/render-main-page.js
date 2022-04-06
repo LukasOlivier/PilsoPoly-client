@@ -9,7 +9,8 @@ let _previousGameState = null;
 function renderMainPage() {
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
-        cardsParent: document.querySelector("#cards-parent")
+        cardsParent: document.querySelector("#cards-parent"),
+        rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog")
     };
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
@@ -40,8 +41,8 @@ function pollingGameState() {
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            getTiles(currentGameInfo);
             checkGameStates(currentGameInfo);
+            getTiles(currentGameInfo);
             checkIfBought(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);
             setTimeout(pollingGameState, 5000);
@@ -59,7 +60,6 @@ function renderCards(currentGameInfo) {
     removeTemplate("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");
-    console.log(playerName);
     // Find the current tile of the player
     currentGameInfo.players.forEach(function (player) {
         if (player.name === playerName) {
