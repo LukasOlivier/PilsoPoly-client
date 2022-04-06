@@ -8,7 +8,6 @@ function chooseBuyOrAuction()
 function buyPropertie() {
     const currentTileName = loadFromStorage("currentTileName");
     const playerName = loadFromStorage("name");
-    console.log(currentTileName, playerName);
     fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTileName}`,'POST');
     updatePlayerProperties();
 }

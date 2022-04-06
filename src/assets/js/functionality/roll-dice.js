@@ -40,9 +40,6 @@ function changeDiceRollNumber(text, currentTile, currentTileDescription){
 }
 
 function checkIfRolledTwice(response) {
-    console.log(response.turns.slice(-1)[0].moves);
-    console.log(response.turns.slice(-1)[0].moves[0].tile);
-    console.log(response.turns.slice(-1)[0].moves[0].description);
     const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
     let text = "";
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
