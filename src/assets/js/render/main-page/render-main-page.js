@@ -6,6 +6,7 @@ let _$containers = {};
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
+//TODO remove the token and game id from rendermainpage() without everything falling apart
 function renderMainPage() {
 
     _$containers["cardsParent"] = document.querySelector("#cards-parent");
