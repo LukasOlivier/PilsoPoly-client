@@ -3,15 +3,12 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
+let _currentGameState = null;
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
 //TODO remove the token and game id from rendermainpage() without everything falling apart
 function renderMainPage() {
-
-    _$containers["cardsParent"] = document.querySelector("#cards-parent");
-    _$giveUpPopup = document.querySelector("#give-up-popup");
-
     _token = {token: loadFromStorage("token")};
     _gameID = loadFromStorage("gameId");
 
@@ -29,8 +26,6 @@ function renderMainPage() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
-
-
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
     getTiles();
@@ -55,8 +50,8 @@ function pollingGameState(){
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
-            const newGameState = res;
-            checkGameStates(newGameState);
+            // this is the new game-state
+            checkGameStates(res);
             setTimeout(pollingGameState, 2000);
         });
 }

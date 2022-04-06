@@ -1,4 +1,4 @@
-#buy-propertie-popup{
+#buy-property-popup{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,16 +10,16 @@
     background: rgb(178, 207, 224);
     text-align: center;
 }
-#buy-propertie-popup p,h2{
+#buy-property-popup p,h2{
     margin: 0.5rem;
 }
-#buy-propertie-popup form{
+#buy-property-popup form{
     display: flex;
     justify-content: space-between;
     padding: 0.3rem;
 }
 
-#buy-propertie-popup form button{
+#buy-property-popup form button{
     background: white;
     border: none;
     margin: 0.3rem;

@@ -55,7 +55,7 @@ function seeWhatActionThatNeedsToBeTaken(currentTile, currentTileDescription){
     saveToStorage("currentTileName", currentTile);
     switch (currentTileDescription) {
         case "can buy this property in direct sale":
-            makeBuyPoppupNotHidden();
+            makeBuyPopupNotHidden();
             chooseBuyOrAuction();
             break;
         case "has to go to jail":
