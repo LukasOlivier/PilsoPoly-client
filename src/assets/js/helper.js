@@ -50,3 +50,20 @@ function nameToId(name){
     return name.toLowerCase().replace(/\s/g, "-");
 }
 
+// switch case where all possible actions on the tiles
+function seeWhatActionThatNeedsToBeTaken(currentTile, currentTileDescription){
+    saveToStorage("currentTileName", currentTile);
+    switch (currentTileDescription) {
+        case "can buy this property in direct sale":
+            makeBuyPoppupNotHidden();
+            chooseBuyOrAuction();
+            break;
+        case "has to go to jail":
+            console.log("je moet naar het gevang");
+            break;
+        case "passes 'GO!' and receives 200 for it":
+            console.log("you receive 200 flappen e niffow");
+        default:
+            console.log(currentTileDescription);
+    }
+}

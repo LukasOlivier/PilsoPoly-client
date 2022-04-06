@@ -33,12 +33,11 @@ function renderMainPage() {
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
     getTiles();
-    chooseBuyOrAuction();
     renderFirstTime();
-
 }
 
 function renderFirstTime(){
+    createPlayerProperties();
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
             renderPlayerInfo(res);
@@ -54,7 +53,6 @@ function pollingGameState(){
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
-            console.log(res);
             const newGameState = res;
             checkGameStates(newGameState);
             setTimeout(pollingGameState, 10000);
@@ -66,7 +64,6 @@ function checkGameStates(newState){
         // This means that a turn was ended and its someone else its turn
         checkIfPlayerCanRoll(newState);
     }
-    console.log(newState);
 }
 
 function renderCards() {
@@ -233,4 +230,11 @@ function giveUpDeny() {
 }
 function trade() {
     console.log("trade");
+}
+
+function createPlayerProperties(){
+    fetchFromServer(`/games/${_gameID}`, 'GET')
+        .then(players => {
+            linkPlayersAndStreets(players.players);
+        });
 }
