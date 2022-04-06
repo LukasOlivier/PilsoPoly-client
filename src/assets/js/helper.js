@@ -63,6 +63,10 @@ function seeWhatActionThatNeedsToBeTaken(currentTile, currentTileDescription){
             break;
         case "passes 'GO!' and receives 200 for it":
             console.log("you receive 200 flappen e niffow");
+            break;
+        case "should pay rent":
+            console.log("should pay rent");
+            break;
         default:
             console.log(currentTileDescription);
     }
