@@ -64,7 +64,7 @@ function checkGameStates(newState){
 }
 
 function renderCards() {
-    removeTemplate("#cards-parent article");
+    removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}`, "GET")

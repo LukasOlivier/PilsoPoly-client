@@ -29,10 +29,10 @@ function createCardInfo(property) {
     return info;
 }
 
-function removeTemplate(container) {
-    const $articles = document.querySelectorAll(container);
-    $articles.forEach((article) => {
-        article.remove();
+function removeTemplateContents(container) {
+    const $elements = document.querySelectorAll(container);
+    $elements.forEach((element) => {
+        element.remove();
     });
 }
 

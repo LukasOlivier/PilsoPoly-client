@@ -26,13 +26,13 @@ function searchStreet(e) {
 
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
 function runStreets(tiles, streetNames, sort) {
-    removeTemplate("#card-container article");
+    removeTemplateContents("#card-container article");
     tiles.forEach(street => {
         if (street.name.toLowerCase().includes(sort) && (street.type === "utility" || street.type === "railroad" || street.type === "street")) {
             streetNames.push(street);
         }
     });
-    removeTemplate("#card-template article");
+    removeTemplateContents("#card-template article");
     streetNames.forEach(function (street) {
         renderStreets(street);
     });

@@ -14,6 +14,7 @@ function buyProperty() {
 // update the player property dictionary in the local storage
 function updatePlayerProperties(){
     createPlayerProperties();
+    removeTemplateContents("footer div");
     renderPlayerProperties();
     makeBuyPopupHidden();
 }
