@@ -2,16 +2,17 @@
 
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
-let _$giveUpPopup = "";
-let _currentGameState = null;
+let _$containers = {};
+_token = {token: loadFromStorage("token")};
+_gameID = loadFromStorage("gameId");
+
 function renderMainPage() {
-
-    _$giveUpPopup = document.querySelector("#give-up-popup");
-
-    _token = {token: loadFromStorage("token")};
-    _gameID = loadFromStorage("gameId");
-    _name = loadFromStorage("name")
-
+    _$containers = {
+        giveUpPopup: document.querySelector("#give-up-popup"),
+        cardsParent: document.querySelector("#cards-parent")
+    };
+    document.querySelector("#map").addEventListener("click", showMap);
+    document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("main").addEventListener("wheel", wheelEvent);
@@ -20,7 +21,7 @@ function renderMainPage() {
     document.querySelector("#back-to-current-position button").addEventListener("click", backToCurrentPosition);
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
-    document.querySelector("#give-up-confirm").addEventListener("click", giveUpConfirm);
+    document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
 
 
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
@@ -95,6 +96,8 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
+    checkPlayerPosition();
+    checkIfBought();
 }
 
 function createToShow(id, firstId, lastId) {
@@ -148,28 +151,29 @@ function renderPlayerProperties() {
         if (player) {
             const $container = document.querySelector(`.${player.toLowerCase()}`);
             playerProperties[player].forEach(function (property) {
-                if (property !== null) {
-                    $container.querySelector(`.${property.toLowerCase().replace(/\s/g, "-")}`).classList.remove("not-bought");
+                // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
+                if (!property.mortgage && property.name !== null) {
+                    $container.querySelector(`.${nameToId(property.name)}`).classList.remove("not-bought");
+                } else if (property.mortgage && property.name !== null) {
+                    $container.querySelector(`.${nameToId(property.name)}`).classList.add("mortgaged");
                 }
             });
         }
     }
 }
-
+function showMap(){
+    window.location.href = "see-all-the-streets-with-owners.html";
+}
 function giveUp() {
-    _$giveUpPopup.classList.remove("hidden");
+    _$containers["giveUpPopup"].classList.remove("hidden");
     document.querySelector("section").classList.add("hidden");
+
 }
 
 function giveUpDeny() {
     document.querySelector("section").classList.remove("hidden");
-    _$giveUpPopup.classList.add("hidden");
+    _$containers["giveUpPopup"].classList.add("hidden");
 }
-
-function giveUpConfirm() {
-    window.location.href = "lose-screen.html";
-}
-
 function trade() {
     console.log("trade");
 }
@@ -185,4 +189,41 @@ function checkIfPlayerBankrupt(response) {
     });
 }
 
+function checkPlayerPosition() {
+    fetchFromServer(`/games/${_gameID}`)
+        .then(response => {
+            const playersInfo = response.players;
+            playersInfo.forEach(player => {
+                // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
+                if (document.querySelector(`#${nameToId(player.currentTile)}`) !== null && !player.bankrupt) {
+                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).classList.remove('hidden');
+                    document.querySelector(`#${nameToId(player.currentTile)} .player-pos`).insertAdjacentHTML("beforeend", `${player.name} `);
+                }
+            });
+        });
+}
 
+function checkIfBought() {
+    const playerProperties = loadFromStorage("playerProperties");
+    for (const player in playerProperties) {
+        if (player) {
+            playerProperties[player].forEach(function (property) {
+                const $propertyCard = document.querySelector(`#${nameToId(property.name)}`);
+                // first statement checks if card is bought, second statement checks if this card is currently rendered in
+                if (property.name !== null && $propertyCard !== null && property.mortgage) {
+                    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
+                    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
+                    $propertyCard.style.border = "orange solid 0.1rem";
+                    $propertyCard.querySelector(`.player-mortgaged`).insertAdjacentHTML("beforeend", `${player}`);
+                    // if its bought but not mortgaged (active)
+                    // "property.name !== null" wordt dubbel gecheckt omdat er anders teveel genest wordt volgens sonar
+                } else if (property.name !== null && $propertyCard !== null) {
+                    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
+                    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
+                    $propertyCard.style.border = "red solid 0.1rem";
+                    $propertyCard.querySelector(`.player-bought`).insertAdjacentHTML("beforeend", `${player}`);
+                }
+            });
+        }
+    }
+}

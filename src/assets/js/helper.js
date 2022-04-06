@@ -21,6 +21,9 @@ function createCardInfo(property) {
             info.name = tile.name;
             info.cost = tile.cost;
             info.rent = tile.rent;
+            info.mortgage = property.mortgage;
+            info.houseCount = property.houseCount;
+            info.hotelCount = property.hotelCount;
         }
     });
     return info;
@@ -35,10 +38,13 @@ function removeTemplate(container) {
 
 // This function finds a game with a specific ID in an array of games.
 function findGameByID(allGames, id){
-    for (let game of allGames){
+    for (const game of allGames){
         if (game.id === id){
             return game;
         }
     }
     throw new Error("There is no game with this code(2)");
+}
+function nameToId(name){
+    return name.toLowerCase().replace(/\s/g, "-");
 }
