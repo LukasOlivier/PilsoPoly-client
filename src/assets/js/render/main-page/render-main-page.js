@@ -11,8 +11,6 @@ function renderMainPage() {
     _$containers["cardsParent"] = document.querySelector("#cards-parent");
     _$giveUpPopup = document.querySelector("#give-up-popup");
 
-    _token = {token: loadFromStorage("token")};
-    _gameID = loadFromStorage("gameId");
 
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
