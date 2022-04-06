@@ -54,7 +54,7 @@ function renderStreets(street) {
 }
 
 function checkIfBought(street) {
-    let boughtBy = "";
+    let boughtBy = "not bought yet";
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
         if (player) {

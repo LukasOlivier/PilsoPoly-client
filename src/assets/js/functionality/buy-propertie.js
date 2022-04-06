@@ -25,6 +25,7 @@ function updatePlayerProperties(){
 
 function refreshPage(){
     makeBuyPoppupHidden();
+    location.reload();
 }
 
 // make the div where you can push the button buy display none
