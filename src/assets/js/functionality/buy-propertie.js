@@ -30,7 +30,8 @@ function checkIfStreetIsAlreadyBought(currentTileName, playerName){
             listOfAllBoughtStreets[player].forEach(propertie => {
                 if (propertie.name === currentTileName){
                     boolean = false;
-                    document.querySelector(`#buy-propertie-popup`).classList.add("hidden");
+                    console.log("hidden");
+                    makeBuyPoppupHidden();
                     if (player !== playerName){
                         playerNeedsToPayRent();
                     }
@@ -46,7 +47,7 @@ function checkIfStreetIsAlreadyBought(currentTileName, playerName){
 // choose if you want to buy or if you want to auction
 function chooseBuyOrAuction()
 {
-    seeIfStreetIsBuyable();
+    console.log("twerkt");
     document.querySelector(`#buy-propertie-popup .Buy`).addEventListener('click', buyPropertie);
 }
 
@@ -65,10 +66,15 @@ function updatePlayerProperties(){
         .then(players => {
             linkPlayersAndStreets(players.players);
         });
-    document.querySelector(`#buy-propertie-popup`).classList.add("hidden");
+    makeBuyPoppupHidden();
 }
 
+function makeBuyPoppupHidden(){
+    document.querySelector(`#buy-propertie-popup`).classList.add("hidden");
+}
 
 function playerNeedsToPayRent(){
     console.log("pay rent functionality comes here");
 }
+
+
