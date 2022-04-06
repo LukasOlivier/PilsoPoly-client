@@ -51,12 +51,13 @@ function renderFirstTime(){
 
 
 function pollingGameState(){
+    console.log("polling")
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
             const newGameState = res;
             checkGameStates(newGameState);
-            setTimeout(pollingGameState, 10000);
+            setTimeout(pollingGameState, 2000);
         });
 }
 
@@ -100,8 +101,6 @@ function getCardById(id) {
     }
     checkIfPlayerOnTile();
     checkIfBought();
-}
-function checkIfMortgaged() {
 }
 
 function createToShow(id, firstId, lastId) {
