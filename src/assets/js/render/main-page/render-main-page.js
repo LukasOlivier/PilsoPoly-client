@@ -4,7 +4,7 @@ let _tempPlayerPositionID = null;
 let _$containers = {};
 _token = {token: loadFromStorage("token")};
 _gameID = "dummy";
-let _previousGameState = null;
+let _gameState = null;
 
 function renderMainPage() {
     _$containers = {
@@ -32,7 +32,7 @@ function renderFirstTime() {
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
-            _previousGameState = currentGameInfo;
+            _gameState = currentGameInfo;
             pollingGameState();
         });
 }
@@ -45,19 +45,19 @@ function pollingGameState() {
             getTiles(currentGameInfo);
             checkIfBought(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);
-            setTimeout(pollingGameState, 5000);
+            setTimeout(pollingGameState, 100000);
         });
 }
 
-function checkGameStates(currentGameInfo) {
-    if (currentGameInfo.currentPlayer !== _previousGameState.currentPlayer) {
+function checkGameStates(newGameState) {
+    if (newGameState.currentPlayer !== _gameState.currentPlayer) {
         // This means that a turn was ended and its someone else its turn
-        checkIfPlayerCanRoll(currentGameInfo);
+        checkIfPlayerCanRoll(newGameState);
     }
 }
 
 function renderCards(currentGameInfo) {
-    removeTemplate("#cards-parent article");
+    removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");
     // Find the current tile of the player
@@ -85,7 +85,9 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
-
+    // We also update these here because we don't want to wait for polling while scrolling (user experience)
+    checkIfBought(_gameState);
+    checkIfPlayerOnTile(_gameState);
 }
 
 function createToShow(id, firstId, lastId) {

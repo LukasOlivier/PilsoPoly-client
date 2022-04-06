@@ -3,6 +3,8 @@
 /*fetch the streets and the players. if player puts input into the form go to function search*/
 function initMap() {
     const streetNames = [];
+    _token = {token: loadFromStorage("token")};
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, 'GET')
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
@@ -24,13 +26,13 @@ function searchStreet(e) {
 
 /*filter on go, community, chance, Jail,Tax, Parking and carts that do not have the given letters in it*/
 function runStreets(tiles, streetNames, sort) {
-    removeTemplate("#card-container article");
+    removeTemplateContents("#card-container article");
     tiles.forEach(street => {
-        if (street.name.toLowerCase().includes(sort) && (street.type !== "utility" || street.type !== "railroad") && (street.type === "street")) {
+        if (street.name.toLowerCase().includes(sort) && (street.type === "utility" || street.type === "railroad" || street.type === "street")) {
             streetNames.push(street);
         }
     });
-    removeTemplate("#card-template article");
+    removeTemplateContents("#card-template article");
     streetNames.forEach(function (street) {
         renderStreets(street);
     });
@@ -52,7 +54,7 @@ function renderStreets(street) {
 }
 
 function checkIfBought(street) {
-    let boughtBy = "";
+    let boughtBy = "not bought yet";
     const playerProperties = loadFromStorage("playerProperties");
     for (const player in playerProperties) {
         if (player) {

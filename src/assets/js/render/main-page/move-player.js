@@ -16,7 +16,7 @@ function move(value) {
         _tempPlayerPositionID = 39;
     }
 
-    removeTemplate("#cards-parent article");
+    removeTemplateContents("#cards-parent article");
     getCardById(_tempPlayerPositionID);
 }
 
@@ -48,6 +48,6 @@ function moveRight() {
 function backToCurrentPosition() {
     document.querySelector("#back-to-current-position button").classList.toggle("hidden");
     _tempPlayerPositionID = 0;
-    removeTemplate("#cards-parent article");
+    removeTemplateContents("#cards-parent article");
     getCardById(_playerPositionID);
 }
