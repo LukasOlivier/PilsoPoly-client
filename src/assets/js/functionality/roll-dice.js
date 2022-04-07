@@ -3,7 +3,7 @@
 function checkIfPlayerCanRoll(gameState){
     const playerName = loadFromStorage("name");
     if (gameState.currentPlayer === playerName && gameState.canRoll === true) {
-        console.log('and you can roll')
+        console.log('and you can roll');
         readyToRoll();
         document.querySelector("#roll-dice-open-dialog").classList.remove("disabled");
     } else {
@@ -14,10 +14,10 @@ function checkIfPlayerCanRoll(gameState){
 function readyToRoll(){
     document.querySelector("#roll-dice-open-dialog").addEventListener('click', () => {
         document.querySelector("#roll-dice-dialog").showModal();
-    })
+    });
     document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
         document.querySelector("#roll-dice-dialog").close();
-    })
+    });
 }
 
 function rollDice(){
@@ -30,12 +30,13 @@ function rollDice(){
         .catch(errorHandler);
 }
 
-function changeDiceRollNumber(text){
+function changeDiceRollNumber(text, currentTile, currentTileDescription){
     document.querySelector('#roll-dice-dialog p').innerText = text;
     document.querySelector("#location").innerText = 'You landed at ' + _playerPositionID;
-    console.log(_tempPlayerPositionID)
+    console.log(_tempPlayerPositionID);
     document.querySelector("#cancel-roll-dice").innerText = "Oké";
     document.querySelector("#roll-dice").classList.add("hidden");
+    seeWhatActionThatNeedsToBeTaken(currentTile, currentTileDescription);
 }
 
 function checkIfRolledTwice(response) {
@@ -43,10 +44,10 @@ function checkIfRolledTwice(response) {
     let text = "";
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
         text = "You rolled a double " + response.lastDiceRoll[0] + ". You can throw again!";
-        changeDiceRollNumber(text);
+        changeDiceRollNumber(text, response.turns.slice(-1)[0].moves[0].tile, response.turns.slice(-1)[0].moves[0].description);
     } else {
         document.querySelector("#roll-dice-open-dialog").classList.add("disabled");
         text = "You threw " + totalRolled + "!";
-        changeDiceRollNumber(text);
+        changeDiceRollNumber(text, response.turns.slice(-1)[0].moves[0].tile, response.turns.slice(-1)[0].moves[0].description);
     }
 }

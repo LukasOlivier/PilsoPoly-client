@@ -3,10 +3,15 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
+let _currentGameState = null;
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
+//TODO remove the token and game id from rendermainpage() without everything falling apart
 function renderMainPage() {
+    _token = {token: loadFromStorage("token")};
+    _gameID = loadFromStorage("gameId");
+
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
         cardsParent: document.querySelector("#cards-parent")
@@ -21,16 +26,14 @@ function renderMainPage() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
-
-
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
 
     getTiles();
     renderFirstTime();
-
 }
 
 function renderFirstTime(){
+    createPlayerProperties();
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
             renderPlayerInfo(res);
@@ -38,31 +41,30 @@ function renderFirstTime(){
             checkIfPlayerCanRoll(res);
             _currentGameState = res;
             pollingGameState();
-        })
+        });
 }
 
 
 function pollingGameState(){
+    console.log("polling")
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(res => {
-            console.log(res)
-            const newGameState = res;
-            checkGameStates(newGameState)
-            setTimeout(pollingGameState, 10000)
-        })
+            // this is the new game-state
+            checkGameStates(res);
+            setTimeout(pollingGameState, 2000);
+        });
 }
 
 function checkGameStates(newState){
     if (newState.currentPlayer !== _currentGameState.currentPlayer) {
         // This means that a turn was ended and its someone else its turn
-        checkIfPlayerCanRoll(newState)
+        checkIfPlayerCanRoll(newState);
     }
-    console.log(newState)
 }
 
 function renderCards() {
-    removeTemplate("#cards-parent article");
+    removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}`, "GET")
@@ -223,4 +225,11 @@ function giveUpDeny() {
 }
 function trade() {
     console.log("trade");
+}
+
+function createPlayerProperties(){
+    fetchFromServer(`/games/${_gameID}`, 'GET')
+        .then(players => {
+            linkPlayersAndStreets(players.players);
+        });
 }

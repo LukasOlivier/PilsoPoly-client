@@ -8,12 +8,18 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700%7COswald" rel="stylegsheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo" />
+
     <link href="https://fonts.googleapis.com/css?family=Cardo:400,700%7COswald" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo"/>
+
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
+    <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
 
 
     <script src="assets/js/config.js"></script>
@@ -29,7 +35,9 @@
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
+    <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
+
 
 
 
@@ -49,6 +57,16 @@
 </header>
 
 <main>
+    <div id="buy-property-popup" class="hidden">
+        <article>
+            <h2>Title</h2>
+            <p>Do you want to buy this property, or let fate decide?</p>
+        </article>
+        <form action="#">
+            <button type="button" class="Buy" >Buy</button>
+            <button type="button" class="Auction">Auction</button>
+        </form>
+    </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
         <p>This will turn over all your assest to your oldest debtor and yield.</p>
