@@ -4,7 +4,7 @@
 function initMap() {
     const streetNames = [];
     _token = {token: loadFromStorage("token")};
-    fetchFromServer(`/games/${loadFromStorage("gameId")}`, 'GET')
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, 'GET');
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
