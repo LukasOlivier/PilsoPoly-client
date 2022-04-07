@@ -51,23 +51,24 @@ function nameToId(name){
 }
 
 // switch case where all possible actions on the tiles
-function seeWhatActionThatNeedsToBeTaken(currentTile, currentTileDescription){
-    saveToStorage("currentTileName", currentTile);
-    switch (currentTileDescription) {
-        case "can buy this property in direct sale":
-            makeBuyPopupNotHidden();
-            chooseBuyOrAuction();
-            break;
-        case "has to go to jail":
-            console.log("je moet naar het gevang");
-            break;
-        case "passes 'GO!' and receives 200 for it":
-            console.log("you receive 200 flappen e niffow");
-            break;
-        case "should pay rent":
-            console.log("should pay rent");
-            break;
-        default:
-            console.log(currentTileDescription);
-    }
+function seeWhatActionThatNeedsToBeTaken(lastMove,currentTile){
+    lastMove.forEach(move => {
+        switch (move.description) {
+            case "can buy this property in direct sale":
+                console.log("buy?");
+                makeBuyPopupNotHidden();
+                break;
+            case "has to go to jail":
+                console.log("je moet naar het gevang");
+                break;
+            case "passes 'GO!' and receives 200 for it":
+                console.log("you receive 200 flappen e niffow");
+                break;
+            case "should pay rent":
+                console.log("should pay rent");
+                break;
+            default:
+                console.log(move.description);
+        }
+    });
 }

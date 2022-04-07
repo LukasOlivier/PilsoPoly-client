@@ -23,6 +23,7 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
+    document.querySelector(`#buy`).addEventListener('click', buyProperty);
     renderFirstTime();
 }
 
@@ -43,13 +44,16 @@ function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             checkGameStates(currentGameInfo);
-            getTiles(currentGameInfo);
-            checkIfBought(currentGameInfo);
+            _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
         });
 }
 
 function checkGameStates(newGameState) {
+    if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+        checkIfBought(newGameState);
+        checkIfPlayerOnTile(newGameState);
+    }
     if (newGameState.currentPlayer !== _gameState.currentPlayer) {
         // This means that a turn was ended and its someone else its turn
         checkIfPlayerCanRoll(newGameState);
@@ -85,7 +89,7 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
-    // We also update these here because we don't want to wait for polling while scrolling (user experience) and the
+    // We also update these here because we don't want to wait for polling while scrolling (user experience)
     checkIfBought(_gameState);
     checkIfPlayerOnTile(_gameState);
 }
@@ -147,18 +151,15 @@ function renderMortgagedMain($propertyCard, playerName) {
     $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
     $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
     $propertyCard.style.border = "orange solid 0.1rem";
-    if($propertyCard.querySelector(`.player-mortgaged`).innerText !== playerName){
-        $propertyCard.querySelector(`.player-mortgaged`).insertAdjacentHTML = playerName;
-    }
+    $propertyCard.querySelector(`.player-mortgaged span`).innerText = playerName;
+
 }
 
 function renderBoughtMain($propertyCard, playerName) {
     $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
     $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
     $propertyCard.style.border = "red solid 0.1rem";
-    if($propertyCard.querySelector(`.player-bought`).innerText !== playerName){
-        $propertyCard.querySelector(`.player-bought`).insertAdjacentHTML = playerName;
-    }
+    $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
 }
 
 function renderPlayerBankrupt(playerName) {
@@ -170,9 +171,9 @@ function renderPlayerBankrupt(playerName) {
 
 function renderPlayerOnTile(tile, playerName) {
     document.querySelector(`#${tile} .player-pos`).classList.remove('hidden');
-    const playersOnTile = document.querySelector(`#${tile} .player-pos`).innerText;
-    if(!playersOnTile.includes(playerName)){
-        document.querySelector(`#${tile} .player-pos`).insertAdjacentHTML("beforeend",`${playerName} `);
+    const playersOnTile = document.querySelector(`#${tile} .player-pos span`).innerText.toLowerCase();
+    if (!playersOnTile.includes(playerName)) {
+        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName} `);
     }
 }
 
