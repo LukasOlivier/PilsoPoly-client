@@ -45,8 +45,7 @@ function pollingGameState() {
             checkGameStates(currentGameInfo);
             getTiles(currentGameInfo);
             checkIfBought(currentGameInfo);
-            checkIfPlayerOnTile(currentGameInfo);
-            setTimeout(pollingGameState, 100000);
+            setTimeout(pollingGameState, 2000);
         });
 }
 
@@ -86,7 +85,7 @@ function getCardById(id) {
             showCards(loadFromStorage("tiles")[cardId], false);
         }
     }
-    // We also update these here because we don't want to wait for polling while scrolling (user experience)
+    // We also update these here because we don't want to wait for polling while scrolling (user experience) and the
     checkIfBought(_gameState);
     checkIfPlayerOnTile(_gameState);
 }
