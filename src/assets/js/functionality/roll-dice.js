@@ -24,7 +24,7 @@ function rollDice(){
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
         .then(response => {
-            renderCards();
+            renderCards(response);
             checkIfRolledTwice(response);
         })
         .catch(errorHandler);

@@ -3,7 +3,7 @@ let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
 _token = {token: loadFromStorage("token")};
-_gameID = "dummy";
+_gameID = loadFromStorage("gameId");
 let _gameState = null;
 
 function renderMainPage() {
@@ -32,6 +32,7 @@ function renderFirstTime() {
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
+            getTiles(currentGameInfo);
             _gameState = currentGameInfo;
             pollingGameState();
         });
@@ -147,14 +148,18 @@ function renderMortgagedMain($propertyCard, playerName) {
     $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
     $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
     $propertyCard.style.border = "orange solid 0.1rem";
-    $propertyCard.querySelector(`.player-mortgaged`).innerText = playerName;
+    if($propertyCard.querySelector(`.player-mortgaged`).innerText !== playerName){
+        $propertyCard.querySelector(`.player-mortgaged`).insertAdjacentHTML = playerName;
+    }
 }
 
 function renderBoughtMain($propertyCard, playerName) {
     $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
     $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
     $propertyCard.style.border = "red solid 0.1rem";
-    $propertyCard.querySelector(`.player-bought`).innerText = playerName;
+    if($propertyCard.querySelector(`.player-bought`).innerText !== playerName){
+        $propertyCard.querySelector(`.player-bought`).insertAdjacentHTML = playerName;
+    }
 }
 
 function renderPlayerBankrupt(playerName) {
@@ -166,7 +171,10 @@ function renderPlayerBankrupt(playerName) {
 
 function renderPlayerOnTile(tile, playerName) {
     document.querySelector(`#${tile} .player-pos`).classList.remove('hidden');
-    document.querySelector(`#${tile} .player-pos`).innerText = playerName;
+    const playersOnTile = document.querySelector(`#${tile} .player-pos`).innerText;
+    if(!playersOnTile.includes(playerName)){
+        document.querySelector(`#${tile} .player-pos`).insertAdjacentHTML("beforeend",`${playerName} `);
+    }
 }
 
 
