@@ -2,18 +2,21 @@
     color: limegreen;
     margin-top: auto;
     text-align: center;
+    font-family: "Oswald", serif;
 }
 
 .player-bought {
     margin-top: auto;
     color: red;
     text-align: center;
+    font-family: "Oswald", serif;
 }
 
 .player-mortgaged {
     margin-top: auto;
     color: orange;
     text-align: center;
+    font-family: "Oswald", serif;
 }
 
 .info-container p {
@@ -23,6 +26,7 @@
 }
 
 #cards-parent article {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     border: black solid 0.1rem;
@@ -175,7 +179,7 @@ header button {
     margin-right: auto;
 }
 
-header img:hover, button:hover{
+header img:hover, button:hover {
     filter: drop-shadow(0 0 0.5rem #222);
     transform: scale(1.1);
     cursor: pointer;
@@ -325,11 +329,6 @@ header div {
     justify-content: center;
 }
 
-
-/* ======================================================================================================== */
-/* ===================================      PROCEED WITH CAUTION       ==================================== */
-/* ======================================================================================================== */
-
 #cards-parent {
     font-family: Calibri, serif;
     margin-top: 2rem;
@@ -427,17 +426,16 @@ footer .player-balance {
     display: flex;
     justify-content: space-around;
 }
+
 /* ======================================================================================================== */
 /* ===================================        Dialog css (Robin)       ==================================== */
 /* ======================================================================================================== */
 dialog {
     background-color: #98c5da;
 }
-/*
 
- */
-#cards-parent #jail{
-    background-color: rgb(240,124,28);
+#cards-parent #jail {
+    background-color: rgb(240, 124, 28);
 }
 
 .PURPLE {

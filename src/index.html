@@ -13,7 +13,8 @@
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
-    <link rel="stylesheet" href="assets/css/grid-template-properties.css">git
+    <link rel="stylesheet" href="assets/css/grid-template-properties.css">
+    <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
 
 
     <script src="assets/js/config.js"></script>
@@ -26,11 +27,12 @@
     <script src="assets/js/functionality/roll-dice.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/functionality/gameChecks.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
+    <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
-
 
 
 </head>
@@ -49,6 +51,16 @@
 </header>
 
 <main>
+    <div id="buy-property-popup" class="hidden">
+        <article>
+            <h2>Title</h2>
+            <p>Do you want to buy this property, or let fate decide?</p>
+        </article>
+        <form action="#">
+            <button type="button" id="buy">Buy</button>
+            <button type="button" id="auction">Auction</button>
+        </form>
+    </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
         <p>This will turn over all your assest to your oldest debtor and yield.</p>
@@ -89,16 +101,16 @@
                     <p class="price-house"></p>
                     <p class="mortgage"></p>
                     <p class="price "></p>
-                    <p class="player-pos hidden">Occupied by: </p>
-                    <p class="player-bought hidden">Bought by: </p>
-                    <p class="player-mortgaged hidden">Mortgaged by: </p>
+                    <p class="player-pos hidden">Occupied by: <span></span></p>
+                    <p class="player-bought hidden">Bought by: <span></span></p>
+                    <p class="player-mortgaged hidden">Mortgaged by: <span></span></p>
                 </article>
             </template>
 
             <template class="special-card-template">
                 <article class="special-card">
                     <img src="#" class="card-icon" alt="card-icon" title="card-icon">
-                    <p class="player-pos hidden">Occupied by: </p>
+                    <p class="player-pos hidden">Occupied by: <span></span></p>
                 </article>
             </template>
 
@@ -109,9 +121,9 @@
                     <p class="rent">4 or 5 times the dice roll</p>
                     <p class="mortgage"></p>
                     <p class="price"></p>
-                    <p class="player-pos hidden">Occupied by: </p>
-                    <p class="player-bought hidden">Bought by: </p>
-                    <p class="player-mortgaged hidden">Mortgaged by: </p>
+                    <p class="player-pos hidden">Occupied by: <span></span></p>
+                    <p class="player-bought hidden">Bought by: <span></span></p>
+                    <p class="player-mortgaged hidden">Mortgaged by: <span></span></p>
                 </article>
             </template>
 
@@ -119,11 +131,12 @@
                 <article class="railroad-card">
                     <h3 class="card-name"></h3>
                     <img src="" alt="card-icon" title="card-icon" class="card-icon">
+                    <p class="rent"></p>
                     <p class="mortgage"></p>
                     <p class="price"></p>
-                    <p class="player-pos hidden">Occupied by: </p>
-                    <p class="player-bought hidden">Bought by: </p>
-                    <p class="player-mortgaged hidden">Mortgaged by: </p>
+                    <p class="player-pos hidden">Occupied by: <span></span></p>
+                    <p class="player-bought hidden">Bought by: <span></span></p>
+                    <p class="player-mortgaged hidden">Mortgaged by: <span></span></p>
                 </article>
             </template>
 
