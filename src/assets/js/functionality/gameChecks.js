@@ -16,6 +16,7 @@ function checkGameStates(newGameState) {
         checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkIfPlayerCanRoll(newGameState);
+        checkPlayerBalance(newGameState);
     }
 }
 
@@ -42,7 +43,14 @@ function checkIfBought(gameInfo) {
                     renderBoughtMain($propertyCard, player.name);
                 }
             }
+
         });
+    });
+}
+
+function checkPlayerBalance(gameInfo){
+    gameInfo.players.forEach(function (player) {
+        document.querySelector(`.${player.name} .player-balance`).innerText = `${player.name}: ${player.money}`;
     });
 }
 

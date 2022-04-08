@@ -51,7 +51,7 @@ function nameToId(name){
 }
 
 // switch case where all possible actions on the tiles
-function seeWhatActionThatNeedsToBeTaken(lastMove,currentTile){
+function seeWhatActionThatNeedsToBeTaken(lastMove){
     lastMove.forEach(move => {
         switch (move.description) {
             case "can buy this property in direct sale":

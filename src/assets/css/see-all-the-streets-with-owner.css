@@ -30,8 +30,8 @@ article h2 {
     color: white;
     font-family: "Oswald", serif;
 }
-article p, li{
-    font-family: "Oswald", serif;
+li{
+    padding: 0.7rem
 }
 article .player-mortgaged{
     background: rgba(255, 165, 0, 0.5);

@@ -47,20 +47,10 @@ function renderStreets(street) {
     $template.id = nameToId(street.name);
     $template.querySelector('.name').classList.add(street.color);
     $template.querySelector('.name').insertAdjacentHTML("afterbegin",street.name);
-    const $icon = $template.querySelector('.icon');
-    if (street.name.includes("RR")) {
-        $icon.src = `images/railroad.png`;
-    } else if (street.name.includes("Electric")) {
-        $icon.src = `images/electric.png`;
-    } else if (street.name.includes("Water")) {
-        $icon.src = `images/water.png`;
-    }else{
-        // TODO: Haal het aantal huisjes uit de API en pas de afbeelding aan
-        $icon.src = `images/4houses.png`;
-        $icon.classList.add("houses");
-    }
-
+    $template.querySelector('.mortgage').innerText = `Mortgage ${street.mortgage}`;
     $template.querySelector('.price').innerText = `Cost: M${street.cost}`;
     $template.querySelector('.rent').innerText = `Rent: ${street.rent}`;
+    $template.querySelector('.position').innerText = `Position: ${street.position}`;
+
     document.querySelector('#card-container').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
