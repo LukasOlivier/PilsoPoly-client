@@ -17,6 +17,7 @@ function checkGameStates(newGameState) {
         checkIfPlayerOnTile(newGameState);
         checkIfPlayerCanRoll(newGameState);
         checkPlayerBalance(newGameState);
+        checkIfPlayerNeedsToPayRent(newGameState);
     }
 }
 

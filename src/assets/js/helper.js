@@ -52,6 +52,9 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(lastMove){
+    console.log(lastMove);
+    console.log(lastMove[lastMove.length - 1].description);
+    console.log(lastMove[lastMove.length - 1].tile);
     lastMove.forEach(move => {
         switch (move.description) {
             case "can buy this property in direct sale":
@@ -65,10 +68,29 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 console.log("you receive 200 flappen e niffow");
                 break;
             case "should pay rent":
-                console.log("should pay rent");
+                pollingGameState();
                 break;
             default:
                 console.log(move.description);
         }
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
