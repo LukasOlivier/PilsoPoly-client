@@ -1,8 +1,10 @@
 function checkIfPlayerNeedsToPayRent(gameInfo){
-    const discriptionOfLastMove = gameInfo.turns.slice(-1)[0].moves;
-    if (discriptionOfLastMove[discriptionOfLastMove.length - 1].description === 'should pay rent'){
-        makeListOfAllStreetsThatTheLocalPlayerOwnes(gameInfo);
-    };
+    if (gameInfo.turns.length !== 0){
+        const discriptionOfLastMove = gameInfo.turns.slice(-1)[0].moves;
+        if (discriptionOfLastMove[discriptionOfLastMove.length - 1].description === 'should pay rent'){
+            makeListOfAllStreetsThatTheLocalPlayerOwnes(gameInfo);
+        };
+    }
 }
 
 function makeListOfAllStreetsThatTheLocalPlayerOwnes(gameInfo){
