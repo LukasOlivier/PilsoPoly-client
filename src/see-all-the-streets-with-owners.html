@@ -16,6 +16,8 @@
 
     <script src="assets/js/helper.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
+    <script src="assets/js/functionality/roll-dice.js"></script>
+    <script src="assets/js/functionality/gameChecks.js"></script>
     <script src="assets/js/see-all-the-streets-with-owners.js"></script>
     <script src="assets/js/config.js"></script>
 
@@ -40,14 +42,16 @@
             <template class="card-template">
                 <article>
                     <h2 class="name"></h2>
+                    <img class="icon" src="" alt="">
                     <ul>
-                        <li class="position"></li>
-                        <li class="cost"></li>
-                        <li class="mortgage"></li>
+                        <li class="price"></li>
                         <li class="rent"></li>
                     </ul>
                     <div class="iconplace">
-                        <p></p>
+                        <ul>
+                            <li class="player-mortgaged hidden">Mortgaged by: <span></span></li>
+                            <li class="player-bought hidden">Bought by: <span></span></li>
+                        </ul>
                     </div>
                 </article>
             </template>

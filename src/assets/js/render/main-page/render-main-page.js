@@ -4,7 +4,6 @@ let _tempPlayerPositionID = null;
 let _$containers = {};
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
-let _gameState = null;
 
 function renderMainPage() {
     _$containers = {
@@ -34,30 +33,8 @@ function renderFirstTime() {
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
             getTiles(currentGameInfo);
-            _gameState = currentGameInfo;
             pollingGameState();
         });
-}
-
-function pollingGameState() {
-    // This needs to be on a diff place for sure!!
-    fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(currentGameInfo => {
-            checkGameStates(currentGameInfo);
-            _gameState = currentGameInfo;
-            setTimeout(pollingGameState, 2000);
-        });
-}
-
-function checkGameStates(newGameState) {
-    if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
-        checkIfBought(newGameState);
-        checkIfPlayerOnTile(newGameState);
-    }
-    if (newGameState.currentPlayer !== _gameState.currentPlayer) {
-        // This means that a turn was ended and its someone else its turn
-        checkIfPlayerCanRoll(newGameState);
-    }
 }
 
 function renderCards(currentGameInfo) {
@@ -156,9 +133,10 @@ function renderMortgagedMain($propertyCard, playerName) {
 }
 
 function renderBoughtMain($propertyCard, playerName) {
+    $propertyCard.querySelector(`.price`).classList.add("hidden");
     $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
     $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
-    $propertyCard.style.border = "red solid 0.1rem";
+    $propertyCard.style.border = "red solid";
     $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
 }
 

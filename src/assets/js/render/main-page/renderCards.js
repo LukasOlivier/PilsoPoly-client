@@ -5,7 +5,7 @@ function renderNormalCard(cardInfo, middle) {
     const $template = document.querySelector('main .normal-card-template').content.firstElementChild.cloneNode(true);
     addClassToMiddle($template, middle);
     $template.querySelector("h3").innerText = cardInfo.name;
-    $template.querySelector('p:first-of-type').innerText = `rent: M${cardInfo.rent}`;
+    $template.querySelector('.rent').innerText = `rent: M${cardInfo.rent}`;
     $template.querySelector('.rent-one-house').innerText = `M${cardInfo.rentWithOneHouse}`;
     $template.querySelector('.rent-two-house').innerText = `M${cardInfo.rentWithTwoHouses}`;
     $template.querySelector('.rent-three-house').innerText = `M${cardInfo.rentWithThreeHouses}`;
@@ -44,10 +44,12 @@ function utilityAndRailroadTemplate($template, cardInfo, middle) {
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
+    $template.querySelector('.rent').innerText = `Rent: M${cardInfo.rent}`;
+
     if (cardInfo.name.includes("RR")) {
         $icon.src = `images/railroad.png`;
     } else if (cardInfo.name.includes("Electric")) {
-        $icon.src = `images/electric.jpg`;
+        $icon.src = `images/electric.png`;
     } else {
         $icon.src = `images/water.png`;
     }

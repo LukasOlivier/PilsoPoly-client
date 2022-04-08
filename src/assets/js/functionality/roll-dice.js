@@ -1,17 +1,16 @@
 'use strict';
 
-function checkIfPlayerCanRoll(gameState){
+function checkIfPlayerCanRoll(gameState) {
     const playerName = loadFromStorage("name");
-    if (gameState.currentPlayer === playerName && gameState.canRoll === true) {
-        console.log('and you can roll');
+    if (gameState.currentPlayer === playerName && gameState.canRoll === true && document.querySelector("body").id !== "see-all-the-streets-with-owners") {
         readyToRoll();
         _$containers["rollDiceOpenDialog"].classList.remove("disabled");
-    } else {
+    } else if (document.querySelector("body").id !== "see-all-the-streets-with-owners") {
         _$containers["rollDiceOpenDialog"].classList.add("disabled");
     }
 }
 
-function readyToRoll(){
+function readyToRoll() {
     _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
         document.querySelector("#roll-dice-dialog").showModal();
     });
@@ -20,7 +19,7 @@ function readyToRoll(){
     });
 }
 
-function rollDice(){
+function rollDice() {
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
         .then(response => {
@@ -32,7 +31,7 @@ function rollDice(){
         .catch(errorHandler);
 }
 
-function changeDiceRollNumber(text){
+function changeDiceRollNumber(text) {
     document.querySelector('#roll-dice-dialog p').innerText = text;
     document.querySelector("#location").innerText = `You landed at ${_playerPositionID}`;
     document.querySelector("#cancel-roll-dice").innerText = "Oké";
@@ -53,10 +52,10 @@ function checkIfRolledTwice(response) {
     }
 }
 
-function getLastMove(response){
+function getLastMove(response) {
     return response.turns.slice(-1)[0].moves;
 }
 
-function getCurrentTile(response){
+function getCurrentTile(response) {
     saveToStorage("currentTile", response.turns.slice(-1)[0].moves.slice(-1)[0].tile);
 }
