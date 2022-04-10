@@ -68,6 +68,7 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 console.log("you receive 200 flappen e niffow");
                 break;
             case "should pay rent":
+                removeHiddenClassToPayRentDiv();
                 pollingGameState();
                 break;
             default:
