@@ -10,7 +10,9 @@ function renderMainPage() {
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
         cardsParent: document.querySelector("#cards-parent"),
-        rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog")
+        rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
+        rollDiceDialog: document.querySelector("#roll-dice-dialog"),
+        backToCurrentPositionButton: document.querySelector("#back-to-current-position button")
     };
     document.querySelector("#map").addEventListener("click", showMap);
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
@@ -19,7 +21,7 @@ function renderMainPage() {
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("#back-to-current-position button").addEventListener("click", function (e){
-        document.querySelector("#back-to-current-position button").classList.toggle("hidden");
+        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
         seeOtherPlayerPosition(e);
     });
     document.querySelector("#give-up").addEventListener("click", giveUp);
@@ -73,9 +75,8 @@ function renderCards(currentGameInfo) {
 }
 
 function showBackToPositionButton(){
-    const $button = document.querySelector("#back-to-current-position button");
-    if ($button.classList.contains("hidden")) {
-        $button.classList.toggle("hidden");
+    if (_$containers.backToCurrentPositionButton.classList.contains("hidden")) {
+        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
     }
 }
 

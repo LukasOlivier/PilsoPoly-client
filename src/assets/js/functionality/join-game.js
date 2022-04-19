@@ -13,8 +13,8 @@ function fetchAllGames() {
                     throw new Error("This game has already started.");
                 }
                 checkName(name, game);
-                _gameID = gameID
-                iconPicker(name)
+                _gameID = gameID;
+                iconPicker(name);
             })
             .catch(errorHandler);
     } catch (error) {

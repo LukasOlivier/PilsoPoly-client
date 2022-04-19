@@ -21,18 +21,18 @@ function renderPlayerActionRollDice(gameState) {
 function readyToRoll() {
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
     _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").showModal();
+        _$containers.rollDiceDialog.showModal();
     });
     document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
-        document.querySelector("#roll-dice-dialog").close();
+        _$containers.rollDiceDialog.close();
     });
     document.querySelector("#roll-dice-oke").addEventListener('click', () => {
         // this should be in one function probably
-        document.querySelector("#roll-dice-dialog").close();
-        document.querySelector("#roll-dice-dialog p").innerText = "You can roll the dice";
-        document.querySelector("#roll-dice-dialog #location").innerText = "";
-        togglePopUpButtons()
-    })
+        _$containers.rollDiceDialog.close();
+        _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
+        _$containers.rollDiceDialog.querySelector("#location").innerText = "";
+        togglePopUpButtons();
+    });
 }
 
 function rollDice() {
@@ -48,9 +48,9 @@ function rollDice() {
 }
 
 function changePopUpText(text, location) {
-    document.querySelector('#roll-dice-dialog p').innerText = text;
+    _$containers.rollDiceDialog.querySelector('p').innerText = text;
     document.querySelector("#location").innerText = `You landed at ${location[0].tile}`;
-    togglePopUpButtons()
+    togglePopUpButtons();
 }
 
 function togglePopUpButtons(){
