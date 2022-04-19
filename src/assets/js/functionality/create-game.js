@@ -10,6 +10,7 @@ function getInputValues() {
         errorHandler(errorMessage);
         return;
     }
+    // name0
     createGame(numberOfPlayers, name);
 }
 
@@ -40,7 +41,7 @@ function createGame(numberOfPlayer, name) {
     fetchFromServer('/games', 'POST', body)
         .then(response => {
             _gameID = response.id;
-            joinGame(_gameID, name);
+            iconPicker(name)
         })
         .catch(errorHandler);
 }

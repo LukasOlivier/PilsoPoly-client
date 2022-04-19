@@ -13,13 +13,13 @@ function fetchAllGames() {
                     throw new Error("This game has already started.");
                 }
                 checkName(name, game);
-                joinGame(gameID, name);
+                _gameID = gameID
+                iconPicker(name)
             })
             .catch(errorHandler);
     } catch (error) {
         errorHandler(error);
     }
-
 }
 
 // if the id doesnt contains the prefix, add it. ;)
@@ -49,20 +49,20 @@ function checkName(name, game) {
     });
 }
 
-function joinGame(gameID, name) {
+function joinGame(name, icon) {
+    console.log(name)
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${gameID}/players`, 'POST', name)
+    fetchFromServer(`/games/${_gameID}/players`, 'POST', name)
         .then(response => {
-            _gameID = gameID;
             _token = response.token;
             localStorage.clear();
-            saveToStorage("gameId", gameID);
+            saveToStorage("gameId", _gameID);
+            // this token is your security token.
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
-            //loadGameDataForLobby(gameID, name);
-            renderIconPicker()
+            saveToStorage("iconId", icon);
+            loadGameDataForLobby();
         })
-        // this token is your security token.
         .catch(errorHandler);
 }
 

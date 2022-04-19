@@ -45,7 +45,6 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     _$interfaces["joinInterface"].classList.add("hidden");
     _$interfaces["createInterface"].classList.add("hidden");
     _$interfaces["lobbyInterface"].classList.remove("hidden");
-
     _$interfaces["lobbyInterface"].querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
     _$interfaces["lobbyInterface"].querySelector("span").innerText = id; //Display the ID of current game
     const playersToJoin = numberOfPlayers - playerNames.length;
@@ -54,7 +53,9 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
         $templateClone.id = player.name;
-
+        if (player.name === loadFromStorage("name")) {
+            $templateClone.querySelector('img').src = `assets/media/${loadFromStorage("iconId")}.png`
+        }
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
     // this ads a timeout every 1.5s to refresh the lobby
@@ -63,14 +64,19 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     _$interfaces.lobbyInterface.querySelector("#back-lobby").addEventListener('click', () => clearTimeout(timoutID));
 }
 
+function iconPicker(name) {
+    renderIconPicker()
+    document.querySelectorAll("li").forEach(icon => icon.addEventListener('click', () => {
+        loadGameDataForLobby();
+        joinGame(name, icon.id)
+        _$interfaces.iconInterface.classList.add("hidden");
+    }));
+}
+
 function renderIconPicker() {
     _$interfaces.joinInterface.classList.add("hidden");
     _$interfaces.createInterface.classList.add("hidden");
     _$interfaces.iconInterface.classList.remove("hidden");
-    document.querySelectorAll("li").forEach(icon => icon.addEventListener('click', () => {
-       loadGameDataForLobby();
-       _$interfaces.iconInterface.classList.add("hidden");
-    }));
 }
 
 function renderRules() {
