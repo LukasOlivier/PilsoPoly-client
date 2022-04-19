@@ -17,7 +17,6 @@ function renderMainPage() {
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("main").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
-    document.querySelector("#trade").addEventListener("click", trade);
     document.querySelector("#back-to-current-position button").addEventListener("click", function (e){
         document.querySelector("#back-to-current-position button").classList.toggle("hidden");
         seeOtherPlayerPosition(e);
@@ -26,6 +25,13 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
+    document.querySelector("#trade").addEventListener("click", initTrade);
+    document.querySelector("#trade-select-player").addEventListener("click", selectPlayer);
+    document.querySelector("#cancel-select-player").addEventListener("click", cancelSelectPlayer);
+    document.querySelector("#cancel-trading").addEventListener("click", cancelTrading);
+    document.querySelector("#player1 ul").addEventListener("click", addToOffers);
+    document.querySelector("#player2 ul").addEventListener("click", addToWants);
+    document.querySelector("#send-trade").addEventListener("click", sendTrade);
     renderFirstTime();
 }
 
@@ -196,8 +202,4 @@ function giveUp() {
 function giveUpDeny() {
     document.querySelector("section").classList.remove("hidden");
     _$containers["giveUpPopup"].classList.add("hidden");
-}
-
-function trade() {
-    console.log("trade");
 }

@@ -31,6 +31,7 @@
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
+    <script src="assets/js/render/main-page/trade-screen.js"></script>
     <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
 
@@ -151,7 +152,56 @@
     <div id="back-to-current-position">
         <button class="hidden">back to current position!</button>
     </div>
+    <dialog id="trade-select-player-disabled">
+        <h3>Trading is currently disabled!</h3>
+    </dialog>
 
+    <!--    THIS DIALOG IS CURRENTLY NOT IN USE BECAUSE THE API DOESN'T SUPPORT TRADING-->
+    <dialog id="trade-select-player">
+        <h3>select a player to trade with!</h3>
+        <ul id="players-to-trade"></ul>
+        <input type="button" id="cancel-select-player" value="cancel trade">
+    </dialog>
+    <!--END OF DIALOG-->
+
+    <dialog id="trade-dialog">
+        <h3>Trading</h3>
+        <div>
+
+            <section id="player1">
+                <h4>Player1</h4>
+                <ul></ul>
+            </section>
+
+            <section id="player2">
+                <h4>Player2</h4>
+                <ul></ul>
+            </section>
+
+        </div>
+
+        <section id="summary-of-trade">
+            <div id="offers">
+                <h4>Offers</h4>
+                <ul></ul>
+            </div>
+            <div id="total-value">
+                <p id="player1-value">M0</p>
+                <p>Total value</p>
+                <p id="player2-value">M0</p>
+            </div>
+            <div id="wants">
+                <h4>Wants</h4>
+                <ul></ul>
+            </div>
+        </section>
+
+        <div>
+            <input type="button" id="cancel-trading" value="Cancel trading">
+            <input type="button" id="send-trade" value="send trade request">
+        </div>
+
+    </dialog>
 </main>
 
 <footer>
