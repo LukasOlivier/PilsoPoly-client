@@ -50,7 +50,6 @@ function checkName(name, game) {
 }
 
 function joinGame(name, icon) {
-    console.log(name)
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${_gameID}/players`, 'POST', name)
         .then(response => {

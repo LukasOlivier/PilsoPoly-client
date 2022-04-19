@@ -48,7 +48,6 @@ function rollDice() {
 }
 
 function changePopUpText(text, location) {
-    console.log(location)
     document.querySelector('#roll-dice-dialog p').innerText = text;
     document.querySelector("#location").innerText = `You landed at ${location[0].tile}`;
     togglePopUpButtons()
