@@ -39,6 +39,10 @@ footer img {
     margin-right: 1rem;
 }
 
+.info-container {
+    display: flex;
+    padding: 0.8rem;
+}
 
 .info-container img {
     filter: invert(100%);
@@ -260,13 +264,6 @@ section div {
     flex-direction: row;
     justify-content: center;
 }
-
-
-.info-container {
-    display: flex;
-    padding: 0.8rem;
-}
-
 
 header div {
     display: flex;
