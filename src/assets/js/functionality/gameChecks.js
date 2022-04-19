@@ -72,3 +72,15 @@ function checkIfPlayerBankrupt(response) {
         }
     });
 }
+
+function checkIfPlayerNeedsToPayRent(gameInfo){
+    if (gameInfo.turns.length !== 0){
+        const discriptionOfLastMove = gameInfo.turns.slice(-1)[0].moves;
+        if (discriptionOfLastMove[discriptionOfLastMove.length - 1].description === 'should pay rent'){
+            makeListOfAllStreetsThatTheLocalPlayerOwnes(gameInfo);
+        }
+    }
+    else {
+        saveToStorage("rent", ``);
+    }
+}

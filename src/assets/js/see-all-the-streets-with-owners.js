@@ -41,7 +41,6 @@ function runStreets(tiles, streetNames, sort) {
 
 
 /* fill in the template with the api results*/
-
 function renderStreets(street) {
     const $template = document.querySelector('.card-template').content.firstElementChild.cloneNode(true);
     $template.id = nameToId(street.name);
