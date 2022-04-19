@@ -291,14 +291,13 @@ header div {
     margin-right: auto;
 }
 
-#main-screen header .disabled {
+#main-screen header button:disabled {
     background-color: grey;
     transition-property: none;
     opacity: 50%;
 }
 
-#main-screen header .disabled:hover {
-    color: black;
+#main-screen header button:disabled:hover {
     filter: none;
     transform: scale(1);
     cursor: auto;

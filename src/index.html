@@ -27,7 +27,7 @@
     <script src="assets/js/functionality/roll-dice.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
-    <script src="assets/js/functionality/gameChecks.js"></script>
+    <script src="assets/js/functionality/game-checks.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
@@ -40,7 +40,7 @@
 <body id="main-screen">
 
 <header>
-    <button id="roll-dice-open-dialog">Roll the dice</button>
+    <button disabled id="roll-dice-open-dialog">Roll the dice</button>
     <h1 id="game-screen">Monopoly</h1>
     <div>
         <img src="images/give-up.png" alt="give-up" title="give-up" id="give-up">
@@ -77,6 +77,7 @@
             <div>
                 <button id="cancel-roll-dice">Cancel</button>
                 <button id="roll-dice">Roll the dice</button>
+                <button id="roll-dice-oke" class="hidden">Oke</button>
             </div>
         </dialog>
 

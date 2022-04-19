@@ -2,6 +2,7 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
+let _gameState = null;
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
@@ -24,7 +25,6 @@ function renderMainPage() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
-    document.querySelector("#roll-dice").addEventListener("click", rollDice);
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     renderFirstTime();
 }
@@ -32,11 +32,12 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
+            _gameState = currentGameInfo;
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
             getTiles(currentGameInfo);
-            pollingGameState();
+            setTimeout(pollingGameState, 2000);
         });
 }
 function seeOtherPlayerPosition(e){

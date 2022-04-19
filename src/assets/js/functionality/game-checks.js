@@ -1,23 +1,29 @@
 "use strict";
-let _gameState = null;
 
 function pollingGameState() {
+    console.log('Polling')
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             checkGameStates(currentGameInfo);
-            checkIfPlayerOnTile(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
         });
 }
 
 function checkGameStates(newGameState) {
-    if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+    // if your on the map screen, all the other checks are not needed.
+    if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
+        console.log("Only checking fot the map")
+        checkIfBought(newGameState);
+    } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+        if (newGameState.currentPlayer !== _gameState.currentPlayer){
+            checkIfPlayerCanRoll(newGameState);
+        }
         checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
-        checkIfPlayerCanRoll(newGameState);
         checkPlayerBalance(newGameState);
+        checkIfPlayerBankrupt(newGameState);
     }
 }
 
