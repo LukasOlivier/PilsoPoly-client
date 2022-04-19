@@ -59,7 +59,8 @@ function joinGame(gameID, name) {
             saveToStorage("gameId", gameID);
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
-            loadGameDataForLobby(gameID, name);
+            //loadGameDataForLobby(gameID, name);
+            renderIconPicker()
         })
         // this token is your security token.
         .catch(errorHandler);

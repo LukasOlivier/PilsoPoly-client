@@ -53,6 +53,8 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     playerNames.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
+        $templateClone.id = player.name;
+
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
     // this ads a timeout every 1.5s to refresh the lobby
@@ -61,19 +63,14 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     _$interfaces.lobbyInterface.querySelector("#back-lobby").addEventListener('click', () => clearTimeout(timoutID));
 }
 
-function renderIconPicker(e) {
-    _$interfaces.lobbyInterface.classList.add("hidden");
+function renderIconPicker() {
+    _$interfaces.joinInterface.classList.add("hidden");
+    _$interfaces.createInterface.classList.add("hidden");
     _$interfaces.iconInterface.classList.remove("hidden");
-    _$interfaces.iconInterface.querySelectorAll('img').forEach(item => {
-        item.addEventListener('click', event => {
-            const icon = event.target.id;
-            // this is the currently selected icon.
-            _$interfaces.lobbyInterface.classList.remove("hidden");
-            _$interfaces.iconInterface.classList.add("hidden");
-            $clickedIcon.src = `assets/media/${icon}.png`;
-            document.querySelector(`${previousScreen} button`).innerHTML = `<img src="assets/media/${icon}.png" alt="${icon}" id="${icon}">`;
-        });
-    });
+    document.querySelectorAll("li").forEach(icon => icon.addEventListener('click', () => {
+       loadGameDataForLobby();
+       _$interfaces.iconInterface.classList.add("hidden");
+    }));
 }
 
 function renderRules() {
