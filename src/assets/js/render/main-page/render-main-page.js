@@ -134,6 +134,9 @@ function renderPlayerInfo(currentGameInfo) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.id = nameToId(player.name);
         $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
+        if (player.name === loadFromStorage("name")) {
+            $template.querySelector("img").src = `assets/media/${loadFromStorage("iconId")}.png`;
+        }
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
         document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
     });
