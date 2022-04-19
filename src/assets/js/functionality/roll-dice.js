@@ -2,11 +2,19 @@
 
 function checkIfPlayerCanRoll(gameState) {
     const playerName = loadFromStorage("name");
+    renderPlayerActionRollDice(gameState);
     if (gameState.currentPlayer === playerName && gameState.canRoll === true && document.querySelector("body").id !== "see-all-the-streets-with-owners") {
         readyToRoll();
         _$containers["rollDiceOpenDialog"].classList.remove("disabled");
     } else if (document.querySelector("body").id !== "see-all-the-streets-with-owners") {
         _$containers["rollDiceOpenDialog"].classList.add("disabled");
+    }
+}
+
+function renderPlayerActionRollDice(gameState) {
+    if (gameState.canRoll === true && document.querySelector("body").id !== "see-all-the-streets-with-owners") {
+        document.querySelectorAll(`.info-container img`).forEach(player => player.classList.remove("active-player"));
+        document.querySelector(`#${gameState.currentPlayer} img`).classList.add("active-player");
     }
 }
 
