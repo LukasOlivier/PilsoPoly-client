@@ -2,6 +2,7 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
+let _gameState = null;
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
@@ -17,11 +18,13 @@ function renderMainPage() {
     document.querySelector("main").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#trade").addEventListener("click", trade);
-    document.querySelector("#back-to-current-position button").addEventListener("click", backToCurrentPosition);
+    document.querySelector("#back-to-current-position button").addEventListener("click", function (e){
+        document.querySelector("#back-to-current-position button").classList.toggle("hidden");
+        seeOtherPlayerPosition(e);
+    });
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
-    document.querySelector("#roll-dice").addEventListener("click", rollDice);
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     renderFirstTime();
 }
@@ -29,12 +32,30 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
+            _gameState = currentGameInfo;
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
             getTiles(currentGameInfo);
-            pollingGameState();
+            setTimeout(pollingGameState, 2000);
         });
+}
+function seeOtherPlayerPosition(e){
+    goToPlayerPosition(e.currentTarget.id);
+}
+
+function goToPlayerPosition(playerName){
+    removeTemplateContents("#cards-parent article");
+    let currentTileName = null;
+    // Find the current tile of the player
+    _gameState.players.forEach(function (player) {
+        if (player.name === playerName) {
+            currentTileName = player.currentTile;
+        }
+        showBackToPositionButton();
+    });
+    // Find that tile in localStorage
+    findTileId(currentTileName);
 }
 
 function renderCards(currentGameInfo) {
@@ -48,14 +69,16 @@ function renderCards(currentGameInfo) {
         }
     });
     // Find that tile in localStorage
-    loadFromStorage("tiles").forEach(function (tile) {
-        if (tile.name === currentTileName) {
-            _tempPlayerPositionID = tile.position;
-            _playerPositionID = tile.position;
-            getCardById(tile.position);
-        }
-    });
+    findTileId(currentTileName);
 }
+
+function showBackToPositionButton(){
+    const $button = document.querySelector("#back-to-current-position button");
+    if ($button.classList.contains("hidden")) {
+        $button.classList.toggle("hidden");
+    }
+}
+
 
 function getCardById(id) {
     const toShow = createToShow(id, id - 2, id + 3);
@@ -109,19 +132,23 @@ function showCards(cardInfo, middle) {
 function renderPlayerInfo(currentGameInfo) {
     currentGameInfo.players.forEach(function (player) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
-        $template.classList.add(player.name.toLowerCase());
+        $template.id = nameToId(player.name);
         $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
+        if (player.name === loadFromStorage("name")) {
+            $template.querySelector("img").src = `assets/media/${loadFromStorage("iconId")}.png`;
+        }
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
+        document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
     });
 }
 
 function renderBoughtFooter(property, playerName) {
-    document.querySelector(`.${playerName.toLowerCase()}`).querySelector(`.${property}`).classList.remove("not-bought");
+    document.querySelector(`#${playerName} .${property}`).classList.remove("not-bought");
 }
 
 function renderMortgagedFooter(property, playerName) {
-    document.querySelector(`.${playerName.toLowerCase()}`).querySelector(`.${property}`).classList.remove("not-bought");
-    document.querySelector(`.${playerName.toLowerCase()}`).querySelector(`.${property}`).classList.add("mortgaged");
+    document.querySelector(`#${playerName} .${property}`).classList.remove("not-bought");
+    document.querySelector(`#${playerName} .${property}`).classList.add("mortgaged");
 }
 
 function renderMortgagedMain($propertyCard, playerName) {
@@ -141,7 +168,7 @@ function renderBoughtMain($propertyCard, playerName) {
 }
 
 function renderPlayerBankrupt(playerName) {
-    const $container = document.querySelector(`.${playerName}`);
+    const $container = document.querySelector(`#${playerName}`);
     $container.style.opacity = "0.5";
     $container.querySelector("p").style.color = "red";
     $container.querySelector("p").innerHTML = `${playerName}: BANKRUPT`;

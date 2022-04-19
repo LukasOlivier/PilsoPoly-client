@@ -76,3 +76,13 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
         }
     });
 }
+
+function findTileId(tileName){
+    loadFromStorage("tiles").forEach(function (tile) {
+        if (tile.name === tileName) {
+            _tempPlayerPositionID = tile.position;
+            _playerPositionID = tile.position;
+            getCardById(tile.position);
+        }
+    });
+}

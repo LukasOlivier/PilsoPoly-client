@@ -1,6 +1,7 @@
 'use strict';
 
 function loadGameDataForLobby(){
+    _$interfaces.iconInterface.classList.add("hidden");
     fetchFromServer(`/games?prefix=${_config.prefix}`)
         .then(response => {
             const game = findGameByID(response, _gameID);
