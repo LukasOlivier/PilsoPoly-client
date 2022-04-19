@@ -45,7 +45,6 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     _$interfaces["joinInterface"].classList.add("hidden");
     _$interfaces["createInterface"].classList.add("hidden");
     _$interfaces["lobbyInterface"].classList.remove("hidden");
-
     _$interfaces["lobbyInterface"].querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
     _$interfaces["lobbyInterface"].querySelector("span").innerText = id; //Display the ID of current game
     const playersToJoin = numberOfPlayers - playerNames.length;
@@ -53,6 +52,10 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     playerNames.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
+        $templateClone.id = player.name;
+        if (player.name === loadFromStorage("name")) {
+            $templateClone.querySelector('img').src = `assets/media/${loadFromStorage("iconId")}.png`
+        }
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
     // this ads a timeout every 1.5s to refresh the lobby
@@ -61,19 +64,19 @@ function renderLobby(id, numberOfPlayers, playerNames) {
     _$interfaces.lobbyInterface.querySelector("#back-lobby").addEventListener('click', () => clearTimeout(timoutID));
 }
 
-function renderIconPicker(e) {
-    _$interfaces.lobbyInterface.classList.add("hidden");
+function iconPicker(name) {
+    renderIconPicker()
+    document.querySelectorAll("li").forEach(icon => icon.addEventListener('click', () => {
+        loadGameDataForLobby();
+        joinGame(name, icon.id)
+        _$interfaces.iconInterface.classList.add("hidden");
+    }));
+}
+
+function renderIconPicker() {
+    _$interfaces.joinInterface.classList.add("hidden");
+    _$interfaces.createInterface.classList.add("hidden");
     _$interfaces.iconInterface.classList.remove("hidden");
-    _$interfaces.iconInterface.querySelectorAll('img').forEach(item => {
-        item.addEventListener('click', event => {
-            const icon = event.target.id;
-            // this is the currently selected icon.
-            _$interfaces.lobbyInterface.classList.remove("hidden");
-            _$interfaces.iconInterface.classList.add("hidden");
-            $clickedIcon.src = `assets/media/${icon}.png`;
-            document.querySelector(`${previousScreen} button`).innerHTML = `<img src="assets/media/${icon}.png" alt="${icon}" id="${icon}">`;
-        });
-    });
 }
 
 function renderRules() {
