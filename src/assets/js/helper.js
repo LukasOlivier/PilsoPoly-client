@@ -55,7 +55,6 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
     lastMove.forEach(move => {
         switch (move.description) {
             case "can buy this property in direct sale":
-                console.log("buy?");
                 makeBuyPopupNotHidden();
                 break;
             case "has to go to jail":
