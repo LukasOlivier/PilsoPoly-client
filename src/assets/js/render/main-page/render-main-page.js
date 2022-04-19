@@ -165,7 +165,7 @@ function renderBoughtMain($propertyCard, playerName) {
 }
 
 function renderPlayerBankrupt(playerName) {
-    const $container = document.querySelector(`.${playerName}`);
+    const $container = document.querySelector(`#${playerName}`);
     $container.style.opacity = "0.5";
     $container.querySelector("p").style.color = "red";
     $container.querySelector("p").innerHTML = `${playerName}: BANKRUPT`;

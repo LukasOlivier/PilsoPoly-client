@@ -1,7 +1,6 @@
 "use strict";
 
 function pollingGameState() {
-    console.log('Polling')
     // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
@@ -74,8 +73,8 @@ function checkIfPlayerOnTile(gameInfo) {
     });
 }
 
-function checkIfPlayerBankrupt(response) {
-    response.players.forEach(player => {
+function checkIfPlayerBankrupt(gameInfo) {
+    gameInfo.players.forEach(player => {
         if (player.bankrupt) {
             renderPlayerBankrupt(player.name.toLowerCase());
         }
