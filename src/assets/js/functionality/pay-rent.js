@@ -11,11 +11,11 @@ function makeListOfAllStreetsThatTheLocalPlayerOwnes(gameInfo){
     checkNamePlayerBoughtStreet(gameInfo, listOfSelfOuningStreets);
 }
 
-function checkNamePlayerBoughtStreet(gameInfo, listOfSelfOuningStreets){
+function checkNamePlayerBoughtStreet(gameInfo, listOfSelfOwningStreets){
     const playersInfo = gameInfo.players;
     playersInfo.forEach(player => {
         if (player.name !== loadFromStorage("name")){
-            listOfSelfOuningStreets.forEach(property => {
+            listOfSelfOwningStreets.forEach(property => {
                 if (player.currentTile === property){
                     collectDebt(property , player.name, loadFromStorage("name"));
                 }
@@ -23,6 +23,7 @@ function checkNamePlayerBoughtStreet(gameInfo, listOfSelfOuningStreets){
         }
     });
 }
+
 
 function collectDebt(property , player, name){
     if (`${name}${property}${player}` !== loadFromStorage("rent")){
