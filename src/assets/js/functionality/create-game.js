@@ -41,7 +41,7 @@ function createGame(numberOfPlayer, name) {
     fetchFromServer('/games', 'POST', body)
         .then(response => {
             _gameID = response.id;
-            iconPicker(name)
+            iconPicker(name);
         })
         .catch(errorHandler);
 }

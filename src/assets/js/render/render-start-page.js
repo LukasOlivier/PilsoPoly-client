@@ -54,7 +54,7 @@ function renderLobby(id, numberOfPlayers, playerNames) {
         $templateClone.querySelector('h3').innerText = player.name;
         $templateClone.id = player.name;
         if (player.name === loadFromStorage("name")) {
-            $templateClone.querySelector('img').src = `assets/media/${loadFromStorage("iconId")}.png`
+            $templateClone.querySelector('img').src = `assets/media/${loadFromStorage("iconId")}.png`;
         }
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
@@ -65,10 +65,10 @@ function renderLobby(id, numberOfPlayers, playerNames) {
 }
 
 function iconPicker(name) {
-    renderIconPicker()
+    renderIconPicker();
     document.querySelectorAll("li").forEach(icon => icon.addEventListener('click', () => {
         loadGameDataForLobby();
-        joinGame(name, icon.id)
+        joinGame(name, icon.id);
         _$interfaces.iconInterface.classList.add("hidden");
     }));
 }
