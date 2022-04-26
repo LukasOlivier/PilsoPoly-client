@@ -77,5 +77,8 @@ function getLastMove(response) {
 }
 //
 function saveCurrentTile(response) {
-    saveToStorage("currentTile", response.turns.slice(-1)[0].moves.slice(-1)[0].tile);
+    let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;
+    saveToStorage("currentTile", currentTile);
 }
+
+

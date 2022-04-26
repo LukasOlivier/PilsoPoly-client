@@ -13,15 +13,18 @@ function pollingGameState() {
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
     if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
+        console.log("Only checking fot the map");
         checkIfBought(newGameState);
     } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
         if (newGameState.currentPlayer !== _gameState.currentPlayer){
             checkIfPlayerCanRoll(newGameState);
+            checkIfPlayerNeedsToPayRent(newGameState);
         }
         checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
+
     }
 }
 
@@ -78,4 +81,18 @@ function checkIfPlayerBankrupt(gameInfo) {
             renderPlayerBankrupt(player.name.toLowerCase());
         }
     });
+}
+
+function checkIfPlayerNeedsToPayRent(gameInfo){
+    console.log(getLastTile(gameInfo));
+
+    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')){
+        const inventory = loadFromStorage('inventory');
+        if(inventory.includes(getLastTile(gameInfo))){
+            collectDebt(getLastTile(gameInfo) , gameInfo.currentPlayer, loadFromStorage("name"));
+        }
+    }
+    else {
+        saveToStorage("rent", ``);
+    }
 }

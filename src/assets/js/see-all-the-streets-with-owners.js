@@ -5,7 +5,6 @@ function initMap() {
     pollingGameState();
     const streetNames = [];
     _token = {token: loadFromStorage("token")};
-    fetchFromServer(`/games/${loadFromStorage("gameId")}`, 'GET');
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
@@ -41,7 +40,6 @@ function runStreets(tiles, streetNames, sort) {
 
 
 /* fill in the template with the api results*/
-
 function renderStreets(street) {
     const $template = document.querySelector('.card-template').content.firstElementChild.cloneNode(true);
     $template.id = nameToId(street.name);

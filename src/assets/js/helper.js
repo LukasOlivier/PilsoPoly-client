@@ -64,12 +64,20 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 console.log("you receive 200 flappen e niffow");
                 break;
             case "should pay rent":
-                console.log("should pay rent");
+                removeHiddenClassToPayRentDiv();
                 break;
             default:
                 console.log(move.description);
         }
     });
+}
+
+function getLastMove(response) {
+    return response.turns.slice(-1)[0].moves;
+}
+
+function getLastTile(response) {
+    return getLastMove(response).slice(-1)[0].tile;
 }
 
 function findTileId(tileName){

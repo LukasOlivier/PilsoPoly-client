@@ -60,6 +60,7 @@ function joinGame(name, icon) {
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
             saveToStorage("iconId", icon);
+            saveToStorage("inventory", []);
             loadGameDataForLobby();
         })
         .catch(errorHandler);

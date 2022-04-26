@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
     <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
+    <link rel="stylesheet" href="assets/css/paying-rent.css">
 
 
     <script src="assets/js/config.js"></script>
@@ -25,6 +26,7 @@
 
     <script src="assets/js/functionality/get-playboard-tiles.js"></script>
     <script src="assets/js/functionality/roll-dice.js"></script>
+    <script src="assets/js/functionality/pay-rent.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
     <script src="assets/js/functionality/game-checks.js"></script>
@@ -34,6 +36,7 @@
     <script src="assets/js/render/main-page/trade-screen.js"></script>
     <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
+
 
 
 </head>
@@ -52,15 +55,22 @@
 </header>
 
 <main>
+
     <div id="buy-property-popup" class="hidden">
         <article>
             <h2>Title</h2>
-            <p>Do you want to buy this property, or let fate decide?</p>
+            <p>Do you want to buy this property, or start an auction?</p>
         </article>
         <form action="#">
             <button type="button" id="buy">Buy</button>
             <button type="button" id="auction">Auction</button>
         </form>
+    </div>
+    <div id="pay-rent" class="hidden">
+        <p>You need to pay rent!</p>
+    </div>
+    <div id="collect-rent" class="hidden">
+        <p></p>
     </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
