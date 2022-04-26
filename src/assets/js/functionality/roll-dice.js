@@ -3,11 +3,7 @@
 function checkIfPlayerCanRoll(gameState) {
     const playerName = loadFromStorage("name");
     renderPlayerActionRollDice(gameState);
-    if (gameState.currentPlayer === playerName && gameState.canRoll === true) {
-        _$containers["rollDiceOpenDialog"].disabled = false;
-    } else {
-        _$containers["rollDiceOpenDialog"].disabled = true;
-    }
+    _$containers["rollDiceOpenDialog"].disabled = !(gameState.currentPlayer === playerName && gameState.canRoll === true);
 }
 // This function adds the glowing effect to the player icon
 function renderPlayerActionRollDice(gameState) {
