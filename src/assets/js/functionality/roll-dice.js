@@ -31,7 +31,7 @@ function readyToRoll() {
         document.querySelector("#roll-dice-dialog").close();
         document.querySelector("#roll-dice-dialog p").innerText = "You can roll the dice";
         document.querySelector("#roll-dice-dialog #location").innerText = "";
-        togglePopUpButtons()
+        togglePopUpButtons();
     })
 }
 
@@ -48,10 +48,9 @@ function rollDice() {
 }
 
 function changePopUpText(text, location) {
-    console.log(location)
     document.querySelector('#roll-dice-dialog p').innerText = text;
     document.querySelector("#location").innerText = `You landed at ${location[0].tile}`;
-    togglePopUpButtons()
+    togglePopUpButtons();
 }
 
 function togglePopUpButtons(){
@@ -73,9 +72,6 @@ function checkIfRolledTwice(response) {
     changePopUpText(text, getLastMove(response));
 }
 
-function getLastMove(response) {
-    return response.turns.slice(-1)[0].moves;
-}
 //
 function saveCurrentTile(response) {
     let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;

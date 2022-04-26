@@ -52,7 +52,6 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(lastMove){
-    console.log(lastMove);
     lastMove.forEach(move => {
         switch (move.description) {
             case "can buy this property in direct sale":
@@ -72,6 +71,14 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 console.log(move.description);
         }
     });
+}
+
+function getLastMove(response) {
+    return response.turns.slice(-1)[0].moves;
+}
+
+function getLastTile(response) {
+    return getLastMove(response).slice(-1)[0].tile;
 }
 
 function findTileId(tileName){

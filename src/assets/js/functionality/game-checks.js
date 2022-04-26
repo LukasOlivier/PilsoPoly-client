@@ -18,11 +18,11 @@ function checkGameStates(newGameState) {
     } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
         if (newGameState.currentPlayer !== _gameState.currentPlayer){
             checkIfPlayerCanRoll(newGameState);
+            checkIfPlayerNeedsToPayRent(newGameState);
         }
         checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
-        checkIfPlayerNeedsToPayRent(newGameState);
         checkIfPlayerBankrupt(newGameState);
 
     }
@@ -84,10 +84,12 @@ function checkIfPlayerBankrupt(gameInfo) {
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo){
-    if (gameInfo.turns.length !== 0){
-        const discriptionOfLastMove = gameInfo.turns.slice(-1)[0].moves;
-        if (discriptionOfLastMove[discriptionOfLastMove.length - 1].description === 'should pay rent'){
-            makeListOfAllStreetsThatTheLocalPlayerOwnes(gameInfo);
+    console.log(getLastTile(gameInfo));
+
+    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')){
+        const inventory = loadFromStorage('inventory');
+        if(inventory.includes(getLastTile(gameInfo))){
+            collectDebt(getLastTile(gameInfo) , gameInfo.currentPlayer, loadFromStorage("name"));
         }
     }
     else {

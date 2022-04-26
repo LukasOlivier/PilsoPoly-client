@@ -50,7 +50,6 @@ function checkName(name, game) {
 }
 
 function joinGame(name, icon) {
-    console.log(name)
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${_gameID}/players`, 'POST', name)
         .then(response => {
@@ -61,6 +60,7 @@ function joinGame(name, icon) {
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
             saveToStorage("iconId", icon);
+            saveToStorage("inventory", []);
             loadGameDataForLobby();
         })
         .catch(errorHandler);
