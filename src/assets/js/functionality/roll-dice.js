@@ -5,7 +5,6 @@ function checkIfPlayerCanRoll(gameState) {
     renderPlayerActionRollDice(gameState);
     if (gameState.currentPlayer === playerName && gameState.canRoll === true) {
         _$containers["rollDiceOpenDialog"].disabled = false;
-        readyToRoll();
     } else {
         _$containers["rollDiceOpenDialog"].disabled = true;
     }
@@ -16,23 +15,6 @@ function renderPlayerActionRollDice(gameState) {
         document.querySelectorAll(`.info-container img`).forEach(player => player.classList.remove("active-player"));
         document.querySelector(`#${gameState.currentPlayer} img`).classList.add("active-player");
     }
-}
-
-function readyToRoll() {
-    document.querySelector("#roll-dice").addEventListener("click", rollDice);
-    _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
-        _$containers.rollDiceDialog.showModal();
-    });
-    document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
-        _$containers.rollDiceDialog.close();
-    });
-    document.querySelector("#roll-dice-oke").addEventListener('click', () => {
-        // this should be in one function probably
-        _$containers.rollDiceDialog.close();
-        _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
-        _$containers.rollDiceDialog.querySelector("#location").innerText = "";
-        togglePopUpButtons();
-    });
 }
 
 function rollDice() {
@@ -64,7 +46,6 @@ function checkIfRolledTwice(response) {
     let text = "";
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
         text = `You rolled a double ${response.lastDiceRoll[0]}. You can throw again!`;
-        readyToRoll();
     } else {
         _$containers["rollDiceOpenDialog"].disabled = true;
         text = `You threw ${totalRolled}!`;
