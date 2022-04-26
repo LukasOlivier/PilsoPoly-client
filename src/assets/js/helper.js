@@ -52,6 +52,7 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(lastMove){
+    console.log(lastMove);
     lastMove.forEach(move => {
         switch (move.description) {
             case "can buy this property in direct sale":
@@ -66,7 +67,6 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 break;
             case "should pay rent":
                 removeHiddenClassToPayRentDiv();
-                pollingGameState();
                 break;
             default:
                 console.log(move.description);
