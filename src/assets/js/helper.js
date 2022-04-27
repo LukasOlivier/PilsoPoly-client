@@ -53,6 +53,7 @@ function nameToId(name){
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(lastMove){
     lastMove.forEach(move => {
+        console.log(move)
         switch (move.description) {
             case "can buy this property in direct sale":
                 makeBuyPopupNotHidden();
@@ -66,10 +67,28 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
             case "should pay rent":
                 removeHiddenClassToPayRentDiv();
                 break;
+            case "does nothing special":
+                break;
+            case "":
+                document.querySelector("#card-result").classList.remove("hidden");
+                document.querySelector("#card-result").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
+                setTimeout(hidePopup,8000);
+                break;
+            case "already owns this property":
+                break;
             default:
                 console.log(move.description);
+                document.querySelector("#chance-chest-result").classList.remove("hidden");
+                document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
+                setTimeout(hidePopup,8000);
         }
     });
+}
+
+function hidePopup(){
+    document.querySelector("#chance-chest-result").classList.add("hidden");
+    document.querySelector("#chance-chest-result").innerText = "";
+
 }
 
 function getLastMove(response) {

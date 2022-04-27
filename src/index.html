@@ -36,8 +36,7 @@
     <script src="assets/js/render/main-page/trade-screen.js"></script>
     <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
-
-
+    <script src="assets/js/render/main-page/eventListeners.js"></script>
 
 </head>
 
@@ -66,11 +65,15 @@
             <button type="button" id="auction">Auction</button>
         </form>
     </div>
-    <div id="pay-rent" class="hidden">
-        <p>You need to pay rent!</p>
-    </div>
-    <div id="collect-rent" class="hidden">
-        <p></p>
+    <div id="flexbox-center">
+        <div id="card-result" class="hidden">
+        </div>
+        <div id="pay-rent" class="hidden">
+            <p>You need to pay rent!</p>
+        </div>
+        <div id="collect-rent" class="hidden">
+            <p></p>
+        </div>
     </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
