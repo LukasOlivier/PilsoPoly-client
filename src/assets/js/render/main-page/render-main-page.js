@@ -19,7 +19,7 @@ function renderMainPage() {
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("main").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
-    document.querySelector("#back-to-current-position button").addEventListener("click", function (e){
+    document.querySelector("#back-to-current-position button").addEventListener("click", function (e) {
         _$containers.backToCurrentPositionButton.classList.toggle("hidden");
         seeOtherPlayerPosition(e);
     });
@@ -34,6 +34,19 @@ function renderMainPage() {
     document.querySelector("#player1 ul").addEventListener("click", addToOffers);
     document.querySelector("#player2 ul").addEventListener("click", addToWants);
     document.querySelector("#send-trade").addEventListener("click", sendTrade);
+    document.querySelector("#roll-dice").addEventListener("click", rollDice);
+    _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
+        openDialog(_$containers.rollDiceDialog);
+    });
+    document.querySelector("#cancel-roll-dice").addEventListener('click', function () {
+        closeDialog(_$containers.rollDiceDialog);
+    });
+
+    document.querySelector("#roll-dice-oke").addEventListener('click', () => {
+        closeDialog(_$containers.rollDiceDialog);
+        resetRollDiceText();
+        togglePopUpButtons();
+    });
     renderFirstTime();
 }
 
@@ -48,11 +61,12 @@ function renderFirstTime() {
             setTimeout(pollingGameState, 2000);
         });
 }
-function seeOtherPlayerPosition(e){
+
+function seeOtherPlayerPosition(e) {
     goToPlayerPosition(e.currentTarget.id);
 }
 
-function goToPlayerPosition(playerName){
+function goToPlayerPosition(playerName) {
     removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     // Find the current tile of the player
@@ -80,7 +94,7 @@ function renderCards(currentGameInfo) {
     findTileId(currentTileName);
 }
 
-function showBackToPositionButton(){
+function showBackToPositionButton() {
     if (_$containers.backToCurrentPositionButton.classList.contains("hidden")) {
         _$containers.backToCurrentPositionButton.classList.toggle("hidden");
     }
@@ -203,4 +217,17 @@ function giveUp() {
 function giveUpDeny() {
     document.querySelector("section").classList.remove("hidden");
     _$containers["giveUpPopup"].classList.add("hidden");
+}
+
+function closeDialog($dialog) {
+    $dialog.close();
+}
+
+function openDialog($dialog) {
+    $dialog.showModal();
+}
+
+function resetRollDiceText(){
+    _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
+    _$containers.rollDiceDialog.querySelector("#location").innerText = "";
 }
