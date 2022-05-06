@@ -21,7 +21,7 @@ div {
     max-width: 50%;
 }
 
-#winningScreen div img {
+#win-page div img {
     max-width: 100%;
 }
 
@@ -54,4 +54,13 @@ a:hover {
 .errormessages p:empty {
     padding: 0;
     border: none;
+}
+
+h2{
+    font-size: 8rem;
+    margin-bottom: 2rem;
+}
+
+p{
+    font-size: 2rem;
 }

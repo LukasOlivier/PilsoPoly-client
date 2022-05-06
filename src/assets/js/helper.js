@@ -108,3 +108,13 @@ function findTileId(tileName){
         }
     });
 }
+
+function getPlayerBalance(gameInfo){
+    let balance = 0;
+    gameInfo.players.forEach(player => {
+        if(player.name === loadFromStorage("name")){
+            balance = player.money
+        }
+    })
+    return balance
+}
