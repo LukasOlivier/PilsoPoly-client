@@ -73,11 +73,13 @@ function checkIfRolledTwice(response) {
 }
 
 function getLastMove(response) {
+    console.log(response)
     return response.turns.slice(-1)[0].moves;
 }
 //
 function saveCurrentTile(response) {
     let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;
+    console.log(currentTile)
     saveToStorage("currentTile", currentTile);
 }
 

@@ -84,8 +84,6 @@ function checkIfPlayerBankrupt(gameInfo) {
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo){
-    console.log(getLastTile(gameInfo));
-
     if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')){
         const inventory = loadFromStorage('inventory');
         if(inventory.includes(getLastTile(gameInfo))){
