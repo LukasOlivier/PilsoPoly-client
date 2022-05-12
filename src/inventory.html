@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700%7COswald" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo"/>
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/inventory.css">
+    <link rel="stylesheet" href="assets/css/grid-template-properties.css">
+    <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
+    <link rel="stylesheet" href="assets/css/paying-rent.css">
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/helper.js"></script>
+    <script src="assets/js/data-connector/error-handler.js"></script>
+    <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
+    <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+
+    <script src="assets/js/functionality/get-playboard-tiles.js"></script>
+    <script src="assets/js/functionality/roll-dice.js"></script>
+    <script src="assets/js/functionality/pay-rent.js"></script>
+    <script src="assets/js/render/inventory.js"></script>
+
+    <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/functionality/game-checks.js"></script>
+    <script src="assets/js/render/main-page/render-main-page.js"></script>
+    <script src="assets/js/render/main-page/renderCards.js"></script>
+    <script src="assets/js/render/main-page/move-player.js"></script>
+    <script src="assets/js/render/main-page/trade-screen.js"></script
+    <script src="assets/js/functionality/buy-property.js"></script>
+    <script src="assets/js/functionality/lose-game.js"></script>
+</head>
+<body id="inventory">
+<header>
+    <h1>Inventory</h1>
+    <div>
+        <a href="index.html">Back to main screen</a>
+    </div>
+</header>
+<aside id="colorFilter">
+    <ul>
+        <li class="NONE clickAble"><img src="assets/media/remove-filter.png" alt=""></li>
+        <li class="PURPLE clickAble"></li>
+        <li class="BLACK clickAble"></li>
+        <li class="LIGHTBLUE clickAble"></li>
+        <li class="VIOLET clickAble"></li>
+        <li class="ORANGE clickAble"></li>
+        <li class="RED clickAble"></li>
+        <li class="YELLOW clickAble"></li>
+        <li class="DARKGREEN clickAble"></li>
+        <li class="DARKBLUE clickAble"></li>
+    </ul>
+</aside>
+
+<main>
+    <section id="cards">
+        <template class="street-template" >
+            <article class="clickAble">
+                <h3 class="name"></h3>
+                <div class="card-info">
+                    <ol>
+                        <li><img src="images/1house.png" alt="1house" title="1house">
+                            <p class="rent-one-house"></p></li>
+                        <li><img src="images/2houses.png" alt="2house" title="2house">
+                            <p class="rent-two-house"></p></li>
+                        <li><img src="images/3houses.png" alt="3house" title="3house">
+                            <p class="rent-three-house"></p></li>
+                        <li><img src="images/4houses.png" alt="4house" title="4house">
+                            <p class="rent-four-house"></p></li>
+                        <li><img src="images/hotel.png" alt="hotel" title="hotel">
+                            <p class="rent-hotel"></p></li>
+                    </ol>
+                    <p class="rent"></p>
+                    <p class="price-house"></p>
+                    <p class="mortgage"></p>
+                </div>
+            </article>
+        </template>
+        <template class="railroad-utility-template">
+            <article class="clickAble">
+                <h3 class="name"></h3>
+                <img class="card-icon" src="" alt="">
+
+                <div class="card-info">
+                    <p class="rent"></p>
+                    <p class="mortgage"></p>
+                </div>
+            </article>
+        </template>
+    </section>
+</main>
+</body>
+</html>

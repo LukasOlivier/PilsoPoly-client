@@ -34,6 +34,7 @@ function renderMainPage() {
     document.querySelector("#player1 ul").addEventListener("click", addToOffers);
     document.querySelector("#player2 ul").addEventListener("click", addToWants);
     document.querySelector("#send-trade").addEventListener("click", sendTrade);
+
     renderFirstTime();
 }
 
