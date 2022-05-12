@@ -8,8 +8,6 @@ function loadGameDataForLobby(){
             if (game.started === true) {
                 window.location.href = "index.html";
             }
-            const numberOfPlayers = game.numberOfPlayers;
-            const playerNames = game.players;
-            renderLobby(_gameID, numberOfPlayers, playerNames);
+            renderLobby(game);
         });
 }

@@ -40,22 +40,22 @@ function renderCreate() {
 }
 
 
-function renderLobby(id, numberOfPlayers, playerNames) {
+function renderLobby(game) {
     // Hide other interfaces for lobby //
+    const numberOfPlayers = game.numberOfPlayers;
+    const players = game.players;
     _$interfaces["joinInterface"].classList.add("hidden");
     _$interfaces["createInterface"].classList.add("hidden");
     _$interfaces["lobbyInterface"].classList.remove("hidden");
     _$interfaces["lobbyInterface"].querySelector("#players").innerText = ""; //prevents over flooding the screen when refreshing
-    _$interfaces["lobbyInterface"].querySelector("span").innerText = id; //Display the ID of current game
-    const playersToJoin = numberOfPlayers - playerNames.length;
+    _$interfaces["lobbyInterface"].querySelector("span").innerText = _gameID; //Display the ID of current game
+    const playersToJoin = numberOfPlayers - players.length;
     _$interfaces["lobbyInterface"].querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
-    playerNames.forEach(player => {
+    players.forEach(player => {
         const $templateClone = document.querySelector('template').content.firstElementChild.cloneNode(true);
         $templateClone.querySelector('h3').innerText = player.name;
+        $templateClone.querySelector('img').src = `assets/media/${player.icon}.png`;
         $templateClone.id = player.name;
-        if (player.name === loadFromStorage("name")) {
-            $templateClone.querySelector('img').src = `assets/media/${loadFromStorage("iconId")}.png`;
-        }
         document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
     });
     // this ads a timeout every 1.5s to refresh the lobby
@@ -73,10 +73,24 @@ function iconPicker(name) {
     }));
 }
 
+function loadGameDataForIconPicker() {
+    fetchFromServer(`/games?prefix=${_config.prefix}`)
+        .then(response => {
+            const game = findGameByID(response, _gameID);
+            game.players.forEach(player => {
+                if (document.querySelector(`#${player.icon}`).id !== player.icon) {
+                    document.querySelector(`#${player.icon}`).classList.add("hidden");
+                }
+            });
+            renderIconPicker();
+        });
+}
+
 function renderIconPicker() {
     _$interfaces.joinInterface.classList.add("hidden");
     _$interfaces.createInterface.classList.add("hidden");
     _$interfaces.iconInterface.classList.remove("hidden");
+    setTimeout(loadGameDataForIconPicker, 1500);
 }
 
 function renderRules() {

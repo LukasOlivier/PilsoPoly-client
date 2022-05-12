@@ -6,7 +6,7 @@
 }
 
 .active-player {
-    filter: drop-shadow(0 0 0.5rem #222);
+    filter: drop-shadow(0 0 0.5rem #222) invert(100%);
 }
 
 .player-bought {
@@ -28,11 +28,10 @@ header img {
     height: 3rem;
     margin-left: 1rem;
     transition: all .2s ease-in-out;
-    filter: invert(100%);
 }
 
 footer img {
-    width: 3rem;
+    width: 4rem;
     height: 3rem;
     margin-top: auto;
     margin-bottom: auto;
@@ -513,7 +512,6 @@ footer .player-balance {
 dialog {
     background-color: #98c5da;
 }
-
 #cards-parent #jail {
     background-color: rgb(240, 124, 28);
 }

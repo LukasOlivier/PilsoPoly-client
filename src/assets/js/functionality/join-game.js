@@ -50,16 +50,20 @@ function checkName(name, game) {
 }
 
 function joinGame(name, icon) {
+    const body = {
+        playerName: name.playerName,
+        icon: icon
+    };
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${_gameID}/players`, 'POST', name)
+    fetchFromServer(`/games/${_gameID}/players`, 'POST', body)
         .then(response => {
+            console.log(icon);
             _token = response.token;
             localStorage.clear();
             saveToStorage("gameId", _gameID);
             // this token is your security token.
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
-            saveToStorage("iconId", icon);
             saveToStorage("inventory", []);
             loadGameDataForLobby();
         })
