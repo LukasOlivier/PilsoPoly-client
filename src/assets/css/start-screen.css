@@ -20,6 +20,24 @@ body {
     color: white;
 }
 
+#icon-interface .taken{
+    border: red solid 0.2rem;
+    opacity: 70%;
+}
+
+#icon-interface .taken:hover{
+    border: red solid 0.2rem;
+    cursor: unset;
+    padding: 1rem;
+    background: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 0.438rem 1.813rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    filter: invert(0%);
+}
+
 /* =======================================================================*/
 
 /* ============================= Error message ===========================*/
