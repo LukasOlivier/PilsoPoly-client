@@ -12,7 +12,10 @@ function init() {
         renderMainPage();
     } else if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
         initMap();
+    } else if (document.querySelector("body").id === "win-page") {
+        renderWinScreen();
     } else if (document.querySelector("body").id === "inventory") {
         initInventory();
     }
+
 }

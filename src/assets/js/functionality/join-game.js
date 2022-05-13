@@ -14,7 +14,8 @@ function fetchAllGames() {
                 }
                 checkName(name, game);
                 _gameID = gameID;
-                iconPicker(name);
+
+                renderIconPicker(name);
             })
             .catch(errorHandler);
     } catch (error) {

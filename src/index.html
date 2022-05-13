@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Monopoly</title>
+    <title>PilsoPoly</title>
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
     <link rel="stylesheet" href="assets/css/paying-rent.css">
 
+
     <script src="assets/js/config.js"></script>
     <script src="assets/js/helper.js"></script>
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+
 
     <script src="assets/js/functionality/get-playboard-tiles.js"></script>
     <script src="assets/js/functionality/roll-dice.js"></script>
@@ -33,9 +35,12 @@
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
     <script src="assets/js/render/main-page/trade-screen.js"></script>
-
     <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
+    <script src="assets/js/render/win-screen.js"></script>
+
+    <script src="assets/js/render/main-page/eventListeners.js"></script>
+
 </head>
 
 <body id="main-screen">
@@ -45,7 +50,7 @@
     <h1 id="game-screen">PilsoPoly</h1>
     <div>
         <img src="images/give-up.png" alt="give-up" title="give-up" id="give-up">
-        <a href="inventory.html"><img src="images/inventory.png" alt="map" title="inventory" id="inventory"></a>
+        <img src="images/inventory.png" alt="inventory" title="inventory" id="inventory">
         <img src="images/trade.png" alt="trade" title="trade" id="trade">
         <a href="see-all-the-streets-with-owners.html"><img src="images/map.png" alt="map" title="map" id="map"></a>
     </div>
@@ -63,11 +68,15 @@
             <button type="button" id="auction">Auction</button>
         </form>
     </div>
-    <div id="pay-rent" class="hidden">
-        <p>You need to pay rent!</p>
-    </div>
-    <div id="collect-rent" class="hidden">
-        <p></p>
+    <div id="flexbox-center">
+        <div id="card-result" class="hidden">
+        </div>
+        <div id="pay-rent" class="hidden">
+            <p>You need to pay rent!</p>
+        </div>
+        <div id="collect-rent" class="hidden">
+            <p></p>
+        </div>
     </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
@@ -85,7 +94,6 @@
             <div>
                 <button id="cancel-roll-dice">Cancel</button>
                 <button id="roll-dice">Roll the dice</button>
-
                 <button id="roll-dice-oke" class="hidden">Oke</button>
             </div>
         </dialog>

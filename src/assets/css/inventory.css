@@ -41,13 +41,16 @@ header a:hover {
 .hidden {
     display: none !important;
 }
-#cards{
+
+#cards {
     display: flex;
     flex-direction: row;
     gap: 3rem;
 }
+
 article {
-    border: black 0.15rem solid;
+    transition: all .2s ease-in-out;
+    border: black 0.2rem solid;
     height: 32vh;
     width: 10vw;
     padding: 0.5rem;
@@ -62,57 +65,68 @@ article .name {
     border: black 0.05rem solid;
     text-align: center;
     width: 80%;
-     margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 #cards .selected {
     border: red 0.2rem solid;
+    transform: scale(0.9);
 }
-article p, article li{
+
+article p, article li {
     font-size: 0.9rem;
 }
-article .card-info{
+
+article .card-info {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: auto;
 }
-article li{
+
+article li {
     margin-bottom: 0.2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-article p{
+
+article p {
     margin-bottom: 0.5rem;
 }
-article ol{
+
+article ol {
     margin-bottom: 0.7rem;
 }
+
 main {
     width: 60%;
     margin: 0 auto 0 auto;
 }
-#aside-parent{
+
+#aside-parent {
     display: flex;
     justify-content: center;
 }
 
-#card-actions{
+#card-actions {
     margin-left: 5rem;
     display: flex;
     justify-content: space-around;
 }
-#card-actions li{
+
+#card-actions li {
     width: 2rem;
 }
-#card-actions li:nth-of-type(2){
+
+#card-actions li:nth-of-type(2) {
     margin-right: 1rem;
 }
 
-#card-actions img{
+#card-actions img {
     max-width: 100%;
 }
+
 article img {
     height: 1rem;
 }
@@ -122,37 +136,45 @@ article .card-icon {
     width: 6rem;
     align-self: center;
 }
-aside{
+
+aside {
     display: flex;
     justify-content: center;
     height: 1rem;
     padding: 1rem;
     margin-bottom: 1rem;
 }
-aside:nth-of-type(1){
+
+aside:nth-of-type(1) {
     margin-right: 0;
     margin-left: auto;
     padding-left: 22rem;
 }
-aside:nth-of-type(2){
+
+aside:nth-of-type(2) {
     margin-left: auto;
     margin-right: 0;
 }
-aside ul{
+
+aside ul {
     display: flex;
     flex-direction: row;
     gap: 1rem;
 }
-aside li{
+
+aside li {
     width: 1rem;
     height: 1rem;
 }
-.clickable{
+
+.clickable {
     cursor: pointer;
 }
-.mortgaged{
+
+.mortgaged {
     border: orange solid 0.2rem;
 }
+
 .PURPLE {
     background: rgba(161, 27, 161, 0.5);
 }

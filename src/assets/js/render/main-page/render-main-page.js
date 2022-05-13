@@ -12,29 +12,10 @@ function renderMainPage() {
         cardsParent: document.querySelector("#cards-parent"),
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
-        backToCurrentPositionButton: document.querySelector("#back-to-current-position button")
+        backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
+        cardResult: document.querySelector("#card-result")
     };
-    document.querySelector("#map").addEventListener("click", showMap);
-    document.querySelector("#left-arrow").addEventListener("click", moveLeft);
-    document.querySelector("#right-arrow").addEventListener("click", moveRight);
-    document.querySelector("main").addEventListener("wheel", wheelEvent);
-    document.addEventListener('keydown', keyPressEvent);
-    document.querySelector("#back-to-current-position button").addEventListener("click", function (e){
-        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
-        seeOtherPlayerPosition(e);
-    });
-    document.querySelector("#give-up").addEventListener("click", giveUp);
-    document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
-    document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
-    document.querySelector(`#buy`).addEventListener('click', buyProperty);
-    document.querySelector("#trade").addEventListener("click", initTrade);
-    document.querySelector("#trade-select-player").addEventListener("click", selectPlayer);
-    document.querySelector("#cancel-select-player").addEventListener("click", cancelSelectPlayer);
-    document.querySelector("#cancel-trading").addEventListener("click", cancelTrading);
-    document.querySelector("#player1 ul").addEventListener("click", addToOffers);
-    document.querySelector("#player2 ul").addEventListener("click", addToWants);
-    document.querySelector("#send-trade").addEventListener("click", sendTrade);
-
+    addEventListeners();
     renderFirstTime();
 }
 
@@ -49,11 +30,12 @@ function renderFirstTime() {
             setTimeout(pollingGameState, 2000);
         });
 }
-function seeOtherPlayerPosition(e){
+
+function seeOtherPlayerPosition(e) {
     goToPlayerPosition(e.currentTarget.id);
 }
 
-function goToPlayerPosition(playerName){
+function goToPlayerPosition(playerName) {
     removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     // Find the current tile of the player
@@ -81,7 +63,7 @@ function renderCards(currentGameInfo) {
     findTileId(currentTileName);
 }
 
-function showBackToPositionButton(){
+function showBackToPositionButton() {
     if (_$containers.backToCurrentPositionButton.classList.contains("hidden")) {
         _$containers.backToCurrentPositionButton.classList.toggle("hidden");
     }
@@ -142,7 +124,9 @@ function renderPlayerInfo(currentGameInfo) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.id = nameToId(player.name);
         $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
-        $template.querySelector(`img`).src = `assets/media/${player.icon}.png`;
+        if (player.name === loadFromStorage("name")) {
+            $template.querySelector("img").src = `assets/media/${loadFromStorage("iconId")}.png`;
+        }
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
         document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
     });
@@ -188,11 +172,6 @@ function renderPlayerOnTile(tile, playerName) {
     }
 }
 
-
-function showMap() {
-    window.location.href = "see-all-the-streets-with-owners.html";
-}
-
 function giveUp() {
     _$containers["giveUpPopup"].classList.remove("hidden");
     document.querySelector("section").classList.add("hidden");
@@ -202,4 +181,17 @@ function giveUp() {
 function giveUpDeny() {
     document.querySelector("section").classList.remove("hidden");
     _$containers["giveUpPopup"].classList.add("hidden");
+}
+
+function closeDialog($dialog) {
+    $dialog.close();
+}
+
+function openDialog($dialog) {
+    $dialog.showModal();
+}
+
+function resetRollDiceText() {
+    _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
+    _$containers.rollDiceDialog.querySelector("#location").innerText = "";
 }

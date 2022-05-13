@@ -6,6 +6,8 @@ function initInventory() {
         });
     document.querySelectorAll("#colorFilter li").forEach(color => color.addEventListener('click', filterCards));
     document.querySelector("#mortgage").addEventListener('click', mortgage);
+    document.querySelector("#unmortgage").addEventListener('click', unMortgage);
+
 }
 
 function checkIfMortgaged() {
@@ -117,6 +119,10 @@ function mortgage() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
+            .then(() =>{
+                card.classList.add("mortgaged")
+                card.classList.remove("selected")
+            })
             .catch(errorHandler);
     })
 }
@@ -125,7 +131,10 @@ function unMortgage() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
+            .then(() => {
+                card.classList.remove("mortgaged")
+                card.classList.remove("selected")
+            })
             .catch(errorHandler);
-
     })
 }
