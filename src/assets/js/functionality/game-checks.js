@@ -7,7 +7,6 @@ function pollingGameState() {
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
-            console.log(currentGameInfo)
             checkIfPlayerWon(currentGameInfo)
 
         });
