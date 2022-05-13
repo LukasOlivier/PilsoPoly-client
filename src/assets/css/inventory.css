@@ -48,12 +48,13 @@ header a:hover {
 }
 article {
     border: black 0.15rem solid;
-    height: 28vh;
+    height: 32vh;
     width: 10vw;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: white;
 }
 
 article .name {
@@ -108,6 +109,7 @@ aside{
     height: 1rem;
     padding: 1rem;
     width: 100%;
+    margin-bottom: 1rem;
 }
 aside ul{
     display: flex;

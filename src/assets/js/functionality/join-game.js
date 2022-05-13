@@ -57,7 +57,6 @@ function joinGame(name, icon) {
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${_gameID}/players`, 'POST', body)
         .then(response => {
-            console.log(icon);
             _token = response.token;
             localStorage.clear();
             saveToStorage("gameId", _gameID);

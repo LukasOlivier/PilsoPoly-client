@@ -58,10 +58,7 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 makeBuyPopupNotHidden();
                 break;
             case "has to go to jail":
-                console.log("je moet naar het gevang");
-                break;
-            case "passes 'GO!' and receives 200 for it":
-                console.log("you receive 200 flappen e niffow");
+                console.log("jail");
                 break;
             case "should pay rent":
                 removeHiddenClassToPayRentDiv();

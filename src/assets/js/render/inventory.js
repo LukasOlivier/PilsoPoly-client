@@ -31,8 +31,6 @@ function selectCard(e) {
 function filterCards(e) {
     const filter = e.currentTarget.classList[0];
     document.querySelectorAll(".name").forEach(cardColor => {
-        console.log(cardColor.classList[1]);
-        console.log(filter);
         if (filter === "NONE") {
             document.querySelectorAll("article").forEach(card => {
                 card.classList.remove("hidden");
@@ -86,8 +84,6 @@ function renderHouses(players) {
     players.forEach(player => {
         if (player.name === loadFromStorage('name')) {
             player.properties.forEach(property => {
-                console.log(nameToId(property.property));
-                console.log(document.querySelector(`#${nameToId(property.property)}`))
                 const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
                 if ($currentCard.houses > 0) {
                     $currentCard.querySelector('.houses').src = `${property.houseCount}`.houses.png;
