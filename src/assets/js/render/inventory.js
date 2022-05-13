@@ -7,7 +7,6 @@ function initInventory() {
         .then(gameInfo => {
             gameInfo.players.forEach(player => {
                 if (player.name === loadFromStorage("name")) {
-                    console.log(player.properties)
                     _PlayerProperties = player.properties
                 }
             })
@@ -19,6 +18,8 @@ function initInventory() {
     document.querySelectorAll("#colorFilter li").forEach(color => color.addEventListener('click', filterCards));
     document.querySelector("#mortgage").addEventListener('click', mortgage);
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
+    document.querySelector("#buy").addEventListener('click', buyHouse);
+    document.querySelector("#sell").addEventListener('click', sellHouse);
 }
 
 function checkIfMortgaged() {
@@ -102,7 +103,6 @@ function renderRailroadUtility(tile) {
 function renderHouses() {
     _PlayerProperties.forEach(property => {
         const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
-        console.log(property)
         if (property.houseCount > 0) {
             $currentCard.querySelector(`li:nth-of-type(${property.houseCount}) img`).src = `images/${property.houseCount}houseBought.png`;
         }
@@ -119,6 +119,7 @@ function mortgage() {
             .then(() => {
                 card.classList.add("mortgaged")
                 card.classList.remove("selected")
+
             })
             .catch(errorHandler);
     })
@@ -130,6 +131,29 @@ function unMortgage() {
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
             .then(() => {
                 card.classList.remove("mortgaged")
+                card.classList.remove("selected")
+
+            })
+            .catch(errorHandler);
+    })
+}
+
+function buyHouse() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
+            .then(() => {
+                card.classList.remove("selected")
+            })
+            .catch(errorHandler);
+    })
+}
+
+function sellHouse() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'DELETE')
+            .then(() => {
                 card.classList.remove("selected")
             })
             .catch(errorHandler);
