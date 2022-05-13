@@ -1,3 +1,11 @@
+#main-screen .hidden {
+    display: none;
+}
+
+#main-screen .reduce-opacity{
+    opacity: 20%;
+}
+
 .player-pos {
     color: limegreen;
     margin-top: auto;
@@ -131,11 +139,6 @@ article:nth-of-type(3) img {
     font-size: 130%;
 }
 
-.hidden {
-    display: none !important;
-}
-
-
 header {
     background: rgb(178, 207, 224);
     padding: 1rem 0 1rem 0;
@@ -163,7 +166,6 @@ footer {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    /*TODO: ask if right (position:fixed)*/
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -435,23 +437,21 @@ footer .player-balance {
     display: flex;
     justify-content: space-around;
 }
-#pay-rent,#collect-rent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    width: 22vw;
-    height: 3vw;
+#pay-rent,#collect-rent,#chance-chest-result{
+    display: inline-block;
     background: white;
     border: black solid 0.1rem;
-    margin-top: 60vh;
-    margin-bottom: 1rem;
-    margin-left: 37%;
-    margin-right: auto;
     font-size: 1.2rem;
     padding: 1rem;
 }
-
+#flexbox-center{
+    position: fixed;
+    margin-top: 60vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 /* ======================================================================================================== */
 /* ===================================        Dialog css (Robin)       ==================================== */
 /* ======================================================================================================== */
