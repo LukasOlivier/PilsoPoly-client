@@ -33,7 +33,7 @@
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
-    <script src="assets/js/render/main-page/trade-screen.js"></script
+    <script src="assets/js/render/main-page/trade-screen.js"></script>
     <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
 </head>
@@ -44,30 +44,36 @@
         <a href="index.html">Back to main screen</a>
     </div>
 </header>
-<aside id="colorFilter">
-    <ul>
-        <li class="NONE clickAble"><img src="assets/media/remove-filter.png" alt=""></li>
-        <li class="PURPLE clickAble"></li>
-        <li class="BLACK clickAble"></li>
-        <li class="LIGHTBLUE clickAble"></li>
-        <li class="VIOLET clickAble"></li>
-        <li class="ORANGE clickAble"></li>
-        <li class="RED clickAble"></li>
-        <li class="YELLOW clickAble"></li>
-        <li class="DARKGREEN clickAble"></li>
-        <li class="DARKBLUE clickAble"></li>
-    </ul>
-    <ul>
-        <li><img src="images/plushouse.png" alt="add a house"></li>
-        <li><img src="images/plushouse.png" alt="add a house"></li>
-        <li><img src="images/plushouse.png" alt="add a house"></li>
-    </ul>
-</aside>
+<div id="aside-parent">
+    <aside id="colorFilter">
+        <ul>
+            <li class="NONE clickable"><img src="assets/media/remove-filter.png" alt=""></li>
+            <li class="PURPLE clickable"></li>
+            <li class="BLACK clickable"></li>
+            <li class="LIGHTBLUE clickable"></li>
+            <li class="VIOLET clickable"></li>
+            <li class="ORANGE clickable"></li>
+            <li class="RED clickable"></li>
+            <li class="YELLOW clickable"></li>
+            <li class="DARKGREEN clickable"></li>
+            <li class="DARKBLUE clickable"></li>
+        </ul>
+    </aside>
+    <aside>
+        <ul id="card-actions">
+            <li class="clickable"><img src="images/plushouse.png" alt="buy a house" title="buy a house"></li>
+            <li class="clickable"><img src="images/minhouse.png" alt="sell a house" title="sell a house"></li>
+            <li class="clickable" id="mortgage"><img src="images/mortgage.png" alt="mortgage card" title="mortgage card"></li>
+            <li class="clickable" id="unmortgage"><img src="images/unmortgage.png" alt="unmortgage card" title="unmortgage card"></li>
+        </ul>
+    </aside>
+</div>
+
 
 <main>
     <section id="cards">
         <template class="street-template" >
-            <article class="clickAble">
+            <article class="clickable">
                 <h3 class="name"></h3>
                 <div class="card-info">
                     <ol>
@@ -89,7 +95,7 @@
             </article>
         </template>
         <template class="railroad-utility-template">
-            <article class="clickAble">
+            <article class="clickable">
                 <h3 class="name"></h3>
                 <img class="card-icon" src="" alt="">
 

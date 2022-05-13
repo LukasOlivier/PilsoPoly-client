@@ -4,7 +4,24 @@ function initInventory() {
         .then(gameInfo => {
             renderInventoryCards(gameInfo);
         });
-    document.querySelectorAll("aside li").forEach(color => color.addEventListener('click', filterCards));
+    document.querySelectorAll("#colorFilter li").forEach(color => color.addEventListener('click', filterCards));
+    document.querySelector("#mortgage").addEventListener('click', mortgage);
+}
+
+function checkIfMortgaged() {
+    fetchFromServer(`/games/${_gameID}`, "GET")
+        .then(gameInfo => {
+            gameInfo.players.forEach(player => {
+                if (player.name === loadFromStorage("name")) {
+                    player.properties.forEach(property => {
+                        if (property.mortgage === true) {
+                            document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged")
+                        }
+                    })
+                }
+            })
+        })
+    document.querySelectorAll("article").forEach(card => console.log(card))
 }
 
 function renderInventoryCards(gameInfo) {
@@ -16,6 +33,7 @@ function renderInventoryCards(gameInfo) {
                 renderRailroadUtility(tile);
             }
         }
+        checkIfMortgaged();
     });
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(gameInfo => {
@@ -35,8 +53,7 @@ function filterCards(e) {
             document.querySelectorAll("article").forEach(card => {
                 card.classList.remove("hidden");
             });
-        }
-        else if (cardColor.classList[1] !== filter) {
+        } else if (cardColor.classList[1] !== filter) {
             cardColor.parentElement.classList.add("hidden");
         } else {
             cardColor.parentElement.classList.remove("hidden");
@@ -96,3 +113,19 @@ function renderHouses(players) {
     });
 }
 
+function mortgage() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
+            .catch(errorHandler);
+    })
+}
+
+function unMortgage() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
+            .catch(errorHandler);
+
+    })
+}
