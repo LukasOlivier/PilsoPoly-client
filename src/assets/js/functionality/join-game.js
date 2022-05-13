@@ -6,8 +6,6 @@ function fetchAllGames() {
         playerName: _$interfaces["joinInterface"].querySelector(".name").value.toLowerCase()
     };
     try {
-        console.log("yo")
-
         fetchFromServer(`/games?prefix=${_config.prefix}`)
             .then(response => {
                 const game = findGameByID(response, gameID);

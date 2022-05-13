@@ -16,7 +16,6 @@ function pollingGameState() {
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
     if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
-        console.log("Only checking fot the map");
         checkIfBought(newGameState);
     } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
@@ -88,14 +87,11 @@ function checkIfPlayerBankrupt(gameInfo) {
 
 function checkIfPlayerWon(gameInfo) {
     if (gameInfo.winner === loadFromStorage("name")) {
-        console.log(getPlayerBalance(gameInfo))
         renderWinScreen();
     }
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo) {
-    console.log(getLastTile(gameInfo));
-
     if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(getLastTile(gameInfo))) {
