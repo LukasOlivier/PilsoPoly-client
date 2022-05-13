@@ -44,6 +44,7 @@ header a:hover {
 
 #cards {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     gap: 3rem;
 }

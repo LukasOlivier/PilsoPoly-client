@@ -1,5 +1,17 @@
+let _PlayerProperties = null;
+
 function initInventory() {
     _token = {token: loadFromStorage("token")};
+    fetchFromServer(`/games/${_gameID}`, "GET")
+        //fetchFromServer(`/games/${_gameID}`, "GET")
+        .then(gameInfo => {
+            gameInfo.players.forEach(player => {
+                if (player.name === loadFromStorage("name")) {
+                    console.log(player.properties)
+                    _PlayerProperties = player.properties
+                }
+            })
+        })
     fetchFromServer(`/tiles`, 'GET')
         .then(gameInfo => {
             renderInventoryCards(gameInfo);
@@ -7,23 +19,14 @@ function initInventory() {
     document.querySelectorAll("#colorFilter li").forEach(color => color.addEventListener('click', filterCards));
     document.querySelector("#mortgage").addEventListener('click', mortgage);
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
-
 }
 
 function checkIfMortgaged() {
-    fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(gameInfo => {
-            gameInfo.players.forEach(player => {
-                if (player.name === loadFromStorage("name")) {
-                    player.properties.forEach(property => {
-                        if (property.mortgage === true) {
-                            document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged")
-                        }
-                    })
-                }
-            })
-        })
-    document.querySelectorAll("article").forEach(card => console.log(card))
+    _PlayerProperties.forEach(property => {
+        if (property.mortgage === true) {
+            document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged")
+        }
+    })
 }
 
 function renderInventoryCards(gameInfo) {
@@ -36,11 +39,8 @@ function renderInventoryCards(gameInfo) {
             }
         }
         checkIfMortgaged();
+        renderHouses();
     });
-    fetchFromServer(`/games/${_gameID}`, 'GET')
-        .then(gameInfo => {
-            renderHouses(gameInfo.players);
-        });
     document.querySelectorAll('article').forEach(card => card.addEventListener('click', selectCard));
 }
 
@@ -99,18 +99,15 @@ function renderRailroadUtility(tile) {
 }
 
 
-function renderHouses(players) {
-    players.forEach(player => {
-        if (player.name === loadFromStorage('name')) {
-            player.properties.forEach(property => {
-                const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
-                if ($currentCard.houses > 0) {
-                    $currentCard.querySelector('.houses').src = `${property.houseCount}`.houses.png;
-                }
-                if ($currentCard.houses > 0) {
-                    $currentCard.querySelector('.houses').src = "images/hotelBought.png";
-                }
-            });
+function renderHouses() {
+    _PlayerProperties.forEach(property => {
+        const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
+        console.log(property)
+        if (property.houseCount > 0) {
+            $currentCard.querySelector(`li:nth-of-type(${property.houseCount}) img`).src = `images/${property.houseCount}houseBought.png`;
+        }
+        if (property.hotelCount > 0) {
+            $currentCard.querySelector('li:nth-of-type(5) img').src = "images/hotelBought.png";
         }
     });
 }
@@ -119,7 +116,7 @@ function mortgage() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
-            .then(() =>{
+            .then(() => {
                 card.classList.add("mortgaged")
                 card.classList.remove("selected")
             })
