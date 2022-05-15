@@ -16,7 +16,9 @@ function initInventory() {
             })
         })
 
-    document.querySelectorAll("#colorFilter li").forEach(color => color.addEventListener('click', filterCards));
+    document.querySelectorAll("#color-filter li").forEach(color => {
+        color.addEventListener('click', filterCards)
+    });
     document.querySelector("#mortgage").addEventListener('click', mortgage);
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
     document.querySelector("#buy").addEventListener('click', buyHouse);
