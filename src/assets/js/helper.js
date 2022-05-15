@@ -52,6 +52,7 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(lastMove){
+    console.log(lastMove[0])
     lastMove.forEach(move => {
         switch (move.description) {
             case "can buy this property in direct sale":
