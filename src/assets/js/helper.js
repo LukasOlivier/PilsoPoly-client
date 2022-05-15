@@ -52,19 +52,17 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(lastMove){
-    console.log(lastMove[0])
+    const lastActionType = lastMove[lastMove.length - 1].actionType;
+    console.log(lastActionType)
     lastMove.forEach(move => {
-        switch (move.description) {
-            case "can buy this property in direct sale":
-                makeBuyPopupNotHidden();
-                break;
-            case "has to go to jail":
+        switch (move.actionType) {
+            case "jailed":
                 console.log("Jail!");
                 break;
-            case "passes 'GO!' and receives 200 for it":
+            case "go":
                 console.log("you passes 'GO!");
                 break;
-            case "should pay rent":
+            case "rent":
                 removeHiddenClassToPayRentDiv();
                 break;
             case "does nothing special":
@@ -77,9 +75,13 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
             case "already owns this property":
                 break;
             default:
-                document.querySelector("#chance-chest-result").classList.remove("hidden");
-                document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
-                setTimeout(hidePopup,8000);
+                if (lastActionType === "buy"){
+                    makeBuyPopupNotHidden();
+                }else{
+                    document.querySelector("#chance-chest-result").classList.remove("hidden");
+                    document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
+                    setTimeout(hidePopup,8000);
+                }
         }
     });
 }
