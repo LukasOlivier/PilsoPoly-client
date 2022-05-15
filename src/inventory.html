@@ -13,9 +13,6 @@
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/inventory.css">
-    <link rel="stylesheet" href="assets/css/grid-template-properties.css">
-    <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
-    <link rel="stylesheet" href="assets/css/paying-rent.css">
 
     <script src="assets/js/config.js"></script>
     <script src="assets/js/helper.js"></script>
@@ -47,7 +44,7 @@
 <div id="aside-parent">
     <aside id="color-filter">
         <ul>
-            <li class="NONE clickable"><img src="assets/media/remove-filter.png" alt=""></li>
+            <li class="NONE clickable"><img src="assets/media/remove-filter.png" alt="remove filter" title="remove filter"></li>
             <li class="PURPLE clickable"></li>
             <li class="BLACK clickable"></li>
             <li class="LIGHTBLUE clickable"></li>
@@ -97,7 +94,7 @@
         <template class="railroad-utility-template">
             <article class="clickable">
                 <h3 class="name"></h3>
-                <img class="card-icon" src="" alt="">
+                <img class="card-icon" src="" alt="card icon" title="card icon">
 
                 <div class="card-info">
                     <p class="rent"></p>
@@ -105,6 +102,7 @@
                 </div>
             </article>
         </template>
+        <div id="error" class="hidden"><p></p></div>
     </section>
 </main>
 </body>

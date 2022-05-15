@@ -5,16 +5,17 @@ function initInventory() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         //fetchFromServer(`/games/${_gameID}`, "GET")
         .then(gameInfo => {
+            fetchFromServer(`/tiles`, 'GET')
+                .then(tiles => {
+                    renderInventoryCards(tiles);
+                });
             gameInfo.players.forEach(player => {
                 if (player.name === loadFromStorage("name")) {
                     _PlayerProperties = player.properties
                 }
             })
         })
-    fetchFromServer(`/tiles`, 'GET')
-        .then(gameInfo => {
-            renderInventoryCards(gameInfo);
-        });
+
     document.querySelectorAll("#colorFilter li").forEach(color => color.addEventListener('click', filterCards));
     document.querySelector("#mortgage").addEventListener('click', mortgage);
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
@@ -145,9 +146,23 @@ function buyHouse() {
             .then(() => {
                 card.classList.remove("selected")
             })
-            .catch(errorHandler);
-    })
+            .catch(() => {
+                showErrorPopup();
+                setTimeout(hideErrorPopup,4000);
+                }
+            )
+    });
 }
+
+function showErrorPopup(){
+    document.querySelector("#error").classList.remove("hidden")
+    document.querySelector("#error p").innerText = "You can only place houses on full streets or need to improve other tiles firsts!"
+}
+
+function hideErrorPopup(){
+    document.querySelector("#error").classList.add("hidden")
+}
+
 
 function sellHouse() {
     document.querySelectorAll(".selected").forEach(card => {

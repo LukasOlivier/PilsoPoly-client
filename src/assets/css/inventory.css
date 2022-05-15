@@ -168,6 +168,15 @@ aside li {
     height: 1rem;
 }
 
+#error{
+    padding: 1rem;
+    position: fixed;
+    background: red;
+    color: white;
+    top: 50%;
+    left: 35%;
+}
+
 .clickable {
     cursor: pointer;
 }

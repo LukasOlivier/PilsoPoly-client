@@ -76,16 +76,16 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
             case "already owns this property":
                 break;
             default:
-                document.querySelector("#chance-chest-result").classList.remove("hidden");
-                document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
+                document.querySelector("#card-result").classList.remove("hidden");
+                document.querySelector("#card-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
                 setTimeout(hidePopup,8000);
         }
     });
 }
 
 function hidePopup(){
-    document.querySelector("#chance-chest-result").classList.add("hidden");
-    document.querySelector("#chance-chest-result").innerText = "";
+    document.querySelector("#card-result").classList.add("hidden");
+    document.querySelector("#card-result").innerText = "";
 
 }
 
