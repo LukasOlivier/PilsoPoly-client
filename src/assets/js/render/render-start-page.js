@@ -106,8 +106,14 @@ function renderRules() {
 }
 
 function renderAllAvailableGames(allGames) {
-    _$interfaces["joinInterface"].style.opacity = "0.2";
-    _$interfaces["seeAllGamesInterface"].classList.remove("hidden");
+    document.addEventListener('click', function (e) {
+        if (!_$interfaces.seeAllGamesInterface.contains(e.target)) {
+            _$interfaces.seeAllGamesInterface.classList.add("hidden");
+            _$interfaces.joinInterface.classList.remove("reduce-opacity")
+        }
+    });
+    _$interfaces.joinInterface.classList.add("reduce-opacity")
+    _$interfaces.seeAllGamesInterface.classList.remove("hidden");
     // renders all games that are PilsoPoly and that haven't started.
     // also makes the li clickable
     const $ul = _$interfaces["seeAllGamesInterface"].querySelector('ul');
