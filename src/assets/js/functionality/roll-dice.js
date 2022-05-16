@@ -20,7 +20,7 @@ function rollDice() {
             checkIfRolledTwice(response);
             getTiles(response);
             saveCurrentTile(response);
-            seeWhatActionThatNeedsToBeTaken(getLastMove(response));
+            seeWhatActionThatNeedsToBeTaken(response);
         })
         .catch(errorHandler);
 }
