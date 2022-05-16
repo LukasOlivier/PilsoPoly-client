@@ -19,7 +19,7 @@ function makeBuyPopupNotHidden() {
 
 function addPropertyToInventory() {
     const currentInventory = loadFromStorage('inventory');
-    currentInventory.push(loadFromStorage("currentTile"));
+    currentInventory.push(nameToId(loadFromStorage("currentTile")));
     saveToStorage("inventory",currentInventory);
 
 }

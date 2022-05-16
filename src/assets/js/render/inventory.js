@@ -25,7 +25,7 @@ function initInventory() {
     document.querySelector("#sell").addEventListener('click', sellHouse);
 }
 
-function checkIfMortgaged() {
+function checkIfMortgaged(tileName) {
     _PlayerProperties.forEach(property => {
         if (property.mortgage === true) {
             document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged")
@@ -35,16 +35,17 @@ function checkIfMortgaged() {
 
 function renderInventoryCards(gameInfo) {
     gameInfo.forEach(tile => {
-        if (loadFromStorage('inventory').includes(tile.name)) {
+        if (loadFromStorage('inventory').includes(nameToId(tile.name))) {
+            //console.log(tile)
             if (tile.type === "street") {
                 renderStreet(tile);
             } else {
                 renderRailroadUtility(tile);
             }
-            checkIfMortgaged();
-            renderHouses();
         }
     });
+    checkIfMortgaged();
+    renderHouses();
     document.querySelectorAll('article').forEach(card => card.addEventListener('click', selectCard));
 }
 
