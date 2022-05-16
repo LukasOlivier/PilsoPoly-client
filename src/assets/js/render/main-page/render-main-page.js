@@ -54,7 +54,7 @@ function goToPlayerPosition(playerName) {
     findTileId(currentTileName);
 }
 
-function renderCards(currentGameInfo) {
+function enderCards(currentGameInfo) {
     removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     const playerName = loadFromStorage("name");

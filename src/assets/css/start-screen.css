@@ -166,7 +166,7 @@ body {
 
 #join-interface #show-all-games {
     width: 3rem;
-    background: url("../media/list-icon.png");
+    background: url("../../images/icons/start-page/list-icon.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
