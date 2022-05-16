@@ -53,7 +53,7 @@ function nameToId(name){
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response){
     const lastMove = getLastMove(response)
-    console.log(lastMove)
+
     const lastActionType = getLastTile(response).actionType;
     lastMove.forEach(move => {
         switch (move.actionType) {

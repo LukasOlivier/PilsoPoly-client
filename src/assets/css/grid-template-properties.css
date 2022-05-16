@@ -4,7 +4,7 @@
     grid-template-areas:
             ".             .               .      .       .             .         .            .      brewery-artois              ."
             ".             heineken        primus stella  rodenbach     duvel     brugse-zot   .      brewery-rodenbach           ."
-            "delhaize365   sparta-pils     bavik  jupiler kriek         omer      chimay       cornet brewery-lupulus             electric-company"
+            "delhaize-365  sparta-pils     bavik  jupiler kriek         omer      chimay       cornet brewery-lupulus             electric-company"
             "cara          schuttenbräu    bockor maes    kasteel-rouge westmalle westvleteren bush12 brewery-omer-vander-ghinste water-works";
 }
 
@@ -16,8 +16,8 @@
     opacity: 0.4;
 }
 
-.delhaize365 {
-    grid-area: delhaize365;
+.delhaize-365 {
+    grid-area: delhaize-365;
     background-color: saddlebrown
 }
 
