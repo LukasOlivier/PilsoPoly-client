@@ -36,7 +36,6 @@ function checkIfMortgaged(tileName) {
 function renderInventoryCards(gameInfo) {
     gameInfo.forEach(tile => {
         if (loadFromStorage('inventory').includes(nameToId(tile.name))) {
-            //console.log(tile)
             if (tile.type === "street") {
                 renderStreet(tile);
             } else {
@@ -130,16 +129,20 @@ function mortgage() {
 }
 
 function unMortgage() {
-    document.querySelectorAll(".selected").forEach(card => {
-        const cardName = card.querySelector("h3").innerText
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
-            .then(() => {
-                card.classList.remove("mortgaged")
-                card.classList.remove("selected")
+    try {
+        document.querySelectorAll(".selected").forEach(card => {
+            const cardName = card.querySelector("h3").innerText
+            fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
+                .then(() => {
+                    card.classList.remove("mortgaged")
+                    card.classList.remove("selected")
 
-            })
-            .catch(errorHandler);
-    })
+                })
+                .catch(errorHandler);
+        })
+    } catch (Illelgal) {
+        errorHandler(error);
+    }
 }
 
 function buyHouse() {
@@ -150,19 +153,19 @@ function buyHouse() {
                 card.classList.remove("selected")
             })
             .catch(() => {
-                showErrorPopup();
-                setTimeout(hideErrorPopup,4000);
+                    showErrorPopup();
+                    setTimeout(hideErrorPopup, 4000);
                 }
             )
     });
 }
 
-function showErrorPopup(){
+function showErrorPopup() {
     document.querySelector("#error").classList.remove("hidden")
     document.querySelector("#error p").innerText = "You can only place houses on full streets or need to improve other tiles firsts!"
 }
 
-function hideErrorPopup(){
+function hideErrorPopup() {
     document.querySelector("#error").classList.add("hidden")
 }
 
