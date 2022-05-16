@@ -42,8 +42,13 @@ function goToPlayerPosition(playerName) {
     _gameState.players.forEach(function (player) {
         if (player.name === playerName) {
             currentTileName = player.currentTile;
+            if (playerName === loadFromStorage("name")){
+                hideBackToPosition();
+            }else{
+                showBackToPosition();
+            }
         }
-        showBackToPositionButton();
+
     });
     // Find that tile in localStorage
     findTileId(currentTileName);
@@ -63,11 +68,13 @@ function renderCards(currentGameInfo) {
     findTileId(currentTileName);
 }
 
-function showBackToPositionButton() {
-    if (_$containers.backToCurrentPositionButton.classList.contains("hidden")) {
-        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
-    }
+function hideBackToPosition() {
+    _$containers.backToCurrentPositionButton.classList.add("hidden");
 }
+function showBackToPosition() {
+    _$containers.backToCurrentPositionButton.classList.remove("hidden");
+}
+
 
 
 function getCardById(id) {

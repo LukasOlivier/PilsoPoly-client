@@ -47,7 +47,6 @@ function addEventListenersBoardNavigation() {
     document.querySelector("main").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#back-to-current-position button").addEventListener("click", function (e) {
-        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
         seeOtherPlayerPosition(e);
     });
 }

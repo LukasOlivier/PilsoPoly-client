@@ -52,10 +52,9 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response){
-    console.log(response)
     const lastMove = getLastMove(response)
+    console.log(lastMove)
     const lastActionType = getLastTile(response).actionType;
-    console.log(lastActionType)
     lastMove.forEach(move => {
         switch (move.actionType) {
             case "rent":
@@ -91,7 +90,7 @@ function getLastMove(response) {
 }
 
 function getLastTile(response) {
-    return getLastMove(response).slice(-1)[0].tile;
+    return getLastMove(response).slice(-1)[0];
 }
 
 function findTileId(tileName){

@@ -85,7 +85,6 @@ function checkIfPlayerBankrupt(gameInfo) {
 }
 
 function checkIfPlayerWon(gameInfo) {
-    console.log(gameInfo.winner)
     if (gameInfo.winner === loadFromStorage("name")) {
         window.location.href = "win-screen.html"
     }
@@ -94,8 +93,8 @@ function checkIfPlayerWon(gameInfo) {
 function checkIfPlayerNeedsToPayRent(gameInfo) {
     if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
         const inventory = loadFromStorage('inventory');
-        if (inventory.includes(getLastTile(gameInfo))) {
-            collectDebt(getLastTile(gameInfo), gameInfo.currentPlayer, loadFromStorage("name"));
+        if (inventory.includes(getLastTile(gameInfo).tile)) {
+            collectDebt(getLastTile(gameInfo).tile, gameInfo.currentPlayer, loadFromStorage("name"));
         }
     } else {
         saveToStorage("rent", ``);
