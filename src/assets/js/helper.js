@@ -51,8 +51,10 @@ function nameToId(name){
 }
 
 // switch case where all possible actions on the tiles
-function seeWhatActionThatNeedsToBeTaken(lastMove){
-    const lastActionType = lastMove[lastMove.length - 1].actionType;
+function seeWhatActionThatNeedsToBeTaken(response){
+    console.log(response)
+    const lastMove = getLastMove(response)
+    const lastActionType = getLastTile(response).actionType;
     console.log(lastActionType)
     lastMove.forEach(move => {
         switch (move.actionType) {
@@ -71,7 +73,7 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                     makeBuyPopupNotHidden();
                 }else{
                     document.querySelector("#card-description").classList.remove("hidden");
-                    document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
+                    document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                     setTimeout(hidePopup,8000);
                 }
         }
@@ -79,8 +81,8 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
 }
 
 function hidePopup(){
-    document.querySelector("#chance-chest-result").classList.add("hidden");
-    document.querySelector("#chance-chest-result").innerText = "";
+    document.querySelector("#card-description").classList.add("hidden");
+    document.querySelector("#card-description").innerText = "";
 
 }
 

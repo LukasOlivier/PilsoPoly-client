@@ -13,7 +13,7 @@ function renderMainPage() {
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
         backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
-        cardResult: document.querySelector("#card-result")
+        cardDescription: document.querySelector("#card-description")
     };
     addEventListeners();
     renderFirstTime();

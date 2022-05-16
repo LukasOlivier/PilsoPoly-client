@@ -85,8 +85,9 @@ function checkIfPlayerBankrupt(gameInfo) {
 }
 
 function checkIfPlayerWon(gameInfo) {
+    console.log(gameInfo.winner)
     if (gameInfo.winner === loadFromStorage("name")) {
-        renderWinScreen();
+        window.location.href = "win-screen.html"
     }
 }
 
