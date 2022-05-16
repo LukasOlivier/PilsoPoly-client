@@ -94,6 +94,7 @@ function checkIfPlayerNeedsToPayRent(gameInfo) {
     if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(getLastTile(gameInfo).tile)) {
+            console.log(getLastTile(gameInfo))
             collectDebt(getLastTile(gameInfo).tile, gameInfo.currentPlayer, loadFromStorage("name"));
         }
     } else {

@@ -19,10 +19,10 @@ function collectDepthPopupNotHidden(property, name){
     const collectingRentPopup = document.querySelector(`#collect-rent`);
     collectingRentPopup.innerText = `You received money because ${name} is on tile: ${property}`;
     collectingRentPopup.classList.remove(`hidden`);
-    setTimeout(collectDepbtPopupHidden, 5000);
+    setTimeout(collectDepthPopupHidden, 5000);
 }
 
-function collectDepbtPopupHidden(){
+function collectDepthPopupHidden(){
     document.querySelector(`#collect-rent`).classList.add("hidden");
 }
 
