@@ -439,7 +439,7 @@ footer .player-balance {
     justify-content: space-around;
 }
 
-#pay-rent, #collect-rent, #card-result {
+#pay-rent, #collect-rent, #card-description {
     display: inline-block;
     background: white;
     border: black solid 0.1rem;

@@ -56,20 +56,12 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
     console.log(lastActionType)
     lastMove.forEach(move => {
         switch (move.actionType) {
-            case "jailed":
-                console.log("Jail!");
-                break;
-            case "go":
-                console.log("you passes 'GO!");
-                break;
             case "rent":
                 removeHiddenClassToPayRentDiv();
                 break;
-            case "does nothing special":
-                break;
-            case "":
-                document.querySelector("#card-result").classList.remove("hidden");
-                document.querySelector("#card-result").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
+            case "jailed":
+                document.querySelector("#card-description").classList.remove("hidden");
+                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
                 setTimeout(hidePopup,8000);
                 break;
             case "already owns this property":
@@ -78,8 +70,8 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 if (lastActionType === "buy"){
                     makeBuyPopupNotHidden();
                 }else{
-                    document.querySelector("#chance-chest-result").classList.remove("hidden");
-                    document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
+                    document.querySelector("#card-description").classList.remove("hidden");
+                    document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
                     setTimeout(hidePopup,8000);
                 }
         }
