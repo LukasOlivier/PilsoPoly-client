@@ -2,146 +2,147 @@
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-areas:
-            ".             .           .                   .           .               .              .              .          short-line-rr         ."
-            ".             connecticut virginia            new-york    illinois-avenue marvin-gardens pennsylvania   .          baltimore-and-ohio-rr ."
-            "baltic        vermont     states              tennessee   indiana-avenue  ventnor        north-carolina boardwalk  pennsylvania-rr       water-works"
-            "mediterranean oriental    saint-charles-place saint-james kentucky-avenue atlantic       pacific        park-place reading-rr            electric-company";
+            ".             .               .      .       .             .         .            .      brewery-artois              ."
+            ".             heineken        primus stella  rodenbach     duvel     brugse-zot   .      brewery-rodenbach           ."
+            "delhaize365   sparta-pils     bavik  jupiler kriek         omer      chimay       cornet brewery-lupulus             electric-company"
+            "cara          schuttenbräu    bockor maes    kasteel-rouge westmalle westvleteren bush12 brewery-omer-vander-ghinste water-works";
 }
 
 .info-container .not-bought {
     background-color: #979797
 }
+
 .info-container .mortgaged {
     opacity: 0.4;
 }
 
-.mediterranean {
-    grid-area: mediterranean;
+.delhaize365 {
+    grid-area: delhaize365;
     background-color: saddlebrown
 }
 
-.baltic {
-    grid-area: baltic;
+.cara {
+    grid-area: cara;
     background-color: saddlebrown
 }
 
-.oriental {
-    grid-area: oriental;
+.heineken {
+    grid-area: heineken;
     background-color: lightblue;
 }
 
-.vermont {
-    grid-area: vermont;
+.sparta-pils {
+    grid-area: sparta-pils;
     background-color: lightblue;
 }
 
-.connecticut {
-    grid-area: connecticut;
+.schuttenbräu {
+    grid-area: schuttenbräu;
     background-color: lightblue;
 }
 
-.saint-charles-place {
-    grid-area: saint-charles-place;
+.primus {
+    grid-area: primus;
     background-color: purple
 }
 
-.states {
-    grid-area: states;
+.bavik {
+    grid-area: bavik;
     background-color: purple
 }
 
-.virginia {
-    grid-area: virginia;
+.bockor {
+    grid-area: bockor;
     background-color: purple
 }
 
-.saint-james {
-    grid-area: saint-james;
+.stella {
+    grid-area: stella;
     background-color: orange
 }
 
-.tennessee {
-    grid-area: tennessee;
+.jupiler {
+    grid-area: jupiler;
     background-color: orange
 }
 
-.new-york {
-    grid-area: new-york;
+.maes {
+    grid-area: maes;
     background-color: orange
 }
 
-.kentucky-avenue {
-    grid-area: kentucky-avenue;
+.rodenbach {
+    grid-area: rodenbach;
     background-color: red
 }
 
-.indiana-avenue {
-    grid-area: indiana-avenue;
+.kriek {
+    grid-area: kriek;
     background-color: red
 }
 
-.illinois-avenue {
-    grid-area: illinois-avenue;
+.kasteel-rouge {
+    grid-area: kasteel-rouge;
     background-color: red
 }
 
-.atlantic {
-    grid-area: atlantic;
+.duvel {
+    grid-area: duvel;
     background-color: yellow
 }
 
-.ventnor {
-    grid-area: ventnor;
+.omer {
+    grid-area: omer;
     background-color: yellow
 }
 
-.marvin-gardens {
-    grid-area: marvin-gardens;
+.westmalle {
+    grid-area: westmalle;
     background-color: yellow
 }
 
-.pacific {
-    grid-area: pacific;
+.brugse-zot {
+    grid-area: brugse-zot;
     background-color: green
 }
 
-.north-carolina {
-    grid-area: north-carolina;
+.chimay {
+    grid-area: chimay;
     background-color: green
 }
 
-.pennsylvania {
-    grid-area: pennsylvania;
+.westvleteren {
+    grid-area: westvleteren;
     background-color: green
 }
 
-.park-place {
-    grid-area: park-place;
+.cornet {
+    grid-area: cornet;
     background-color: darkblue
 }
 
-.boardwalk {
-    grid-area: boardwalk;
+.bush12 {
+    grid-area: bush12;
     background-color: darkblue
 }
 
-.reading-rr {
-    grid-area: reading-rr;
+.brewery-artois {
+    grid-area: brewery-artois;
     background-color: black
 }
 
-.pennsylvania-rr {
-    grid-area: pennsylvania-rr;
+.brewery-rodenbach {
+    grid-area: brewery-rodenbach;
     background-color: black
 }
 
-.baltimore-and-ohio-rr {
-    grid-area: baltimore-and-ohio-rr;
+.brewery-lupulus {
+    grid-area: brewery-lupulus;
     background-color: black
 }
 
-.short-line-rr {
-    grid-area: short-line-rr;
+.brewery-omer-vander-ghinste {
+    grid-area: brewery-omer-vander-ghinste;
     background-color: black
 }
 
