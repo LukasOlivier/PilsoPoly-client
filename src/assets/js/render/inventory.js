@@ -41,9 +41,9 @@ function renderInventoryCards(gameInfo) {
             } else {
                 renderRailroadUtility(tile);
             }
+            checkIfMortgaged();
+            renderHouses();
         }
-        checkIfMortgaged();
-        renderHouses();
     });
     document.querySelectorAll('article').forEach(card => card.addEventListener('click', selectCard));
 }

@@ -1,12 +1,13 @@
-function collectDebt(property , player, name){
+function collectDebt(property , player, debtorName){
     if (`${name}${property}${player}` !== loadFromStorage("rent")){
-        fetchFromServer(`/games/${_gameID}/players/${name}/properties/${property}/visitors/${player}/rent`, 'DELETE');
+        fetchFromServer(`/games/${_gameID}/players/${player}/properties/${property}/visitors/${debtorName}/rent`, 'DELETE');
         saveToStorage("rent", `${name}${property}${player}`);
-        collectDepthPopupNotHidden(property, name);
+        collectDepthPopupNotHidden(property, player);
     }
 }
 
 function removeHiddenClassToPayRentDiv(){
+
     document.querySelector(`#pay-rent`).classList.remove("hidden");
     setTimeout(addHiddenClassToPayRentDiv, 5000);
 }
