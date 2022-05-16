@@ -58,7 +58,9 @@ function seeWhatActionThatNeedsToBeTaken(response){
     lastMove.forEach(move => {
         switch (move.actionType) {
             case "rent":
-                removeHiddenClassToPayRentDiv();
+                if (!inventory.includes(getLastTile(gameInfo).tile)) {
+                    removeHiddenClassToPayRentDiv();
+                }
                 break;
             case "jailed":
                 document.querySelector("#card-description").classList.remove("hidden");
