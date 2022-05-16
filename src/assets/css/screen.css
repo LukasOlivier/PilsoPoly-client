@@ -13,8 +13,8 @@
     font-family: "Oswald", serif;
 }
 
-.active-player {
-    filter: drop-shadow(0 0 0.5rem #222);
+.info-container .active-player {
+    filter: invert(0%);
 }
 
 .player-bought {
