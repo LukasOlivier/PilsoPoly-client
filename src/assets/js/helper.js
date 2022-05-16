@@ -52,22 +52,25 @@ function nameToId(name){
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response){
-    const lastMove = getLastMove(response)
-
+    const lastMove = getLastMove(response);
     const lastActionType = getLastTile(response).actionType;
+    console.log(getLastTile(response).actionType);
+    console.log(getLastTile(response).tile);
+
     lastMove.forEach(move => {
         switch (move.actionType) {
             case "rent":
-                if (!loadFromStorage("inventory").includes(getLastTile(gameInfo).tile)) {
+                if (!loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
                     removeHiddenClassToPayRentDiv();
                 }
                 break;
             case "jailed":
                 document.querySelector("#card-description").classList.remove("hidden");
                 document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
-                setTimeout(hidePopup,8000);
                 break;
-            case "already owns this property":
+            case "go":
+                document.querySelector("#card-description").classList.remove("hidden");
+                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 break;
             default:
                 if (lastActionType === "buy"){
@@ -75,7 +78,6 @@ function seeWhatActionThatNeedsToBeTaken(response){
                 }else{
                     document.querySelector("#card-description").classList.remove("hidden");
                     document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
-                    setTimeout(hidePopup,8000);
                 }
         }
     });
@@ -84,7 +86,6 @@ function seeWhatActionThatNeedsToBeTaken(response){
 function hidePopup(){
     document.querySelector("#card-description").classList.add("hidden");
     document.querySelector("#card-description").innerText = "";
-
 }
 
 function getLastMove(response) {

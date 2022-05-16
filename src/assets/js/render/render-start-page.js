@@ -68,11 +68,10 @@ function renderLobby(game) {
 
 
 function goToLobby(name,icon){
-    console.log(name)
     if (document.querySelector(`#${icon}`).classList.contains("taken")){
         return;
     }
-    clearTimeout(timoutIDForIconPicker)
+    clearTimeout(timoutIDForIconPicker);
     loadGameDataForLobby();
     joinGame(name, icon);
     _$interfaces.iconInterface.classList.add("hidden");
@@ -88,8 +87,8 @@ function loadGameDataForIconPicker() {
                     document.querySelector(`#${player.icon}`).classList.add("taken");
                 }
             });
-            timoutIDForIconPicker = setTimeout(loadGameDataForIconPicker,1500)
-        })
+            timoutIDForIconPicker = setTimeout(loadGameDataForIconPicker,1500);
+        });
 }
 
 function renderIconPicker(name) {
@@ -109,10 +108,10 @@ function renderAllAvailableGames(allGames) {
     document.addEventListener('click', function (e) {
         if (!_$interfaces.seeAllGamesInterface.contains(e.target)) {
             _$interfaces.seeAllGamesInterface.classList.add("hidden");
-            _$interfaces.joinInterface.classList.remove("reduce-opacity")
+            _$interfaces.joinInterface.classList.remove("reduce-opacity");
         }
     });
-    _$interfaces.joinInterface.classList.add("reduce-opacity")
+    _$interfaces.joinInterface.classList.add("reduce-opacity");
     _$interfaces.seeAllGamesInterface.classList.remove("hidden");
     // renders all games that are PilsoPoly and that haven't started.
     // also makes the li clickable

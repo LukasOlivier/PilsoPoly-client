@@ -1,9 +1,8 @@
 let _PlayerProperties = null;
+_token = {token: loadFromStorage("token")};
 
 function initInventory() {
-    _token = {token: loadFromStorage("token")};
     fetchFromServer(`/games/${_gameID}`, "GET")
-        //fetchFromServer(`/games/${_gameID}`, "GET")
         .then(gameInfo => {
             fetchFromServer(`/tiles`, 'GET')
                 .then(tiles => {
@@ -11,13 +10,21 @@ function initInventory() {
                 });
             gameInfo.players.forEach(player => {
                 if (player.name === loadFromStorage("name")) {
-                    _PlayerProperties = player.properties
+                    _PlayerProperties = player.properties;
                 }
-            })
-        })
+            });
+        });
+    addEventListeners();
+}
 
+function addEventListeners(){
+    document.addEventListener('click', function (e) {
+        if (!e.target.classList.contains("errormessages")) {
+            hideErrorPopup();
+        }
+    });
     document.querySelectorAll("#color-filter li").forEach(color => {
-        color.addEventListener('click', filterCards)
+        color.addEventListener('click', filterCards);
     });
     document.querySelector("#mortgage").addEventListener('click', mortgage);
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
@@ -25,12 +32,12 @@ function initInventory() {
     document.querySelector("#sell").addEventListener('click', sellHouse);
 }
 
-function checkIfMortgaged(tileName) {
+function checkIfMortgaged() {
     _PlayerProperties.forEach(property => {
         if (property.mortgage === true) {
-            document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged")
+            document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged");
         }
-    })
+    });
 }
 
 function renderInventoryCards(gameInfo) {
@@ -92,7 +99,7 @@ function renderRailroadUtility(tile) {
     $template.querySelector('.mortgage').innerText = `Mortgage: M${tile.mortgage}`;
     $template.querySelector('.name').classList.add(tile.color);
     const $icon = $template.querySelector('.card-icon');
-    if (tile.name.includes("RR")) {
+    if (tile.type === "railroad") {
         $icon.src = `images/railroad.png`;
     } else if (tile.name.includes("Electric")) {
         $icon.src = `images/electric.png`;
@@ -117,66 +124,58 @@ function renderHouses() {
 
 function mortgage() {
     document.querySelectorAll(".selected").forEach(card => {
-        const cardName = card.querySelector("h3").innerText
+        const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
             .then(() => {
-                card.classList.add("mortgaged")
-                card.classList.remove("selected")
+                card.classList.add("mortgaged");
+                card.classList.remove("selected");
 
-            })
-            .catch(errorHandler);
-    })
+            }).catch(() => showErrorPopup("This tile is already mortgaged"));
+    });
 }
 
-function unMortgage() {
-    try {
-        document.querySelectorAll(".selected").forEach(card => {
-            const cardName = card.querySelector("h3").innerText
-            fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
-                .then(() => {
-                    card.classList.remove("mortgaged")
-                    card.classList.remove("selected")
 
-                })
-                .catch(errorHandler);
-        })
-    } catch (Illelgal) {
-        errorHandler(error);
-    }
+function unMortgage() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText;
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
+            .then(() => {
+                card.classList.remove("mortgaged");
+                card.classList.remove("selected");
+
+            })
+            .catch(() => showErrorPopup("This tile is not mortgaged"));
+    });
 }
 
 function buyHouse() {
     document.querySelectorAll(".selected").forEach(card => {
-        const cardName = card.querySelector("h3").innerText
+        const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
             .then(() => {
-                card.classList.remove("selected")
+                card.classList.remove("selected");
             })
-            .catch(() => {
-                    showErrorPopup();
-                    setTimeout(hideErrorPopup, 4000);
-                }
-            )
+            .catch(() => showErrorPopup("You can only place houses on full streets or need to improve other tiles firsts!"));
     });
 }
 
-function showErrorPopup() {
-    document.querySelector("#error").classList.remove("hidden")
-    document.querySelector("#error p").innerText = "You can only place houses on full streets or need to improve other tiles firsts!"
+function showErrorPopup(errorMessage) {
+    document.querySelector(".errormessages").classList.remove("hidden");
+    document.querySelector(".errormessages p").innerText = errorMessage;
 }
 
 function hideErrorPopup() {
-    document.querySelector("#error").classList.add("hidden")
+    document.querySelector(".errormessages").classList.add("hidden");
 }
 
 
 function sellHouse() {
     document.querySelectorAll(".selected").forEach(card => {
-        const cardName = card.querySelector("h3").innerText
+        const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'DELETE')
             .then(() => {
-                card.classList.remove("selected")
+                card.classList.remove("selected");
             })
-            .catch(errorHandler);
-    })
+            .catch(() => showErrorPopup("You don't have houses or need to sell other first!"));
+    });
 }

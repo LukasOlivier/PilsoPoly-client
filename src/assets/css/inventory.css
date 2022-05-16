@@ -6,6 +6,27 @@ body {
     display: flex;
     flex-direction: column;
 }
+.errormessages p {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: #000000 solid 0.1rem;
+    background-color: #FF0000FF;
+    text-align: center;
+}
+
+.errormessages{
+    position: fixed;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+}
+
+.errormessages p:empty {
+    padding: 0;
+    border: none;
+}
 
 header {
     background: rgb(178, 207, 224);

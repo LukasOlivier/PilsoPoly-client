@@ -5,6 +5,6 @@ function generateVisualAPIErrorInConsole(){
 }
 
 function errorHandler(error){
-    console.log(error)
+    console.error(error);
     document.querySelector(_config.errorHandlerSelector).innerText = error;
 }
