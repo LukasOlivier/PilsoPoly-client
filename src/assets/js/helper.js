@@ -58,7 +58,7 @@ function seeWhatActionThatNeedsToBeTaken(response){
     lastMove.forEach(move => {
         switch (move.actionType) {
             case "rent":
-                if (!inventory.includes(getLastTile(gameInfo).tile)) {
+                if (!loadFromStorage("inventory").includes(getLastTile(gameInfo).tile)) {
                     removeHiddenClassToPayRentDiv();
                 }
                 break;
