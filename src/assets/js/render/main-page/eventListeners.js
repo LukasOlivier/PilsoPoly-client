@@ -7,7 +7,7 @@ function addEventListeners() {
     document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
     document.addEventListener('click', function (e) {
         if (!e.target.classList.contains("#card-description") && e.target.id !== "roll-dice-oke") {
-            hidePopup();
+            hidePopupCardDescription();
         }
     });
 }

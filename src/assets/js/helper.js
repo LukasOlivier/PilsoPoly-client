@@ -92,9 +92,9 @@ function goToPlayerPosition(playerName) {
         if (player.name === playerName) {
             currentTileName = player.currentTile;
             if (playerName === loadFromStorage("name")){
-                hideBackToPosition();
+                hideElement(_$containers.backToCurrentPositionButton);
             }else{
-                showBackToPosition();
+                showElement(_$containers.backToCurrentPositionButton);
             }
         }
 
@@ -112,7 +112,7 @@ function updateLastMoveInfo(gameInfo) {
     };
 }
 
-function hidePopup() {
+function hidePopupCardDescription() {
     document.querySelector("#card-description").classList.add("hidden");
     document.querySelector("#card-description").innerText = "";
 }
@@ -144,8 +144,17 @@ function getPlayerBalance(gameInfo) {
     let balance = 0;
     gameInfo.players.forEach(player => {
         if (player.name === loadFromStorage("name")) {
-            balance = player.money
+            balance = player.money;
         }
-    })
-    return balance
+    });
+    return balance;
+}
+
+
+function showElement($element){
+    $element.classList.remove("hidden");
+}
+
+function hideElement($element){
+    $element.classList.add("hidden");
 }

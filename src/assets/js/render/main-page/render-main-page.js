@@ -49,15 +49,6 @@ function renderCards(currentGameInfo) {
     findTileId(currentTileName);
 }
 
-function hideBackToPosition() {
-    _$containers.backToCurrentPositionButton.classList.add("hidden");
-}
-function showBackToPosition() {
-    _$containers.backToCurrentPositionButton.classList.remove("hidden");
-}
-
-
-
 function getCardById(id) {
     const toShow = createToShow(id, id - 2, id + 3);
     for (const cardId of toShow) {
@@ -128,56 +119,39 @@ function renderMortgagedFooter(property, playerName) {
 }
 
 function renderMortgagedMain($propertyCard, playerName) {
-    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
-    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
-    $propertyCard.style.border = "orange solid 0.1rem";
+    hideElement($propertyCard.querySelector(`.player-bought`));
+    showElement($propertyCard.querySelector(`.player-mortgaged`));
+    $propertyCard.classList.add("card-mortgaged");
     $propertyCard.querySelector(`.player-mortgaged span`).innerText = playerName;
 
 }
 
 function renderBoughtMain($propertyCard, playerName) {
-    $propertyCard.querySelector(`.price`).classList.add("hidden");
-    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
-    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
-    $propertyCard.style.border = "red solid";
+    hideElement($propertyCard.querySelector(`.price`));
+    hideElement($propertyCard.querySelector(`.player-mortgaged`));
+    showElement( $propertyCard.querySelector(`.player-bought`));
     $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
 }
 
 function renderPlayerBankrupt(playerName) {
     const $container = document.querySelector(`#${playerName}`);
-    $container.style.opacity = "0.5";
-    $container.querySelector("p").style.color = "red";
     $container.querySelector("p").innerHTML = `${playerName}: BANKRUPT`;
 }
 
 function renderPlayerOnTile(tile, playerName) {
-    document.querySelector(`#${tile} .player-pos`).classList.remove('hidden');
+    showElement(document.querySelector(`#${tile} .player-pos`));
     const playersOnTile = document.querySelector(`#${tile} .player-pos span`).innerText.toLowerCase();
     if (!playersOnTile.includes(playerName)) {
-        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName} `);
+        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName}`);
     }
 }
 
 function giveUp() {
-    _$containers["giveUpPopup"].classList.remove("hidden");
-    document.querySelector("section").classList.add("hidden");
-
+    showElement(_$containers.giveUpPopup);
+    hideElement(document.querySelector("section"));
 }
 
 function giveUpDeny() {
-    document.querySelector("section").classList.remove("hidden");
-    _$containers["giveUpPopup"].classList.add("hidden");
-}
-
-function closeDialog($dialog) {
-    $dialog.close();
-}
-
-function openDialog($dialog) {
-    $dialog.showModal();
-}
-
-function resetRollDiceText() {
-    _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
-    _$containers.rollDiceDialog.querySelector("#location").innerText = "";
+    hideElement(_$containers.giveUpPopup);
+    showElement(document.querySelector("section"));
 }

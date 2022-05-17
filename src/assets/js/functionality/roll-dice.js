@@ -20,7 +20,7 @@ function rollDice() {
             updateLastMoveInfo(response);
             checkIfRolledTwice(response);
             getTiles(response);
-            saveCurrentTile(response);
+            //saveCurrentTile(response);
             seeWhatActionThatNeedsToBeTaken(response);
         })
         .catch(errorHandler);
@@ -50,10 +50,24 @@ function checkIfRolledTwice(response) {
     changePopUpText(text);
 }
 
-
+/*
 function saveCurrentTile(response) {
     let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;
     saveToStorage("currentTile", currentTile);
 }
 
+ */
+
+function closeDialog($dialog) {
+    $dialog.close();
+}
+
+function openDialog($dialog) {
+    $dialog.showModal();
+}
+
+function resetRollDiceText() {
+    _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
+    _$containers.rollDiceDialog.querySelector("#location").innerText = "";
+}
 

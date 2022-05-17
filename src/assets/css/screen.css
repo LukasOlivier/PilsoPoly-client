@@ -24,6 +24,19 @@
     font-family: "Oswald", serif;
 }
 
+.player-bankrupt {
+    opacity: 50%;
+    color: red;
+}
+
+#cards-parent .card-mortgaged {
+    border: orange solid 0.2rem;
+}
+
+#cards-parent .card-bought {
+    border: red solid 0.2rem;
+}
+
 .player-mortgaged {
     margin-top: auto;
     color: orange;
@@ -455,15 +468,18 @@ footer .player-balance {
     flex-direction: row;
     justify-content: center;
 }
-#buy-property-popup p{
+
+#buy-property-popup p {
     margin-bottom: 1rem;
 }
-#buy-property-popup button{
+
+#buy-property-popup button {
     width: 5rem;
     border: black solid 0.05rem;
     background: white;
 }
-#buy-property-popup form{
+
+#buy-property-popup form {
     display: flex;
     justify-content: center;
     gap: 1rem;
