@@ -84,6 +84,25 @@ function seeWhatActionThatNeedsToBeTaken(response) {
     });
 }
 
+function goToPlayerPosition(playerName) {
+    removeTemplateContents("#cards-parent article");
+    let currentTileName = null;
+    // Find the current tile of the player
+    _gameState.players.forEach(function (player) {
+        if (player.name === playerName) {
+            currentTileName = player.currentTile;
+            if (playerName === loadFromStorage("name")){
+                hideBackToPosition();
+            }else{
+                showBackToPosition();
+            }
+        }
+
+    });
+    // Find that tile in localStorage
+    findTileId(currentTileName);
+}
+
 function updateLastMoveInfo(gameInfo) {
     _lastMoveInfo = {
         moves: getLastMove(gameInfo).moves,
