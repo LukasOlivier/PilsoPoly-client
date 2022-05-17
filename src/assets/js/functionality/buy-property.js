@@ -12,11 +12,6 @@ function makeBuyPopupHidden() {
     document.querySelector(`#buy-property-popup`).classList.add("hidden");
 }
 
-// make the div where you can push the button buy pop up
-function makeBuyPopupNotHidden() {
-    document.querySelector(`#buy-property-popup`).classList.remove("hidden");
-}
-
 function addPropertyToInventory() {
     const currentInventory = loadFromStorage('inventory');
     currentInventory.push(nameToId(loadFromStorage("currentTile")));

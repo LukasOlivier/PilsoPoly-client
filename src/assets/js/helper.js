@@ -1,4 +1,10 @@
 "use strict";
+let _lastMoveInfo = {
+    moves: null,
+    player: null,
+    tile: null,
+    actionType: null
+};
 
 /* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
 function linkPlayersAndStreets(players) {
@@ -37,27 +43,22 @@ function removeTemplateContents(container) {
 }
 
 // This function finds a game with a specific ID in an array of games.
-function findGameByID(allGames, id){
-    for (const game of allGames){
-        if (game.id === id){
+function findGameByID(allGames, id) {
+    for (const game of allGames) {
+        if (game.id === id) {
             return game;
         }
     }
-    throw new Error("There is no game with this code(2)");
+    throw new Error("There is no game with this code");
 }
 
-function nameToId(name){
+function nameToId(name) {
     return name.toLowerCase().replace(/\s/g, "-");
 }
 
 // switch case where all possible actions on the tiles
-function seeWhatActionThatNeedsToBeTaken(response){
-    const lastMove = getLastMove(response);
-    const lastActionType = getLastTile(response).actionType;
-    console.log(getLastTile(response).actionType);
-    console.log(getLastTile(response).tile);
-
-    lastMove.forEach(move => {
+function seeWhatActionThatNeedsToBeTaken(response) {
+    _lastMoveInfo.moves.forEach(move => {
         switch (move.actionType) {
             case "rent":
                 if (!loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
@@ -73,9 +74,9 @@ function seeWhatActionThatNeedsToBeTaken(response){
                 document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 break;
             default:
-                if (lastActionType === "buy"){
+                if (_lastMoveInfo.actionType === "buy") {
                     makeBuyPopupNotHidden();
-                }else{
+                } else {
                     document.querySelector("#card-description").classList.remove("hidden");
                     document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 }
@@ -83,20 +84,34 @@ function seeWhatActionThatNeedsToBeTaken(response){
     });
 }
 
-function hidePopup(){
+function updateLastMoveInfo(gameInfo) {
+    _lastMoveInfo = {
+        moves: getLastMove(gameInfo).moves,
+        player: getLastMove(gameInfo).player,
+        tileName: getLastTile(gameInfo).tile,
+        actionType: getLastTile(gameInfo).actionType
+    };
+}
+
+function hidePopup() {
     document.querySelector("#card-description").classList.add("hidden");
     document.querySelector("#card-description").innerText = "";
 }
-
-function getLastMove(response) {
-    return response.turns.slice(-1)[0].moves;
+function getLastMove(gameInfo) {
+    const indexOfLastMove = gameInfo.turns.length - 1;
+    return gameInfo.turns[indexOfLastMove];
 }
 
-function getLastTile(response) {
-    return getLastMove(response).slice(-1)[0];
+function getLastTile(gameInfo) {
+    const indexOfLastMove = gameInfo.turns.length - 1;
+    const lastMove = (gameInfo.turns[indexOfLastMove]);
+    const allTilesInLastMove = lastMove.moves;
+    const indexOfLastTile = allTilesInLastMove.length - 1;
+    return allTilesInLastMove[indexOfLastTile];
 }
 
-function findTileId(tileName){
+
+function findTileId(tileName) {
     loadFromStorage("tiles").forEach(function (tile) {
         if (tile.name === tileName) {
             _tempPlayerPositionID = tile.position;
@@ -106,10 +121,10 @@ function findTileId(tileName){
     });
 }
 
-function getPlayerBalance(gameInfo){
+function getPlayerBalance(gameInfo) {
     let balance = 0;
     gameInfo.players.forEach(player => {
-        if(player.name === loadFromStorage("name")){
+        if (player.name === loadFromStorage("name")) {
             balance = player.money
         }
     })

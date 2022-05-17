@@ -20,14 +20,15 @@ function rollDice() {
             checkIfRolledTwice(response);
             getTiles(response);
             saveCurrentTile(response);
+            updateLastMoveInfo(response);
             seeWhatActionThatNeedsToBeTaken(response);
         })
         .catch(errorHandler);
 }
 
-function changePopUpText(text, location) {
+function changePopUpText(text) {
     _$containers.rollDiceDialog.querySelector('p').innerText = text;
-    document.querySelector("#location").innerText = `You landed at ${location[0].tile}`;
+    document.querySelector("#location").innerText = `You landed at ${_lastMoveInfo.tileName}`;
     togglePopUpButtons();
 }
 
@@ -46,13 +47,10 @@ function checkIfRolledTwice(response) {
         _$containers["rollDiceOpenDialog"].disabled = true;
         text = `You threw ${totalRolled}!`;
     }
-    changePopUpText(text, getLastMove(response));
+    changePopUpText(text);
 }
 
-function getLastMove(response) {
-    return response.turns.slice(-1)[0].moves;
-}
-//
+
 function saveCurrentTile(response) {
     let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;
     saveToStorage("currentTile", currentTile);

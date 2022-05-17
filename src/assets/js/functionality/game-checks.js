@@ -1,16 +1,16 @@
 "use strict";
 
 function pollingGameState() {
-    // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
-            checkIfPlayerWon(currentGameInfo)
-
+            checkIfPlayerWon(currentGameInfo);
         });
 }
+
+
 
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
@@ -25,8 +25,7 @@ function checkGameStates(newGameState) {
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
-        checkIfPlayerWon(newGameState)
-    }
+        checkIfPlayerWon(newGameState)}
 }
 
 function checkIfBought(gameInfo) {
@@ -91,10 +90,10 @@ function checkIfPlayerWon(gameInfo) {
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo) {
-    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
+    if (gameInfo.turns.length !== 0 && getLastPlayer(gameInfo) !== loadFromStorage("name")) {
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(nameToId(getLastTile(gameInfo).tile))) {
-            collectDebt(getLastTile(gameInfo).tile, gameInfo.currentPlayer, loadFromStorage("name"));
+            collectDebt(getLastTile(gameInfo).tile, getLastPlayer(gameInfo), loadFromStorage("name"));
         }
     } else {
         saveToStorage("rent", ``);
