@@ -75,7 +75,7 @@ function seeWhatActionThatNeedsToBeTaken(response) {
                 break;
             default:
                 if (_lastMoveInfo.actionType === "buy") {
-                    makeBuyPopupNotHidden();
+                    document.querySelector(`#buy-property-popup`).classList.remove("hidden");
                 } else {
                     document.querySelector("#card-description").classList.remove("hidden");
                     document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);

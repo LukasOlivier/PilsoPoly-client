@@ -90,7 +90,7 @@ function checkIfPlayerWon(gameInfo) {
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo) {
-    if (gameInfo.turns.length !== 0 && getLastPlayer(gameInfo) !== loadFromStorage("name")) {
+    if (gameInfo.turns.length !== 0 && _lastMoveInfo.player !== loadFromStorage("name")) {
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(nameToId(getLastTile(gameInfo).tile))) {
             collectDebt(getLastTile(gameInfo).tile, getLastPlayer(gameInfo), loadFromStorage("name"));

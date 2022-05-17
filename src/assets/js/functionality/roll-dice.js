@@ -17,10 +17,10 @@ function rollDice() {
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
         .then(response => {
+            updateLastMoveInfo(response);
             checkIfRolledTwice(response);
             getTiles(response);
             saveCurrentTile(response);
-            updateLastMoveInfo(response);
             seeWhatActionThatNeedsToBeTaken(response);
         })
         .catch(errorHandler);
