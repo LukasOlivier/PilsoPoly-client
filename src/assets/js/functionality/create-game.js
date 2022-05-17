@@ -34,7 +34,6 @@ function checkInput(numberOfPlayers, name) {
 
 
 function createGame(numberOfPlayer, name) {
-    console.log(name)
     const body = {
         prefix: _config.prefix,
         numberOfPlayers: numberOfPlayer
