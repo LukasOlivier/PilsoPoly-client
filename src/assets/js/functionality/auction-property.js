@@ -34,7 +34,7 @@ function addOne() {
       bidder: loadFromStorage("name"),
         amount: newBid
     };
-    fetchFromServer(`/games/${_gameID}/players/TEST/auctions/TEST/bid`, "POST", body);
+    placeBidOnAuction(body)
 }
 
 function addTen() {
@@ -44,7 +44,7 @@ function addTen() {
         bidder: loadFromStorage("name"),
         amount: parseInt(newBid)
     };
-    fetchFromServer(`/games/${_gameID}/players/TEST/auctions/TEST/bid`, "POST", body);
+    placeBidOnAuction(body)
 }
 
 function addHunderd() {
@@ -54,5 +54,9 @@ function addHunderd() {
         bidder: loadFromStorage("name"),
         amount: parseInt(newBid)
     };
+    placeBidOnAuction(body)
+}
+
+function placeBidOnAuction(body) {
     fetchFromServer(`/games/${_gameID}/players/TEST/auctions/TEST/bid`, "POST", body);
 }
