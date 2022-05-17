@@ -33,6 +33,7 @@
     <script src="assets/js/render/main-page/move-player.js"></script>
     <script src="assets/js/render/main-page/trade-screen.js"></script>
     <script src="assets/js/functionality/buy-property.js"></script>
+    <script src="assets/js/functionality/auction-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
 
 
@@ -62,6 +63,19 @@
             <button type="button" id="auction">Auction</button>
         </form>
     </div>
+    <dialog id="auction-property-popup">
+        <article>
+            <h2>Property auction</h2>
+            <p>You have 30 seconds to be the highest bidder</p>
+            <h3 id="property-name"></h3>
+            <p id="property-original-price"></p>
+            <p id="highest-bid"></p>
+            <p id="duration"></p>
+            <button id="add-1">+1M</button>
+            <button id="add-10">+10M</button>
+            <button id="add-100">+100M</button>
+        </article>
+    </dialog>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
         <p>This will turn over all your assest to your oldest debtor and yield.</p>

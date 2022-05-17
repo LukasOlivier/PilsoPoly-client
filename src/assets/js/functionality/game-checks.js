@@ -22,6 +22,7 @@ function checkGameStates(newGameState) {
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
+        checkIfPlayerAuction(newGameState);
     }
 }
 
@@ -78,4 +79,11 @@ function checkIfPlayerBankrupt(gameInfo) {
             renderPlayerBankrupt(player.name.toLowerCase());
         }
     });
+}
+
+function checkIfPlayerAuction(gameInfo) {
+    if ( gameInfo.auction !== null ) {
+        renderAuctionPopup(gameInfo);
+        showAuctionPopup();
+    }
 }

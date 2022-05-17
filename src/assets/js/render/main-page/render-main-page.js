@@ -27,6 +27,7 @@ function renderMainPage() {
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
     document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
+    document.querySelector("#auction").addEventListener('click', auctionProperty);
     document.querySelector("#trade").addEventListener("click", initTrade);
     document.querySelector("#trade-select-player").addEventListener("click", selectPlayer);
     document.querySelector("#cancel-select-player").addEventListener("click", cancelSelectPlayer);
@@ -34,6 +35,11 @@ function renderMainPage() {
     document.querySelector("#player1 ul").addEventListener("click", addToOffers);
     document.querySelector("#player2 ul").addEventListener("click", addToWants);
     document.querySelector("#send-trade").addEventListener("click", sendTrade);
+
+    document.querySelector("#add-1").addEventListener("click", addOne);
+    document.querySelector("#add-10").addEventListener("click", addTen);
+    document.querySelector("#add-100").addEventListener("click", addHunderd);
+
     renderFirstTime();
 }
 
