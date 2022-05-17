@@ -6,7 +6,7 @@ function pollingGameState() {
         .then(currentGameInfo => {
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
-            setTimeout(pollingGameState, 2000);
+            setTimeout(pollingGameState, 1000);
         });
 }
 
