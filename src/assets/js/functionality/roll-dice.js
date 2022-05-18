@@ -27,7 +27,7 @@ function rollDice() {
 
 function changePopUpText(text) {
     _$containers.rollDiceDialog.querySelector('p').innerText = text;
-    document.querySelector("#location").innerText = `You landed at ${_lastMoveInfo.tileName}`;
+    document.querySelector("#location").innerText = `You landed at ${_currentMoveInfo.tileName}`;
     togglePopUpButtons();
 }
 
@@ -48,14 +48,6 @@ function checkIfRolledTwice(response) {
     }
     changePopUpText(text);
 }
-
-/*
-function saveCurrentTile(response) {
-    let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;
-    saveToStorage("currentTile", currentTile);
-}
-
- */
 
 function closeDialog($dialog) {
     $dialog.close();
