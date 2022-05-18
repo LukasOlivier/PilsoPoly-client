@@ -7,9 +7,10 @@ function pollingGameState() {
             updatePlayerProperties(currentGameInfo)
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
-            setTimeout(pollingGameState, 2000);
+            setTimeout(pollingGameState, 1000);
             checkIfPlayerWon(currentGameInfo);
             checkIfBought(currentGameInfo);
+            checkIfPlayerAuction(currentGameInfo);
         });
 }
 
@@ -24,6 +25,7 @@ function checkGameStates(newGameState) {
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
+        checkIfPlayerAuction(newGameState);
     }
 }
 
@@ -97,6 +99,15 @@ function checkIfPlayerBankrupt(gameInfo) {
             renderPlayerBankrupt(player.name.toLowerCase());
         }
     });
+}
+
+function checkIfPlayerAuction(gameInfo) {
+    if (gameInfo.auction !== null) {
+        renderAuctionPopup(gameInfo);
+        showAuctionPopup();
+    } else {
+        hideAuctionPopup();
+    }
 }
 
 function checkIfPlayerWon(gameInfo) {
