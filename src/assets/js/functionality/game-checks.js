@@ -24,6 +24,7 @@ function checkGameStates(newGameState) {
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
+       checkIfPlayerAuction(newGameState);
     }
 }
 

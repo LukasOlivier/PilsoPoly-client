@@ -3,7 +3,7 @@
 function auctionProperty() {
     const auctionDuration = 30;
     const playerName = loadFromStorage("name");
-    const currentTile = loadFromStorage("currentTile");
+    const currentTile = _lastMoveInfo.tileName;
     const body = {
         "start-bid": 0,
         "duration": auctionDuration,
@@ -16,7 +16,7 @@ function auctionProperty() {
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
-    document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highest_bid}`;
+    document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
     document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
 }
 
