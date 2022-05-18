@@ -7,13 +7,6 @@ let _currentMoveInfo = {
     actionType: ""
 };
 
-let _lastMoveInfo = {
-    moves: "",
-    player: "",
-    tileName: "",
-    actionType: ""
-};
-
 /* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
 function linkPlayersAndStreets(players) {
     const playersBoughtProperties = {};
@@ -123,7 +116,6 @@ function goToPlayerPosition(playerName) {
 
 function updateLastMoveInfo(gameInfo) {
     if (gameInfo.turns.length !== 0){
-        _lastMoveInfo = _currentMoveInfo;
         _currentMoveInfo = {
             moves: getLastMove(gameInfo).moves,
             player: getLastMove(gameInfo).player,

@@ -7,7 +7,6 @@ function pollingGameState() {
             updatePlayerProperties(currentGameInfo)
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
-            _lastMoveInfo = currentGameInfo;
             setTimeout(pollingGameState, 2000);
             checkIfPlayerWon(currentGameInfo);
             checkIfBought(currentGameInfo);
