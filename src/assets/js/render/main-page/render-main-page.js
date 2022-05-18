@@ -13,7 +13,8 @@ function renderMainPage() {
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
         backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
-        cardDescription: document.querySelector("#card-description")
+        cardDescription: document.querySelector("#card-description"),
+        jailFreeButton: document.querySelector("#jail-free")
     };
     addEventListeners();
     renderFirstTime();
@@ -22,13 +23,18 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            _gameState = currentGameInfo;
-            updatePlayerProperties(currentGameInfo)
-            renderPlayerInfo(currentGameInfo);
-            checkIfPlayerBankrupt(currentGameInfo);
-            checkIfPlayerCanRoll(currentGameInfo);
-            getTiles(currentGameInfo);
-            setTimeout(pollingGameState, 2000);
+            try {
+                _gameState = currentGameInfo;
+                updatePlayerInfo(currentGameInfo);
+                renderPlayerInfo(currentGameInfo);
+                getTiles(currentGameInfo);
+                pollingGameState(currentGameInfo);
+                checkIfCurrentTileBuyAble(currentGameInfo);
+                checkIfPlayerCanRoll(currentGameInfo);
+                checkIfPlayerJailed(currentGameInfo);
+            }catch (error){
+                console.error(error);
+            }
         });
 }
 

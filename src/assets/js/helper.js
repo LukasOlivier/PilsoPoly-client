@@ -70,16 +70,26 @@ function nameToId(name) {
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
-            if (move.actionType === "rent" && !loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
-                removeHiddenClassToPayRentDiv();
-            } else if(move.actionType !== "buy" && move.actionType !== "rent"){
-                document.querySelector("#card-description").classList.remove("hidden");
-                document.querySelector("#card-description p").innerText = move.description
-            }
-        });
-    if (_currentMoveInfo.actionType === "buy") {
-        document.querySelector(`#buy-property-popup`).classList.remove("hidden");
+        if (move.actionType === "rent") {
+            checkIfPlayerNeedsToPayRent(move,response);
+        }else{
+            addActionDescriptionToActivity(move.description);
+        }
+    });
+    checkIfCurrentTileBuyAble(response);
+}
+
+function checkIfPlayerNeedsToPayRent(move,response) {
+    if(!loadFromStorage("inventory").includes(nameToId(getCurrentTile(response).tile))){
+        addActionDescriptionToActivity(move.description);
+    }else {
+        addActionDescriptionToActivity("You own this property");
     }
+}
+
+function addActionDescriptionToActivity(actionDescription) {
+    document.querySelector("#activity").insertAdjacentHTML("afterbegin", `<li><p>${actionDescription}</p></li>`);
+
 }
 
 function goToPlayerPosition(playerName) {
@@ -101,33 +111,31 @@ function goToPlayerPosition(playerName) {
     findTileId(currentTileName);
 }
 
-function updateLastMoveInfo(gameInfo) {
+function updateCurrentMoveInfo(gameInfo) {
     if (gameInfo.turns.length !== 0) {
         _currentMoveInfo = {
-            moves: getLastMove(gameInfo).moves,
-            player: getLastMove(gameInfo).player,
-            tileName: getLastTile(gameInfo).tile,
-            actionType: getLastTile(gameInfo).actionType
+            moves: getCurrentMove(gameInfo).moves,
+            player: getCurrentMove(gameInfo).player,
+            tileName: getCurrentTile(gameInfo).tile,
+            actionType: getCurrentTile(gameInfo).actionType
         };
+        saveToStorage("currentTile", _currentMoveInfo.tileName);
+        saveToStorage("currentTileAction", _currentMoveInfo.actionType);
     }
 }
 
-function hidePopupCardDescription() {
-    document.querySelector("#card-description").classList.add("hidden");
-    document.querySelector("#card-description p").innerText = "";
-}
-
-function getLastMove(gameInfo) {
+function getCurrentMove(gameInfo) {
     const indexOfLastMove = gameInfo.turns.length - 1;
     return gameInfo.turns[indexOfLastMove];
 }
 
-function getLastTile(gameInfo) {
-    const indexOfLastMove = gameInfo.turns.length - 1;
-    const lastMove = (gameInfo.turns[indexOfLastMove]);
-    const allTilesInLastMove = lastMove.moves;
-    const indexOfLastTile = allTilesInLastMove.length - 1;
-    return allTilesInLastMove[indexOfLastTile];
+function getCurrentTile(gameInfo) {
+    if (getCurrentMove(gameInfo) !== undefined) {
+        const allTilesInLastMove = getCurrentMove(gameInfo).moves;
+        const indexOfLastTile = allTilesInLastMove.length - 1;
+        return allTilesInLastMove[indexOfLastTile];
+    }
+    return null;
 }
 
 

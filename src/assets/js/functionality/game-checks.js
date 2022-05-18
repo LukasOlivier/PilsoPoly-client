@@ -6,79 +6,65 @@ function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             updatePlayerInfo(currentGameInfo);
-            updatePlayerProperties(currentGameInfo)
             checkGameStates(currentGameInfo);
+            checkPlayerBalance(currentGameInfo);
+            checkIfPlayerOnTile(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
-            checkIfPlayerWon(currentGameInfo);
-            checkIfBought(currentGameInfo);
-            checkIfPlayerJailed(currentGameInfo);
-            console.log(_player)
-
         });
 }
-
 function updatePlayerInfo(gameInfo) {
     gameInfo.players.forEach(player => {
         if (player.name === loadFromStorage("name")) {
             _player = player;
         }
-    })
+    });
     return null;
 }
 
-function checkIfPlayerHasFreeCards(){
-    return  _player.getOutOfJailFreeCards > 0;
-}
-
-function enableButton($element){
-    document.querySelector($element).disabled = false;
-    hideElement($element);
-}
-
-function disableButton($element){
-    document.querySelector($element).disabled = true;
-    document.querySelector($element).classList.add("disabled")
+function checkIfPlayerHasFreeCards() {
+    if (_player.getOutOfJailFreeCards > 0) {
+        _$containers.jailFreeButton.disabled = false;
+        _$containers.jailFreeButton.classList.remove("disabled");
+    }
 }
 
 function checkIfPlayerJailed(gameInfo) {
-    if (checkIfPlayerHasFreeCards){
-
-    }
-    if (_player.jailed && gameInfo.currentPlayer === _player.name){
-        document.querySelector("#jail-free").disabled = true;
+    _$containers.jailFreeButton.classList.add("disabled");
+    _$containers.jailFreeButton.disabled = true;
+    if (_player.jailed && gameInfo.currentPlayer === _player.name) {
         showElement(document.querySelector("#get-out-of-jail-popup"));
-else{
-
-        }
-    }else {
+        checkIfPlayerHasFreeCards();
+    } else {
         hideElement(document.querySelector("#get-out-of-jail-popup"));
     }
 }
 
-
+function checkIfCurrentTileBuyAble(gameInfo) {
+    const currentTileName = loadFromStorage("currentTile");
+    const currentTileAction = loadFromStorage("currentTileAction");
+    if (gameInfo.turns.length > 0){
+        if (currentTileAction === "buy" && gameInfo.currentPlayer === loadFromStorage("name") && !loadFromStorage("inventory").includes(nameToId(currentTileName))){
+            showElement(document.querySelector("#buy-property-popup"));
+        }
+    }
+}
 
 
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
     if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
-        checkIfPlayerNeedsToPayRent(newGameState);
-        if (newGameState.currentPlayer !== _gameState.currentPlayer) {
-            checkIfPlayerCanRoll(newGameState);
-        }
-        checkIfItsYourTurn(newGameState);
-        checkIfPlayerOnTile(newGameState);
-        checkPlayerBalance(newGameState);
+        updatePlayerProperties(newGameState);
+        checkIfPlayerWon(newGameState);
+        checkIfBought(newGameState);
+        checkIfPlayerJailed(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
         checkIfPlayerJailed(newGameState);
-    }
-}
-
-function checkIfItsYourTurn(gameInfo){
-    if (_player.name === gameInfo.currentPlayer){
-        hideElement(document.querySelector("#card-description"))
-
+        if (newGameState.currentPlayer !== _gameState.currentPlayer) {
+            checkIfPlayerCanRoll(newGameState);
+            checkIfPlayerNeedsToReceiveRent(newGameState);
+        }
     }
 }
 
@@ -123,7 +109,7 @@ function checkIfHousesBoughtMain(gameInfo) {
                 }
             }
         });
-    })
+    });
 }
 
 function checkPlayerBalance(gameInfo) {
@@ -160,12 +146,12 @@ function checkIfPlayerWon(gameInfo) {
     }
 }
 
-function checkIfPlayerNeedsToPayRent(gameInfo) {
-    console.log(getLastTile(gameInfo).tile);
-    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage("name")) {
+function checkIfPlayerNeedsToReceiveRent(gameInfo) {
+    if (gameInfo.turns.length > 0 && _gameState.currentPlayer !== loadFromStorage("name")) {
+        const currentTile = getCurrentTile(gameInfo);
         const inventory = loadFromStorage('inventory');
-        if (inventory.includes(nameToId(getLastTile(gameInfo).tile))) {
-            collectDebt(getLastTile(gameInfo).tile, _gameState.currentPlayer, loadFromStorage("name"));
+        if (inventory.includes(nameToId(currentTile.tile)) && currentTile.actionType !== "mortgage") {
+            collectDebt(currentTile.tile, _gameState.currentPlayer, loadFromStorage("name"));
         }
     } else {
         saveToStorage("rent", ``);
