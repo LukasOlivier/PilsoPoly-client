@@ -1,31 +1,29 @@
 "use strict";
+let _playerProperties;
 
 function pollingGameState() {
-    // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
+            updatePlayerProperties(currentGameInfo)
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
-            checkIfPlayerWon(currentGameInfo)
-
+            checkIfPlayerWon(currentGameInfo);
+            checkIfBought(currentGameInfo);
         });
 }
 
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
-    if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
-        checkIfBought(newGameState);
-    } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+    if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+        checkIfPlayerNeedsToPayRent(newGameState);
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfPlayerCanRoll(newGameState);
-            checkIfPlayerNeedsToPayRent(newGameState);
         }
-        checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
-        checkIfPlayerWon(newGameState)
+        checkIfPlayerWon(newGameState);
     }
 }
 
@@ -50,10 +48,27 @@ function checkIfBought(gameInfo) {
                     renderMortgagedMain($propertyCard, player.name);
                 } else if ($propertyCard !== null) {
                     renderBoughtMain($propertyCard, player.name);
+                    checkIfHousesBoughtMain(gameInfo);
                 }
             }
         });
     });
+}
+
+function checkIfHousesBoughtMain(gameInfo) {
+    gameInfo.players.forEach(player => {
+        player.properties.forEach(property => {
+            const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
+            if ($currentCard !== null) {
+                if (property.houseCount > 0) {
+                    $currentCard.querySelector(`li:nth-of-type(${property.houseCount}) img`).src = `images/${property.houseCount}houseBought.png`;
+                }
+                if (property.hotelCount > 0) {
+                    $currentCard.querySelector('li:nth-of-type(5) img').src = "images/hotelBought.png";
+                }
+            }
+        });
+    })
 }
 
 function checkPlayerBalance(gameInfo) {
@@ -86,15 +101,16 @@ function checkIfPlayerBankrupt(gameInfo) {
 
 function checkIfPlayerWon(gameInfo) {
     if (gameInfo.winner === loadFromStorage("name")) {
-        renderWinScreen();
+        window.location.href = "win-screen.html";
     }
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo) {
-    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
+    console.log(getLastTile(gameInfo).tile);
+    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage("name")) {
         const inventory = loadFromStorage('inventory');
-        if (inventory.includes(getLastTile(gameInfo))) {
-            collectDebt(getLastTile(gameInfo), gameInfo.currentPlayer, loadFromStorage("name"));
+        if (inventory.includes(nameToId(getLastTile(gameInfo).tile))) {
+            collectDebt(getLastTile(gameInfo).tile, _gameState.currentPlayer, loadFromStorage("name"));
         }
     } else {
         saveToStorage("rent", ``);

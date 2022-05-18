@@ -1,5 +1,12 @@
 "use strict";
 
+let _currentMoveInfo = {
+    moves: "",
+    player: "",
+    tileName: "",
+    actionType: ""
+};
+
 /* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
 function linkPlayersAndStreets(players) {
     const playersBoughtProperties = {};
@@ -13,6 +20,16 @@ function linkPlayersAndStreets(players) {
     });
     saveToStorage("playerProperties", playersBoughtProperties);
 }
+
+
+function updatePlayerProperties(gameInfo) {
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            _playerProperties = player.properties;
+        }
+    });
+}
+
 
 function createCardInfo(property) {
     const info = {name: null, cost: null, rent: null};
@@ -37,67 +54,96 @@ function removeTemplateContents(container) {
 }
 
 // This function finds a game with a specific ID in an array of games.
-function findGameByID(allGames, id){
-    for (const game of allGames){
-        if (game.id === id){
+function findGameByID(allGames, id) {
+    for (const game of allGames) {
+        if (game.id === id) {
             return game;
         }
     }
-    throw new Error("There is no game with this code(2)");
+    throw new Error("There is no game with this code");
 }
 
-function nameToId(name){
+function nameToId(name) {
     return name.toLowerCase().replace(/\s/g, "-");
 }
 
 // switch case where all possible actions on the tiles
-function seeWhatActionThatNeedsToBeTaken(lastMove){
-    lastMove.forEach(move => {
-        switch (move.description) {
-            case "can buy this property in direct sale":
-                makeBuyPopupNotHidden();
+function seeWhatActionThatNeedsToBeTaken(response) {
+    _currentMoveInfo.moves.forEach(move => {
+        switch (move.actionType) {
+            case "rent":
+                if (!loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
+                    removeHiddenClassToPayRentDiv();
+                }
                 break;
-            case "has to go to jail":
-                console.log("Jail!");
+            case "jailed":
+                document.querySelector("#card-description").classList.remove("hidden");
+                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
                 break;
-            case "passes 'GO!' and receives 200 for it":
-                console.log("you passes 'GO!");
-                break;
-            case "should pay rent":
-                removeHiddenClassToPayRentDiv();
-                break;
-            case "does nothing special":
-                break;
-            case "":
-                document.querySelector("#card-result").classList.remove("hidden");
-                document.querySelector("#card-result").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
-                setTimeout(hidePopup,8000);
-                break;
-            case "already owns this property":
+            case "go":
+                document.querySelector("#card-description").classList.remove("hidden");
+                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 break;
             default:
-                document.querySelector("#chance-chest-result").classList.remove("hidden");
-                document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
-                setTimeout(hidePopup,8000);
+                if (_currentMoveInfo.actionType === "buy") {
+                    document.querySelector(`#buy-property-popup`).classList.remove("hidden");
+                } else {
+                    document.querySelector("#card-description").classList.remove("hidden");
+                    document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
+                }
         }
     });
 }
 
-function hidePopup(){
-    document.querySelector("#chance-chest-result").classList.add("hidden");
-    document.querySelector("#chance-chest-result").innerText = "";
+function goToPlayerPosition(playerName) {
+    removeTemplateContents("#cards-parent article");
+    let currentTileName = null;
+    // Find the current tile of the player
+    _gameState.players.forEach(function (player) {
+        if (player.name === playerName) {
+            currentTileName = player.currentTile;
+            if (playerName === loadFromStorage("name")){
+                hideElement(_$containers.backToCurrentPositionButton);
+            }else{
+                showElement(_$containers.backToCurrentPositionButton);
+            }
+        }
 
+    });
+    // Find that tile in localStorage
+    findTileId(currentTileName);
 }
 
-function getLastMove(response) {
-    return response.turns.slice(-1)[0].moves;
+function updateLastMoveInfo(gameInfo) {
+    if (gameInfo.turns.length !== 0){
+        _currentMoveInfo = {
+            moves: getLastMove(gameInfo).moves,
+            player: getLastMove(gameInfo).player,
+            tileName: getLastTile(gameInfo).tile,
+            actionType: getLastTile(gameInfo).actionType
+        };
+    }
 }
 
-function getLastTile(response) {
-    return getLastMove(response).slice(-1)[0].tile;
+function hidePopupCardDescription() {
+    document.querySelector("#card-description").classList.add("hidden");
+    document.querySelector("#card-description").innerText = "";
+}
+function getLastMove(gameInfo) {
+    const indexOfLastMove = gameInfo.turns.length - 1;
+    return gameInfo.turns[indexOfLastMove];
 }
 
-function findTileId(tileName){
+function getLastTile(gameInfo) {
+    const indexOfLastMove = gameInfo.turns.length - 1;
+    const lastMove = (gameInfo.turns[indexOfLastMove]);
+    const allTilesInLastMove = lastMove.moves;
+    const indexOfLastTile = allTilesInLastMove.length - 1;
+    return allTilesInLastMove[indexOfLastTile];
+}
+
+
+function findTileId(tileName) {
     loadFromStorage("tiles").forEach(function (tile) {
         if (tile.name === tileName) {
             _tempPlayerPositionID = tile.position;
@@ -107,12 +153,21 @@ function findTileId(tileName){
     });
 }
 
-function getPlayerBalance(gameInfo){
+function getPlayerBalance(gameInfo) {
     let balance = 0;
     gameInfo.players.forEach(player => {
-        if(player.name === loadFromStorage("name")){
-            balance = player.money
+        if (player.name === loadFromStorage("name")) {
+            balance = player.money;
         }
-    })
-    return balance
+    });
+    return balance;
+}
+
+
+function showElement($element){
+    $element.classList.remove("hidden");
+}
+
+function hideElement($element){
+    $element.classList.add("hidden");
 }

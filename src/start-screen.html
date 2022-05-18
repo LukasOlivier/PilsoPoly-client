@@ -20,7 +20,9 @@
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
-    <script src="assets/js/render/render-start-page.js"></script>
+    <script src="assets/js/render/start-page/render-start-page.js"></script>
+    <script src="assets/js/render/start-page/eventListeners.js"></script>
+
     <script src="assets/js/functionality/join-game.js"></script>
     <script src="assets/js/functionality/create-game.js"></script>
     <script src="assets/js/initialiser.js"></script>
@@ -38,7 +40,7 @@
                    value="Rules">
         </nav>
     </div>
-    <!-- END -->
+    <!-- Rules interface -->
     <div id="rules-interface" class="hidden">
         <h1>PILSOPOLY RULES</h1>
         <h2>Parker Brothers Real Estate Trading Game</h2>
@@ -331,7 +333,7 @@
         <input type="button" class="back-button" value="Back">
     </div>
 
-    <!-- Join interface (hidden by default) -->
+    <!-- Join interface -->
     <div id="join-interface" class="hidden">
         <h2>Enter ID</h2>
         <label for="ID">To join your friend’s game, enter their game ID</label>
@@ -342,8 +344,6 @@
             </div>
             <input type="text" name="name" class="name" placeholder="Your name" required>
         </form>
-
-
         <nav aria-label="navigation">
             <input type="button" name="back" class="back-button" value="Back">
             <input type="button" name="join" class="join-button" value="Join">
@@ -356,23 +356,22 @@
         </ul>
     </div>
 
-    <!-- END -->
 
-    <!-- Icon picker interface (hidden by default) -->
+    <!-- Icon picker interface -->
     <div id="icon-interface" class="hidden">
         <ul>
-            <li id="1"><img src="assets/media/1.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="2"><img src="assets/media/2.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="3"><img src="assets/media/3.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="4"><img src="assets/media/4.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="5"><img src="assets/media/5.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="6"><img src="assets/media/6.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="7"><img src="assets/media/7.png" alt="beer-icon" title="beer-icon"></li>
-            <li id="8"><img src="assets/media/8.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="wide-glass" class="available"><img src="assets/media/wide-glass.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="tap" class="available"><img src="assets/media/tap.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="tall-glass" class="available"><img src="assets/media/tall-glass.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="pretzel" class="available"><img src="assets/media/pretzel.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="barrel" class="available"><img src="assets/media/barrel.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="hoppe" class="available"><img src="assets/media/hoppe.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="opener" class="available"><img src="assets/media/opener.png" alt="beer-icon" title="beer-icon"></li>
+            <li id="cap" class="available"><img src="assets/media/cap.png" alt="beer-icon" title="beer-icon"></li>
         </ul>
     </div>
 
-    <!-- Create interface (hidden by default) -->
+    <!-- Create interface -->
     <div id="create-interface" class="hidden">
         <h2>Create a game</h2>
         <label>Please fill in your name and choose an icon</label>
@@ -387,9 +386,8 @@
             <input type="button" name="join" class="join-button" value="Create">
         </nav>
     </div>
-    <!-- END -->
 
-    <!-- Lobby interface (hidden by default) -->
+    <!-- Lobby interface -->
     <div id="lobby-interface" class="hidden">
         <h2>Game ID: <span>xxx-xxx-xxx</span></h2>
         <p></p>
@@ -404,12 +402,11 @@
         </div>
         <input type="button" name="back" class="back-button" id="back-lobby" value="Leave Game">
     </div>
-    <!-- END -->
+
     <!-- Error message -->
     <div class="errormessages">
         <p></p>
     </div>
-    <!-- END -->
 </main>
 </body>
 </html>

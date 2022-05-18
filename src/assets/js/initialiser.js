@@ -14,5 +14,8 @@ function init() {
         initMap();
     } else if (document.querySelector("body").id === "win-page") {
         renderWinScreen();
+    } else if (document.querySelector("body").id === "inventory") {
+        initInventory();
     }
+
 }

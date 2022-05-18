@@ -14,10 +14,9 @@ function fetchAllGames() {
                 }
                 checkName(name, game);
                 _gameID = gameID;
-
                 renderIconPicker(name);
             })
-            .catch(errorHandler);
+            .catch((error) => errorHandler(error));
     } catch (error) {
         errorHandler(error);
     }
@@ -51,16 +50,19 @@ function checkName(name, game) {
 }
 
 function joinGame(name, icon) {
+    const body = {
+        playerName: name,
+        icon: icon
+    };
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${_gameID}/players`, 'POST', name)
+    fetchFromServer(`/games/${_gameID}/players`, 'POST', body)
         .then(response => {
             _token = response.token;
             localStorage.clear();
             saveToStorage("gameId", _gameID);
             // this token is your security token.
             saveToStorage("token", _token);
-            saveToStorage("name", name.playerName);
-            saveToStorage("iconId", icon);
+            saveToStorage("name", name);
             saveToStorage("inventory", []);
             loadGameDataForLobby();
         })
