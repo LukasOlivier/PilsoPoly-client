@@ -11,7 +11,6 @@ function initStartScreen() {
         iconInterface: document.querySelector("#icon-interface"),
         rulesInterface: document.querySelector("#rules-interface"),
         seeAllGamesInterface: document.querySelector("#see-all-games-interface"),
-        errorMessage: document.querySelector(".errormessages p"),
     };
     addEventListeners();
 }
@@ -35,7 +34,7 @@ function renderLobby(game) {
     _$interfaces.lobbyInterface.querySelector("span").innerText = _gameID;
     _$interfaces.lobbyInterface.querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
     players.forEach(player => {
-            renderPlayer(player);
+        renderPlayer(player);
     });
     const timoutID = setTimeout(loadGameDataForLobby, 1500);
     _$interfaces.lobbyInterface.querySelector("#back-lobby").addEventListener('click', () => clearTimeout(timoutID));
@@ -49,8 +48,8 @@ function renderPlayer(player) {
     document.querySelector('#players').insertAdjacentHTML('beforeend', $templateClone.outerHTML);
 }
 
-function goToLobby(name,icon){
-    if (!document.querySelector(`#${icon}`).classList.contains("taken")){
+function goToLobby(name, icon) {
+    if (!document.querySelector(`#${icon}`).classList.contains("taken")) {
         clearTimeout(timoutIDForIconPicker);
         loadGameDataForLobby();
         joinGame(name, icon);
@@ -68,12 +67,12 @@ function loadGameDataForIconPicker() {
                     document.querySelector(`#${player.icon}`).classList.add("taken");
                 }
             });
-            timoutIDForIconPicker = setTimeout(loadGameDataForIconPicker,1500);
+            timoutIDForIconPicker = setTimeout(loadGameDataForIconPicker, 1500);
         });
 }
 
 function renderIconPicker(name) {
-    document.querySelectorAll(".available").forEach(icon => icon.addEventListener('click', () => goToLobby(name.playerName,icon.id)));
+    document.querySelectorAll(".available").forEach(icon => icon.addEventListener('click', () => goToLobby(name.playerName, icon.id)));
     loadGameDataForIconPicker();
     showElement(_$interfaces.iconInterface);
 }

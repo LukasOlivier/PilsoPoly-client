@@ -23,6 +23,7 @@ function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             _gameState = currentGameInfo;
+            updatePlayerProperties(currentGameInfo)
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
@@ -129,7 +130,9 @@ function renderMortgagedMain($propertyCard, playerName) {
 function renderBoughtMain($propertyCard, playerName) {
     hideElement($propertyCard.querySelector(`.price`));
     hideElement($propertyCard.querySelector(`.player-mortgaged`));
-    showElement( $propertyCard.querySelector(`.player-bought`));
+    showElement($propertyCard.querySelector(`.player-bought`));
+    $propertyCard.classList.add("card-bought");
+
     $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
 }
 

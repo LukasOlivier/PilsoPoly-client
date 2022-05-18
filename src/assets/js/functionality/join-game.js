@@ -16,7 +16,7 @@ function fetchAllGames() {
                 _gameID = gameID;
                 renderIconPicker(name);
             })
-            .catch(errorHandler);
+            .catch((error) => errorHandler(error));
     } catch (error) {
         errorHandler(error);
     }

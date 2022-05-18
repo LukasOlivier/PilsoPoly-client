@@ -23,10 +23,10 @@
     <script src="assets/js/functionality/get-playboard-tiles.js"></script>
     <script src="assets/js/functionality/roll-dice.js"></script>
     <script src="assets/js/functionality/pay-rent.js"></script>
+    <script src="assets/js/functionality/game-checks.js"></script>
     <script src="assets/js/render/inventory.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
-    <script src="assets/js/functionality/game-checks.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
     <script src="assets/js/render/main-page/move-player.js"></script>
@@ -68,7 +68,11 @@
 
 
 <main>
-    <section id="cards">
+    <div id="cards">
+
+    </div>
+
+    <div id="templates">
         <template class="street-template" >
             <article class="clickable">
                 <h3 class="name"></h3>
@@ -105,7 +109,7 @@
         <div class="errormessages">
             <p></p>
         </div>
-    </section>
+    </div>
 </main>
 </body>
 </html>

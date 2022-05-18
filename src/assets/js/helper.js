@@ -1,9 +1,10 @@
 "use strict";
-let _lastMoveInfo = {
-    moves: null,
-    player: null,
-    tile: null,
-    actionType: null
+
+let _currentMoveInfo = {
+    moves: "",
+    player: "",
+    tileName: "",
+    actionType: ""
 };
 
 /* put the players with their owning streets in to a dictionary. the name as a key value and the street as a list*/
@@ -19,6 +20,16 @@ function linkPlayersAndStreets(players) {
     });
     saveToStorage("playerProperties", playersBoughtProperties);
 }
+
+
+function updatePlayerProperties(gameInfo) {
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            _playerProperties = player.properties;
+        }
+    });
+}
+
 
 function createCardInfo(property) {
     const info = {name: null, cost: null, rent: null};
@@ -58,7 +69,7 @@ function nameToId(name) {
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
-    _lastMoveInfo.moves.forEach(move => {
+    _currentMoveInfo.moves.forEach(move => {
         switch (move.actionType) {
             case "rent":
                 if (!loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
@@ -74,7 +85,7 @@ function seeWhatActionThatNeedsToBeTaken(response) {
                 document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 break;
             default:
-                if (_lastMoveInfo.actionType === "buy") {
+                if (_currentMoveInfo.actionType === "buy") {
                     document.querySelector(`#buy-property-popup`).classList.remove("hidden");
                 } else {
                     document.querySelector("#card-description").classList.remove("hidden");
@@ -104,12 +115,14 @@ function goToPlayerPosition(playerName) {
 }
 
 function updateLastMoveInfo(gameInfo) {
-    _lastMoveInfo = {
-        moves: getLastMove(gameInfo).moves,
-        player: getLastMove(gameInfo).player,
-        tileName: getLastTile(gameInfo).tile,
-        actionType: getLastTile(gameInfo).actionType
-    };
+    if (gameInfo.turns.length !== 0){
+        _currentMoveInfo = {
+            moves: getLastMove(gameInfo).moves,
+            player: getLastMove(gameInfo).player,
+            tileName: getLastTile(gameInfo).tile,
+            actionType: getLastTile(gameInfo).actionType
+        };
+    }
 }
 
 function hidePopupCardDescription() {
