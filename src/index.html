@@ -38,8 +38,6 @@
     <script src="assets/js/functionality/lose-game.js"></script>
     <script src="assets/js/render/win-screen.js"></script>
     <script src="assets/js/render/inventory.js"></script>
-
-
     <script src="assets/js/render/main-page/eventListeners.js"></script>
 
 </head>
@@ -58,19 +56,28 @@
 </header>
 
 <main>
-
     <div id="buy-property-popup" class="hidden">
-        <article>
             <p>Do you want to buy this property, or start an auction?</p>
-        </article>
         <form action="#">
             <button type="button" id="buy">Buy</button>
             <button type="button" id="auction">Auction</button>
         </form>
     </div>
+
+    <div id="get-out-of-jail-popup" class="hidden">
+        <p>Do you want to buy yourself out of jail or try to roll a double?</p>
+        <form action="#">
+            <button type="button" id="pay">Pay M50</button>
+            <button type="button" id="use-card" disabled>Use card</button>
+        </form>
+    </div>
+
     <div id="flexbox-center">
+
         <div id="card-description" class="hidden">
+            <p></p>
         </div>
+
         <div id="pay-rent" class="hidden">
             <p>You need to pay rent!</p>
         </div>

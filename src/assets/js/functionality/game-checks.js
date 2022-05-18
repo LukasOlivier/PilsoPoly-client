@@ -13,6 +13,16 @@ function pollingGameState() {
         });
 }
 
+function checkIfPlayerJailed(gameInfo){
+    gameInfo.players.forEach(player =>{
+        if (player === loadFromStorage("name")){
+            if (player.jailed){
+                showElement(document.querySelector("#get-out-of-jail-popup"))
+            }
+        }
+    })
+}
+
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
     if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
@@ -24,6 +34,7 @@ function checkGameStates(newGameState) {
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
+        checkIfPlayerJailed(newGameState);
     }
 }
 

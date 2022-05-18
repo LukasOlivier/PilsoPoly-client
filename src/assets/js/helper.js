@@ -70,29 +70,16 @@ function nameToId(name) {
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
-        switch (move.actionType) {
-            case "rent":
-                if (!loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
-                    removeHiddenClassToPayRentDiv();
-                }
-                break;
-            case "jailed":
+            if (move.actionType === "rent" && !loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
+                removeHiddenClassToPayRentDiv();
+            } else {
                 document.querySelector("#card-description").classList.remove("hidden");
-                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
-                break;
-            case "go":
-                document.querySelector("#card-description").classList.remove("hidden");
-                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
-                break;
-            default:
-                if (_currentMoveInfo.actionType === "buy") {
-                    document.querySelector(`#buy-property-popup`).classList.remove("hidden");
-                } else {
-                    document.querySelector("#card-description").classList.remove("hidden");
-                    document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
-                }
-        }
-    });
+                document.querySelector("#card-description p").innerText = move.description
+            }
+        });
+    if (_currentMoveInfo.actionType === "buy") {
+        document.querySelector(`#buy-property-popup`).classList.remove("hidden");
+    }
 }
 
 function goToPlayerPosition(playerName) {
@@ -102,9 +89,9 @@ function goToPlayerPosition(playerName) {
     _gameState.players.forEach(function (player) {
         if (player.name === playerName) {
             currentTileName = player.currentTile;
-            if (playerName === loadFromStorage("name")){
+            if (playerName === loadFromStorage("name")) {
                 hideElement(_$containers.backToCurrentPositionButton);
-            }else{
+            } else {
                 showElement(_$containers.backToCurrentPositionButton);
             }
         }
@@ -115,7 +102,7 @@ function goToPlayerPosition(playerName) {
 }
 
 function updateLastMoveInfo(gameInfo) {
-    if (gameInfo.turns.length !== 0){
+    if (gameInfo.turns.length !== 0) {
         _currentMoveInfo = {
             moves: getLastMove(gameInfo).moves,
             player: getLastMove(gameInfo).player,
@@ -127,8 +114,9 @@ function updateLastMoveInfo(gameInfo) {
 
 function hidePopupCardDescription() {
     document.querySelector("#card-description").classList.add("hidden");
-    document.querySelector("#card-description").innerText = "";
+    document.querySelector("#card-description p").innerText = "";
 }
+
 function getLastMove(gameInfo) {
     const indexOfLastMove = gameInfo.turns.length - 1;
     return gameInfo.turns[indexOfLastMove];
@@ -164,10 +152,10 @@ function getPlayerBalance(gameInfo) {
 }
 
 
-function showElement($element){
+function showElement($element) {
     $element.classList.remove("hidden");
 }
 
-function hideElement($element){
+function hideElement($element) {
     $element.classList.add("hidden");
 }
