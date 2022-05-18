@@ -1,15 +1,9 @@
 "use strict";
 
 function auctionProperty() {
-    const auctionDuration = 30;
     const playerName = loadFromStorage("name");
     const currentTile = _currentMoveInfo.tileName;
-    const body = {
-        "start-bid": 0,
-        "duration": auctionDuration,
-        "tradable": true
-    }
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/auctions/${currentTile}`, 'POST', body);
+    fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTile}`, 'DELETE');
     makeBuyPopupHidden();
 }
 

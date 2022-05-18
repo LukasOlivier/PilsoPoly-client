@@ -117,7 +117,6 @@ function checkIfPlayerWon(gameInfo) {
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo) {
-    console.log(getLastTile(gameInfo).tile);
     if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage("name")) {
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(nameToId(getLastTile(gameInfo).tile))) {
