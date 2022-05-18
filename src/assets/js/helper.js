@@ -72,7 +72,7 @@ function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
             if (move.actionType === "rent" && !loadFromStorage("inventory").includes(nameToId(getLastTile(response).tile))) {
                 removeHiddenClassToPayRentDiv();
-            } else {
+            } else if(move.actionType !== "buy" && move.actionType !== "rent"){
                 document.querySelector("#card-description").classList.remove("hidden");
                 document.querySelector("#card-description p").innerText = move.description
             }

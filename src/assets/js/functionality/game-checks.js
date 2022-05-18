@@ -1,28 +1,45 @@
 "use strict";
 let _playerProperties;
+let _player;
 
 function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
+            updatePlayerInfo(currentGameInfo);
             updatePlayerProperties(currentGameInfo)
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
             checkIfPlayerWon(currentGameInfo);
             checkIfBought(currentGameInfo);
+            checkIfPlayerJailed(currentGameInfo);
+            console.log(_player)
+
         });
 }
 
-function checkIfPlayerJailed(gameInfo){
-    console.log(gameInfo)
-    gameInfo.players.forEach(player =>{
-        if (player === loadFromStorage("name")){
-            if (player.jailed){
-                showElement(document.querySelector("#get-out-of-jail-popup"))
-            }
+function updatePlayerInfo(gameInfo) {
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            _player = player;
         }
     })
+    return null;
 }
+
+function checkIfPlayerJailed(gameInfo) {
+    if (_player.jailed && gameInfo.currentPlayer === _player.name){
+        showElement(document.querySelector("#get-out-of-jail-popup"));
+        if (_player.getOutOfJailFreeCards > 0){
+            document.querySelector("#jail-free").disabled = false;
+        }
+    }else {
+        hideElement(document.querySelector("#get-out-of-jail-popup"));
+    }
+}
+
+
+
 
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
@@ -31,11 +48,19 @@ function checkGameStates(newGameState) {
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfPlayerCanRoll(newGameState);
         }
+        checkIfItsYourTurn(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
         checkIfPlayerJailed(newGameState);
+    }
+}
+
+function checkIfItsYourTurn(gameInfo){
+    if (_player.name === gameInfo.currentPlayer){
+        hideElement(document.querySelector("#card-description"))
+
     }
 }
 

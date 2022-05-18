@@ -3,6 +3,8 @@ function addEventListeners() {
     addEventListenersTrading();
     addEventListenersGiveUp();
     addEventListenersRollDice();
+    document.querySelector("#jail-free").addEventListener("click",getOutOfJailFree);
+    document.querySelector("#jail-fine").addEventListener("click",getOutOfJailFine);
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
     document.addEventListener('click', function (e) {
@@ -27,6 +29,7 @@ function addEventListenersRollDice() {
         togglePopUpButtons();
     });
 }
+
 
 
 function addEventListenersGiveUp() {
