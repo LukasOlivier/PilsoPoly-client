@@ -27,11 +27,29 @@ function updatePlayerInfo(gameInfo) {
     return null;
 }
 
+function checkIfPlayerHasFreeCards(){
+    return  _player.getOutOfJailFreeCards > 0;
+}
+
+function enableButton($element){
+    document.querySelector($element).disabled = false;
+    hideElement($element);
+}
+
+function disableButton($element){
+    document.querySelector($element).disabled = true;
+    document.querySelector($element).classList.add("disabled")
+}
+
 function checkIfPlayerJailed(gameInfo) {
+    if (checkIfPlayerHasFreeCards){
+
+    }
     if (_player.jailed && gameInfo.currentPlayer === _player.name){
+        document.querySelector("#jail-free").disabled = true;
         showElement(document.querySelector("#get-out-of-jail-popup"));
-        if (_player.getOutOfJailFreeCards > 0){
-            document.querySelector("#jail-free").disabled = false;
+else{
+
         }
     }else {
         hideElement(document.querySelector("#get-out-of-jail-popup"));

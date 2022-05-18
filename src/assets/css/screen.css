@@ -539,3 +539,9 @@ dialog {
 .DARKBLUE {
     background: rgba(0, 0, 139, 0.6);
 }
+
+#main-screen .disabled:hover{
+    cursor: unset;
+    filter: unset;
+    transform: none;
+}
