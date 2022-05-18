@@ -8,6 +8,7 @@ function pollingGameState() {
             setTimeout(pollingGameState, 1000);
             checkIfPlayerWon(currentGameInfo);
             checkIfBought(currentGameInfo);
+            checkIfPlayerAuction(currentGameInfo);
         });
 }
 
@@ -24,7 +25,7 @@ function checkGameStates(newGameState) {
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
-       checkIfPlayerAuction(newGameState);
+        checkIfPlayerAuction(newGameState);
     }
 }
 
@@ -85,8 +86,12 @@ function checkIfPlayerBankrupt(gameInfo) {
 
 function checkIfPlayerAuction(gameInfo) {
     if (gameInfo.auction !== null) {
+        console.log("der is auction");
         renderAuctionPopup(gameInfo);
         showAuctionPopup();
+    } else {
+        console.log("der is geen auction meer")
+        hideAuctionPopup();
     }
 }
 

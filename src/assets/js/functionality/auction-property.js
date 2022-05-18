@@ -16,6 +16,7 @@ function auctionProperty() {
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
+    document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
     document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
 }
@@ -24,6 +25,13 @@ function showAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
     if ( !$dialog.open ) {
         $dialog.showModal();
+    }
+}
+
+function hideAuctionPopup() {
+    const $dialog = document.querySelector("#auction-property-popup");
+    if ( $dialog.open ) {
+        $dialog.close();
     }
 }
 
