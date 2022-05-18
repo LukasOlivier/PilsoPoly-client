@@ -22,9 +22,9 @@ function renderAuctionPopup(gameInfo) {
     document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
 }
 
-function checkIfCanBid(last_bidder) {
+function checkIfCanBid(lastBidder) {
     const $buttons = document.querySelectorAll("#auction-property-popup button");
-    if ( last_bidder === loadFromStorage("name") ) {
+    if (lastBidder === loadFromStorage("name")) {
         $buttons.forEach(button => {
             button.disabled = true;
             document.querySelector("#last-bidder-message").classList.remove("hidden");
