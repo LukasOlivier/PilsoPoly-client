@@ -5,6 +5,12 @@ function addEventListeners() {
     addEventListenersRollDice();
     addEventListenersAuction();
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
+    document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
+    document.addEventListener('click', function (e) {
+        if (!e.target.classList.contains("#card-description") && e.target.id !== "roll-dice-oke") {
+            hidePopupCardDescription();
+        }
+    });
 }
 
 function addEventListenersRollDice() {
@@ -53,7 +59,6 @@ function addEventListenersBoardNavigation() {
     document.querySelector("main").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#back-to-current-position button").addEventListener("click", function (e) {
-        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
         seeOtherPlayerPosition(e);
     });
 }

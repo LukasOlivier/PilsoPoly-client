@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700%7COswald" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cardo"/>
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/inventory.css">
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/helper.js"></script>
+    <script src="assets/js/data-connector/error-handler.js"></script>
+    <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
+    <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+
+    <script src="assets/js/functionality/get-playboard-tiles.js"></script>
+    <script src="assets/js/functionality/roll-dice.js"></script>
+    <script src="assets/js/functionality/pay-rent.js"></script>
+    <script src="assets/js/render/inventory.js"></script>
+
+    <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/functionality/game-checks.js"></script>
+    <script src="assets/js/render/main-page/render-main-page.js"></script>
+    <script src="assets/js/render/main-page/renderCards.js"></script>
+    <script src="assets/js/render/main-page/move-player.js"></script>
+    <script src="assets/js/render/main-page/trade-screen.js"></script>
+    <script src="assets/js/functionality/buy-property.js"></script>
+    <script src="assets/js/functionality/lose-game.js"></script>
+</head>
+<body id="inventory">
+<header>
+    <h1>Inventory</h1>
+    <div>
+        <a href="index.html">Back to main screen</a>
+    </div>
+</header>
+<div id="aside-parent">
+    <aside id="color-filter">
+        <ul>
+            <li class="NONE clickable"><img src="assets/media/remove-filter.png" alt="remove filter" title="remove filter"></li>
+            <li class="PURPLE clickable"></li>
+            <li class="BLACK clickable"></li>
+            <li class="LIGHTBLUE clickable"></li>
+            <li class="VIOLET clickable"></li>
+            <li class="ORANGE clickable"></li>
+            <li class="RED clickable"></li>
+            <li class="YELLOW clickable"></li>
+            <li class="DARKGREEN clickable"></li>
+            <li class="DARKBLUE clickable"></li>
+        </ul>
+    </aside>
+    <aside>
+        <ul id="card-actions">
+            <li class="clickable" id="buy"><img src="images/plushouse.png" alt="buy a house" title="buy a house"></li>
+            <li class="clickable" id="sell"><img src="images/minhouse.png" alt="sell a house" title="sell a house"></li>
+            <li class="clickable" id="mortgage"><img src="images/mortgage.png" alt="mortgage card" title="mortgage card"></li>
+            <li class="clickable" id="unmortgage"><img src="images/unmortgage.png" alt="unmortgage card" title="unmortgage card"></li>
+        </ul>
+    </aside>
+</div>
+
+
+<main>
+    <section id="cards">
+        <template class="street-template" >
+            <article class="clickable">
+                <h3 class="name"></h3>
+                <div class="card-info">
+                    <ol>
+                        <li id="1house"><img src="images/1house.png" alt="1house" title="1house">
+                            <p class="rent-one-house"></p></li>
+                        <li id="2house"><img src="images/2houses.png" alt="2house" title="2house">
+                            <p class="rent-two-house"></p></li>
+                        <li id="3house"><img src="images/3houses.png" alt="3house" title="3house">
+                            <p class="rent-three-house"></p></li>
+                        <li id="4house"><img src="images/4houses.png" alt="4house" title="4house">
+                            <p class="rent-four-house"></p></li>
+                        <li id="hotel"><img src="images/hotel.png" alt="hotel" title="hotel">
+                            <p class="rent-hotel"></p></li>
+                    </ol>
+                    <p class="rent"></p>
+                    <p class="price-house"></p>
+                    <p class="mortgage"></p>
+                </div>
+            </article>
+        </template>
+        <template class="railroad-utility-template">
+            <article class="clickable">
+                <h3 class="name"></h3>
+                <img class="card-icon" src="" alt="card icon" title="card icon">
+
+                <div class="card-info">
+                    <p class="rent"></p>
+                    <p class="mortgage"></p>
+                </div>
+            </article>
+        </template>
+        <div class="errormessages">
+            <p></p>
+        </div>
+    </section>
+</main>
+</body>
+</html>

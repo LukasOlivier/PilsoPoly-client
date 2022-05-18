@@ -1,12 +1,13 @@
-function collectDebt(property , player, name){
+function collectDebt(property , player, debtorName){
     if (`${name}${property}${player}` !== loadFromStorage("rent")){
-        fetchFromServer(`/games/${_gameID}/players/${name}/properties/${property}/visitors/${player}/rent`, 'DELETE');
+        fetchFromServer(`/games/${_gameID}/players/${player}/properties/${property}/visitors/${debtorName}/rent`, 'DELETE');
         saveToStorage("rent", `${name}${property}${player}`);
-        collectDepthPopupNotHidden(property, name);
+        collectDepthPopupNotHidden(property, player);
     }
 }
 
 function removeHiddenClassToPayRentDiv(){
+
     document.querySelector(`#pay-rent`).classList.remove("hidden");
     setTimeout(addHiddenClassToPayRentDiv, 5000);
 }
@@ -19,10 +20,10 @@ function collectDepthPopupNotHidden(property, name){
     const collectingRentPopup = document.querySelector(`#collect-rent`);
     collectingRentPopup.innerText = `You received money because ${name} is on tile: ${property}`;
     collectingRentPopup.classList.remove(`hidden`);
-    setTimeout(collectDepbtPopupHidden, 5000);
+    setTimeout(collectDepthPopupHidden, 5000);
 }
 
-function collectDepbtPopupHidden(){
+function collectDepthPopupHidden(){
     document.querySelector(`#collect-rent`).classList.add("hidden");
 }
 

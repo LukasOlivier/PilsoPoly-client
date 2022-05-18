@@ -2,7 +2,7 @@
     display: none;
 }
 
-#main-screen .reduce-opacity{
+#main-screen .reduce-opacity {
     opacity: 20%;
 }
 
@@ -13,8 +13,8 @@
     font-family: "Oswald", serif;
 }
 
-.active-player {
-    filter: drop-shadow(0 0 0.5rem #222);
+.info-container .active-player {
+    filter: invert(0%);
 }
 
 .player-bought {
@@ -22,6 +22,19 @@
     color: red;
     text-align: center;
     font-family: "Oswald", serif;
+}
+
+.player-bankrupt {
+    opacity: 50%;
+    color: red;
+}
+
+#cards-parent .card-mortgaged {
+    border: orange solid 0.2rem;
+}
+
+#cards-parent .card-bought {
+    border: red solid 0.2rem;
 }
 
 .player-mortgaged {
@@ -410,6 +423,7 @@ footer .player-balance {
     margin-right: 25%;
 }
 
+
 #give-up-popup h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -437,14 +451,16 @@ footer .player-balance {
     display: flex;
     justify-content: space-around;
 }
-#pay-rent,#collect-rent,#chance-chest-result{
+
+#pay-rent, #collect-rent, #card-description {
     display: inline-block;
     background: white;
     border: black solid 0.1rem;
     font-size: 1.2rem;
     padding: 1rem;
 }
-#flexbox-center{
+
+#flexbox-center {
     position: fixed;
     margin-top: 60vh;
     width: 100%;
@@ -452,6 +468,34 @@ footer .player-balance {
     flex-direction: row;
     justify-content: center;
 }
+
+#buy-property-popup p {
+    margin-bottom: 1rem;
+}
+
+#buy-property-popup button {
+    width: 5rem;
+    border: black solid 0.05rem;
+    background: white;
+}
+
+#buy-property-popup form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+#buy-property-popup {
+    position: fixed;
+    margin-top: 60vh;
+    margin-left: 39.5vw;
+    background: white;
+    border: black solid 0.1rem;
+    padding: 1rem;
+    height: 4rem;
+}
+
 /* ======================================================================================================== */
 /* ===================================        Dialog css (Robin)       ==================================== */
 /* ======================================================================================================== */

@@ -13,7 +13,7 @@ function renderMainPage() {
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
         backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
-        cardResult: document.querySelector("#card-result")
+        cardDescription: document.querySelector("#card-description")
     };
     addEventListeners();
     renderFirstTime();
@@ -35,20 +35,6 @@ function seeOtherPlayerPosition(e) {
     goToPlayerPosition(e.currentTarget.id);
 }
 
-function goToPlayerPosition(playerName) {
-    removeTemplateContents("#cards-parent article");
-    let currentTileName = null;
-    // Find the current tile of the player
-    _gameState.players.forEach(function (player) {
-        if (player.name === playerName) {
-            currentTileName = player.currentTile;
-        }
-        showBackToPositionButton();
-    });
-    // Find that tile in localStorage
-    findTileId(currentTileName);
-}
-
 function renderCards(currentGameInfo) {
     removeTemplateContents("#cards-parent article");
     let currentTileName = null;
@@ -62,13 +48,6 @@ function renderCards(currentGameInfo) {
     // Find that tile in localStorage
     findTileId(currentTileName);
 }
-
-function showBackToPositionButton() {
-    if (_$containers.backToCurrentPositionButton.classList.contains("hidden")) {
-        _$containers.backToCurrentPositionButton.classList.toggle("hidden");
-    }
-}
-
 
 function getCardById(id) {
     const toShow = createToShow(id, id - 2, id + 3);
@@ -124,9 +103,7 @@ function renderPlayerInfo(currentGameInfo) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.id = nameToId(player.name);
         $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
-        if (player.name === loadFromStorage("name")) {
-            $template.querySelector("img").src = `assets/media/${loadFromStorage("iconId")}.png`;
-        }
+        $template.querySelector("img").src = `assets/media/${player.icon}.png`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
         document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
     });
@@ -142,56 +119,39 @@ function renderMortgagedFooter(property, playerName) {
 }
 
 function renderMortgagedMain($propertyCard, playerName) {
-    $propertyCard.querySelector(`.player-bought`).classList.add("hidden");
-    $propertyCard.querySelector(`.player-mortgaged`).classList.remove("hidden");
-    $propertyCard.style.border = "orange solid 0.1rem";
+    hideElement($propertyCard.querySelector(`.player-bought`));
+    showElement($propertyCard.querySelector(`.player-mortgaged`));
+    $propertyCard.classList.add("card-mortgaged");
     $propertyCard.querySelector(`.player-mortgaged span`).innerText = playerName;
 
 }
 
 function renderBoughtMain($propertyCard, playerName) {
-    $propertyCard.querySelector(`.price`).classList.add("hidden");
-    $propertyCard.querySelector(`.player-mortgaged`).classList.add("hidden");
-    $propertyCard.querySelector(`.player-bought`).classList.remove("hidden");
-    $propertyCard.style.border = "red solid";
+    hideElement($propertyCard.querySelector(`.price`));
+    hideElement($propertyCard.querySelector(`.player-mortgaged`));
+    showElement( $propertyCard.querySelector(`.player-bought`));
     $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
 }
 
 function renderPlayerBankrupt(playerName) {
     const $container = document.querySelector(`#${playerName}`);
-    $container.style.opacity = "0.5";
-    $container.querySelector("p").style.color = "red";
     $container.querySelector("p").innerHTML = `${playerName}: BANKRUPT`;
 }
 
 function renderPlayerOnTile(tile, playerName) {
-    document.querySelector(`#${tile} .player-pos`).classList.remove('hidden');
+    showElement(document.querySelector(`#${tile} .player-pos`));
     const playersOnTile = document.querySelector(`#${tile} .player-pos span`).innerText.toLowerCase();
     if (!playersOnTile.includes(playerName)) {
-        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName} `);
+        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName}`);
     }
 }
 
 function giveUp() {
-    _$containers["giveUpPopup"].classList.remove("hidden");
-    document.querySelector("section").classList.add("hidden");
-
+    showElement(_$containers.giveUpPopup);
+    hideElement(document.querySelector("section"));
 }
 
 function giveUpDeny() {
-    document.querySelector("section").classList.remove("hidden");
-    _$containers["giveUpPopup"].classList.add("hidden");
-}
-
-function closeDialog($dialog) {
-    $dialog.close();
-}
-
-function openDialog($dialog) {
-    $dialog.showModal();
-}
-
-function resetRollDiceText() {
-    _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
-    _$containers.rollDiceDialog.querySelector("#location").innerText = "";
+    hideElement(_$containers.giveUpPopup);
+    showElement(document.querySelector("section"));
 }

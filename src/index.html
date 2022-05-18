@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
-    <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
     <link rel="stylesheet" href="assets/css/paying-rent.css">
 
 
@@ -39,6 +38,8 @@
     <script src="assets/js/functionality/auction-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
     <script src="assets/js/render/win-screen.js"></script>
+    <script src="assets/js/render/inventory.js"></script>
+
 
     <script src="assets/js/render/main-page/eventListeners.js"></script>
 
@@ -61,7 +62,6 @@
 
     <div id="buy-property-popup" class="hidden">
         <article>
-            <h2>Title</h2>
             <p>Do you want to buy this property, or start an auction?</p>
         </article>
         <form action="#">
@@ -83,7 +83,7 @@
         </article>
     </dialog>
     <div id="flexbox-center">
-        <div id="card-result" class="hidden">
+        <div id="card-description" class="hidden">
         </div>
         <div id="pay-rent" class="hidden">
             <p>You need to pay rent!</p>
@@ -244,32 +244,32 @@
                 </div>
                 <div class="player-properties">
                     <!-- add class "not-bought" to make grey-->
-                    <div class="square mediterranean not-bought"></div>
-                    <div class="square baltic not-bought"></div>
-                    <div class="square oriental not-bought"></div>
-                    <div class="square vermont not-bought"></div>
-                    <div class="square connecticut not-bought"></div>
-                    <div class="square saint-charles-place not-bought"></div>
-                    <div class="square states not-bought"></div>
-                    <div class="square virginia not-bought"></div>
-                    <div class="square saint-james not-bought"></div>
-                    <div class="square tennessee not-bought"></div>
-                    <div class="square new-york not-bought"></div>
-                    <div class="square kentucky-avenue not-bought"></div>
-                    <div class="square indiana-avenue not-bought"></div>
-                    <div class="square illinois-avenue not-bought"></div>
-                    <div class="square atlantic not-bought"></div>
-                    <div class="square ventnor not-bought"></div>
-                    <div class="square marvin-gardens not-bought"></div>
-                    <div class="square pacific not-bought"></div>
-                    <div class="square north-carolina not-bought"></div>
-                    <div class="square pennsylvania not-bought"></div>
-                    <div class="square park-place not-bought"></div>
-                    <div class="square boardwalk not-bought"></div>
-                    <div class="square reading-rr not-bought"></div>
-                    <div class="square pennsylvania-rr not-bought"></div>
-                    <div class="square baltimore-and-ohio-rr not-bought"></div>
-                    <div class="square short-line-rr not-bought"></div>
+                    <div class="square delhaize-365 not-bought"></div>
+                    <div class="square cara not-bought"></div>
+                    <div class="square heineken not-bought"></div>
+                    <div class="square sparta-pils  not-bought"></div>
+                    <div class="square schuttenbräu not-bought"></div>
+                    <div class="square primus not-bought"></div>
+                    <div class="square bavik not-bought"></div>
+                    <div class="square bockor not-bought"></div>
+                    <div class="square stella not-bought"></div>
+                    <div class="square jupiler not-bought"></div>
+                    <div class="square maes not-bought"></div>
+                    <div class="square rodenbach not-bought"></div>
+                    <div class="square kriek not-bought"></div>
+                    <div class="square kasteel-rouge not-bought"></div>
+                    <div class="square duvel not-bought"></div>
+                    <div class="square omer not-bought"></div>
+                    <div class="square westmalle not-bought"></div>
+                    <div class="square brugse-zot not-bought"></div>
+                    <div class="square chimay not-bought"></div>
+                    <div class="square westvleteren not-bought"></div>
+                    <div class="square cornet not-bought"></div>
+                    <div class="square bush12 not-bought"></div>
+                    <div class="square brewery-artois not-bought"></div>
+                    <div class="square brewery-rodenbach not-bought"></div>
+                    <div class="square brewery-lupulus not-bought"></div>
+                    <div class="square brewery-omer-vander-ghinste not-bought"></div>
                     <div class="square electric-company not-bought"></div>
                     <div class="square water-works not-bought"></div>
                 </div>

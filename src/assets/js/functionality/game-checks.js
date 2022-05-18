@@ -1,31 +1,29 @@
 "use strict";
 
 function pollingGameState() {
-    // This needs to be on a diff place for sure!!
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 1000);
-            checkIfPlayerWon(currentGameInfo)
+            checkIfPlayerWon(currentGameInfo);
+            checkIfBought(currentGameInfo);
         });
 }
 
+
+
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
-    if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
-        checkIfBought(newGameState);
-    } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+   if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfPlayerCanRoll(newGameState);
             checkIfPlayerNeedsToPayRent(newGameState);
         }
-        checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
-        checkIfPlayerAuction(newGameState);
-        checkIfPlayerWon(newGameState)
+        checkIfPlayerWon(newGameState);
     }
 }
 
@@ -93,15 +91,15 @@ function checkIfPlayerAuction(gameInfo) {
 
 function checkIfPlayerWon(gameInfo) {
     if (gameInfo.winner === loadFromStorage("name")) {
-        renderWinScreen();
+        window.location.href = "win-screen.html";
     }
 }
 
 function checkIfPlayerNeedsToPayRent(gameInfo) {
-    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
+    if (gameInfo.turns.length !== 0 && _lastMoveInfo.player !== loadFromStorage("name")) {
         const inventory = loadFromStorage('inventory');
-        if (inventory.includes(getLastTile(gameInfo))) {
-            collectDebt(getLastTile(gameInfo), gameInfo.currentPlayer, loadFromStorage("name"));
+        if (inventory.includes(nameToId(getLastTile(gameInfo).tile))) {
+            collectDebt(getLastTile(gameInfo).tile, getLastPlayer(gameInfo), loadFromStorage("name"));
         }
     } else {
         saveToStorage("rent", ``);
