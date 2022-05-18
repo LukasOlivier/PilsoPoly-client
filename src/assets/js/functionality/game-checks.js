@@ -86,11 +86,9 @@ function checkIfPlayerBankrupt(gameInfo) {
 
 function checkIfPlayerAuction(gameInfo) {
     if (gameInfo.auction !== null) {
-        console.log("der is auction");
         renderAuctionPopup(gameInfo);
         showAuctionPopup();
     } else {
-        console.log("der is geen auction meer")
         hideAuctionPopup();
     }
 }

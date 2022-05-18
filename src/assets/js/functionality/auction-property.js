@@ -15,10 +15,28 @@ function auctionProperty() {
 
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
+    checkIfCanBid(auctionInfo.lastBidder);
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
     document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
     document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
+}
+
+function checkIfCanBid(last_bidder) {
+    console.log(last_bidder);
+    const $buttons = document.querySelectorAll("#auction-property-popup button");
+    console.log(last_bidder, loadFromStorage("name"));
+    if ( last_bidder === loadFromStorage("name") ) {
+        $buttons.forEach(button => {
+            console.log($buttons);
+            button.disabled = true;
+        });
+    } else {
+        console.log($buttons);
+        $buttons.forEach(button => {
+            button.disabled = false;
+        });
+    }
 }
 
 function showAuctionPopup() {
