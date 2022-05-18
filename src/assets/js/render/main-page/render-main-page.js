@@ -25,6 +25,7 @@ function renderFirstTime() {
         .then(currentGameInfo => {
             try {
                 _gameState = currentGameInfo;
+                checkAmountOfPlayersOverflow(currentGameInfo);
                 updatePlayerInfo(currentGameInfo);
                 renderPlayerInfo(currentGameInfo);
                 getTiles(currentGameInfo);
@@ -36,6 +37,13 @@ function renderFirstTime() {
                 console.error(error);
             }
         });
+}
+
+function checkAmountOfPlayersOverflow(gameInfo){
+    const maxPlayersThatFitInFooter = 6;
+    if (gameInfo.numberOfPlayers > maxPlayersThatFitInFooter){
+        document.querySelector("footer").classList.add("scrollable-footer");
+    }
 }
 
 function seeOtherPlayerPosition(e) {
@@ -109,7 +117,7 @@ function renderPlayerInfo(currentGameInfo) {
     currentGameInfo.players.forEach(function (player) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.id = nameToId(player.name);
-        $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
+        $template.querySelector(".player-balance").innerText = `${player.name}: M${player.money}`;
         $template.querySelector("img").src = `assets/media/${player.icon}.png`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
         document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
