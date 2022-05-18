@@ -23,18 +23,16 @@ function renderAuctionPopup(gameInfo) {
 }
 
 function checkIfCanBid(last_bidder) {
-    console.log(last_bidder);
     const $buttons = document.querySelectorAll("#auction-property-popup button");
-    console.log(last_bidder, loadFromStorage("name"));
     if ( last_bidder === loadFromStorage("name") ) {
         $buttons.forEach(button => {
-            console.log($buttons);
             button.disabled = true;
+            document.querySelector("#last-bidder-message").classList.remove("hidden");
         });
     } else {
-        console.log($buttons);
         $buttons.forEach(button => {
             button.disabled = false;
+            document.querySelector("#last-bidder-message").classList.add("hidden");
         });
     }
 }
