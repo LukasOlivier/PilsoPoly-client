@@ -3,7 +3,7 @@
 function auctionProperty() {
     const auctionDuration = 30;
     const playerName = loadFromStorage("name");
-    const currentTile = _lastMoveInfo.tileName;
+    const currentTile = _currentMoveInfo.tileName;
     const body = {
         "start-bid": 0,
         "duration": auctionDuration,
@@ -51,32 +51,12 @@ function hideAuctionPopup() {
     }
 }
 
-function addOne() {
+function addAmount(amount) {
     const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
-    const newBid = highestBid + 1;
+    const newBid = highestBid + amount;
     const body = {
-      bidder: loadFromStorage("name"),
+        bidder: loadFromStorage("name"),
         amount: newBid
-    };
-    placeBidOnAuction(body)
-}
-
-function addTen() {
-    const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
-    const newBid = highestBid + 10;
-    const body = {
-        bidder: loadFromStorage("name"),
-        amount: parseInt(newBid)
-    };
-    placeBidOnAuction(body)
-}
-
-function addHunderd() {
-    const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
-    const newBid = highestBid + 100;
-    const body = {
-        bidder: loadFromStorage("name"),
-        amount: parseInt(newBid)
     };
     placeBidOnAuction(body)
 }

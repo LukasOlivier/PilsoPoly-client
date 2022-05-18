@@ -48,9 +48,15 @@ function addEventListenersTrading() {
 
 function addEventListenersAuction() {
     document.querySelector("#auction").addEventListener('click', auctionProperty);
-    document.querySelector("#add-1").addEventListener("click", addOne);
-    document.querySelector("#add-10").addEventListener("click", addTen);
-    document.querySelector("#add-100").addEventListener("click", addHunderd);
+    document.querySelector("#add-1").addEventListener("click", () => {
+        addAmount(1);
+    });
+    document.querySelector("#add-10").addEventListener("click", () => {
+        addAmount(10);
+    });
+    document.querySelector("#add-100").addEventListener("click", () => {
+        addAmount(100);
+    });
 }
 
 function addEventListenersBoardNavigation() {
