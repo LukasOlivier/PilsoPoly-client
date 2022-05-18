@@ -58,18 +58,43 @@ function seeWhatActionThatNeedsToBeTaken(lastMove){
                 makeBuyPopupNotHidden();
                 break;
             case "has to go to jail":
-                console.log("je moet naar het gevang");
+                console.log("Jail!");
                 break;
             case "passes 'GO!' and receives 200 for it":
-                console.log("you receive 200 flappen e niffow");
+                console.log("you passes 'GO!");
                 break;
             case "should pay rent":
-                console.log("should pay rent");
+                removeHiddenClassToPayRentDiv();
+                break;
+            case "does nothing special":
+                break;
+            case "":
+                document.querySelector("#card-result").classList.remove("hidden");
+                document.querySelector("#card-result").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
+                setTimeout(hidePopup,8000);
+                break;
+            case "already owns this property":
                 break;
             default:
-                console.log(move.description);
+                document.querySelector("#chance-chest-result").classList.remove("hidden");
+                document.querySelector("#chance-chest-result").insertAdjacentHTML("beforeend", `<p>Card result: ${move.description}</p>`);
+                setTimeout(hidePopup,8000);
         }
     });
+}
+
+function hidePopup(){
+    document.querySelector("#chance-chest-result").classList.add("hidden");
+    document.querySelector("#chance-chest-result").innerText = "";
+
+}
+
+function getLastMove(response) {
+    return response.turns.slice(-1)[0].moves;
+}
+
+function getLastTile(response) {
+    return getLastMove(response).slice(-1)[0].tile;
 }
 
 function findTileId(tileName){
@@ -80,4 +105,14 @@ function findTileId(tileName){
             getCardById(tile.position);
         }
     });
+}
+
+function getPlayerBalance(gameInfo){
+    let balance = 0;
+    gameInfo.players.forEach(player => {
+        if(player.name === loadFromStorage("name")){
+            balance = player.money
+        }
+    })
+    return balance
 }

@@ -3,12 +3,7 @@
 function checkIfPlayerCanRoll(gameState) {
     const playerName = loadFromStorage("name");
     renderPlayerActionRollDice(gameState);
-    if (gameState.currentPlayer === playerName && gameState.canRoll === true) {
-        _$containers["rollDiceOpenDialog"].disabled = false;
-        readyToRoll();
-    } else {
-        _$containers["rollDiceOpenDialog"].disabled = true;
-    }
+    _$containers["rollDiceOpenDialog"].disabled = !(gameState.currentPlayer === playerName && gameState.canRoll === true);
 }
 // This function adds the glowing effect to the player icon
 function renderPlayerActionRollDice(gameState) {
@@ -16,23 +11,6 @@ function renderPlayerActionRollDice(gameState) {
         document.querySelectorAll(`.info-container img`).forEach(player => player.classList.remove("active-player"));
         document.querySelector(`#${gameState.currentPlayer} img`).classList.add("active-player");
     }
-}
-
-function readyToRoll() {
-    document.querySelector("#roll-dice").addEventListener("click", rollDice);
-    _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
-        _$containers.rollDiceDialog.showModal();
-    });
-    document.querySelector("#cancel-roll-dice").addEventListener('click', () => {
-        _$containers.rollDiceDialog.close();
-    });
-    document.querySelector("#roll-dice-oke").addEventListener('click', () => {
-        // this should be in one function probably
-        _$containers.rollDiceDialog.close();
-        _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
-        _$containers.rollDiceDialog.querySelector("#location").innerText = "";
-        togglePopUpButtons();
-    });
 }
 
 function rollDice() {
@@ -64,7 +42,6 @@ function checkIfRolledTwice(response) {
     let text = "";
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
         text = `You rolled a double ${response.lastDiceRoll[0]}. You can throw again!`;
-        readyToRoll();
     } else {
         _$containers["rollDiceOpenDialog"].disabled = true;
         text = `You threw ${totalRolled}!`;
@@ -77,5 +54,8 @@ function getLastMove(response) {
 }
 //
 function saveCurrentTile(response) {
-    saveToStorage("currentTile", response.turns.slice(-1)[0].moves.slice(-1)[0].tile);
+    let currentTile = response.turns.slice(-1)[0].moves.slice(-1)[0].tile;
+    saveToStorage("currentTile", currentTile);
 }
+
+

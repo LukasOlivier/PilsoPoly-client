@@ -7,6 +7,7 @@ function pollingGameState() {
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 1000);
+            checkIfPlayerWon(currentGameInfo)
         });
 }
 
@@ -15,14 +16,16 @@ function checkGameStates(newGameState) {
     if (document.querySelector("body").id === "see-all-the-streets-with-owners") {
         checkIfBought(newGameState);
     } else if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
-        if (newGameState.currentPlayer !== _gameState.currentPlayer){
+        if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfPlayerCanRoll(newGameState);
+            checkIfPlayerNeedsToPayRent(newGameState);
         }
         checkIfBought(newGameState);
         checkIfPlayerOnTile(newGameState);
         checkPlayerBalance(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerAuction(newGameState);
+        checkIfPlayerWon(newGameState)
     }
 }
 
@@ -60,7 +63,7 @@ function checkPlayerBalance(gameInfo) {
 }
 
 function checkIfPlayerOnTile(gameInfo) {
-    document.querySelectorAll(".player-pos").forEach(card =>{
+    document.querySelectorAll(".player-pos").forEach(card => {
         card.querySelector("span").innerText = "";
         card.classList.add("hidden");
     });
@@ -82,8 +85,25 @@ function checkIfPlayerBankrupt(gameInfo) {
 }
 
 function checkIfPlayerAuction(gameInfo) {
-    if ( gameInfo.auction !== null ) {
+    if (gameInfo.auction !== null) {
         renderAuctionPopup(gameInfo);
         showAuctionPopup();
+    }
+}
+
+function checkIfPlayerWon(gameInfo) {
+    if (gameInfo.winner === loadFromStorage("name")) {
+        renderWinScreen();
+    }
+}
+
+function checkIfPlayerNeedsToPayRent(gameInfo) {
+    if (gameInfo.turns.length !== 0 && _gameState.currentPlayer !== loadFromStorage('name')) {
+        const inventory = loadFromStorage('inventory');
+        if (inventory.includes(getLastTile(gameInfo))) {
+            collectDebt(getLastTile(gameInfo), gameInfo.currentPlayer, loadFromStorage("name"));
+        }
+    } else {
+        saveToStorage("rent", ``);
     }
 }

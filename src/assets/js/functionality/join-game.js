@@ -14,7 +14,8 @@ function fetchAllGames() {
                 }
                 checkName(name, game);
                 _gameID = gameID;
-                iconPicker(name);
+
+                renderIconPicker(name);
             })
             .catch(errorHandler);
     } catch (error) {
@@ -60,6 +61,7 @@ function joinGame(name, icon) {
             saveToStorage("token", _token);
             saveToStorage("name", name.playerName);
             saveToStorage("iconId", icon);
+            saveToStorage("inventory", []);
             loadGameDataForLobby();
         })
         .catch(errorHandler);

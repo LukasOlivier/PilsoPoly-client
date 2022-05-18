@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Monopoly</title>
+    <title>PilsoPoly</title>
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/screen.css">
     <link rel="stylesheet" href="assets/css/grid-template-properties.css">
     <link rel="stylesheet" href="assets/css/Buying-property-popup.css">
+    <link rel="stylesheet" href="assets/css/paying-rent.css">
 
 
     <script src="assets/js/config.js"></script>
@@ -23,8 +24,10 @@
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
 
+
     <script src="assets/js/functionality/get-playboard-tiles.js"></script>
     <script src="assets/js/functionality/roll-dice.js"></script>
+    <script src="assets/js/functionality/pay-rent.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
     <script src="assets/js/functionality/game-checks.js"></script>
@@ -35,7 +38,9 @@
     <script src="assets/js/functionality/buy-property.js"></script>
     <script src="assets/js/functionality/auction-property.js"></script>
     <script src="assets/js/functionality/lose-game.js"></script>
+    <script src="assets/js/render/win-screen.js"></script>
 
+    <script src="assets/js/render/main-page/eventListeners.js"></script>
 
 </head>
 
@@ -53,10 +58,11 @@
 </header>
 
 <main>
+
     <div id="buy-property-popup" class="hidden">
         <article>
             <h2>Title</h2>
-            <p>Do you want to buy this property, or let fate decide?</p>
+            <p>Do you want to buy this property, or start an auction?</p>
         </article>
         <form action="#">
             <button type="button" id="buy">Buy</button>
@@ -76,6 +82,16 @@
             <button id="add-100">+100M</button>
         </article>
     </dialog>
+    <div id="flexbox-center">
+        <div id="card-result" class="hidden">
+        </div>
+        <div id="pay-rent" class="hidden">
+            <p>You need to pay rent!</p>
+        </div>
+        <div id="collect-rent" class="hidden">
+            <p></p>
+        </div>
+    </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
         <p>This will turn over all your assest to your oldest debtor and yield.</p>
