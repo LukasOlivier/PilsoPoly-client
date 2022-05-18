@@ -17,6 +17,7 @@
     filter: invert(0%);
 }
 
+
 .player-bought {
     margin-top: auto;
     color: red;
@@ -70,8 +71,10 @@ footer img {
 }
 
 .info-container p {
-    font-size: 1.2rem;
-    font-weight: bold;
+
+    font-size: 1.5rem;
+    font-family: "Oswald", serif;
+    text-transform: uppercase;
     color: black;
 }
 
@@ -298,7 +301,8 @@ header div {
     width: 0.7rem;
     height: 0.7rem;
     margin: 0.1rem;
-    border: solid 0.065rem;
+    border: #797979 solid 0.065rem;
+    border-radius: 0.2rem;
     justify-content: center;
     align-items: center;
 }
@@ -452,18 +456,19 @@ footer .player-balance {
     justify-content: space-around;
 }
 
-#buy-property-popup, #get-out-of-jail-popup{
+#buy-property-popup, #get-out-of-jail-popup {
     position: fixed;
     background: white;
     border: black solid 0.1rem;
     padding: 1rem;
-    text-align:center;
+    text-align: center;
     top: 78%;
     left: 50%;
     /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
     transform: translate(-50%, -50%);
 }
-#card-description{
+
+#card-description {
     top: 79.5%;
     left: 88.5%;
     padding: 0 1rem 1rem 1rem;
@@ -478,31 +483,64 @@ footer .player-balance {
     background-color: white;
 }
 
-#activity li:first-of-type{
+#activity li:first-of-type {
     color: red;
 }
 
-#card-description h3{
+#jail-free-card-amount {
+    text-align: center;
+    color: red;
+    font-weight: lighter;
+    transform: translate(0.9rem, -0.5rem);
+    padding: 0.2rem;
+    background: white;
+    width: 1rem;
+    height: 1rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+}
+
+#jail-free-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+#jail-free-card img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 0 1rem 0;
+    position: fixed;
+    transform: translateY(1rem);
+}
+
+#card-description h3 {
     padding-top: 1rem;
     background: white;
     width: 100%;
     padding-bottom: 0.5rem;
-    position: sticky; top: 0;
+    position: sticky;
+    top: 0;
 }
+
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
 }
-#activity li:hover{
+
+#activity li:hover {
     color: red;
 }
 
-#activity li{
+#activity li {
     border-bottom: #979797 solid 0.1rem;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     color: #757576;
 }
+
 #flexbox-center {
     position: fixed;
     margin-top: 60vh;
@@ -527,8 +565,6 @@ footer .player-balance {
     justify-content: center;
     gap: 1rem;
 }
-
-
 
 
 /* ======================================================================================================== */
@@ -579,7 +615,7 @@ dialog {
     background: rgba(0, 0, 139, 0.6);
 }
 
-#main-screen .disabled:hover{
+#main-screen .disabled:hover {
     cursor: unset;
     filter: unset;
     transform: none;

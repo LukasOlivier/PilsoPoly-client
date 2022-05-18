@@ -9,6 +9,7 @@ function pollingGameState() {
             checkGameStates(currentGameInfo);
             checkPlayerBalance(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);
+            checkAmountOfJailFreeCards(currentGameInfo)
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 2000);
         });
@@ -38,6 +39,12 @@ function checkIfPlayerJailed(gameInfo) {
     } else {
         hideElement(document.querySelector("#get-out-of-jail-popup"));
     }
+}
+
+function checkAmountOfJailFreeCards(gameInfo){
+    gameInfo.players.forEach(player => {
+        document.querySelector(`footer #${player.name} #jail-free-card-amount`).innerText = player.getOutOfJailFreeCards;
+    });
 }
 
 function checkIfCurrentTileBuyAble(gameInfo) {
