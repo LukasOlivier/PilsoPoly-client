@@ -14,6 +14,7 @@ function pollingGameState() {
 }
 
 function checkIfPlayerJailed(gameInfo){
+    console.log(gameInfo)
     gameInfo.players.forEach(player =>{
         if (player === loadFromStorage("name")){
             if (player.jailed){
