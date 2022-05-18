@@ -1,4 +1,5 @@
 "use strict";
+
 let _lastMoveInfo = {
     moves: null,
     player: null,
@@ -19,6 +20,16 @@ function linkPlayersAndStreets(players) {
     });
     saveToStorage("playerProperties", playersBoughtProperties);
 }
+
+
+function updatePlayerProperties(gameInfo) {
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            _playerProperties = player.properties;
+        }
+    });
+}
+
 
 function createCardInfo(property) {
     const info = {name: null, cost: null, rent: null};

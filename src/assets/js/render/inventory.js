@@ -1,23 +1,25 @@
-let _PlayerProperties = null;
 _token = {token: loadFromStorage("token")};
 
 function initInventory() {
-    fetchFromServer(`/games/${_gameID}`, "GET")
-        .then(gameInfo => {
-            fetchFromServer(`/tiles`, 'GET')
-                .then(tiles => {
-                    renderInventoryCards(tiles);
-                });
-            gameInfo.players.forEach(player => {
-                if (player.name === loadFromStorage("name")) {
-                    _PlayerProperties = player.properties;
-                }
-            });
-        });
-    addEventListeners();
+    getGameState();
 }
 
-function addEventListeners(){
+function clearCards(){
+    document.querySelector("#cards").innerHTML = "";
+}
+
+function getGameState() {
+    fetchFromServer(`/games/${_gameID}`, "GET")
+        .then(currentGameInfo => {
+            clearCards();
+            updatePlayerProperties(currentGameInfo)
+            addEventListeners();
+            renderInventoryCards();
+        });
+}
+
+
+function addEventListeners() {
     document.addEventListener('click', function (e) {
         if (!e.target.classList.contains("errormessages")) {
             hideErrorPopup();
@@ -33,15 +35,15 @@ function addEventListeners(){
 }
 
 function checkIfMortgaged() {
-    _PlayerProperties.forEach(property => {
+    _playerProperties.forEach(property => {
         if (property.mortgage === true) {
             document.querySelector(`#${nameToId(property.property)}`).classList.add("mortgaged");
         }
     });
 }
 
-function renderInventoryCards(gameInfo) {
-    gameInfo.forEach(tile => {
+function renderInventoryCards() {
+    loadFromStorage("tiles").forEach(tile => {
         if (loadFromStorage('inventory').includes(nameToId(tile.name))) {
             if (tile.type === "street") {
                 renderStreet(tile);
@@ -111,7 +113,7 @@ function renderRailroadUtility(tile) {
 
 
 function renderHouses() {
-    _PlayerProperties.forEach(property => {
+    _playerProperties.forEach(property => {
         const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
         if (property.houseCount > 0) {
             $currentCard.querySelector(`li:nth-of-type(${property.houseCount}) img`).src = `images/${property.houseCount}houseBought.png`;
