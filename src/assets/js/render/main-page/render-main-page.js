@@ -152,13 +152,17 @@ function renderPlayerOnTile(tile, playerName) {
 }
 
 function giveUp() {
-    if (!_$containers.taxPopup.classList.contains("hidden")) taxSystem();
+    if (!_$containers.taxPopup.classList.contains("hidden")) {
+        taxSystem();
+    }
     toggleElementHidden(_$containers.giveUpPopup);
     toggleElementHidden(document.querySelector("section"));
 }
 
 function taxSystem() {
-    if (!_$containers.giveUpPopup.classList.contains("hidden")) giveUp();
+    if (!_$containers.giveUpPopup.classList.contains("hidden")) {
+        giveUp();
+    }
     toggleElementHidden(_$containers.taxPopup);
     toggleElementHidden(document.querySelector("section"));
 }
