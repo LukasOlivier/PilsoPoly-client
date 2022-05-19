@@ -4,6 +4,7 @@ function addEventListeners() {
     addEventListenersGiveUp();
     addEventListenersRollDice();
     addEventListenersAuction();
+    addEventListenersTaxSystem();
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
     document.addEventListener('click', function (e) {
@@ -29,11 +30,16 @@ function addEventListenersRollDice() {
     });
 }
 
-
 function addEventListenersGiveUp() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
-    document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
-    document.querySelector("#give-up-confirm").addEventListener("click", loseGame);
+    _$containers.giveUpPopup.querySelector("#give-up-deny").addEventListener("click", giveUp);
+    _$containers.giveUpPopup.querySelector("#give-up-confirm").addEventListener("click", loseGame);
+}
+
+function addEventListenersTaxSystem() {
+    document.querySelector("#tax-system").addEventListener("click", taxSystem);
+    _$containers.taxPopup.querySelector("#estimate").addEventListener("click", setTaxSystem);
+    _$containers.taxPopup.querySelector("#compute").addEventListener("click", setTaxSystem);
 }
 
 function addEventListenersTrading() {

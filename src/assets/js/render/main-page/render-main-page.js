@@ -9,6 +9,7 @@ _gameID = loadFromStorage("gameId");
 function renderMainPage() {
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
+        taxPopup: document.querySelector("#tax-preference-popup"),
         cardsParent: document.querySelector("#cards-parent"),
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
@@ -27,6 +28,7 @@ function renderFirstTime() {
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
+            renderTaxSystemFirstTime(currentGameInfo);
             getTiles(currentGameInfo);
             setTimeout(pollingGameState, 2000);
         });
@@ -150,11 +152,29 @@ function renderPlayerOnTile(tile, playerName) {
 }
 
 function giveUp() {
-    showElement(_$containers.giveUpPopup);
-    hideElement(document.querySelector("section"));
+    if (!_$containers.taxPopup.classList.contains("hidden")) {
+        taxSystem();
+    }
+    toggleElementHidden(_$containers.giveUpPopup);
+    toggleElementHidden(document.querySelector("section"));
 }
 
-function giveUpDeny() {
-    hideElement(_$containers.giveUpPopup);
-    showElement(document.querySelector("section"));
+function taxSystem() {
+    if (!_$containers.giveUpPopup.classList.contains("hidden")) {
+        giveUp();
+    }
+    toggleElementHidden(_$containers.taxPopup);
+    toggleElementHidden(document.querySelector("section"));
+}
+
+function renderTaxSystemFirstTime(currentGameInfo) {
+    const taxType = getTaxSystem(currentGameInfo);
+    const $computeButton = _$containers.taxPopup.querySelector("#compute");
+    const $estimateButton = _$containers.taxPopup.querySelector("#estimate");
+    _$containers.taxPopup.querySelector("#current").innerText = taxType;
+    if (taxType === "COMPUTE") {
+        $computeButton.disabled = true;
+    } else {
+        $estimateButton.disabled = true;
+    }
 }
