@@ -27,11 +27,12 @@ function checkIfTimeExceeded() {
     }
 }
 
+// https://www.codegrepper.com/code-examples/javascript/javascript+countdown+10+seconds
 function startTimer() {
     let timeLeft = 30;
-    const downloadTimer = setInterval(function(){
+    const bidTimer = setInterval(function(){
         if( timeLeft <= 0 ) {
-            clearInterval(downloadTimer);
+            clearInterval(bidTimer);
         }
         document.querySelector("#duration").value = 30 - timeLeft;
         timeLeft -= 1;
