@@ -116,6 +116,11 @@ main {
     justify-content: space-around;
 }
 
+aside li {
+    width: 1rem;
+    height: 1rem;
+}
+
 #card-actions li {
     width: 2rem;
 }
@@ -124,12 +129,12 @@ main {
     margin-right: 1rem;
 }
 
-#card-actions img {
-    max-width: 100%;
-}
-
 article img {
     height: 1rem;
+}
+
+#card-actions img {
+    max-width: 100%;
 }
 
 article .card-icon {
@@ -161,11 +166,6 @@ aside ul {
     display: flex;
     flex-direction: row;
     gap: 1rem;
-}
-
-aside li {
-    width: 1rem;
-    height: 1rem;
 }
 
 .errormessages p {
