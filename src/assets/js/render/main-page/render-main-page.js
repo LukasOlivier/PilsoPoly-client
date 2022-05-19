@@ -160,7 +160,7 @@ function giveUp() {
 function taxSystem() {
     if (!_$containers.giveUpPopup.classList.contains("hidden")) giveUp();
     toggleElementHidden(_$containers.taxPopup);
-    toggleElementHidden(document.querySelector("section"))
+    toggleElementHidden(document.querySelector("section"));
 }
 
 function renderTaxSystemFirstTime(currentGameInfo) {
