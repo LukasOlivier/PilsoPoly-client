@@ -422,6 +422,7 @@ footer .player-balance {
 
 #tax-preference-popup li {
     margin-bottom: 0.5rem;
+    list-style: circle;
 }
 
 /* GIVE UP POP-UP and TAX PREFERENCE POPUP*/
@@ -431,11 +432,11 @@ footer .player-balance {
     align-items: center;
     position: fixed;
     width: 30vw;
-    height: 7vw;
+    height: 10vw;
     background: white;
     padding: 2rem;
     border: black solid 0.1rem;
-    top: 20%;
+    top: 25%;
     left: 50%;
     /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
     transform: translate(-50%, -50%);
@@ -454,7 +455,7 @@ footer .player-balance {
     background: white;
 }
 
-#give-up-popup input:hover, #tax-preference-popup input {
+#tax-preference-popup input:hover, #give-up-popup input:hover  {
     cursor: pointer;
     background: rgba(232, 232, 232, 0.5)
 }
@@ -463,10 +464,15 @@ footer .player-balance {
     border: red solid 0.1rem;
 }
 
-#give-up-popup form, #tax-preference-popup, form {
+#give-up-popup form, #tax-preference-popup form {
     width: 25rem;
     display: flex;
     justify-content: space-around;
+}
+
+#estimate:disabled:hover, #compute:disabled:hover {
+    background-color: grey;
+    cursor: unset;
 }
 
 #pay-rent, #collect-rent, #card-description {

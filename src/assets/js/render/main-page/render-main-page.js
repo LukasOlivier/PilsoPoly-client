@@ -28,6 +28,7 @@ function renderFirstTime() {
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
+            renderTaxSystemFirstTime(currentGameInfo);
             getTiles(currentGameInfo);
             setTimeout(pollingGameState, 2000);
         });
@@ -160,4 +161,16 @@ function taxSystem() {
     if (!_$containers.giveUpPopup.classList.contains("hidden")) giveUp();
     toggleElementHidden(_$containers.taxPopup);
     toggleElementHidden(document.querySelector("section"));
+}
+
+function renderTaxSystemFirstTime(currentGameInfo) {
+    const taxType = getTaxSystem(currentGameInfo);
+    const $computeButton = _$containers.taxPopup.querySelector("#compute");
+    const $estimateButton = _$containers.taxPopup.querySelector("#estimate");
+    _$containers.taxPopup.querySelector("#current").innerText = taxType;
+    if (taxType === "COMPUTE") {
+        $computeButton.disabled = true;
+    } else {
+        $estimateButton.disabled = true;
+    }
 }
