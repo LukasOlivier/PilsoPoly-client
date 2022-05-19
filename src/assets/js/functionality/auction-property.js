@@ -9,9 +9,9 @@ function auctionProperty() {
 
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
-    const playerBalance = findPlayerBalance(gameInfo.players);
     isYourTurnToBid(auctionInfo.lastBidder);
-    canBidHigher(playerBalance, auctionInfo.highestBid);
+    // const playerBalance = findPlayerBalance(gameInfo.players);
+    // canBidHigher(playerBalance, auctionInfo.highestBid);
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
     document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
@@ -33,26 +33,26 @@ function isYourTurnToBid(lastBidder) {
     }
 }
 
-function canBidHigher(playerBalance, highestBid) {
-    const $add1Btn = document.querySelector("#add-1");
-    const $add10Btn = document.querySelector("#add-10");
-    const $add100Btn = document.querySelector("#add-100");
-    if ( playerBalance + 1 < highestBid ) {
-        $add1Btn.disabled = true;
-    } else {
-        $add1Btn.disabled = false;
-    }
-    if ( playerBalance + 10 < highestBid ) {
-        $add10Btn.disabled = true;
-    } else {
-        $add10Btn.disabled = false;
-    }
-    if ( playerBalance + 100 < highestBid ) {
-        $add100Btn.disabled = true;
-    } else {
-        $add100Btn.disabled = false;
-    }
-}
+// function canBidHigher(playerBalance, highestBid) {
+//     const $add1Btn = document.querySelector("#add-1");
+//     const $add10Btn = document.querySelector("#add-10");
+//     const $add100Btn = document.querySelector("#add-100");
+//     if ( playerBalance + 1 < highestBid ) {
+//         $add1Btn.disabled = true;
+//     } else {
+//         $add1Btn.disabled = false;
+//     }
+//     if ( playerBalance + 10 < highestBid ) {
+//         $add10Btn.disabled = true;
+//     } else {
+//         $add10Btn.disabled = false;
+//     }
+//     if ( playerBalance + 100 < highestBid ) {
+//         $add100Btn.disabled = true;
+//     } else {
+//         $add100Btn.disabled = false;
+//     }
+// }
 
 function findPlayerBalance(players) {
     const currentPlayer = loadFromStorage("name");
@@ -89,5 +89,5 @@ function addAmount(amount) {
 }
 
 function placeBidOnAuction(body) {
-    fetchFromServer(`/games/${_gameID}/players/TEST/auctions/TEST/bid`, "POST", body);
+    fetchFromServer(`/games/${_gameID}/bank/auctions/property/bid`, "POST", body);
 }

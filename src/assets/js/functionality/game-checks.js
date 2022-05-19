@@ -11,6 +11,7 @@ function pollingGameState() {
             checkIfPlayerWon(currentGameInfo);
             checkIfBought(currentGameInfo);
             checkIfPlayerAuction(currentGameInfo);
+            console.log(currentGameInfo);
         });
 }
 
