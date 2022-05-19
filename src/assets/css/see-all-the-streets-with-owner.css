@@ -182,3 +182,11 @@ article .houses{
     padding: 0.7rem 2.3rem 0.7rem 2.3rem;
     font-size: 1.4rem;
 }
+
+ .card-bought{
+     border: red solid 0.2rem;
+ }
+
+.card-mortgaged{
+    border: orange solid 0.2rem;
+}

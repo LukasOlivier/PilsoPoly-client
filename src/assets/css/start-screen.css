@@ -272,6 +272,10 @@ body {
     display: flex;
     flex-direction: row;
     column-gap: 3rem;
+    row-gap: 1rem;
+    margin: 0 2rem 0 2rem;
+    flex-wrap: wrap;
+
 }
 
 #lobby-interface h2 {

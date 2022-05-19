@@ -64,7 +64,7 @@ footer img {
 
 .scrollable-footer{
     justify-content: flex-start;
-    overflow: scroll;
+    overflow: auto;
     border-right: black solid 0.005rem;
     border-left: black solid 0.005rem;
 }

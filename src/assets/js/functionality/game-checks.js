@@ -5,6 +5,7 @@ let _player;
 function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
+            console.log(currentGameInfo)
             updatePlayerInfo(currentGameInfo);
             checkGameStates(currentGameInfo);
             checkPlayerBalance(currentGameInfo);
