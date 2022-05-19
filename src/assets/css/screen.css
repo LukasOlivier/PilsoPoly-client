@@ -324,17 +324,17 @@ header div {
     margin-right: auto;
 }
 
-#main-screen header button:disabled {
+#main-screen button:disabled, #estimate:disabled, #compute:disabled {
     background-color: grey;
+    color: black;
     transition-property: none;
-    opacity: 50%;
+    opacity: 80%;
 }
 
-#main-screen header button:disabled:hover {
+#main-screen button:disabled:hover {
     filter: none;
     transform: scale(1);
     cursor: auto;
-
 }
 
 #main-screen header div {
@@ -454,7 +454,7 @@ footer .player-balance {
     background: white;
 }
 
-#give-up-popup input:hover, #tax-preference-popup input:hover {
+#give-up-popup input:hover, #tax-preference-popup input {
     cursor: pointer;
     background: rgba(232, 232, 232, 0.5)
 }
