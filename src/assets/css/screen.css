@@ -307,6 +307,12 @@ header div {
     align-items: center;
 }
 
+#buy-property-popup button {
+    width: 5rem;
+    border: black solid 0.05rem;
+    background: white;
+}
+
 #main-screen header button {
     transition: all .2s ease-in-out;
     border: none;
@@ -471,12 +477,6 @@ footer .player-balance {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-#buy-property-popup button {
-    width: 5rem;
-    border: black solid 0.05rem;
-    background: white;
 }
 
 #buy-property-popup form {
