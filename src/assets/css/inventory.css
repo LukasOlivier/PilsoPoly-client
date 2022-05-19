@@ -6,27 +6,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-.errormessages p {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: #000000 solid 0.1rem;
-    background-color: #FF0000FF;
-    text-align: center;
-}
-
-.errormessages{
-    position: fixed;
-    text-align:center;
-    top: 50%;
-    left: 50%;
-    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
-    transform: translate(-50%, -50%);
-}
-
-.errormessages p:empty {
-    padding: 0;
-    border: none;
-}
 
 header {
     background: rgb(178, 207, 224);
@@ -137,6 +116,11 @@ main {
     justify-content: space-around;
 }
 
+aside li {
+    width: 1rem;
+    height: 1rem;
+}
+
 #card-actions li {
     width: 2rem;
 }
@@ -145,12 +129,12 @@ main {
     margin-right: 1rem;
 }
 
-#card-actions img {
-    max-width: 100%;
-}
-
 article img {
     height: 1rem;
+}
+
+#card-actions img {
+    max-width: 100%;
 }
 
 article .card-icon {
@@ -184,9 +168,26 @@ aside ul {
     gap: 1rem;
 }
 
-aside li {
-    width: 1rem;
-    height: 1rem;
+.errormessages p {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: #000000 solid 0.1rem;
+    background-color: #FF0000FF;
+    text-align: center;
+}
+
+.errormessages{
+    position: fixed;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+}
+
+.errormessages p:empty {
+    padding: 0;
+    border: none;
 }
 
 #error{

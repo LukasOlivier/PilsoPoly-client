@@ -23,7 +23,7 @@ function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             _gameState = currentGameInfo;
-            updatePlayerProperties(currentGameInfo)
+            updatePlayerProperties(currentGameInfo);
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);

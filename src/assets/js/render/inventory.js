@@ -12,12 +12,11 @@ function getGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             clearCards();
-            updatePlayerProperties(currentGameInfo)
+            updatePlayerProperties(currentGameInfo);
             addEventListeners();
             renderInventoryCards();
         });
 }
-
 
 function addEventListeners() {
     document.addEventListener('click', function (e) {

@@ -69,6 +69,7 @@ function nameToId(name) {
 
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
+    const $cardDescription = document.querySelector("#card-description");
     _currentMoveInfo.moves.forEach(move => {
         switch (move.actionType) {
             case "rent":
@@ -77,19 +78,19 @@ function seeWhatActionThatNeedsToBeTaken(response) {
                 }
                 break;
             case "jailed":
-                document.querySelector("#card-description").classList.remove("hidden");
-                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
+                $cardDescription.classList.remove("hidden");
+                $cardDescription.insertAdjacentHTML("beforeend", `<p>You are in jail!</p>`);
                 break;
             case "go":
-                document.querySelector("#card-description").classList.remove("hidden");
-                document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
+                $cardDescription.classList.remove("hidden");
+                $cardDescription.insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 break;
             default:
                 if (_currentMoveInfo.actionType === "buy") {
                     document.querySelector(`#buy-property-popup`).classList.remove("hidden");
                 } else {
-                    document.querySelector("#card-description").classList.remove("hidden");
-                    document.querySelector("#card-description").insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
+                    $cardDescription.classList.remove("hidden");
+                    $cardDescription.insertAdjacentHTML("beforeend", `<p>${move.description}</p>`);
                 }
         }
     });
@@ -126,9 +127,11 @@ function updateLastMoveInfo(gameInfo) {
 }
 
 function hidePopupCardDescription() {
-    document.querySelector("#card-description").classList.add("hidden");
-    document.querySelector("#card-description").innerText = "";
+    const $cardDescription = document.querySelector("#card-description");
+    $cardDescription.classList.add("hidden");
+    $cardDescription.innerText = "";
 }
+
 function getLastMove(gameInfo) {
     const indexOfLastMove = gameInfo.turns.length - 1;
     return gameInfo.turns[indexOfLastMove];

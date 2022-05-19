@@ -4,7 +4,7 @@ let _playerProperties;
 function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            updatePlayerProperties(currentGameInfo)
+            updatePlayerProperties(currentGameInfo);
             checkGameStates(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 1000);
@@ -70,7 +70,7 @@ function checkIfHousesBoughtMain(gameInfo) {
                 }
             }
         });
-    })
+    });
 }
 
 function checkPlayerBalance(gameInfo) {
