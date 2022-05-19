@@ -51,8 +51,6 @@ function checkAmountOfJailFreeCards(gameInfo){
 function checkIfCurrentTileBuyAble(gameInfo) {
     const currentTileName = loadFromStorage("currentTile");
     const currentTileAction = loadFromStorage("currentTileAction");
-    console.log(currentTileName)
-    console.log(currentTileAction)
     if (gameInfo.turns.length > 0){
         if (currentTileAction === "buy" && gameInfo.auction == null && gameInfo.currentPlayer === loadFromStorage("name") && !loadFromStorage("inventory").includes(nameToId(currentTileName))){
             showElement(document.querySelector("#buy-property-popup"));
