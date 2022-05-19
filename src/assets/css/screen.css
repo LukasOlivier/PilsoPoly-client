@@ -100,6 +100,10 @@ footer img {
     text-align: left;
 }
 
+#buy-property-popup p {
+    margin-bottom: 1rem;
+}
+
 #cards-parent article:first-of-type, #cards-parent article:last-of-type {
     width: 10vw;
     height: 18vw;
@@ -467,10 +471,6 @@ footer .player-balance {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-#buy-property-popup p {
-    margin-bottom: 1rem;
 }
 
 #buy-property-popup button {
