@@ -12,7 +12,7 @@ function getGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             clearCards();
-            updatePlayerProperties(currentGameInfo)
+            updatePlayerProperties(currentGameInfo);
             addEventListeners();
             renderInventoryCards();
         });
