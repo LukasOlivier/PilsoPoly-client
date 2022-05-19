@@ -6,47 +6,32 @@ body {
     display: flex;
     flex-direction: column;
 }
-.errormessages p {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: #000000 solid 0.1rem;
-    background-color: #FF0000FF;
-    text-align: center;
-}
-
-.errormessages{
-    position: fixed;
-    text-align:center;
-    top: 50%;
-    left: 50%;
-    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
-    transform: translate(-50%, -50%);
-}
-
-.errormessages p:empty {
-    padding: 0;
-    border: none;
-}
 
 header {
     background: rgb(178, 207, 224);
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     border-bottom: black solid 0.1rem;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+article img {
+    height: 1rem;
+}
+
+header div img{
+    margin-left: 1rem;
+    max-width: 3rem;
 }
 
 header h1 {
     color: white;
-    margin-left: 48%;
-    margin-right: auto;
     font-size: 2rem;
 }
 
 header a {
-    margin-right: 0;
     background: white;
     border: none;
     color: black;
@@ -137,6 +122,16 @@ main {
     justify-content: space-around;
 }
 
+aside li {
+    width: 1rem;
+    height: 1rem;
+}
+
+.tipText li {
+    padding-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+
 #card-actions li {
     width: 2rem;
 }
@@ -147,10 +142,6 @@ main {
 
 #card-actions img {
     max-width: 100%;
-}
-
-article img {
-    height: 1rem;
 }
 
 article .card-icon {
@@ -184,9 +175,57 @@ aside ul {
     gap: 1rem;
 }
 
-aside li {
-    width: 1rem;
-    height: 1rem;
+.tip .tipText {
+    border: black solid 0.1rem;
+    visibility: hidden;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    position: absolute;
+}
+
+.tipText p {
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+    color: #5b5f97;
+}
+
+.tipText h2 {
+    text-align: center;
+    padding-bottom: 0.8rem;
+    font-size: 2rem;
+}
+
+.tipText ul {
+    list-style: circle;
+    text-align: left;
+    padding-bottom: 0.5rem;
+}
+
+.tip:hover .tipText {
+    visibility: visible;
+}
+
+.errormessages p {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: #000000 solid 0.1rem;
+    background-color: #FF0000FF;
+    text-align: center;
+}
+
+.errormessages{
+    position: fixed;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+}
+
+.errormessages p:empty {
+    padding: 0;
+    border: none;
 }
 
 #error{

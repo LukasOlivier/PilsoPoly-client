@@ -20,4 +20,3 @@ function addPropertyToInventory() {
     saveToStorage("inventory",currentInventory);
 
 }
-

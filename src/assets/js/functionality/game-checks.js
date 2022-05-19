@@ -6,6 +6,7 @@ function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             updatePlayerInfo(currentGameInfo);
+            updatePlayerProperties(currentGameInfo);
             checkGameStates(currentGameInfo);
             checkPlayerBalance(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);

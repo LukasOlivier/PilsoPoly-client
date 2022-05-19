@@ -108,6 +108,15 @@ footer img {
     text-align: left;
 }
 
+#buy-property-popup p {
+    margin-bottom: 1rem;
+}
+
+#auction-property-popup p, h3 {
+    text-align: center;
+    margin: 0.3rem;
+}
+
 #cards-parent article:first-of-type, #cards-parent article:last-of-type {
     width: 10vw;
     height: 18vw;
@@ -133,7 +142,6 @@ article:first-of-type img, article:last-of-type img {
 article:nth-of-type(2) img, article:nth-of-type(4) img {
     height: 1.5rem;
 }
-
 
 #cards-parent article:nth-of-type(2) p, #cards-parent article:nth-of-type(4) p {
     font-size: 99%;
@@ -237,7 +245,6 @@ header img:hover, button:hover {
     height: 3rem;
 }
 
-
 section div {
     display: flex;
     justify-content: space-around;
@@ -312,6 +319,7 @@ header div {
     align-items: center;
 }
 
+<<<<<<< HEAD
 
 .dice-roll-double {
     text-decoration: underline;
@@ -321,6 +329,18 @@ header div {
 #main-screen #dice-parent{
     justify-content: space-between;
     width: 10rem;
+=======
+#buy-property-popup button {
+    width: 5rem;
+    border: black solid 0.05rem;
+    background: white;
+}
+
+#main-screen header button {
+    transition: all .2s ease-in-out;
+    border: none;
+    background: white;
+>>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     margin-left: 2rem;
     margin-right: auto;
     color: white;
@@ -336,17 +356,17 @@ header div {
     margin-left: 0;
 }
 
-#main-screen header button:disabled {
+#main-screen button:disabled, #estimate:disabled, #compute:disabled {
     background-color: grey;
+    color: black;
     transition-property: none;
-    opacity: 50%;
+    opacity: 80%;
 }
 
-#main-screen header button:disabled:hover {
+#main-screen button:disabled:hover {
     filter: none;
     transform: scale(1);
     cursor: auto;
-
 }
 
 #main-screen header div {
@@ -367,7 +387,6 @@ header div {
     transform: scale(1.5);
 }
 
-
 #trade {
     border-radius: 1rem;
 }
@@ -385,6 +404,11 @@ header div {
     align-items: center;
     text-transform: uppercase;
     margin-bottom: 2rem;
+}
+
+#tax-preference-popup li {
+    margin-bottom: 0.5rem;
+    list-style: circle;
 }
 
 #cards-parent article li {
@@ -433,28 +457,29 @@ footer .player-balance {
     margin: auto auto auto auto;
 }
 
-/* GIVE UP POP-UP */
-#give-up-popup {
+/* GIVE UP POP-UP and TAX PREFERENCE POPUP*/
+#give-up-popup, #tax-preference-popup {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: fixed;
     width: 30vw;
-    height: 7vw;
+    height: 10vw;
     background: white;
     padding: 2rem;
     border: black solid 0.1rem;
-    margin-left: 33%;
-    margin-right: 25%;
+    top: 25%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
 }
 
-
-#give-up-popup h2 {
+#give-up-popup h2, #tax-preference-popup h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-#give-up-popup input {
+#give-up-popup input, #tax-preference-popup input {
     margin-top: 2rem;
     width: 10rem;
     height: 2rem;
@@ -462,7 +487,7 @@ footer .player-balance {
     background: white;
 }
 
-#give-up-popup input:hover {
+#tax-preference-popup input:hover, #give-up-popup input:hover  {
     cursor: pointer;
     background: rgba(232, 232, 232, 0.5)
 }
@@ -471,14 +496,24 @@ footer .player-balance {
     border: red solid 0.1rem;
 }
 
-#give-up-popup form {
+#give-up-popup form, #tax-preference-popup form {
     width: 25rem;
     display: flex;
     justify-content: space-around;
 }
 
+<<<<<<< HEAD
 #buy-property-popup, #get-out-of-jail-popup {
     position: fixed;
+=======
+#estimate:disabled:hover, #compute:disabled:hover {
+    background-color: grey;
+    cursor: unset;
+}
+
+#pay-rent, #collect-rent, #card-description {
+    display: inline-block;
+>>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     background: white;
     border: black solid 0.1rem;
     padding: 1rem;
@@ -571,6 +606,7 @@ footer .player-balance {
     justify-content: center;
 }
 
+<<<<<<< HEAD
 #buy-property-popup p, #get-out-of-jail-popup p {
     margin-bottom: 1rem;
 }
@@ -582,11 +618,15 @@ footer .player-balance {
 }
 
 #buy-property-popup form, #get-out-of-jail-popup form {
+=======
+#buy-property-popup form {
+>>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
 
+<<<<<<< HEAD
 #card-info-auction h3{
     border: black solid 0.1rem;
     padding: 0.4rem;
@@ -601,6 +641,12 @@ footer .player-balance {
 
 #card-info-auction{
     color: black;
+=======
+#buy-property-popup {
+    position: fixed;
+    margin-top: 60vh;
+    margin-left: 39.5vw;
+>>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     background: white;
     display: flex;
     flex-direction: column;
@@ -638,11 +684,6 @@ footer .player-balance {
 
 #bidding-info p{
     padding-bottom: 1rem;
-}
-
-#auction-property-popup p, h3 {
-    text-align: center;
-    margin: 0.3rem;
 }
 
 /* ======================================================================================================== */

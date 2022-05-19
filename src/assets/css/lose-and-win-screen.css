@@ -42,6 +42,10 @@ a:hover {
 
 }
 
+p {
+    font-size: 2rem;
+}
+
 .errormessages p {
     font-size: 1rem;
     margin-top: 1rem;
@@ -56,11 +60,7 @@ a:hover {
     border: none;
 }
 
-h2{
+h2 {
     font-size: 8rem;
     margin-bottom: 2rem;
-}
-
-p{
-    font-size: 2rem;
 }

@@ -30,7 +30,6 @@ function updatePlayerProperties(gameInfo) {
     });
 }
 
-
 function createCardInfo(property) {
     const info = {name: null, cost: null, rent: null};
     loadFromStorage("tiles").forEach(function (tile) {
@@ -138,7 +137,6 @@ function getCurrentTile(gameInfo) {
     return null;
 }
 
-
 function findTileId(tileName) {
     loadFromStorage("tiles").forEach(function (tile) {
         if (tile.name === tileName) {
@@ -159,6 +157,19 @@ function getPlayerBalance(gameInfo) {
     return balance;
 }
 
+function getTaxSystem(gameInfo) {
+    let taxSystem;
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            taxSystem = player.taxSystem;
+        }
+    });
+    return taxSystem;
+}
+
+function toggleElementHidden($element){
+    $element.classList.toggle("hidden");
+}
 
 function showElement($element) {
     $element.classList.remove("hidden");

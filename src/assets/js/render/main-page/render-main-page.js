@@ -9,6 +9,7 @@ _gameID = loadFromStorage("gameId");
 function renderMainPage() {
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
+        taxPopup: document.querySelector("#tax-preference-popup"),
         cardsParent: document.querySelector("#cards-parent"),
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
@@ -23,19 +24,19 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            try {
-                _gameState = currentGameInfo;
-                checkAmountOfPlayersOverflow(currentGameInfo);
-                updatePlayerInfo(currentGameInfo);
-                renderPlayerInfo(currentGameInfo);
-                getTiles(currentGameInfo);
-                pollingGameState(currentGameInfo);
-                checkIfCurrentTileBuyAble(currentGameInfo);
-                checkIfPlayerCanRoll(currentGameInfo);
-                checkIfPlayerJailed(currentGameInfo);
-            }catch (error){
-                console.error(error);
-            }
+            _gameState = currentGameInfo;
+            checkAmountOfPlayersOverflow(currentGameInfo);
+            //
+            updatePlayerInfo(currentGameInfo);
+            updatePlayerProperties(currentGameInfo);
+            renderPlayerInfo(currentGameInfo);
+            checkIfPlayerBankrupt(currentGameInfo);
+            checkIfPlayerCanRoll(currentGameInfo);
+            checkIfCurrentTileBuyAble(currentGameInfo);
+            renderTaxSystemFirstTime(currentGameInfo);
+            checkIfPlayerJailed(currentGameInfo);
+            getTiles(currentGameInfo);
+            setTimeout(pollingGameState, 2000);
         });
 }
 
@@ -164,11 +165,29 @@ function renderPlayerOnTile(tile, playerName) {
 }
 
 function giveUp() {
-    showElement(_$containers.giveUpPopup);
-    hideElement(document.querySelector("section"));
+    if (!_$containers.taxPopup.classList.contains("hidden")) {
+        taxSystem();
+    }
+    toggleElementHidden(_$containers.giveUpPopup);
+    toggleElementHidden(document.querySelector("section"));
 }
 
-function giveUpDeny() {
-    hideElement(_$containers.giveUpPopup);
-    showElement(document.querySelector("section"));
+function taxSystem() {
+    if (!_$containers.giveUpPopup.classList.contains("hidden")) {
+        giveUp();
+    }
+    toggleElementHidden(_$containers.taxPopup);
+    toggleElementHidden(document.querySelector("section"));
+}
+
+function renderTaxSystemFirstTime(currentGameInfo) {
+    const taxType = getTaxSystem(currentGameInfo);
+    const $computeButton = _$containers.taxPopup.querySelector("#compute");
+    const $estimateButton = _$containers.taxPopup.querySelector("#estimate");
+    _$containers.taxPopup.querySelector("#current").innerText = taxType;
+    if (taxType === "COMPUTE") {
+        $computeButton.disabled = true;
+    } else {
+        $estimateButton.disabled = true;
+    }
 }
