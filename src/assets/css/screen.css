@@ -17,7 +17,6 @@
     filter: invert(0%);
 }
 
-
 .player-bought {
     margin-top: auto;
     color: red;
@@ -61,14 +60,12 @@ footer img {
     margin-right: 1rem;
 }
 
-
 .scrollable-footer{
     justify-content: flex-start;
     overflow: auto;
     border-right: black solid 0.005rem;
     border-left: black solid 0.005rem;
 }
-
 
 .info-container {
     display: flex;
