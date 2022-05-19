@@ -10,12 +10,32 @@ function auctionProperty() {
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
     isYourTurnToBid(auctionInfo.lastBidder);
-    // const playerBalance = findPlayerBalance(gameInfo.players);
-    // canBidHigher(playerBalance, auctionInfo.highestBid);
+    checkIfTimeExceeded();
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
     document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
-    document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
+}
+
+function checkIfTimeExceeded() {
+    const $progressBar = document.querySelector("#duration");
+    if ( $progressBar.value === 30 ) {
+        const body = {
+            bidder: loadFromStorage("name"),
+            amount: -1
+        };
+        placeBidOnAuction(body);
+    }
+}
+
+function startTimer() {
+    let timeLeft = 30;
+    const downloadTimer = setInterval(function(){
+        if( timeLeft <= 0 ) {
+            clearInterval(downloadTimer);
+        }
+        document.querySelector("#duration").value = 30 - timeLeft;
+        timeLeft -= 1;
+    }, 1000);
 }
 
 function isYourTurnToBid(lastBidder) {
@@ -33,40 +53,10 @@ function isYourTurnToBid(lastBidder) {
     }
 }
 
-// function canBidHigher(playerBalance, highestBid) {
-//     const $add1Btn = document.querySelector("#add-1");
-//     const $add10Btn = document.querySelector("#add-10");
-//     const $add100Btn = document.querySelector("#add-100");
-//     if ( playerBalance + 1 < highestBid ) {
-//         $add1Btn.disabled = true;
-//     } else {
-//         $add1Btn.disabled = false;
-//     }
-//     if ( playerBalance + 10 < highestBid ) {
-//         $add10Btn.disabled = true;
-//     } else {
-//         $add10Btn.disabled = false;
-//     }
-//     if ( playerBalance + 100 < highestBid ) {
-//         $add100Btn.disabled = true;
-//     } else {
-//         $add100Btn.disabled = false;
-//     }
-// }
-
-function findPlayerBalance(players) {
-    const currentPlayer = loadFromStorage("name");
-    players.forEach(player => {
-        if ( player.name === currentPlayer ) {
-            return player.money;
-        }
-    });
-    return null;
-}
-
 function showAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
     if ( !$dialog.open ) {
+        startTimer();
         $dialog.showModal();
     }
 }
