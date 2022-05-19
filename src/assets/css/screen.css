@@ -374,6 +374,11 @@ header div {
     margin-bottom: 2rem;
 }
 
+#tax-preference-popup li {
+    margin-bottom: 0.5rem;
+    list-style: circle;
+}
+
 #cards-parent article li {
     display: flex;
     justify-content: space-between;
@@ -418,11 +423,6 @@ footer .player-balance {
     height: 50%;
     align-self: center;
     margin: auto auto auto auto;
-}
-
-#tax-preference-popup li {
-    margin-bottom: 0.5rem;
-    list-style: circle;
 }
 
 /* GIVE UP POP-UP and TAX PREFERENCE POPUP*/

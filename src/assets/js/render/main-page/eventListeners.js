@@ -37,7 +37,7 @@ function addEventListenersGiveUp() {
 }
 
 function addEventListenersTaxSystem() {
-    document.querySelector("#tax-system").addEventListener("click", taxSystem)
+    document.querySelector("#tax-system").addEventListener("click", taxSystem);
     _$containers.taxPopup.querySelector("#estimate").addEventListener("click", setTaxSystem);
     _$containers.taxPopup.querySelector("#compute").addEventListener("click", setTaxSystem);
 }
