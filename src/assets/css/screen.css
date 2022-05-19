@@ -135,7 +135,6 @@ article:nth-of-type(2) img, article:nth-of-type(4) img {
     height: 1.5rem;
 }
 
-
 #cards-parent article:nth-of-type(2) p, #cards-parent article:nth-of-type(4) p {
     font-size: 99%;
 }
@@ -237,7 +236,6 @@ header img:hover, button:hover {
     width: 3rem;
     height: 3rem;
 }
-
 
 section div {
     display: flex;
@@ -357,7 +355,6 @@ header div {
     transform: scale(1.5);
 }
 
-
 #trade {
     border-radius: 1rem;
 }
@@ -437,7 +434,6 @@ footer .player-balance {
     margin-left: 33%;
     margin-right: 25%;
 }
-
 
 #give-up-popup h2 {
     font-size: 2rem;

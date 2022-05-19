@@ -52,7 +52,7 @@ function addAmount(amount) {
         bidder: loadFromStorage("name"),
         amount: newBid
     };
-    placeBidOnAuction(body)
+    placeBidOnAuction(body);
 }
 
 function placeBidOnAuction(body) {
