@@ -12,6 +12,7 @@ function renderAuctionPopup(gameInfo) {
     checkIfCanBid(auctionInfo.lastBidder);
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
     document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
+    saveToStorage("last-bidder", `${auctionInfo.lastBidder}`)
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
     document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
 }
@@ -33,16 +34,21 @@ function checkIfCanBid(lastBidder) {
 
 function showAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
-    if ( !$dialog.open ) {
+    if (!$dialog.open) {
         $dialog.showModal();
     }
 }
 
 function hideAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
-    if ( $dialog.open ) {
+    if ($dialog.open) {
         $dialog.close();
     }
+    console.log(loadFromStorage("last-bidder"));
+    if (loadFromStorage("last-bidder") !== null) {
+        addActionDescriptionToActivity(`${loadFromStorage("last-bidder")} has won the auction`)
+    }
+    saveToStorage("last-bidder", null)
 }
 
 function addAmount(amount) {

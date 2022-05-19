@@ -5,14 +5,14 @@ let _player;
 function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            console.log(currentGameInfo)
             updatePlayerInfo(currentGameInfo);
             checkGameStates(currentGameInfo);
             checkPlayerBalance(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);
             checkAmountOfJailFreeCards(currentGameInfo);
-            checkIfPlayerAuction(currentGameInfo);
+            //checkIfPlayerAuction(currentGameInfo);
             _gameState = currentGameInfo;
+            setTimeout(pollingGameState, 1000);
         });
 }
 function updatePlayerInfo(gameInfo) {
@@ -51,6 +51,8 @@ function checkAmountOfJailFreeCards(gameInfo){
 function checkIfCurrentTileBuyAble(gameInfo) {
     const currentTileName = loadFromStorage("currentTile");
     const currentTileAction = loadFromStorage("currentTileAction");
+    console.log(currentTileName)
+    console.log(currentTileAction)
     if (gameInfo.turns.length > 0){
         if (currentTileAction === "buy" && gameInfo.currentPlayer === loadFromStorage("name") && !loadFromStorage("inventory").includes(nameToId(currentTileName))){
             showElement(document.querySelector("#buy-property-popup"));

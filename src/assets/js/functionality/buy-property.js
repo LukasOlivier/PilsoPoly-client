@@ -4,6 +4,7 @@ function buyProperty() {
     fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${loadFromStorage("currentTile")}`, 'POST')
         .then(() =>{
             addPropertyToInventory();
+            addActionDescriptionToActivity(`You bought: ${loadFromStorage("currentTile")}`)
             hideElement(document.querySelector("#buy-property-popup"));
         });
 }

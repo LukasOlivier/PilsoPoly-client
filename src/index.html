@@ -63,11 +63,24 @@
         <p>Do you want to buy this property, or start an auction?</p>
         <form action="#">
             <button type="button" id="buy">Buy</button>
-            <button type="button" id="auction">don't buy property</button>
+            <button type="button" id="auction">Auction</button>
         </form>
     </div>
-<<<<<<< HEAD
-
+    <dialog id="auction-property-popup" open>
+        <article>
+            <h2>Property auction</h2>
+            <p>You have 30 seconds to be the highest bidder</p>
+            <h3 id="property-name">Property name</h3>
+            <p id="property-original-price">ORIGINAL PRICE 200</p>
+            <p id="last-bidder">LAST BIDDER LUKAS</p>
+            <p id="highest-bid">HIGHEST BID 500</p>
+            <p id="duration">duration: 20</p>
+            <button id="add-1">+1M</button>
+            <button id="add-10">+10M</button>
+            <button id="add-100">+100M</button>
+            <p class="hidden" id="last-bidder-message">Currently the last bidder!</p>
+        </article>
+    </dialog>
     <div id="get-out-of-jail-popup" class="hidden">
         <p>Do you want to buy yourself out of jail or try to roll a double?</p>
         <form action="#">
@@ -76,23 +89,6 @@
         </form>
     </div>
 
-=======
-    <dialog id="auction-property-popup">
-        <article>
-            <h2>Property auction</h2>
-            <p>You have 30 seconds to be the highest bidder</p>
-            <h3 id="property-name">Property name</h3>
-            <p id="property-original-price"></p>
-            <p id="last-bidder"></p>
-            <p id="highest-bid"></p>
-            <p id="duration"></p>
-            <button id="add-1">+1M</button>
-            <button id="add-10">+10M</button>
-            <button id="add-100">+100M</button>
-            <p class="hidden" id="last-bidder-message">Currently the last bidder!</p>
-        </article>
-    </dialog>
->>>>>>> c86f3f86856e7ccce8f37f07276b568791033b5b
     <div id="flexbox-center">
 
         <div id="card-description" class="">
@@ -110,7 +106,7 @@
     </div>
     <div id="give-up-popup" class="hidden">
         <h2>Are you sure you want to give up?</h2>
-        <p>This will turn over all your assets to your oldest debtor and yield.</p>
+        <p>This will turn over all your assest to your oldest debtor and yield.</p>
         <form>
             <input type="button" id="give-up-confirm" value="YES">
             <input type="button" id="give-up-deny" value="NO">
