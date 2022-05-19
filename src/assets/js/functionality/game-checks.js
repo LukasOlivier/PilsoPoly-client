@@ -73,9 +73,19 @@ function checkGameStates(newGameState) {
         checkIfPlayerJailed(newGameState);
         checkIfPlayerAuction(newGameState);
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
+            checkIfAPlayerThrewDouble(newGameState);
             checkIfPlayerCanRoll(newGameState);
             checkIfPlayerNeedsToReceiveRent(newGameState);
         }
+    }
+}
+
+function checkIfAPlayerThrewDouble(gameInfo){
+    const diceOne = gameInfo.lastDiceRoll[0]
+    const diceTwo = gameInfo.lastDiceRoll[1]
+
+    if (diceOne === diceTwo){
+        addActionDescriptionToActivity(`${_gameState.currentPlayer} just threw a double`)
     }
 }
 

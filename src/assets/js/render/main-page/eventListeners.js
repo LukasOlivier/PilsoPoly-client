@@ -14,9 +14,13 @@ function addEventListeners() {
 
 function addEventListenersRollDice() {
     document.querySelector("#roll-dice").addEventListener("click", rollDice);
+    /*
     _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
         openDialog(_$containers.rollDiceDialog);
     });
+
+     */
+    _$containers["rollDiceOpenDialog"].addEventListener('click',rollDice);
     document.querySelector("#cancel-roll-dice").addEventListener('click', function () {
         closeDialog(_$containers.rollDiceDialog);
     });
