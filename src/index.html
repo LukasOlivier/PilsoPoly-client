@@ -27,7 +27,7 @@
     <script src="assets/js/functionality/roll-dice.js"></script>
     <script src="assets/js/functionality/pay-rent.js"></script>
 
-    <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/initializer.js"></script>
     <script src="assets/js/functionality/game-checks.js"></script>
     <script src="assets/js/render/main-page/render-main-page.js"></script>
     <script src="assets/js/render/main-page/renderCards.js"></script>
@@ -38,8 +38,7 @@
     <script src="assets/js/functionality/lose-game.js"></script>
     <script src="assets/js/render/win-screen.js"></script>
     <script src="assets/js/render/inventory.js"></script>
-
-
+    <script src="assets/js/functionality/tax-system.js"></script>
     <script src="assets/js/render/main-page/eventListeners.js"></script>
 
 </head>
@@ -51,7 +50,7 @@
     <h1 id="game-screen">PilsoPoly</h1>
     <div>
         <img src="images/give-up.png" alt="give-up" title="give-up" id="give-up">
-        <img src="images/tax%20icon.png" alt="preffered-tax">
+        <img src="images/tax%20icon.png" alt="preferred-tax" title="tax-system" id="tax-system">
         <img src="images/inventory.png" alt="inventory" title="inventory" id="inventory">
         <img src="images/trade.png" alt="trade" title="trade" id="trade">
         <a href="see-all-the-streets-with-owners.html"><img src="images/map.png" alt="map" title="map" id="map"></a>
@@ -106,6 +105,11 @@
             <li>Estimate: tax is set at 200M</li>
             <li>Calculated: 10% of your total worth.</li>
         </ul>
+        <p>Your current system is: <span id="current"></span></p>
+        <form>
+            <input type="button" id="estimate" value="estimate">
+            <input type="button" id="compute" value="compute">
+        </form>
     </div>
     <section>
         <h2>Current position:</h2>

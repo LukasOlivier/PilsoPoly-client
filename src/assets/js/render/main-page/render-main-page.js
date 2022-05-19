@@ -9,6 +9,7 @@ _gameID = loadFromStorage("gameId");
 function renderMainPage() {
     _$containers = {
         giveUpPopup: document.querySelector("#give-up-popup"),
+        taxPopup: document.querySelector("#tax-preference-popup"),
         cardsParent: document.querySelector("#cards-parent"),
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
@@ -150,11 +151,16 @@ function renderPlayerOnTile(tile, playerName) {
 }
 
 function giveUp() {
-    showElement(_$containers.giveUpPopup);
-    hideElement(document.querySelector("section"));
+    if (!_$containers.taxPopup.classList.contains("hidden")) taxSystem();
+    toggleElementHidden(_$containers.giveUpPopup);
+    toggleElementHidden(document.querySelector("section"));
 }
 
-function giveUpDeny() {
-    hideElement(_$containers.giveUpPopup);
-    showElement(document.querySelector("section"));
+function taxSystem(){
+    if (!_$containers.giveUpPopup.classList.contains("hidden")) giveUp();
+    console.log(_gameState.players)
+    const currentSystem = null
+    _$containers.taxPopup.querySelector("#current").innerHTML = currentSystem;
+    toggleElementHidden(_$containers.taxPopup);
+    toggleElementHidden(document.querySelector("section"));
 }

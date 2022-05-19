@@ -420,8 +420,12 @@ footer .player-balance {
     margin: auto auto auto auto;
 }
 
-/* GIVE UP POP-UP */
-#give-up-popup {
+#tax-preference-popup li {
+    margin-bottom: 0.5rem;
+}
+
+/* GIVE UP POP-UP and TAX PREFERENCE POPUP*/
+#give-up-popup, #tax-preference-popup {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -431,16 +435,18 @@ footer .player-balance {
     background: white;
     padding: 2rem;
     border: black solid 0.1rem;
-    margin-left: 33%;
-    margin-right: 25%;
+    top: 20%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
 }
 
-#give-up-popup h2 {
+#give-up-popup h2, #tax-preference-popup h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-#give-up-popup input {
+#give-up-popup input, #tax-preference-popup input {
     margin-top: 2rem;
     width: 10rem;
     height: 2rem;
@@ -448,7 +454,7 @@ footer .player-balance {
     background: white;
 }
 
-#give-up-popup input:hover {
+#give-up-popup input:hover, #tax-preference-popup input:hover {
     cursor: pointer;
     background: rgba(232, 232, 232, 0.5)
 }
@@ -457,7 +463,7 @@ footer .player-balance {
     border: red solid 0.1rem;
 }
 
-#give-up-popup form {
+#give-up-popup form, #tax-preference-popup, form {
     width: 25rem;
     display: flex;
     justify-content: space-around;

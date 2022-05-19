@@ -166,6 +166,9 @@ function getPlayerBalance(gameInfo) {
     return balance;
 }
 
+function toggleElementHidden($element){
+    $element.classList.toggle("hidden")
+}
 
 function showElement($element){
     $element.classList.remove("hidden");
