@@ -156,11 +156,8 @@ function giveUp() {
     toggleElementHidden(document.querySelector("section"));
 }
 
-function taxSystem(){
+function taxSystem() {
     if (!_$containers.giveUpPopup.classList.contains("hidden")) giveUp();
-    console.log(_gameState.players)
-    const currentSystem = null
-    _$containers.taxPopup.querySelector("#current").innerHTML = currentSystem;
     toggleElementHidden(_$containers.taxPopup);
     toggleElementHidden(document.querySelector("section"));
 }
