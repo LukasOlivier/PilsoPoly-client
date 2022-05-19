@@ -127,9 +127,11 @@ function updateLastMoveInfo(gameInfo) {
 }
 
 function hidePopupCardDescription() {
-    document.querySelector("#card-description").classList.add("hidden");
-    document.querySelector("#card-description").innerText = "";
+    const $cardDescription = document.querySelector("#card-description");
+    $cardDescription.classList.add("hidden");
+    $cardDescription.innerText = "";
 }
+
 function getLastMove(gameInfo) {
     const indexOfLastMove = gameInfo.turns.length - 1;
     return gameInfo.turns[indexOfLastMove];
