@@ -104,6 +104,11 @@ footer img {
     margin-bottom: 1rem;
 }
 
+#auction-property-popup p, h3 {
+    text-align: center;
+    margin: 0.3rem;
+}
+
 #cards-parent article:first-of-type, #cards-parent article:last-of-type {
     width: 10vw;
     height: 18vw;
@@ -485,7 +490,6 @@ footer .player-balance {
     gap: 1rem;
 }
 
-
 #buy-property-popup {
     position: fixed;
     margin-top: 60vh;
@@ -494,11 +498,6 @@ footer .player-balance {
     border: black solid 0.1rem;
     padding: 1rem;
     height: 4rem;
-}
-
-#auction-property-popup p, h3 {
-    text-align: center;
-    margin: 0.3rem;
 }
 
 /* ======================================================================================================== */

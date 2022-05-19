@@ -18,7 +18,6 @@ function getGameState() {
         });
 }
 
-
 function addEventListeners() {
     document.addEventListener('click', function (e) {
         if (!e.target.classList.contains("errormessages")) {
