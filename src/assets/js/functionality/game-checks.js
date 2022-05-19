@@ -10,9 +10,9 @@ function pollingGameState() {
             checkGameStates(currentGameInfo);
             checkPlayerBalance(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);
-            checkAmountOfJailFreeCards(currentGameInfo)
+            checkAmountOfJailFreeCards(currentGameInfo);
+            checkIfPlayerAuction(currentGameInfo);
             _gameState = currentGameInfo;
-            setTimeout(pollingGameState, 2000);
         });
 }
 function updatePlayerInfo(gameInfo) {
@@ -69,6 +69,7 @@ function checkGameStates(newGameState) {
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
         checkIfPlayerJailed(newGameState);
+        checkIfPlayerAuction(newGameState);
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfPlayerCanRoll(newGameState);
             checkIfPlayerNeedsToReceiveRent(newGameState);
@@ -146,6 +147,15 @@ function checkIfPlayerBankrupt(gameInfo) {
             renderPlayerBankrupt(player.name.toLowerCase());
         }
     });
+}
+
+function checkIfPlayerAuction(gameInfo) {
+    if (gameInfo.auction !== null) {
+        renderAuctionPopup(gameInfo);
+        showAuctionPopup();
+    } else {
+        hideAuctionPopup();
+    }
 }
 
 function checkIfPlayerWon(gameInfo) {

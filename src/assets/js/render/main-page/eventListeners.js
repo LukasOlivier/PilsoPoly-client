@@ -3,10 +3,14 @@ function addEventListeners() {
     addEventListenersTrading();
     addEventListenersGiveUp();
     addEventListenersRollDice();
-    document.querySelector("#jail-free").addEventListener("click",getOutOfJailFree);
-    document.querySelector("#jail-fine").addEventListener("click",getOutOfJailFine);
+    addEventListenersAuction();
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
+    document.addEventListener('click', function (e) {
+        if (!e.target.classList.contains("#card-description") && e.target.id !== "roll-dice-oke") {
+            hidePopupCardDescription();
+        }
+    });
 }
 
 function addEventListenersRollDice() {
@@ -26,7 +30,6 @@ function addEventListenersRollDice() {
 }
 
 
-
 function addEventListenersGiveUp() {
     document.querySelector("#give-up").addEventListener("click", giveUp);
     document.querySelector("#give-up-deny").addEventListener("click", giveUpDeny);
@@ -41,6 +44,19 @@ function addEventListenersTrading() {
     document.querySelector("#player1 ul").addEventListener("click", addToOffers);
     document.querySelector("#player2 ul").addEventListener("click", addToWants);
     document.querySelector("#send-trade").addEventListener("click", sendTrade);
+}
+
+function addEventListenersAuction() {
+    document.querySelector("#auction").addEventListener('click', auctionProperty);
+    document.querySelector("#add-1").addEventListener("click", () => {
+        addAmount(1);
+    });
+    document.querySelector("#add-10").addEventListener("click", () => {
+        addAmount(10);
+    });
+    document.querySelector("#add-100").addEventListener("click", () => {
+        addAmount(100);
+    });
 }
 
 function addEventListenersBoardNavigation() {

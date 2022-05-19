@@ -575,6 +575,21 @@ footer .player-balance {
 }
 
 
+#buy-property-popup {
+    position: fixed;
+    margin-top: 60vh;
+    margin-left: 39.5vw;
+    background: white;
+    border: black solid 0.1rem;
+    padding: 1rem;
+    height: 4rem;
+}
+
+#auction-property-popup p, h3 {
+    text-align: center;
+    margin: 0.3rem;
+}
+
 /* ======================================================================================================== */
 /* ===================================        Dialog css (Robin)       ==================================== */
 /* ======================================================================================================== */
