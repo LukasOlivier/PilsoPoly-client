@@ -29,13 +29,6 @@ function changePopUpText(text) {
     openDialog(_$containers.rollDiceDialog);
     _$containers.rollDiceDialog.querySelector('p').innerText = text;
     document.querySelector("#location").innerText = `You landed at ${_currentMoveInfo.tileName}`;
-    togglePopUpButtons();
-}
-
-function togglePopUpButtons(){
-    document.querySelector("#roll-dice-oke").classList.toggle("hidden");
-    document.querySelector("#roll-dice").classList.toggle("hidden");
-    document.querySelector("#cancel-roll-dice").classList.toggle("hidden");
 }
 
 function checkIfRolledTwice(response) {

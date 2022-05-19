@@ -13,7 +13,6 @@ function addEventListeners() {
 }
 
 function addEventListenersRollDice() {
-    document.querySelector("#roll-dice").addEventListener("click", rollDice);
     _$containers.rollDiceOpenDialog.addEventListener('click',rollDice);
     document.querySelector("#roll-dice-oke").addEventListener('click', () => {
         closeDialog(_$containers.rollDiceDialog);

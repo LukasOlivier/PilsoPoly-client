@@ -71,27 +71,7 @@
             <button type="button" id="auction">Auction</button>
         </form>
     </div>
-    <dialog id="auction-property-popup" class="hidden">
-        <article>
-            <h2>Property auction</h2>
-            <p>You have 30 seconds to be the highest bidder</p>
-            <div id="auction-parent">
-                <div id="card-info-auction">
-                    <h3 id="property-name">Property name</h3>
-                <p id="property-original-price"></p>
-                </div>
-                <div id="bidding-info">
-                    <p id="last-bidder"></p>
-                    <p id="highest-bid"></p>
-                    <progress value="0" max="30" id="duration"></progress>
-                    <p class="hidden" id="last-bidder-message">Currently the last bidder!</p>
-                </div>
-            </div>
-            <button id="add-1">+1M</button>
-            <button id="add-10">+10M</button>
-            <button id="add-100">+100M</button>
-        </article>
-    </dialog>
+
     <div id="get-out-of-jail-popup" class="hidden">
         <p>Do you want to buy yourself out of jail or try to roll a double?</p>
         <form action="#">
@@ -141,10 +121,30 @@
             <p>You can roll the dice</p>
             <p id="location"></p>
             <div>
-                <button id="roll-dice-oke" class="hidden">Oke</button>
+                <button id="roll-dice-oke">Oke</button>
             </div>
         </dialog>
-
+        <dialog id="auction-property-popup">
+            <article>
+                <h2>Property auction</h2>
+                <p>You have 30 seconds to be the highest bidder</p>
+                <div id="auction-parent">
+                    <div id="card-info-auction">
+                        <h3 id="property-name">Property name</h3>
+                        <p id="property-original-price"></p>
+                    </div>
+                    <div id="bidding-info">
+                        <p id="last-bidder"></p>
+                        <p id="highest-bid"></p>
+                        <progress value="0" max="30" id="duration"></progress>
+                        <p class="hidden" id="last-bidder-message">Currently the last bidder!</p>
+                    </div>
+                </div>
+                <button id="add-1">+1M</button>
+                <button id="add-10">+10M</button>
+                <button id="add-100">+100M</button>
+            </article>
+        </dialog>
         <div id="cards-parent">
             <template class="normal-card-template">
                 <!--middle article should have class "middle"-->

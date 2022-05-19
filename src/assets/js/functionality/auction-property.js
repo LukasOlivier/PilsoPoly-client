@@ -64,7 +64,6 @@ function showAuctionPopup() {
 
 function hideAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
-    hideElement($dialog)
     if ($dialog.open) {
         $dialog.close();
     }
