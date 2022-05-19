@@ -9,14 +9,37 @@ function auctionProperty() {
 
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
-    checkIfCanBid(auctionInfo.lastBidder);
+    isYourTurnToBid(auctionInfo.lastBidder);
+    checkIfTimeExceeded();
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
     document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
-    document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
 }
 
-function checkIfCanBid(lastBidder) {
+function checkIfTimeExceeded() {
+    const $progressBar = document.querySelector("#duration");
+    if ( $progressBar.value === 30 ) {
+        const body = {
+            bidder: loadFromStorage("name"),
+            amount: -1
+        };
+        placeBidOnAuction(body);
+    }
+}
+
+// https://www.codegrepper.com/code-examples/javascript/javascript+countdown+10+seconds
+function startTimer() {
+    let timeLeft = 30;
+    const bidTimer = setInterval(function(){
+        if( timeLeft <= 0 ) {
+            clearInterval(bidTimer);
+        }
+        document.querySelector("#duration").value = 30 - timeLeft;
+        timeLeft -= 1;
+    }, 1000);
+}
+
+function isYourTurnToBid(lastBidder) {
     const $buttons = document.querySelectorAll("#auction-property-popup button");
     if (lastBidder === loadFromStorage("name")) {
         $buttons.forEach(button => {
@@ -34,6 +57,7 @@ function checkIfCanBid(lastBidder) {
 function showAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
     if ( !$dialog.open ) {
+        startTimer();
         $dialog.showModal();
     }
 }
@@ -56,5 +80,5 @@ function addAmount(amount) {
 }
 
 function placeBidOnAuction(body) {
-    fetchFromServer(`/games/${_gameID}/players/TEST/auctions/TEST/bid`, "POST", body);
+    fetchFromServer(`/games/${_gameID}/bank/auctions/property/bid`, "POST", body);
 }
