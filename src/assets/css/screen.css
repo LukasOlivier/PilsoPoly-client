@@ -108,10 +108,6 @@ footer img {
     text-align: left;
 }
 
-#buy-property-popup p {
-    margin-bottom: 1rem;
-}
-
 #auction-property-popup p, h3 {
     text-align: center;
     margin: 0.3rem;
@@ -319,28 +315,13 @@ header div {
     align-items: center;
 }
 
-<<<<<<< HEAD
-
 .dice-roll-double {
     text-decoration: underline;
 }
 
-
 #main-screen #dice-parent{
     justify-content: space-between;
     width: 10rem;
-=======
-#buy-property-popup button {
-    width: 5rem;
-    border: black solid 0.05rem;
-    background: white;
-}
-
-#main-screen header button {
-    transition: all .2s ease-in-out;
-    border: none;
-    background: white;
->>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     margin-left: 2rem;
     margin-right: auto;
     color: white;
@@ -502,18 +483,8 @@ footer .player-balance {
     justify-content: space-around;
 }
 
-<<<<<<< HEAD
 #buy-property-popup, #get-out-of-jail-popup {
     position: fixed;
-=======
-#estimate:disabled:hover, #compute:disabled:hover {
-    background-color: grey;
-    cursor: unset;
-}
-
-#pay-rent, #collect-rent, #card-description {
-    display: inline-block;
->>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     background: white;
     border: black solid 0.1rem;
     padding: 1rem;
@@ -522,6 +493,23 @@ footer .player-balance {
     left: 50%;
     /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
     transform: translate(-50%, -50%);
+}
+
+#buy-property-popup, #get-out-of-jail-popup {
+    position: fixed;
+    background: white;
+    border: black solid 0.1rem;
+    padding: 1rem;
+    text-align: center;
+    top: 78%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+}
+
+#estimate:disabled:hover, #compute:disabled:hover {
+    background-color: grey;
+    cursor: unset;
 }
 
 #card-description {
@@ -606,7 +594,6 @@ footer .player-balance {
     justify-content: center;
 }
 
-<<<<<<< HEAD
 #buy-property-popup p, #get-out-of-jail-popup p {
     margin-bottom: 1rem;
 }
@@ -618,20 +605,17 @@ footer .player-balance {
 }
 
 #buy-property-popup form, #get-out-of-jail-popup form {
-=======
-#buy-property-popup form {
->>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
 
-<<<<<<< HEAD
 #card-info-auction h3{
     border: black solid 0.1rem;
     padding: 0.4rem;
     font-size: 100%;
 }
+
 #property-original-price{
     margin-top: 100%;
     margin-bottom: 0;
@@ -641,12 +625,6 @@ footer .player-balance {
 
 #card-info-auction{
     color: black;
-=======
-#buy-property-popup {
-    position: fixed;
-    margin-top: 60vh;
-    margin-left: 39.5vw;
->>>>>>> 974911d5337c5c36df6e8e457dffaf6995beb934
     background: white;
     display: flex;
     flex-direction: column;
