@@ -2,19 +2,20 @@
 
 function auctionProperty() {
     const playerName = loadFromStorage("name");
-    const currentTile = _currentMoveInfo.tileName;
+    const currentTile = loadFromStorage("currentTile");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTile}`, 'DELETE');
     makeBuyPopupHidden();
 }
 
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
+    console.log(gameInfo.auction)
     checkIfCanBid(auctionInfo.lastBidder);
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
-    document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
+    document.querySelector("#last-bidder").innerHTML = `⏵ last bidder: ${auctionInfo.lastBidder}`;
     saveToStorage("last-bidder", `${auctionInfo.lastBidder}`)
-    document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
-    document.querySelector("#duration").innerHTML = `duration: ${auctionInfo.duration}`;
+    document.querySelector("#highest-bid").innerHTML = `⏵ highest bid: ${auctionInfo.highestBid}`;
+    document.querySelector("#duration").innerHTML = `⏵ duration: ${auctionInfo.duration}`;
 }
 
 function checkIfCanBid(lastBidder) {
@@ -34,6 +35,7 @@ function checkIfCanBid(lastBidder) {
 
 function showAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
+    showElement($dialog)
     if (!$dialog.open) {
         $dialog.showModal();
     }
@@ -41,10 +43,10 @@ function showAuctionPopup() {
 
 function hideAuctionPopup() {
     const $dialog = document.querySelector("#auction-property-popup");
+    hideElement($dialog)
     if ($dialog.open) {
         $dialog.close();
     }
-    console.log(loadFromStorage("last-bidder"));
     if (loadFromStorage("last-bidder") !== null) {
         addActionDescriptionToActivity(`${loadFromStorage("last-bidder")} has won the auction`)
     }

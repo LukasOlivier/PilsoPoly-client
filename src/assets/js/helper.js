@@ -119,6 +119,7 @@ function updateCurrentMoveInfo(gameInfo) {
             tileName: getCurrentTile(gameInfo).tile,
             actionType: getCurrentTile(gameInfo).actionType
         };
+        console.log(_currentMoveInfo);
         saveToStorage("currentTile", _currentMoveInfo.tileName);
         saveToStorage("currentTileAction", _currentMoveInfo.actionType);
     }

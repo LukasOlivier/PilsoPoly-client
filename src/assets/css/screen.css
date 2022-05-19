@@ -478,7 +478,7 @@ footer .player-balance {
 
 #card-description {
     top: 79.5%;
-    left: 88.5%;
+    left: 86.5%;
     padding: 0 1rem 1rem 1rem;
     position: fixed;
     border: black solid 0.1rem;
@@ -574,13 +574,62 @@ footer .player-balance {
     gap: 1rem;
 }
 
+#card-info-auction h3{
+    border: black solid 0.1rem;
+    padding: 0.4rem;
+    font-size: 100%;
+}
+#property-original-price{
+    margin-top: 100%;
+    margin-bottom: 0;
+    transform: translate(0,2rem);
+    color: white;
+}
 
+#card-info-auction{
+    color: black;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 8rem;
+    height: 10rem;
+    border: black solid 0.1rem;
+    font-size: 0.8rem;
+}
 
+#auction-property-popup{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border: black solid 0.1rem;
+}
+
+#auction-parent{
+    height: 10rem;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    justify-content: space-around;
+}
+
+#bidding-info{
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#bidding-info p{
+    padding-bottom: 1rem;
+}
 
 #auction-property-popup p, h3 {
     text-align: center;
     margin: 0.3rem;
-    padding: 2rem;
 }
 
 /* ======================================================================================================== */

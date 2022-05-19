@@ -10,7 +10,7 @@ function pollingGameState() {
             checkPlayerBalance(currentGameInfo);
             checkIfPlayerOnTile(currentGameInfo);
             checkAmountOfJailFreeCards(currentGameInfo);
-            //checkIfPlayerAuction(currentGameInfo);
+            checkIfPlayerAuction(currentGameInfo);
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 1000);
         });
@@ -54,7 +54,7 @@ function checkIfCurrentTileBuyAble(gameInfo) {
     console.log(currentTileName)
     console.log(currentTileAction)
     if (gameInfo.turns.length > 0){
-        if (currentTileAction === "buy" && gameInfo.currentPlayer === loadFromStorage("name") && !loadFromStorage("inventory").includes(nameToId(currentTileName))){
+        if (currentTileAction === "buy" && gameInfo.auction == null && gameInfo.currentPlayer === loadFromStorage("name") && !loadFromStorage("inventory").includes(nameToId(currentTileName))){
             showElement(document.querySelector("#buy-property-popup"));
         }
     }
@@ -153,8 +153,8 @@ function checkIfPlayerBankrupt(gameInfo) {
 
 function checkIfPlayerAuction(gameInfo) {
     if (gameInfo.auction !== null) {
-        renderAuctionPopup(gameInfo);
         showAuctionPopup();
+        renderAuctionPopup(gameInfo);
     } else {
         hideAuctionPopup();
     }

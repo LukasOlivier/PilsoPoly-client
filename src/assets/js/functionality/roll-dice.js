@@ -18,6 +18,7 @@ function rollDice() {
     fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
         .then(response => {
             updateCurrentMoveInfo(response);
+            console.log(_currentMoveInfo)
             checkIfRolledTwice(response);
             getTiles(response);
             seeWhatActionThatNeedsToBeTaken(response);
