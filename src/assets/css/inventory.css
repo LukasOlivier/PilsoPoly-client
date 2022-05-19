@@ -21,43 +21,6 @@ header div img{
     margin-left: 1rem;
     max-width: 3rem;
 }
-.tip .tipText {
-    border: black solid 0.1rem;
-    visibility: hidden;
-    color: #fff;
-    padding: 1rem;
-    border-radius: 6px;
-
-    /* Position the tooltip text - see examples below! */
-
-    position: absolute;
-}
-.tipText p {
-    font-size: 1.5rem;
-    padding-bottom: 0.5rem;
-    color: #5b5f97;
-}
-
-.tipText li {
-    padding-bottom: 0.5rem;
-    margin-left: 1rem;
-}
-
-.tipText h2 {
-    text-align: center;
-    padding-bottom: 0.8rem;
-    font-size: 2rem;
-}
-
-.tipText ul {
-    list-style: circle;
-    text-align: left;
-    padding-bottom: 0.5rem;
-}
-
-.tip:hover .tipText {
-    visibility: visible;
-}
 
 header h1 {
     color: white;
@@ -205,6 +168,42 @@ aside ul {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+}
+
+.tip .tipText {
+    border: black solid 0.1rem;
+    visibility: hidden;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    position: absolute;
+}
+
+.tipText p {
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+    color: #5b5f97;
+}
+
+.tipText li {
+    padding-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+
+.tipText h2 {
+    text-align: center;
+    padding-bottom: 0.8rem;
+    font-size: 2rem;
+}
+
+.tipText ul {
+    list-style: circle;
+    text-align: left;
+    padding-bottom: 0.5rem;
+}
+
+.tip:hover .tipText {
+    visibility: visible;
 }
 
 .errormessages p {
