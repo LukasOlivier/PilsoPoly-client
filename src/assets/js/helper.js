@@ -177,7 +177,7 @@ function getTaxSystem(gameInfo) {
 }
 
 function toggleElementHidden($element){
-    $element.classList.toggle("hidden")
+    $element.classList.toggle("hidden");
 }
 
 function showElement($element){
