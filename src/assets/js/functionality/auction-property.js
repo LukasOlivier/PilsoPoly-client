@@ -62,12 +62,18 @@ function startAuction() {
         showElement(_$containers.auctionPopup);
 }
 
-function hideAuctionPopup() {
+function endAuction() {
     const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
+    const property = document.querySelector("#property-name").innerHTML;
+    addPropertyToInventory(property);
     addActionDescriptionToActivity(`${lastBidder} has won the auction`);
+    resetProgressBar();
+    hideElement(_$containers.auctionPopup);
+}
+
+function resetProgressBar() {
     const $progressBar = document.querySelector("#duration");
     $progressBar.value = 0;
-    hideElement(_$containers.auctionPopup);
 }
 
 function addAmount(amount) {
