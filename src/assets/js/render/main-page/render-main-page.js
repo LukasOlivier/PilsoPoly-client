@@ -27,7 +27,6 @@ function renderFirstTime() {
         .then(currentGameInfo => {
             _gameState = currentGameInfo;
             checkAmountOfPlayersOverflow(currentGameInfo);
-            //
             updatePlayerInfo(currentGameInfo);
             updatePlayerProperties(currentGameInfo);
             renderPlayerInfo(currentGameInfo);
