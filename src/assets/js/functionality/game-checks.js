@@ -163,6 +163,9 @@ function checkIfPlayerOnTile(gameInfo) {
 function checkIfPlayerBankrupt(gameInfo) {
     gameInfo.players.forEach(player => {
         if (player.bankrupt) {
+            if (player.name === loadFromStorage("name")){
+                loseGame()
+            }
             renderPlayerBankrupt(player.name.toLowerCase());
         }
     });
