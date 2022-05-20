@@ -33,7 +33,7 @@ function changePopUpText(text) {
 
 function checkIfRolledTwice(response) {
     const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
-    const diceResult = document.querySelector("#dice-result")
+    const diceResult = document.querySelector("#dice-result");
     let text = "";
     diceResult.innerText = `${response.lastDiceRoll[0]} - ${response.lastDiceRoll[1]}`;
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
