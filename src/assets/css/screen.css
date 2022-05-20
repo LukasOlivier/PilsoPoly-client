@@ -351,6 +351,25 @@ header div {
     transition-property: none;
     opacity: 80%;
 }
+
+#jail-free-card img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 0 1rem 0;
+    position: relative;
+    transform: translateY(2rem);
+}
+
+#arrows img:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+#main-screen header img {
+    transition: all .2s ease-in-out;
+    filter: invert(100%);
+}
+
 #main-screen button:disabled img {
     filter: grayscale(100%);
     transition-property: none;
@@ -369,16 +388,6 @@ header div {
     flex-direction: row;
     margin-left: auto;
     margin-right: 2rem;
-}
-
-#main-screen header img {
-    transition: all .2s ease-in-out;
-    filter: invert(100%);
-}
-
-#arrows img:hover {
-    cursor: pointer;
-    transform: scale(1.5);
 }
 
 #trade {
@@ -403,6 +412,10 @@ header div {
 #tax-preference-popup li {
     margin-bottom: 0.5rem;
     list-style: circle;
+}
+
+#activity li:first-of-type {
+    color: red;
 }
 
 #cards-parent article li {
@@ -508,18 +521,6 @@ footer .player-balance {
     transform: translate(-50%, -50%);
 }
 
-#buy-property-popup, #get-out-of-jail-popup {
-    position: fixed;
-    background: white;
-    border: black solid 0.1rem;
-    padding: 1rem;
-    text-align: center;
-    top: 78%;
-    left: 50%;
-    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
-    transform: translate(-50%, -50%);
-}
-
 #estimate:disabled:hover, #compute:disabled:hover {
     background-color: grey;
     cursor: unset;
@@ -538,10 +539,6 @@ footer .player-balance {
     border-radius: 1rem;
     overflow-y: scroll;
     background-color: white;
-}
-
-#activity li:first-of-type {
-    color: red;
 }
 
 #jail-free-card-amount {
@@ -563,14 +560,6 @@ footer .player-balance {
     justify-content: center;
     align-items: center;
     margin-left: 1rem;
-}
-
-#jail-free-card img {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: 0 0 1rem 0;
-    position: relative;
-    transform: translateY(2rem);
 }
 
 #card-description h3 {
