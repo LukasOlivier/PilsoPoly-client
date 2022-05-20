@@ -184,3 +184,12 @@ function showElement($element) {
 function hideElement($element) {
     $element.classList.add("hidden");
 }
+
+function showErrorPopup(errorMessage) {
+    document.querySelector(".errormessages").classList.remove("hidden");
+    document.querySelector(".errormessages p").innerText = errorMessage;
+}
+
+function hideErrorPopup() {
+    document.querySelector(".errormessages").classList.add("hidden");
+}

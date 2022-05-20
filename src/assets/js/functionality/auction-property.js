@@ -67,6 +67,7 @@ function isYourTurnToBid(lastBidder,highestBid) {
 }
 
 function startAuction() {
+    hideErrorPopup();
     startTimer();
     showElement(_$containers.auctionPopup);
 }
