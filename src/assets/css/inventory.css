@@ -127,7 +127,7 @@ aside li {
     height: 1rem;
 }
 
-.tipText li {
+.tip-text li {
     padding-bottom: 0.5rem;
     margin-left: 1rem;
 }
@@ -136,9 +136,6 @@ aside li {
     width: 2rem;
 }
 
-#card-actions li:nth-of-type(2) {
-    margin-right: 1rem;
-}
 
 #card-actions img {
     max-width: 100%;
@@ -175,7 +172,7 @@ aside ul {
     gap: 1rem;
 }
 
-.tip .tipText {
+.tip .tip-text {
     border: black solid 0.1rem;
     visibility: hidden;
     color: #fff;
@@ -184,25 +181,25 @@ aside ul {
     position: absolute;
 }
 
-.tipText p {
+.tip-text p {
     font-size: 1.5rem;
     padding-bottom: 0.5rem;
     color: #5b5f97;
 }
 
-.tipText h2 {
+.tip-text h2 {
     text-align: center;
     padding-bottom: 0.8rem;
     font-size: 2rem;
 }
 
-.tipText ul {
+.tip-text ul {
     list-style: circle;
     text-align: left;
     padding-bottom: 0.5rem;
 }
 
-.tip:hover .tipText {
+.tip:hover .tip-text {
     visibility: visible;
 }
 
