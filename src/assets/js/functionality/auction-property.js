@@ -12,14 +12,20 @@ function renderAuctionPopup(gameInfo) {
     isYourTurnToBid(auctionInfo.lastBidder,auctionInfo.highestBid);
     checkIfTimeExceeded();
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
-    document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
+    console.log( _$containers.lastBidder.querySelector("span"));
+    _$containers.lastBidder.querySelector("span").innerHTML = `${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
 }
 
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
+<<<<<<< HEAD
     const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
     if ($progressBar.value === 30) {
+=======
+    const lastBidder = _$containers.lastBidder.querySelector("span").innerText;
+    if ( $progressBar.value === 30) {
+>>>>>>> ad5aa62e8fccb24768357a8cf0c4da75617a5e4c
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
@@ -71,7 +77,7 @@ function startAuction() {
 }
 
 function endAuction() {
-    const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
+    const lastBidder = _$containers.lastBidder.querySelector("span").innerHTML;
     addActionDescriptionToActivity(`${lastBidder} has won the auction`);
     resetProgressBar();
     hideElement(_$containers.auctionPopup);
