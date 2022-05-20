@@ -118,6 +118,10 @@ footer img {
     text-align: left;
 }
 
+#buy-property-popup p, #get-out-of-jail-popup p {
+    margin-bottom: 1rem;
+}
+
 #cards-parent article:first-of-type, #cards-parent article:last-of-type {
     width: 10vw;
     height: 18vw;
@@ -360,20 +364,26 @@ header div {
     transform: translateY(2rem);
 }
 
-#arrows img:hover {
-    cursor: pointer;
-    transform: scale(1.5);
-}
-
 #main-screen header img {
     transition: all .2s ease-in-out;
     filter: invert(100%);
+}
+
+#arrows img:hover {
+    cursor: pointer;
+    transform: scale(1.5);
 }
 
 #main-screen button:disabled img {
     filter: grayscale(100%);
     transition-property: none;
     transform: scale(1);
+}
+
+#buy-property-popup button, #get-out-of-jail-popup button {
+    width: 5rem;
+    border: black solid 0.05rem;
+    background: white;
 }
 
 #main-screen button:disabled:hover {
@@ -414,8 +424,11 @@ header div {
     list-style: circle;
 }
 
-#activity li:first-of-type {
-    color: red;
+#activity li {
+    border-bottom: #979797 solid 0.1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    color: #757576;
 }
 
 #cards-parent article li {
@@ -424,6 +437,14 @@ header div {
     flex-direction: row;
     align-items: center;
     margin-bottom: 0.5rem;
+}
+
+#activity li:hover {
+    color: red;
+}
+
+#activity li:first-of-type {
+    color: red;
 }
 
 #cards-parent article li:last-of-type {
@@ -576,17 +597,6 @@ footer .player-balance {
     background: transparent; /* Optional: just make scrollbar invisible */
 }
 
-#activity li:hover {
-    color: red;
-}
-
-#activity li {
-    border-bottom: #979797 solid 0.1rem;
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    color: #757576;
-}
-
 #flexbox-center {
     position: fixed;
     margin-top: 60vh;
@@ -594,16 +604,6 @@ footer .player-balance {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-#buy-property-popup p, #get-out-of-jail-popup p {
-    margin-bottom: 1rem;
-}
-
-#buy-property-popup button, #get-out-of-jail-popup button {
-    width: 5rem;
-    border: black solid 0.05rem;
-    background: white;
 }
 
 #buy-property-popup form, #get-out-of-jail-popup form {
