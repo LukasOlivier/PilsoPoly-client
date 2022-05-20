@@ -18,7 +18,6 @@ function renderAuctionPopup(gameInfo) {
 
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
-
     const lastBidder = _$containers.lastBidder.querySelector("span").innerText;
     if ( $progressBar.value === 30) {
         const body = {

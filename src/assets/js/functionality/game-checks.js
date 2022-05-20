@@ -81,7 +81,6 @@ function checkGameStates(newGameState) {
         checkIfBought(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
-        checkIfPlayerJailed(newGameState);
         checkIfPlayerAuction(newGameState);
     }
 }
