@@ -11,10 +11,9 @@ function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
     isYourTurnToBid(auctionInfo.lastBidder,auctionInfo.highestBid);
     checkIfTimeExceeded();
-    document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
-    console.log( _$containers.lastBidder.querySelector("span"));
-    _$containers.lastBidder.querySelector("span").innerHTML = `${auctionInfo.lastBidder}`;
-    document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
+    document.querySelector("#property-name").innerText = `${auctionInfo.property}`;
+    _$containers.lastBidder.querySelector("span").innerText = `${auctionInfo.lastBidder}`;
+    document.querySelector("#highest-bid").innerText = `highest bid: ${auctionInfo.highestBid}`;
 }
 
 function checkIfTimeExceeded() {
@@ -26,7 +25,7 @@ function checkIfTimeExceeded() {
             amount: -1
         };
         if (loadFromStorage("name") === lastBidder){
-            const property = document.querySelector("#property-name").innerHTML;
+            const property = document.querySelector("#property-name").innerText;
             placeBidOnAuction(body);
             addPropertyToInventory(property);
         }
@@ -55,7 +54,7 @@ function isYourTurnToBid(lastBidder,highestBid) {
     } else {
         $buttons.forEach(button => {
                 button.disabled = false;
-                const playerBalance = parseInt(document.querySelector(`#${loadFromStorage("name")} .balance`).innerText)
+                const playerBalance = parseInt(document.querySelector(`#${loadFromStorage("name")} .balance`).innerText);
                 if (playerBalance < parseInt(button.value) + highestBid)  {
                     button.disabled = true;
                 }
@@ -72,7 +71,7 @@ function startAuction() {
 }
 
 function endAuction() {
-    const lastBidder = _$containers.lastBidder.querySelector("span").innerHTML;
+    const lastBidder = _$containers.lastBidder.querySelector("span").innerText;
     addActionDescriptionToActivity(`${lastBidder} has won the auction`);
     resetProgressBar();
     hideElement(_$containers.auctionPopup);
@@ -84,7 +83,7 @@ function resetProgressBar() {
 }
 
 function addAmount(amount) {
-    const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
+    const highestBid = parseInt(document.querySelector("#highest-bid").innerText.replace(/\D/g, ""));
     const newBid = highestBid + amount;
     const body = {
         bidder: loadFromStorage("name"),
@@ -94,6 +93,5 @@ function addAmount(amount) {
 }
 
 function placeBidOnAuction(body) {
-  
     fetchFromServer(`/games/${_gameID}/bank/auctions/property/bid`, "POST", body);
 }

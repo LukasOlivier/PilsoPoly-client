@@ -29,10 +29,11 @@ function addEventListeners() {
     });
     document.querySelector("#mortgage").addEventListener('click', mortgage);
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
-    document.querySelector("#buy").addEventListener('click', buyHouse);
-    document.querySelector("#sell").addEventListener('click', sellHouse);
+    document.querySelector("#buy-house").addEventListener('click', buyHouse);
+    document.querySelector("#sell-house").addEventListener('click', sellHouse);
+    document.querySelector("#buy-hotel").addEventListener('click', buyHotel);
+    document.querySelector("#sell-hotel").addEventListener('click', sellHotel);
     document.querySelector('#cards').addEventListener('click', selectCard);
-
 }
 
 function checkIfMortgaged() {
@@ -178,5 +179,27 @@ function sellHouse() {
                 getGameState();
             })
             .catch(() => showErrorPopup("You don't have houses or need to sell other first!"));
+    });
+}
+
+function sellHotel() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText;
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'DELETE')
+            .then(() => {
+                getGameState();
+            })
+            .catch(() => showErrorPopup("You don't have a hotel!"));
+    });
+}
+
+function buyHotel() {
+    document.querySelectorAll(".selected").forEach(card => {
+        const cardName = card.querySelector("h3").innerText;
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
+            .then(() => {
+                getGameState();
+            })
+            .catch(() => showErrorPopup("You need 4 houses on this tile firsts!"));
     });
 }

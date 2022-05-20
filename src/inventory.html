@@ -38,7 +38,7 @@
 <header>
     <div class="tip">
         <img src="assets/media/question-mark.svg" alt="question mark">
-        <div class="tipText LIGHTBLUE">
+        <div class="tip-text LIGHTBLUE">
             <h2>Here you can build houses and mortgage your properties! </h2>
             <p>Selecting properties:</p>
             <ul>
@@ -70,14 +70,12 @@
                 <li>Only unimproved properties can be mortgaged.</li>
                 <li>No rent can be collected on mortgaged properties or utilities.</li>
                 <li>In order to lift the mortgage, the owner must pay the Bank the
-                    amount of the mortgage plus 10% interest.</li>
+                    amount of the mortgage plus 10% interest.
+                </li>
                 <li>The mortgage value can be found on the card.</li>
             </ul>
         </div>
     </div>
-
-
-
     <h1>Your Inventory</h1>
     <div>
         <a href="index.html">Back to main screen</a>
@@ -100,8 +98,10 @@
     </aside>
     <aside>
         <ul id="card-actions">
-            <li class="clickable" id="buy"><img src="images/plushouse.png" alt="buy a house" title="buy a house"></li>
-            <li class="clickable" id="sell"><img src="images/minhouse.png" alt="sell a house" title="sell a house"></li>
+            <li class="clickable" id="buy-hotel"><img src="images/plushotel.png" alt="buy a house" title="buy a house"></li>
+            <li class="clickable" id="sell-hotel"><img src="images/minhotel.png" alt="sell a house" title="sell a house"></li>
+            <li class="clickable" id="buy-house"><img src="images/plushouse.png" alt="buy a house" title="buy a house"></li>
+            <li class="clickable" id="sell-house"><img src="images/minhouse.png" alt="sell a house" title="sell a house"></li>
             <li class="clickable" id="mortgage"><img src="images/mortgage.png" alt="mortgage card" title="mortgage card"></li>
             <li class="clickable" id="unmortgage"><img src="images/unmortgage.png" alt="unmortgage card" title="unmortgage card"></li>
         </ul>
@@ -115,7 +115,7 @@
     </div>
 
     <div id="templates">
-        <template class="street-template" >
+        <template class="street-template">
             <article class="clickable">
                 <h3 class="name"></h3>
                 <div class="card-info">

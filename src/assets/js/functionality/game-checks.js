@@ -45,7 +45,7 @@ function checkIfPlayerJailed(gameInfo) {
 
 function checkAmountOfJailFreeCards(gameInfo){
     gameInfo.players.forEach(player => {
-        document.querySelector(`footer #${player.name} #jail-free-card-amount`).innerText = player.getOutOfJailFreeCards;
+        document.querySelector(`footer #${player.name} .jail-free-card-amount`).innerText = player.getOutOfJailFreeCards;
     });
 }
 
@@ -71,18 +71,17 @@ function isCurrentActionBuy(currentTileAction) {
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
     if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
-        updatePlayerProperties(newGameState);
-        checkIfPlayerWon(newGameState);
-        checkIfBought(newGameState);
-        checkIfPlayerJailed(newGameState);
-        checkIfPlayerBankrupt(newGameState);
-        checkIfPlayerWon(newGameState);
-        checkIfPlayerAuction(newGameState);
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfAPlayerThrewDouble(newGameState);
             checkIfPlayerCanRoll(newGameState);
             checkIfPlayerNeedsToReceiveRent(newGameState);
         }
+        updatePlayerProperties(newGameState);
+        checkIfPlayerWon(newGameState);
+        checkIfBought(newGameState);
+        checkIfPlayerBankrupt(newGameState);
+        checkIfPlayerWon(newGameState);
+        checkIfPlayerAuction(newGameState);
     }
 }
 
@@ -163,7 +162,7 @@ function checkIfPlayerBankrupt(gameInfo) {
     gameInfo.players.forEach(player => {
         if (player.bankrupt) {
             if (player.name === loadFromStorage("name")){
-                loseGame()
+                loseGame();
             }
             renderPlayerBankrupt(player.name.toLowerCase());
         }
@@ -188,7 +187,9 @@ function checkIfPlayerWon(gameInfo) {
 }
 
 function checkIfPlayerNeedsToReceiveRent(gameInfo) {
-    if (gameInfo.turns.length > 0 && _gameState.currentPlayer !== loadFromStorage("name")) {
+    if (gameInfo.turns.length > 0 && _gameState.currentPlayer !== loadFromStorage("name") && _gameState.auction === null) {
+        console.log("pay rent")
+        console.log(_gameState)
         const currentTile = getCurrentTile(gameInfo);
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(nameToId(currentTile.tile)) && currentTile.actionType !== "mortgage") {
