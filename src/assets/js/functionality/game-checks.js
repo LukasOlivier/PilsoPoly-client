@@ -52,13 +52,21 @@ function checkAmountOfJailFreeCards(gameInfo){
 function checkIfCurrentTileBuyAble(gameInfo) {
     const currentTileName = loadFromStorage("currentTile");
     const currentTileAction = loadFromStorage("currentTileAction");
+    const name = loadFromStorage("name");
     if (gameInfo.turns.length > 0){
-        if (currentTileAction === "buy" && gameInfo.auction == null && gameInfo.currentPlayer === loadFromStorage("name") && !loadFromStorage("inventory").includes(nameToId(currentTileName))){
+        if (isCurrentActionBuy(currentTileAction) && gameInfo.auction == null && gameInfo.currentPlayer === name && !playerHasTile(currentTileName)){
             showElement(document.querySelector("#buy-property-popup"));
         }
     }
 }
 
+function playerHasTile(currentTileName) {
+    return loadFromStorage("inventory").includes(nameToId(currentTileName));
+}
+
+function isCurrentActionBuy(currentTileAction) {
+    return currentTileAction === "buy";
+}
 
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
