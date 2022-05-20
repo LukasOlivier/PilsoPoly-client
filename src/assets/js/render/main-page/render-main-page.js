@@ -127,6 +127,7 @@ function renderPlayerInfo(currentGameInfo) {
 
 function renderBoughtFooter(property, playerName) {
     document.querySelector(`#${playerName} .${property}`).classList.remove("not-bought");
+    document.querySelector(`#${playerName} .${property}`).classList.remove("mortgaged");
 }
 
 function renderMortgagedFooter(property, playerName) {
