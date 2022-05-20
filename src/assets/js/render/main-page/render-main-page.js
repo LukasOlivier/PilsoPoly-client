@@ -15,7 +15,8 @@ function renderMainPage() {
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
         backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
         cardDescription: document.querySelector("#card-description"),
-        jailFreeButton: document.querySelector("#jail-free")
+        jailFreeButton: document.querySelector("#jail-free"),
+        auctionPopup: document.querySelector("#auction-property-popup")
     };
     addEventListeners();
     renderFirstTime();

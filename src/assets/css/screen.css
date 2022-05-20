@@ -110,7 +110,7 @@ footer img {
 
 #auction-property-popup p, h3 {
     text-align: center;
-    margin: 0.3rem;
+    margin: 0.7rem;
 }
 
 #cards-parent article:first-of-type, #cards-parent article:last-of-type {
@@ -195,14 +195,17 @@ footer {
     bottom: 0;
     width: 100%;
     background: rgb(178, 207, 224);
-    border-top: black solid 0.1rem;
+    border-top: black solid     0.1rem;
 }
 
 h1 {
-    margin-left: 6rem;
     font-size: 3rem;
     color: white;
     font-family: Oswald, serif;
+    position: fixed;
+    left: 50%;
+    top: 4%;
+    transform: translate(-50%,-50%);
 }
 
 h2 {
@@ -342,6 +345,11 @@ header div {
     color: black;
     transition-property: none;
     opacity: 80%;
+}
+#main-screen button:disabled img {
+    filter: grayscale(100%);
+    transition-property: none;
+    transform: scale(1);
 }
 
 #main-screen button:disabled:hover {
@@ -513,8 +521,6 @@ footer .player-balance {
 }
 
 #card-description {
-    top: 79.5%;
-    left: 86.5%;
     padding: 0 1rem 1rem 1rem;
     position: fixed;
     border: black solid 0.1rem;
@@ -522,6 +528,8 @@ footer .player-balance {
     height: 8rem;
     /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
     transform: translate(-50%, -50%);
+    top: 79.5%;
+    left: 86.5%;
     border-radius: 1rem;
     overflow-y: scroll;
     background-color: white;
@@ -634,20 +642,33 @@ footer .player-balance {
     border: black solid 0.1rem;
     font-size: 0.8rem;
 }
+#auction-property-popup #duration{
+    width: 100%;
+}
 
 #auction-property-popup{
     color: white;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #98c5da;
     border: black solid 0.1rem;
+    width: 35vw;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
+    position: fixed;
+    padding: 1rem;
 }
 
 #auction-parent{
-    height: 10rem;
+    height: 12rem;
     display: flex;
     flex-direction: row;
     margin-bottom: 3rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     justify-content: space-around;
 }
 
@@ -662,6 +683,7 @@ footer .player-balance {
 
 #bidding-info p{
     padding-bottom: 1rem;
+    text-align: left;
 }
 
 /* ======================================================================================================== */

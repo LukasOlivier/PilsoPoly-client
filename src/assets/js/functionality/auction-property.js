@@ -18,12 +18,16 @@ function renderAuctionPopup(gameInfo) {
 
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
-    if ( $progressBar.value === 30 ) {
+    const lastBidder =  document.querySelector("#last-bidder").innerHTML.split(" ")[2];
+
+    if ( $progressBar.value === 30) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
         };
-        placeBidOnAuction(body);
+        if (loadFromStorage("name") === lastBidder) {
+            placeBidOnAuction(body);
+        }
     }
 }
 
@@ -34,6 +38,7 @@ function startTimer() {
         if( timeLeft <= 0 ) {
             clearInterval(bidTimer);
         }
+        console.log("time left : " + timeLeft)
         document.querySelector("#duration").value = 30 - timeLeft;
         timeLeft -= 1;
     }, 1000);
@@ -54,23 +59,17 @@ function isYourTurnToBid(lastBidder) {
     }
 }
 
-function showAuctionPopup() {
-    const $dialog = document.querySelector("#auction-property-popup");
-    if ( !$dialog.open ) {
+function startAuction() {
         startTimer();
-        $dialog.showModal();
-    }
+        showElement(_$containers.auctionPopup);
 }
 
 function hideAuctionPopup() {
-    const $dialog = document.querySelector("#auction-property-popup");
-    if ($dialog.open) {
-        $dialog.close();
-    }
+    hideElement(_$containers.auctionPopup);
     if (loadFromStorage("last-bidder") !== null) {
-        addActionDescriptionToActivity(`${loadFromStorage("last-bidder")} has won the auction`)
+        addActionDescriptionToActivity(`${loadFromStorage("last-bidder")} has won the auction`);
     }
-    saveToStorage("last-bidder", null)
+    saveToStorage("last-bidder", null);
 }
 
 function addAmount(amount) {

@@ -162,7 +162,11 @@ function checkIfPlayerBankrupt(gameInfo) {
 
 function checkIfPlayerAuction(gameInfo) {
     if (gameInfo.auction !== null) {
-        showAuctionPopup();
+        console.log("starting auction")
+        if (_$containers.auctionPopup.classList.contains("hidden")) {
+            startAuction();
+            console.log("Actually showing it")
+        }
         renderAuctionPopup(gameInfo);
     } else {
         hideAuctionPopup();
