@@ -82,14 +82,14 @@ function hideAuctionPopup() {
 function addAmount(amount) {
     const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
     const newBid = highestBid + amount;
-        const body = {
-            bidder: loadFromStorage("name"),
-            amount: newBid
-        };
-        placeBidOnAuction(body);
+    const body = {
+        bidder: loadFromStorage("name"),
+        amount: newBid
+    };
+    placeBidOnAuction(body);
 }
 
 function placeBidOnAuction(body) {
-    console.log("twerkt")
+  
     fetchFromServer(`/games/${_gameID}/bank/auctions/property/bid`, "POST", body);
 }
