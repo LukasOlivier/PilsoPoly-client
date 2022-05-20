@@ -44,13 +44,16 @@ function utilityAndRailroadTemplate($template, cardInfo, middle) {
     $template.querySelector("h3").innerText = cardInfo.name;
     $template.querySelector('.mortgage').innerText = `Mortgage: M${cardInfo.mortgage}`;
     $template.querySelector('.price').innerText = `M${cardInfo.cost}`;
-    $template.querySelector('.rent').innerText = `Rent: ${cardInfo.rent}`;
     if (cardInfo.type === "railroad") {
         $icon.src = `images/railroad.png`;
-    } else if (cardInfo.name.includes("Electric")) {
-        $icon.src = `images/electric.png`;
+        $template.querySelector('.rent').innerText = `Rent: M${cardInfo.rent}`;
     } else {
-        $icon.src = `images/water.png`;
+        $template.querySelector('.rent').innerText = `Rent:${cardInfo.rent}`;
+        if (cardInfo.name.includes("Electric")) {
+            $icon.src = `images/electric.png`;
+        } else {
+            $icon.src = `images/water.png`;
+        }
     }
     $template.id = `${nameToId(cardInfo.name)}`;
     _$containers["cardsParent"].insertAdjacentHTML("beforeend", $template.outerHTML);
