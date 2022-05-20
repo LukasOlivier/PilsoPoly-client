@@ -77,7 +77,6 @@ function checkGameStates(newGameState) {
         checkIfPlayerJailed(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
-        checkIfPlayerJailed(newGameState);
         checkIfPlayerAuction(newGameState);
         if (newGameState.currentPlayer !== _gameState.currentPlayer) {
             checkIfAPlayerThrewDouble(newGameState);

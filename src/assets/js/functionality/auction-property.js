@@ -66,7 +66,7 @@ function startAuction() {
 }
 
 function endAuction() {
-    const lastBidder = _$containers.lastBidder.querySelector("span").innerHTML.split(" ")[2];
+    const lastBidder = _$containers.lastBidder.querySelector("span").innerHTML;
     addActionDescriptionToActivity(`${lastBidder} has won the auction`);
     resetProgressBar();
     hideElement(_$containers.auctionPopup);
