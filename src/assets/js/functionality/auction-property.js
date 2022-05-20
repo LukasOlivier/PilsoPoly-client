@@ -37,7 +37,6 @@ function startTimer() {
         if( timeLeft <= 0 ) {
             clearInterval(bidTimer);
         }
-        console.log("time left : " + timeLeft)
         document.querySelector("#duration").value = 30 - timeLeft;
         timeLeft -= 1;
     }, 1000);
@@ -64,13 +63,14 @@ function startAuction() {
 }
 
 function hideAuctionPopup() {
+    const lastBidder = "last-bidder";
     const $progressBar = document.querySelector("#duration");
     $progressBar.value = 0;
     hideElement(_$containers.auctionPopup);
-    if (loadFromStorage("last-bidder") !== null) {
-        addActionDescriptionToActivity(`${loadFromStorage("last-bidder")} has won the auction`);
+    if (loadFromStorage(lastBidder) !== null) {
+        addActionDescriptionToActivity(`${loadFromStorage(lastBidder)} has won the auction`);
     }
-    saveToStorage("last-bidder", null);
+    saveToStorage(lastBidder, null);
 }
 
 function addAmount(amount) {

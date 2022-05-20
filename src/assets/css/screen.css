@@ -113,6 +113,11 @@ footer img {
     margin: 0.7rem;
 }
 
+#bidding-info p{
+    padding-bottom: 1rem;
+    text-align: left;
+}
+
 #cards-parent article:first-of-type, #cards-parent article:last-of-type {
     width: 10vw;
     height: 18vw;
@@ -679,11 +684,6 @@ footer .player-balance {
     text-align: left;
     align-items: flex-start;
     justify-content: center;
-}
-
-#bidding-info p{
-    padding-bottom: 1rem;
-    text-align: left;
 }
 
 /* ======================================================================================================== */
