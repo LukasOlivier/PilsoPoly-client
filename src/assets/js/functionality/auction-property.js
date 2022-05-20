@@ -12,7 +12,6 @@ function renderAuctionPopup(gameInfo) {
     isYourTurnToBid(auctionInfo.lastBidder);
     checkIfTimeExceeded();
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
-    console.log( _$containers.lastBidder.querySelector("span"));
     _$containers.lastBidder.querySelector("span").innerHTML = `${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
 }
