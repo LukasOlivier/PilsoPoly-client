@@ -142,7 +142,7 @@ function checkIfHousesBoughtMain(gameInfo) {
 
 function checkPlayerBalance(gameInfo) {
     gameInfo.players.forEach(function (player) {
-        document.querySelector(`#${player.name} .player-balance`).innerText = `${player.name}: M${player.money}`;
+        document.querySelector(`#${player.name} .balance`).innerText = `${player.money}`;
     });
 }
 
@@ -163,6 +163,9 @@ function checkIfPlayerOnTile(gameInfo) {
 function checkIfPlayerBankrupt(gameInfo) {
     gameInfo.players.forEach(player => {
         if (player.bankrupt) {
+            if (player.name === loadFromStorage("name")){
+                loseGame()
+            }
             renderPlayerBankrupt(player.name.toLowerCase());
         }
     });
