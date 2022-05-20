@@ -18,14 +18,13 @@ function renderAuctionPopup(gameInfo) {
 
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
-    const lastBidder =  document.querySelector("#last-bidder").innerHTML.split(" ")[2];
-
+    const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
     if ( $progressBar.value === 30) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
         };
-        if (loadFromStorage("name") === lastBidder) {
+        if (loadFromStorage("name") === lastBidder){
             placeBidOnAuction(body);
         }
     }
@@ -65,6 +64,8 @@ function startAuction() {
 }
 
 function hideAuctionPopup() {
+    const $progressBar = document.querySelector("#duration");
+    $progressBar.value = 0;
     hideElement(_$containers.auctionPopup);
     if (loadFromStorage("last-bidder") !== null) {
         addActionDescriptionToActivity(`${loadFromStorage("last-bidder")} has won the auction`);

@@ -12,6 +12,7 @@ function pollingGameState() {
             checkIfPlayerOnTile(currentGameInfo);
             checkAmountOfJailFreeCards(currentGameInfo);
             checkIfPlayerAuction(currentGameInfo);
+            console.log(currentGameInfo)
             _gameState = currentGameInfo;
             setTimeout(pollingGameState, 1000);
         });
