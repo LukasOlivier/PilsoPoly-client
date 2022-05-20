@@ -141,9 +141,9 @@
                         <p class="hidden" id="last-bidder-message">Currently the last bidder!</p>
                     </div>
                 </div>
-                <button id="add-1">+1M</button>
-                <button id="add-10">+10M</button>
-                <button id="add-100">+100M</button>
+                <button id="add-1" value="1">+1M</button>
+                <button id="add-10" value="10">+10M</button>
+                <button id="add-100" value="100">+100M</button>
             </article>
         </div>
         <div id="cards-parent">
@@ -268,13 +268,14 @@
     </dialog>
 </main>
 
+
 <footer>
     <template class="player-info-template">
         <div class="info-container">
             <img src="assets/media/question-mark.svg" alt="player-pawn" title="player-pawn">
             <div>
                 <div>
-                    <p class="player-balance"></p>
+                    <p class="player-balance"><span class="name"></span><span class="balance"></span></p>
                 </div>
                 <div class="player-properties">
                     <!-- add class "not-bought" to make grey-->
