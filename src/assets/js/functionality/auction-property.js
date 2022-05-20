@@ -54,7 +54,7 @@ function isYourTurnToBid(lastBidder,highestBid) {
     } else {
         $buttons.forEach(button => {
                 button.disabled = false;
-                const playerBalance = parseInt(document.querySelector(`#${loadFromStorage("name")} .balance`).innerText)
+                const playerBalance = parseInt(document.querySelector(`#${loadFromStorage("name")} .balance`).innerText);
                 if (playerBalance < parseInt(button.value) + highestBid)  {
                     button.disabled = true;
                 }
@@ -71,7 +71,7 @@ function startAuction() {
 }
 
 function endAuction() {
-    const lastBidder = _$containers.lastBidder.querySelector("span").innerHTML.split(" ")[2];
+    const lastBidder = _$containers.lastBidder.querySelector("span");
     addActionDescriptionToActivity(`${lastBidder} has won the auction`);
     resetProgressBar();
     hideElement(_$containers.auctionPopup);
