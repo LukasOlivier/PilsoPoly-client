@@ -349,6 +349,12 @@ header div {
     margin-left: 0;
 }
 
+#buy-property-popup button, #get-out-of-jail-popup button {
+    width: 5rem;
+    border: black solid 0.05rem;
+    background: white;
+}
+
 #main-screen button:disabled, #estimate:disabled, #compute:disabled {
     background-color: grey;
     color: black;
@@ -378,12 +384,6 @@ header div {
     filter: grayscale(100%);
     transition-property: none;
     transform: scale(1);
-}
-
-#buy-property-popup button, #get-out-of-jail-popup button {
-    width: 5rem;
-    border: black solid 0.05rem;
-    background: white;
 }
 
 #main-screen button:disabled:hover {

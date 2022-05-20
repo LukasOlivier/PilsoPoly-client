@@ -33,14 +33,15 @@ function changePopUpText(text) {
 
 function checkIfRolledTwice(response) {
     const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
+    const diceResult = document.querySelector("#dice-result")
     let text = "";
-    document.querySelector("#dice-result").innerText = `${response.lastDiceRoll[0]} - ${response.lastDiceRoll[1]}`;
+    diceResult.innerText = `${response.lastDiceRoll[0]} - ${response.lastDiceRoll[1]}`;
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
-        document.querySelector("#dice-result").classList.add("dice-roll-double")
+        diceResult.classList.add("dice-roll-double");
         text = `You rolled a double ${response.lastDiceRoll[0]}. You can throw again!`;
     } else {
-        document.querySelector("#dice-result").classList.remove("dice-roll-double")
-        _$containers["rollDiceOpenDialog"].disabled = true;
+        diceResult.classList.remove("dice-roll-double");
+        _$containers.rollDiceOpenDialog.disabled = true;
         text = `You threw ${totalRolled}!`;
     }
     changePopUpText(text);
