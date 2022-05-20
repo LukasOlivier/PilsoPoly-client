@@ -25,7 +25,9 @@ function checkIfTimeExceeded() {
             amount: -1
         };
         if (loadFromStorage("name") === lastBidder){
+            const property = document.querySelector("#property-name").innerHTML;
             placeBidOnAuction(body);
+            addPropertyToInventory(property);
         }
     }
 }
@@ -64,8 +66,6 @@ function startAuction() {
 
 function endAuction() {
     const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
-    const property = document.querySelector("#property-name").innerHTML;
-    addPropertyToInventory(property);
     addActionDescriptionToActivity(`${lastBidder} has won the auction`);
     resetProgressBar();
     hideElement(_$containers.auctionPopup);
