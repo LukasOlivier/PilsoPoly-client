@@ -7,7 +7,10 @@ function buyProperty() {
             addPropertyToInventory(currentTile);
             addActionDescriptionToActivity(`You bought: ${loadFromStorage("currentTile")}`);
             hideElement(document.querySelector("#buy-property-popup"));
-        });
+        })
+        .catch(() => {
+            showErrorPopup("You don't have enough money to buy property, start auction instead");
+        })
 }
 
 // make the div where you can push the button buy display none

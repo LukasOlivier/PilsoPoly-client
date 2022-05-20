@@ -161,16 +161,6 @@ function buyHouse() {
     });
 }
 
-function showErrorPopup(errorMessage) {
-    document.querySelector(".errormessages").classList.remove("hidden");
-    document.querySelector(".errormessages p").innerText = errorMessage;
-}
-
-function hideErrorPopup() {
-    document.querySelector(".errormessages").classList.add("hidden");
-}
-
-
 function sellHouse() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
