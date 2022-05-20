@@ -71,6 +71,11 @@ function isCurrentActionBuy(currentTileAction) {
 function checkGameStates(newGameState) {
     // if your on the map screen, all the other checks are not needed.
     if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
+        if (newGameState.currentPlayer !== _gameState.currentPlayer) {
+            checkIfAPlayerThrewDouble(newGameState);
+            checkIfPlayerCanRoll(newGameState);
+            checkIfPlayerNeedsToReceiveRent(newGameState);
+        }
         updatePlayerProperties(newGameState);
         checkIfPlayerWon(newGameState);
         checkIfBought(newGameState);
@@ -78,11 +83,6 @@ function checkGameStates(newGameState) {
         checkIfPlayerWon(newGameState);
         checkIfPlayerJailed(newGameState);
         checkIfPlayerAuction(newGameState);
-        if (newGameState.currentPlayer !== _gameState.currentPlayer) {
-            checkIfAPlayerThrewDouble(newGameState);
-            checkIfPlayerCanRoll(newGameState);
-            checkIfPlayerNeedsToReceiveRent(newGameState);
-        }
     }
 }
 
@@ -188,7 +188,9 @@ function checkIfPlayerWon(gameInfo) {
 }
 
 function checkIfPlayerNeedsToReceiveRent(gameInfo) {
-    if (gameInfo.turns.length > 0 && _gameState.currentPlayer !== loadFromStorage("name")) {
+    if (gameInfo.turns.length > 0 && _gameState.currentPlayer !== loadFromStorage("name") && _gameState.auction === null) {
+        console.log("pay rent")
+        console.log(_gameState)
         const currentTile = getCurrentTile(gameInfo);
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(nameToId(currentTile.tile)) && currentTile.actionType !== "mortgage") {
