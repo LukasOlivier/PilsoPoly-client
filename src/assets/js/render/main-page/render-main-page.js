@@ -161,7 +161,7 @@ function renderPlayerOnTile(tile, playerName) {
     showElement(document.querySelector(`#${tile} .player-pos`));
     const playersOnTile = document.querySelector(`#${tile} .player-pos span`).innerText.toLowerCase();
     if (!playersOnTile.includes(playerName)) {
-        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName}`);
+        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName} `);
     }
 }
 

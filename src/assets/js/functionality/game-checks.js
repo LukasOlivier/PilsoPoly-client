@@ -74,7 +74,6 @@ function checkGameStates(newGameState) {
         updatePlayerProperties(newGameState);
         checkIfPlayerWon(newGameState);
         checkIfBought(newGameState);
-        checkIfPlayerJailed(newGameState);
         checkIfPlayerBankrupt(newGameState);
         checkIfPlayerWon(newGameState);
         checkIfPlayerJailed(newGameState);
@@ -164,7 +163,7 @@ function checkIfPlayerBankrupt(gameInfo) {
     gameInfo.players.forEach(player => {
         if (player.bankrupt) {
             if (player.name === loadFromStorage("name")){
-                loseGame()
+                loseGame();
             }
             renderPlayerBankrupt(player.name.toLowerCase());
         }
