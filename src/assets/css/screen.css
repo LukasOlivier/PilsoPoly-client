@@ -559,10 +559,11 @@ footer .player-balance {
     left: 86.5%;
     border-radius: 1rem;
     overflow-y: scroll;
+    overflow-x: hidden;
     background-color: white;
 }
 
-#jail-free-card-amount {
+#main-screen .jail-free-card-amount {
     text-align: center;
     color: red;
     font-weight: lighter;

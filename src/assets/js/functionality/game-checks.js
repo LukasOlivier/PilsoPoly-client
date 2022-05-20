@@ -45,7 +45,7 @@ function checkIfPlayerJailed(gameInfo) {
 
 function checkAmountOfJailFreeCards(gameInfo){
     gameInfo.players.forEach(player => {
-        document.querySelector(`footer #${player.name} #jail-free-card-amount`).innerText = player.getOutOfJailFreeCards;
+        document.querySelector(`footer #${player.name} .jail-free-card-amount`).innerText = player.getOutOfJailFreeCards;
     });
 }
 
