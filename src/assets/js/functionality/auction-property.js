@@ -82,13 +82,11 @@ function hideAuctionPopup() {
 function addAmount(amount) {
     const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
     const newBid = highestBid + amount;
-    if (playerBalance >= newBid) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: newBid
         };
         placeBidOnAuction(body);
-    }
 }
 
 function placeBidOnAuction(body) {
