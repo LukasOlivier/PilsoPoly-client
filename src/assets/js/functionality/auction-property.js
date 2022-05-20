@@ -9,7 +9,7 @@ function auctionProperty() {
 
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
-    isYourTurnToBid(auctionInfo.lastBidder);
+    isYourTurnToBid(auctionInfo.lastBidder,auctionInfo.highestBid);
     checkIfTimeExceeded();
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
     document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
@@ -19,12 +19,12 @@ function renderAuctionPopup(gameInfo) {
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
     const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
-    if ( $progressBar.value === 30) {
+    if ($progressBar.value === 30) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
         };
-        if (loadFromStorage("name") === lastBidder){
+        if (loadFromStorage("name") === lastBidder) {
             placeBidOnAuction(body);
         }
     }
@@ -33,8 +33,8 @@ function checkIfTimeExceeded() {
 // https://www.codegrepper.com/code-examples/javascript/javascript+countdown+10+seconds
 function startTimer() {
     let timeLeft = 30;
-    const bidTimer = setInterval(function(){
-        if( timeLeft <= 0 ) {
+    const bidTimer = setInterval(function () {
+        if (timeLeft <= 0) {
             clearInterval(bidTimer);
         }
         document.querySelector("#duration").value = 30 - timeLeft;
@@ -42,7 +42,7 @@ function startTimer() {
     }, 1000);
 }
 
-function isYourTurnToBid(lastBidder) {
+function isYourTurnToBid(lastBidder,highestBid) {
     const $buttons = document.querySelectorAll("#auction-property-popup button");
     if (lastBidder === loadFromStorage("name")) {
         $buttons.forEach(button => {
@@ -51,15 +51,21 @@ function isYourTurnToBid(lastBidder) {
         });
     } else {
         $buttons.forEach(button => {
-            button.disabled = false;
-            document.querySelector("#last-bidder-message").classList.add("hidden");
-        });
+                button.disabled = false;
+                const playerBalance = parseInt(document.querySelector(`#${loadFromStorage("name")} .balance`).innerText)
+                if (playerBalance < parseInt(button.value) + highestBid)  {
+                    button.disabled = true;
+                }
+                document.querySelector("#last-bidder-message").classList.add("hidden");
+            }
+        )
+        ;
     }
 }
 
 function startAuction() {
-        startTimer();
-        showElement(_$containers.auctionPopup);
+    startTimer();
+    showElement(_$containers.auctionPopup);
 }
 
 function hideAuctionPopup() {
@@ -76,13 +82,16 @@ function hideAuctionPopup() {
 function addAmount(amount) {
     const highestBid = parseInt(document.querySelector("#highest-bid").innerHTML.replace(/\D/g, ""));
     const newBid = highestBid + amount;
-    const body = {
-        bidder: loadFromStorage("name"),
-        amount: newBid
-    };
-    placeBidOnAuction(body);
+    if (playerBalance >= newBid) {
+        const body = {
+            bidder: loadFromStorage("name"),
+            amount: newBid
+        };
+        placeBidOnAuction(body);
+    }
 }
 
 function placeBidOnAuction(body) {
+    console.log("twerkt")
     fetchFromServer(`/games/${_gameID}/bank/auctions/property/bid`, "POST", body);
 }

@@ -118,7 +118,8 @@ function renderPlayerInfo(currentGameInfo) {
     currentGameInfo.players.forEach(function (player) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.id = nameToId(player.name);
-        $template.querySelector(".player-balance").innerText = `${player.name}: M${player.money}`;
+        $template.querySelector(".player-balance .name").innerText = `${player.name}:  M`;
+        $template.querySelector(".player-balance .balance").innerText = `${player.money}`;
         $template.querySelector("img").src = `assets/media/${player.icon}.png`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
         document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));

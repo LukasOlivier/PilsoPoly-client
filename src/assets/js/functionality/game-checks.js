@@ -142,7 +142,7 @@ function checkIfHousesBoughtMain(gameInfo) {
 
 function checkPlayerBalance(gameInfo) {
     gameInfo.players.forEach(function (player) {
-        document.querySelector(`#${player.name} .player-balance`).innerText = `${player.name}: M${player.money}`;
+        document.querySelector(`#${player.name} .balance`).innerText = `${player.money}`;
     });
 }
 
