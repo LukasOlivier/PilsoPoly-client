@@ -63,14 +63,11 @@ function startAuction() {
 }
 
 function hideAuctionPopup() {
-    const lastBidder = "last-bidder";
+    const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
+    addActionDescriptionToActivity(`${lastBidder} has won the auction`);
     const $progressBar = document.querySelector("#duration");
     $progressBar.value = 0;
     hideElement(_$containers.auctionPopup);
-    if (loadFromStorage(lastBidder) !== null) {
-        addActionDescriptionToActivity(`${loadFromStorage(lastBidder)} has won the auction`);
-    }
-    saveToStorage(lastBidder, null);
 }
 
 function addAmount(amount) {
