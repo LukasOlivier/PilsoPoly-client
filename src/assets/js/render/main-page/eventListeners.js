@@ -7,6 +7,7 @@ function addEventListeners() {
     addEventListenersAuction();
     addEventListenersJail();
     addEventListenersTaxSystem();
+    addEventListenerFooter();
 
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
@@ -60,12 +61,20 @@ function addEventListenersBoardNavigation() {
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
     document.querySelector("#cards-parent").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
-    document.querySelector("#back-to-current-position button").addEventListener("click", function (e) {
-        seeOtherPlayerPosition(e);
+    document.querySelector("#back-to-current-position button").addEventListener("click", () => {
+        seeOtherPlayerPosition(loadFromStorage("name"));
     });
 }
 
 function addEventListenersJail() {
     document.querySelector("#jail-free").addEventListener("click",getOutOfJailFree);
     document.querySelector("#jail-fine").addEventListener("click",getOutOfJailFine);
+}
+
+function addEventListenerFooter(){
+    document.querySelector(`footer`).addEventListener('click', (e) => {
+        if (e.target.closest(".info-container") !== null){
+            seeOtherPlayerPosition(e.target.closest(".info-container").id);
+        }
+    });
 }

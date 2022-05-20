@@ -16,7 +16,8 @@ function renderMainPage() {
         backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
         cardDescription: document.querySelector("#card-description"),
         jailFreeButton: document.querySelector("#jail-free"),
-        auctionPopup: document.querySelector("#auction-property-popup")
+        auctionPopup: document.querySelector("#auction-property-popup"),
+        lastBidder: document.querySelector("#last-bidder")
     };
     addEventListeners();
     renderFirstTime();
@@ -47,8 +48,8 @@ function checkAmountOfPlayersOverflow(gameInfo){
     }
 }
 
-function seeOtherPlayerPosition(e) {
-    goToPlayerPosition(e.currentTarget.id);
+function seeOtherPlayerPosition(player) {
+    goToPlayerPosition(player);
 }
 
 function renderCards(currentGameInfo) {
@@ -122,7 +123,6 @@ function renderPlayerInfo(currentGameInfo) {
         $template.querySelector(".player-balance .balance").innerText = `${player.money}`;
         $template.querySelector("img").src = `assets/media/${player.icon}.png`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
-        document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
     });
 }
 
@@ -162,7 +162,7 @@ function renderPlayerOnTile(tile, playerName) {
     showElement(document.querySelector(`#${tile} .player-pos`));
     const playersOnTile = document.querySelector(`#${tile} .player-pos span`).innerText.toLowerCase();
     if (!playersOnTile.includes(playerName)) {
-        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName}`);
+        document.querySelector(`#${tile} .player-pos span`).insertAdjacentHTML("beforeend", `${playerName} `);
     }
 }
 
