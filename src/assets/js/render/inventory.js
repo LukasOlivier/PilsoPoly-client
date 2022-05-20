@@ -31,6 +31,8 @@ function addEventListeners() {
     document.querySelector("#unmortgage").addEventListener('click', unMortgage);
     document.querySelector("#buy").addEventListener('click', buyHouse);
     document.querySelector("#sell").addEventListener('click', sellHouse);
+    document.querySelector('#cards').addEventListener('click', selectCard);
+
 }
 
 function checkIfMortgaged() {
@@ -53,11 +55,13 @@ function renderInventoryCards() {
     });
     checkIfMortgaged();
     renderHouses();
-    document.querySelectorAll('article').forEach(card => card.addEventListener('click', selectCard));
 }
 
 function selectCard(e) {
-    e.currentTarget.classList.toggle('selected');
+    const cardToSelect = e.target.closest("article");
+    if (cardToSelect !== null){
+        e.target.closest("article").classList.toggle("selected");
+    }
 }
 
 function filterCards(e) {

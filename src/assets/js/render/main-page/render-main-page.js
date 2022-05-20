@@ -47,8 +47,8 @@ function checkAmountOfPlayersOverflow(gameInfo){
     }
 }
 
-function seeOtherPlayerPosition(e) {
-    goToPlayerPosition(e.currentTarget.id);
+function seeOtherPlayerPosition(player) {
+    goToPlayerPosition(player);
 }
 
 function renderCards(currentGameInfo) {
@@ -121,7 +121,6 @@ function renderPlayerInfo(currentGameInfo) {
         $template.querySelector(".player-balance").innerText = `${player.name}: M${player.money}`;
         $template.querySelector("img").src = `assets/media/${player.icon}.png`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
-        document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
     });
 }
 
