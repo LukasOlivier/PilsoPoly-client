@@ -176,8 +176,8 @@ function checkIfPlayerAuction(gameInfo) {
             startAuction();
         }
         renderAuctionPopup(gameInfo);
-    } else {
-        hideAuctionPopup();
+    } else if ( !_$containers.auctionPopup.classList.contains("hidden") ){
+        endAuction();
     }
 }
 

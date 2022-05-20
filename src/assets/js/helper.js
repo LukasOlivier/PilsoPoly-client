@@ -167,6 +167,12 @@ function getTaxSystem(gameInfo) {
     return taxSystem;
 }
 
+function addPropertyToInventory(tile) {
+    const currentInventory = loadFromStorage('inventory');
+    currentInventory.push(nameToId(tile));
+    saveToStorage("inventory",currentInventory);
+}
+
 function toggleElementHidden($element){
     $element.classList.toggle("hidden");
 }

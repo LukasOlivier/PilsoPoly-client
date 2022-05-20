@@ -12,20 +12,23 @@ function renderAuctionPopup(gameInfo) {
     isYourTurnToBid(auctionInfo.lastBidder);
     checkIfTimeExceeded();
     document.querySelector("#property-name").innerHTML = `${auctionInfo.property}`;
-    document.querySelector("#last-bidder").innerHTML = `last bidder: ${auctionInfo.lastBidder}`;
+    console.log( _$containers.lastBidder.querySelector("span"));
+    _$containers.lastBidder.querySelector("span").innerHTML = `${auctionInfo.lastBidder}`;
     document.querySelector("#highest-bid").innerHTML = `highest bid: ${auctionInfo.highestBid}`;
 }
 
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
-    const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
+    const lastBidder = _$containers.lastBidder.querySelector("span").innerText;
     if ( $progressBar.value === 30) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
         };
         if (loadFromStorage("name") === lastBidder){
+            const property = document.querySelector("#property-name").innerHTML;
             placeBidOnAuction(body);
+            addPropertyToInventory(property);
         }
     }
 }
@@ -62,15 +65,16 @@ function startAuction() {
         showElement(_$containers.auctionPopup);
 }
 
-function hideAuctionPopup() {
-    const lastBidder = "last-bidder";
+function endAuction() {
+    const lastBidder = _$containers.lastBidder.querySelector("span").innerHTML.split(" ")[2];
+    addActionDescriptionToActivity(`${lastBidder} has won the auction`);
+    resetProgressBar();
+    hideElement(_$containers.auctionPopup);
+}
+
+function resetProgressBar() {
     const $progressBar = document.querySelector("#duration");
     $progressBar.value = 0;
-    hideElement(_$containers.auctionPopup);
-    if (loadFromStorage(lastBidder) !== null) {
-        addActionDescriptionToActivity(`${loadFromStorage(lastBidder)} has won the auction`);
-    }
-    saveToStorage(lastBidder, null);
 }
 
 function addAmount(amount) {

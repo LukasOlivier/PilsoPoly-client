@@ -33,6 +33,7 @@ function addEventListeners() {
     document.querySelector("#sell-house").addEventListener('click', sellHouse);
     document.querySelector("#buy-hotel").addEventListener('click', buyHotel);
     document.querySelector("#sell-hotel").addEventListener('click', sellHotel);
+    document.querySelector('#cards').addEventListener('click', selectCard);
 }
 
 function checkIfMortgaged() {
@@ -55,11 +56,13 @@ function renderInventoryCards() {
     });
     checkIfMortgaged();
     renderHouses();
-    document.querySelectorAll('article').forEach(card => card.addEventListener('click', selectCard));
 }
 
 function selectCard(e) {
-    e.currentTarget.classList.toggle('selected');
+    const cardToSelect = e.target.closest("article");
+    if (cardToSelect !== null){
+        e.target.closest("article").classList.toggle("selected");
+    }
 }
 
 function filterCards(e) {
