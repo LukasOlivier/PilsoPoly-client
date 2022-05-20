@@ -128,9 +128,7 @@ function mortgage() {
         const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
             .then(() => {
-                card.classList.add("mortgaged");
-                card.classList.remove("selected");
-
+                getGameState();
             }).catch(() => showErrorPopup("This tile is already mortgaged"));
     });
 }
@@ -141,9 +139,7 @@ function unMortgage() {
         const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
             .then(() => {
-                card.classList.remove("mortgaged");
-                card.classList.remove("selected");
-
+                getGameState();
             })
             .catch(() => showErrorPopup("This tile is not mortgaged"));
     });
@@ -154,7 +150,7 @@ function buyHouse() {
         const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
             .then(() => {
-                card.classList.remove("selected");
+                getGameState();
             })
             .catch(() => showErrorPopup("You can only place houses on full streets or need to improve other tiles firsts!"));
     });
@@ -175,7 +171,7 @@ function sellHouse() {
         const cardName = card.querySelector("h3").innerText;
         fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'DELETE')
             .then(() => {
-                card.classList.remove("selected");
+                getGameState();
             })
             .catch(() => showErrorPopup("You don't have houses or need to sell other first!"));
     });

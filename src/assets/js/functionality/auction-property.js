@@ -2,7 +2,7 @@
 
 function auctionProperty() {
     const playerName = loadFromStorage("name");
-    const currentTile = _currentMoveInfo.tileName;
+    const currentTile = loadFromStorage("currentTile");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTile}`, 'DELETE');
     makeBuyPopupHidden();
 }
@@ -18,12 +18,15 @@ function renderAuctionPopup(gameInfo) {
 
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
-    if ( $progressBar.value === 30 ) {
+    const lastBidder = document.querySelector("#last-bidder").innerHTML.split(" ")[2];
+    if ( $progressBar.value === 30) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
         };
-        placeBidOnAuction(body);
+        if (loadFromStorage("name") === lastBidder){
+            placeBidOnAuction(body);
+        }
     }
 }
 
@@ -54,19 +57,20 @@ function isYourTurnToBid(lastBidder) {
     }
 }
 
-function showAuctionPopup() {
-    const $dialog = document.querySelector("#auction-property-popup");
-    if ( !$dialog.open ) {
+function startAuction() {
         startTimer();
-        $dialog.showModal();
-    }
+        showElement(_$containers.auctionPopup);
 }
 
 function hideAuctionPopup() {
-    const $dialog = document.querySelector("#auction-property-popup");
-    if ( $dialog.open ) {
-        $dialog.close();
+    const lastBidder = "last-bidder";
+    const $progressBar = document.querySelector("#duration");
+    $progressBar.value = 0;
+    hideElement(_$containers.auctionPopup);
+    if (loadFromStorage(lastBidder) !== null) {
+        addActionDescriptionToActivity(`${loadFromStorage(lastBidder)} has won the auction`);
     }
+    saveToStorage(lastBidder, null);
 }
 
 function addAmount(amount) {

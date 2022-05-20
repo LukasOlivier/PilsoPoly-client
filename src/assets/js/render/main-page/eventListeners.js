@@ -1,32 +1,22 @@
+
 function addEventListeners() {
     addEventListenersBoardNavigation();
     addEventListenersTrading();
     addEventListenersGiveUp();
     addEventListenersRollDice();
     addEventListenersAuction();
+    addEventListenersJail();
     addEventListenersTaxSystem();
+
     document.querySelector(`#buy`).addEventListener('click', buyProperty);
     document.querySelector(`#inventory`).addEventListener('click', () => window.location.href = "inventory.html");
-    document.addEventListener('click', function (e) {
-        if (!e.target.classList.contains("#card-description") && e.target.id !== "roll-dice-oke") {
-            hidePopupCardDescription();
-        }
-    });
 }
 
 function addEventListenersRollDice() {
-    document.querySelector("#roll-dice").addEventListener("click", rollDice);
-    _$containers["rollDiceOpenDialog"].addEventListener('click', () => {
-        openDialog(_$containers.rollDiceDialog);
-    });
-    document.querySelector("#cancel-roll-dice").addEventListener('click', function () {
-        closeDialog(_$containers.rollDiceDialog);
-    });
-
+    _$containers.rollDiceOpenDialog.addEventListener('click',rollDice);
     document.querySelector("#roll-dice-oke").addEventListener('click', () => {
         closeDialog(_$containers.rollDiceDialog);
         resetRollDiceText();
-        togglePopUpButtons();
     });
 }
 
@@ -68,9 +58,14 @@ function addEventListenersAuction() {
 function addEventListenersBoardNavigation() {
     document.querySelector("#left-arrow").addEventListener("click", moveLeft);
     document.querySelector("#right-arrow").addEventListener("click", moveRight);
-    document.querySelector("main").addEventListener("wheel", wheelEvent);
+    document.querySelector("#cards-parent").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#back-to-current-position button").addEventListener("click", function (e) {
         seeOtherPlayerPosition(e);
     });
+}
+
+function addEventListenersJail() {
+    document.querySelector("#jail-free").addEventListener("click",getOutOfJailFree);
+    document.querySelector("#jail-fine").addEventListener("click",getOutOfJailFine);
 }

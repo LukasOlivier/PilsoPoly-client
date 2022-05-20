@@ -1,9 +1,12 @@
 // buy the property
 function buyProperty() {
     const playerName = loadFromStorage("name");
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${_currentMoveInfo.tileName}`, 'POST');
-    addPropertyToInventory();
-    makeBuyPopupHidden();
+    fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${loadFromStorage("currentTile")}`, 'POST')
+        .then(() =>{
+            addPropertyToInventory();
+            addActionDescriptionToActivity(`You bought: ${loadFromStorage("currentTile")}`);
+            hideElement(document.querySelector("#buy-property-popup"));
+        });
 }
 
 // make the div where you can push the button buy display none
@@ -15,5 +18,4 @@ function addPropertyToInventory() {
     const currentInventory = loadFromStorage('inventory');
     currentInventory.push(nameToId(_currentMoveInfo.tileName));
     saveToStorage("inventory",currentInventory);
-
 }

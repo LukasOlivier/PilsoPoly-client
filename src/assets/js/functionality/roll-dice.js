@@ -17,7 +17,7 @@ function rollDice() {
     const playerName = loadFromStorage("name");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
         .then(response => {
-            updateLastMoveInfo(response);
+            updateCurrentMoveInfo(response);
             checkIfRolledTwice(response);
             getTiles(response);
             seeWhatActionThatNeedsToBeTaken(response);
@@ -26,24 +26,22 @@ function rollDice() {
 }
 
 function changePopUpText(text) {
+    openDialog(_$containers.rollDiceDialog);
     _$containers.rollDiceDialog.querySelector('p').innerText = text;
     document.querySelector("#location").innerText = `You landed at ${_currentMoveInfo.tileName}`;
-    togglePopUpButtons();
-}
-
-function togglePopUpButtons(){
-    document.querySelector("#roll-dice-oke").classList.toggle("hidden");
-    document.querySelector("#roll-dice").classList.toggle("hidden");
-    document.querySelector("#cancel-roll-dice").classList.toggle("hidden");
 }
 
 function checkIfRolledTwice(response) {
     const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
+    const diceResult = document.querySelector("#dice-result");
     let text = "";
+    diceResult.innerText = `${response.lastDiceRoll[0]} - ${response.lastDiceRoll[1]}`;
     if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
+        diceResult.classList.add("dice-roll-double");
         text = `You rolled a double ${response.lastDiceRoll[0]}. You can throw again!`;
     } else {
-        _$containers["rollDiceOpenDialog"].disabled = true;
+        diceResult.classList.remove("dice-roll-double");
+        _$containers.rollDiceOpenDialog.disabled = true;
         text = `You threw ${totalRolled}!`;
     }
     changePopUpText(text);

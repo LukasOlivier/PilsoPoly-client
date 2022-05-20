@@ -14,7 +14,9 @@ function renderMainPage() {
         rollDiceOpenDialog: document.querySelector("#roll-dice-open-dialog"),
         rollDiceDialog: document.querySelector("#roll-dice-dialog"),
         backToCurrentPositionButton: document.querySelector("#back-to-current-position button"),
-        cardDescription: document.querySelector("#card-description")
+        cardDescription: document.querySelector("#card-description"),
+        jailFreeButton: document.querySelector("#jail-free"),
+        auctionPopup: document.querySelector("#auction-property-popup")
     };
     addEventListeners();
     renderFirstTime();
@@ -24,14 +26,25 @@ function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             _gameState = currentGameInfo;
+            checkAmountOfPlayersOverflow(currentGameInfo);
+            updatePlayerInfo(currentGameInfo);
             updatePlayerProperties(currentGameInfo);
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
+            checkIfCurrentTileBuyAble(currentGameInfo);
             renderTaxSystemFirstTime(currentGameInfo);
+            checkIfPlayerJailed(currentGameInfo);
             getTiles(currentGameInfo);
             setTimeout(pollingGameState, 2000);
         });
+}
+
+function checkAmountOfPlayersOverflow(gameInfo){
+    const maxPlayersThatFitInFooter = 6;
+    if (gameInfo.numberOfPlayers > maxPlayersThatFitInFooter){
+        document.querySelector("footer").classList.add("scrollable-footer");
+    }
 }
 
 function seeOtherPlayerPosition(e) {
@@ -105,7 +118,7 @@ function renderPlayerInfo(currentGameInfo) {
     currentGameInfo.players.forEach(function (player) {
         const $template = document.querySelector('.player-info-template').content.firstElementChild.cloneNode(true);
         $template.id = nameToId(player.name);
-        $template.querySelector(".player-balance").innerText = `${player.name}: ${player.money}`;
+        $template.querySelector(".player-balance").innerText = `${player.name}: M${player.money}`;
         $template.querySelector("img").src = `assets/media/${player.icon}.png`;
         document.querySelector('footer').insertAdjacentHTML("beforeend", $template.outerHTML);
         document.querySelectorAll(`.info-container`).forEach(element => element.addEventListener('click', seeOtherPlayerPosition));
