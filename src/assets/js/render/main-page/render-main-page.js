@@ -149,7 +149,7 @@ function giveUp() {
         taxSystem();
     }
     toggleElementHidden(_$containers.giveUpPopup);
-    toggleElementHidden(document.querySelector("section"));
+    document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
 }
 
 function taxSystem() {
@@ -157,7 +157,7 @@ function taxSystem() {
         giveUp();
     }
     toggleElementHidden(_$containers.taxPopup);
-    toggleElementHidden(document.querySelector("section"));
+    document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
 }
 
 function renderTaxSystemFirstTime(currentGameInfo) {
