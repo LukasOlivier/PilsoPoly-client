@@ -89,8 +89,6 @@ function getPlayer(gameInfo) {
 }
 
 function checkIfPlayerJailed(gameInfo) {
-    console.log("checkIfPlayerJailed")
-    console.log(gameInfo);
     const player = getPlayer(gameInfo);
     return player.jailed;
 }

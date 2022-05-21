@@ -32,8 +32,6 @@ function checkGameStateAfterTurn(newGameState) {
 }
 
 function checkIfPlayerHasFreeCards(gameInfo) {
-    console.log("checkIfPlayerHasFreeCards")
-    console.log(gameInfo);
     if (getPlayer(gameInfo).getOutOfJailFreeCards > 0) {
         _$containers.jailFreeButton.disabled = false;
         _$containers.jailFreeButton.classList.remove("disabled");

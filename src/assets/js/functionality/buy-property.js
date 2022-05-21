@@ -10,7 +10,7 @@ function buyProperty() {
         })
         .catch(() => {
             showErrorPopup("You don't have enough money to buy property, start auction instead");
-        })
+        });
 }
 
 function renderMortgagedMain($propertyCard, playerName) {

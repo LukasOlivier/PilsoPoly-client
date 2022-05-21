@@ -87,6 +87,20 @@ footer img {
     cursor: pointer;
 }
 
+.errormessages {
+    position: fixed;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+}
+
+.errormessages p:empty {
+    padding: 0;
+    border: none;
+}
+
 #cards-parent article {
     overflow: hidden;
     display: flex;
@@ -740,18 +754,4 @@ dialog {
     border: #000000 solid 0.1rem;
     background-color: #FF0000FF;
     text-align: center;
-}
-
-.errormessages {
-    position: fixed;
-    text-align:center;
-    top: 50%;
-    left: 50%;
-    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
-    transform: translate(-50%, -50%);
-}
-
-.errormessages p:empty {
-    padding: 0;
-    border: none;
 }
