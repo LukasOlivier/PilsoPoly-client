@@ -1,5 +1,5 @@
 _token = {token: loadFromStorage("token")};
-
+_playerProperties = null;
 function initInventory() {
     getGameState();
 }
@@ -12,8 +12,8 @@ function getGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             clearCards();
-            updatePlayerProperties(currentGameInfo);
             addEventListeners();
+            _playerProperties = getPlayerProperties(currentGameInfo);
             renderInventoryCards();
         });
 }
@@ -116,6 +116,7 @@ function renderRailroadUtility(tile) {
 }
 
 
+
 function renderHouses() {
     _playerProperties.forEach(property => {
         const $currentCard = document.querySelector(`#${nameToId(property.property)}`);
@@ -186,7 +187,7 @@ function sellHotel() {
 function buyHotel() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'POST')
             .then(() => {
                 getGameState();
             })

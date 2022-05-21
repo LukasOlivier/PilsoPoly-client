@@ -14,7 +14,11 @@ function addEventListeners() {
 }
 
 function addEventListenersRollDice() {
-    _$containers.rollDiceOpenDialog.addEventListener('click',rollDice);
+    _$containers.rollDiceOpenDialog.addEventListener('click',() => {
+        rollDice();
+        hidePopUpsForAuction();
+        document.querySelector("#cards-parent").classList.remove("reduce-opacity");
+    });
     document.querySelector("#roll-dice-oke").addEventListener('click', () => {
         closeDialog(_$containers.rollDiceDialog);
         resetRollDiceText();

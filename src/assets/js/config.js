@@ -5,5 +5,5 @@ const _config = {
     groupnumber: '29',
     errorHandlerSelector: '.errormessages p',
     getAPIUrl: function() { return `https://project-i.ti.howest.be/monopoly-${this.groupnumber}/api`;}
-    // getAPIUrl: function() { return `http://localhost:8080`;}
+    //getAPIUrl: function() { return `http://localhost:8080`;}
 };

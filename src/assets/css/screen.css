@@ -87,6 +87,20 @@ footer img {
     cursor: pointer;
 }
 
+.errormessages {
+    position: fixed;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
+    transform: translate(-50%, -50%);
+}
+
+.errormessages p:empty {
+    padding: 0;
+    border: none;
+}
+
 #cards-parent article {
     overflow: hidden;
     display: flex;
@@ -419,6 +433,10 @@ header div {
     margin-bottom: 2rem;
 }
 
+#cards-parent .reduce-opacity{
+    opacity: 10%;
+}
+
 #tax-preference-popup li {
     margin-bottom: 0.5rem;
     list-style: circle;
@@ -487,6 +505,7 @@ footer .player-balance {
 
 /* GIVE UP POP-UP and TAX PREFERENCE POPUP*/
 #give-up-popup, #tax-preference-popup {
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -735,18 +754,4 @@ dialog {
     border: #000000 solid 0.1rem;
     background-color: #FF0000FF;
     text-align: center;
-}
-
-.errormessages {
-    position: fixed;
-    text-align:center;
-    top: 50%;
-    left: 50%;
-    /* https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/ */
-    transform: translate(-50%, -50%);
-}
-
-.errormessages p:empty {
-    padding: 0;
-    border: none;
 }

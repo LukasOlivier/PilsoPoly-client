@@ -21,15 +21,6 @@ function linkPlayersAndStreets(players) {
     saveToStorage("playerProperties", playersBoughtProperties);
 }
 
-
-function updatePlayerProperties(gameInfo) {
-    gameInfo.players.forEach(player => {
-        if (player.name === loadFromStorage("name")) {
-            _playerProperties = player.properties;
-        }
-    });
-}
-
 function createCardInfo(property) {
     const info = {name: null, cost: null, rent: null};
     loadFromStorage("tiles").forEach(function (tile) {
@@ -69,21 +60,56 @@ function nameToId(name) {
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
-        if (move.actionType === "rent") {
-            checkIfPlayerNeedsToPayRent(move,response);
-        }else{
+        if (checkIfPlayerJailed(response)) {
+            addActionDescriptionToActivity("You are jailed!");
+        }
+        else if (move.actionType === "rent") {
+            checkIfPlayerNeedsToPayRent(move, response);
+        } else {
             addActionDescriptionToActivity(move.description);
         }
     });
     checkIfCurrentTileBuyAble(response);
 }
 
-function checkIfPlayerNeedsToPayRent(move,response) {
-    if(!loadFromStorage("inventory").includes(nameToId(getCurrentTile(response).tile))){
-        addActionDescriptionToActivity(move.description);
-    }else {
+function getPlayer(gameInfo) {
+    const foundPlayer = {
+        name: null,
+        jailed: null,
+        money: null
+    };
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            foundPlayer.name = player.name;
+            foundPlayer.jailed = player.jailed;
+            foundPlayer.money = player.money;
+        }
+    });
+    return foundPlayer;
+}
+
+function checkIfPlayerJailed(gameInfo) {
+    const player = getPlayer(gameInfo);
+    return player.jailed;
+}
+
+function checkIfPlayerNeedsToPayRent(move, response) {
+    const currentTile = nameToId(getCurrentTile(response).tile);
+    if (!loadFromStorage("inventory").includes(currentTile)) {
+        addActionDescriptionToActivity(`${move.description} ${loadFromStorage("debtor")}`);
+    } else {
         addActionDescriptionToActivity("You own this property");
     }
+}
+
+function getPlayerProperties(gameInfo) {
+    let properties = null;
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            properties = player.properties;
+        }
+    });
+    return properties;
 }
 
 function addActionDescriptionToActivity(actionDescription) {
@@ -95,7 +121,7 @@ function goToPlayerPosition(playerName) {
     removeTemplateContents("#cards-parent article");
     let currentTileName = null;
     // Find the current tile of the player
-    _gameState.players.forEach(function (player) {
+    loadFromStorage("gameState").players.forEach(function (player) {
         if (player.name === playerName) {
             currentTileName = player.currentTile;
             if (playerName === loadFromStorage("name")) {
@@ -147,16 +173,6 @@ function findTileId(tileName) {
     });
 }
 
-function getPlayerBalance(gameInfo) {
-    let balance = 0;
-    gameInfo.players.forEach(player => {
-        if (player.name === loadFromStorage("name")) {
-            balance = player.money;
-        }
-    });
-    return balance;
-}
-
 function getTaxSystem(gameInfo) {
     let taxSystem;
     gameInfo.players.forEach(player => {
@@ -170,10 +186,10 @@ function getTaxSystem(gameInfo) {
 function addPropertyToInventory(tile) {
     const currentInventory = loadFromStorage('inventory');
     currentInventory.push(nameToId(tile));
-    saveToStorage("inventory",currentInventory);
+    saveToStorage("inventory", currentInventory);
 }
 
-function toggleElementHidden($element){
+function toggleElementHidden($element) {
     $element.classList.toggle("hidden");
 }
 

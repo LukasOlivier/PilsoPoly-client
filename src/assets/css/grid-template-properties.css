@@ -5,7 +5,7 @@
             ".             .               .      .       .             .         .            .      brewery-artois              ."
             ".             heineken        primus stella  rodenbach     duvel     brugse-zot   .      brewery-rodenbach           ."
             "delhaize-365  sparta-pils     bavik  jupiler kriek         omer      chimay       cornet brewery-lupulus             electric-company"
-            "cara          schuttenbräu    bockor maes    kasteel-rouge westmalle westvleteren bush12 brewery-omer-vander-ghinste water-works";
+            "cara          schuttenbrau    bockor maes    kasteel-rouge westmalle westvleteren bush12 brewery-omer-vander-ghinste water-works";
 }
 
 .info-container .not-bought {
@@ -36,8 +36,8 @@
     background-color: lightblue;
 }
 
-.schuttenbräu {
-    grid-area: schuttenbräu;
+.schuttenbrau {
+    grid-area: schuttenbrau;
     background-color: lightblue;
 }
 

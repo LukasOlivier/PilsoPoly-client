@@ -1,4 +1,6 @@
 "use strict";
+_token = {token: loadFromStorage("token")};
+_gameID = loadFromStorage("gameId");
 
 function initMap() {
     pollingGameState();

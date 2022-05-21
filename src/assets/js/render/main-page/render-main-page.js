@@ -2,7 +2,6 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
-let _gameState = null;
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
@@ -17,7 +16,8 @@ function renderMainPage() {
         cardDescription: document.querySelector("#card-description"),
         jailFreeButton: document.querySelector("#jail-free"),
         auctionPopup: document.querySelector("#auction-property-popup"),
-        lastBidder: document.querySelector("#last-bidder")
+        lastBidder: document.querySelector("#last-bidder"),
+        buyPropertyPopup: document.querySelector("#buy-property-popup")
     };
     addEventListeners();
     renderFirstTime();
@@ -26,18 +26,14 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            _gameState = currentGameInfo;
+            saveToStorage("gameState",currentGameInfo);
             checkAmountOfPlayersOverflow(currentGameInfo);
-            updatePlayerInfo(currentGameInfo);
-            updatePlayerProperties(currentGameInfo);
             renderPlayerInfo(currentGameInfo);
-            checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
             checkIfCurrentTileBuyAble(currentGameInfo);
             renderTaxSystemFirstTime(currentGameInfo);
-            checkIfPlayerJailed(currentGameInfo);
             getTiles(currentGameInfo);
-            setTimeout(pollingGameState, 2000);
+            pollingGameState();
         });
 }
 
@@ -76,8 +72,8 @@ function getCardById(id) {
         }
     }
     // We also update these here because we don't want to wait for polling while scrolling (user experience)
-    checkIfBought(_gameState);
-    checkIfPlayerOnTile(_gameState);
+    checkIfBought(loadFromStorage("gameState"));
+    checkIfPlayerOnTile(loadFromStorage("gameState"));
 }
 
 function createToShow(id, firstId, lastId) {
@@ -136,23 +132,6 @@ function renderMortgagedFooter(property, playerName) {
     document.querySelector(`#${playerName} .${property}`).classList.add("mortgaged");
 }
 
-function renderMortgagedMain($propertyCard, playerName) {
-    hideElement($propertyCard.querySelector(`.player-bought`));
-    showElement($propertyCard.querySelector(`.player-mortgaged`));
-    $propertyCard.classList.add("card-mortgaged");
-    $propertyCard.querySelector(`.player-mortgaged span`).innerText = playerName;
-
-}
-
-function renderBoughtMain($propertyCard, playerName) {
-    hideElement($propertyCard.querySelector(`.price`));
-    hideElement($propertyCard.querySelector(`.player-mortgaged`));
-    showElement($propertyCard.querySelector(`.player-bought`));
-    $propertyCard.classList.add("card-bought");
-
-    $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
-}
-
 function renderPlayerBankrupt(playerName) {
     const $container = document.querySelector(`#${playerName}`);
     $container.querySelector("p").innerHTML = `${playerName}: BANKRUPT`;
@@ -171,7 +150,7 @@ function giveUp() {
         taxSystem();
     }
     toggleElementHidden(_$containers.giveUpPopup);
-    toggleElementHidden(document.querySelector("section"));
+    toggleCardsOpacity();
 }
 
 function taxSystem() {
@@ -179,7 +158,7 @@ function taxSystem() {
         giveUp();
     }
     toggleElementHidden(_$containers.taxPopup);
-    toggleElementHidden(document.querySelector("section"));
+    toggleCardsOpacity();
 }
 
 function renderTaxSystemFirstTime(currentGameInfo) {
@@ -192,4 +171,14 @@ function renderTaxSystemFirstTime(currentGameInfo) {
     } else {
         $estimateButton.disabled = true;
     }
+}
+
+function hidePopUpsForAuction(){
+    hideElement(_$containers.giveUpPopup);
+    hideElement(_$containers.taxPopup);
+    hideElement(_$containers.buyPropertyPopup);
+}
+
+function toggleCardsOpacity(){
+    document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
 }
