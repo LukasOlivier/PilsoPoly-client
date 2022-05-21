@@ -187,7 +187,7 @@ function sellHotel() {
 function buyHotel() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
+        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'POST')
             .then(() => {
                 getGameState();
             })

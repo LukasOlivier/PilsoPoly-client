@@ -60,13 +60,39 @@ function nameToId(name) {
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
-        if (move.actionType === "rent") {
+        if (checkIfPlayerJailed(response)) {
+            addActionDescriptionToActivity("You are jailed!");
+        }
+        else if (move.actionType === "rent") {
             checkIfPlayerNeedsToPayRent(move, response);
         } else {
             addActionDescriptionToActivity(move.description);
         }
     });
     checkIfCurrentTileBuyAble(response);
+}
+
+function getPlayer(gameInfo) {
+    const foundPlayer = {
+        name: null,
+        jailed: null,
+        money: null
+    };
+    gameInfo.players.forEach(player => {
+        if (player.name === loadFromStorage("name")) {
+            foundPlayer.name = player.name;
+            foundPlayer.jailed = player.jailed;
+            foundPlayer.money = player.money;
+        }
+    });
+    return foundPlayer;
+}
+
+function checkIfPlayerJailed(gameInfo) {
+    console.log("checkIfPlayerJailed")
+    console.log(gameInfo);
+    const player = getPlayer(gameInfo);
+    return player.jailed;
 }
 
 function checkIfPlayerNeedsToPayRent(move, response) {
@@ -147,16 +173,6 @@ function findTileId(tileName) {
             getCardById(tile.position);
         }
     });
-}
-
-function getPlayerBalance(gameInfo) {
-    let balance = 0;
-    gameInfo.players.forEach(player => {
-        if (player.name === loadFromStorage("name")) {
-            balance = player.money;
-        }
-    });
-    return balance;
 }
 
 function getTaxSystem(gameInfo) {

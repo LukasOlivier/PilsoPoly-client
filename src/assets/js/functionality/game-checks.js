@@ -1,6 +1,5 @@
 "use strict";
 let _playerProperties;
-let _player;
 
 function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
@@ -16,7 +15,6 @@ function pollingGameState() {
             setTimeout(pollingGameState, 1000);
         });
 }
-
 function checkMainPage(currentGameInfo){
     checkIfPlayerAuction(currentGameInfo);
     checkPlayerBalance(currentGameInfo);
@@ -29,22 +27,25 @@ function checkGameStateAfterTurn(newGameState) {
     if (newGameState.currentPlayer !== loadFromStorage("gameState").currentPlayer) {
         checkIfAPlayerThrewDouble(newGameState);
         checkIfPlayerNeedsToReceiveRent(newGameState);
+        renderOutOfJailOptions(newGameState);
     }
 }
 
-function checkIfPlayerHasFreeCards() {
-    if (_player.getOutOfJailFreeCards > 0) {
+function checkIfPlayerHasFreeCards(gameInfo) {
+    console.log("checkIfPlayerHasFreeCards")
+    console.log(gameInfo);
+    if (getPlayer(gameInfo).getOutOfJailFreeCards > 0) {
         _$containers.jailFreeButton.disabled = false;
         _$containers.jailFreeButton.classList.remove("disabled");
     }
 }
 
-function checkIfPlayerJailed(gameInfo) {
+function renderOutOfJailOptions(gameInfo) {
     _$containers.jailFreeButton.classList.add("disabled");
     _$containers.jailFreeButton.disabled = true;
-    if (_player.jailed && gameInfo.currentPlayer === _player.name) {
+    if (checkIfPlayerJailed(gameInfo) && gameInfo.currentPlayer === loadFromStorage("name")){
         showElement(document.querySelector("#get-out-of-jail-popup"));
-        checkIfPlayerHasFreeCards();
+        checkIfPlayerHasFreeCards(gameInfo);
     } else {
         hideElement(document.querySelector("#get-out-of-jail-popup"));
     }
