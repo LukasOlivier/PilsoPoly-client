@@ -2,7 +2,6 @@
 let _playerPositionID = null;
 let _tempPlayerPositionID = null;
 let _$containers = {};
-let _gameState = null;
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
 
@@ -26,18 +25,14 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            _gameState = currentGameInfo;
+            saveToStorage("gameState",currentGameInfo);
             checkAmountOfPlayersOverflow(currentGameInfo);
-            updatePlayerInfo(currentGameInfo);
-            updatePlayerProperties(currentGameInfo);
             renderPlayerInfo(currentGameInfo);
-            checkIfPlayerBankrupt(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
             checkIfCurrentTileBuyAble(currentGameInfo);
             renderTaxSystemFirstTime(currentGameInfo);
-            checkIfPlayerJailed(currentGameInfo);
             getTiles(currentGameInfo);
-            setTimeout(pollingGameState, 2000);
+            pollingGameState();
         });
 }
 
@@ -76,8 +71,8 @@ function getCardById(id) {
         }
     }
     // We also update these here because we don't want to wait for polling while scrolling (user experience)
-    checkIfBought(_gameState);
-    checkIfPlayerOnTile(_gameState);
+    checkIfBought(loadFromStorage("gameState"));
+    checkIfPlayerOnTile(loadFromStorage("gameState"));
 }
 
 function createToShow(id, firstId, lastId) {
@@ -134,23 +129,6 @@ function renderBoughtFooter(property, playerName) {
 function renderMortgagedFooter(property, playerName) {
     document.querySelector(`#${playerName} .${property}`).classList.remove("not-bought");
     document.querySelector(`#${playerName} .${property}`).classList.add("mortgaged");
-}
-
-function renderMortgagedMain($propertyCard, playerName) {
-    hideElement($propertyCard.querySelector(`.player-bought`));
-    showElement($propertyCard.querySelector(`.player-mortgaged`));
-    $propertyCard.classList.add("card-mortgaged");
-    $propertyCard.querySelector(`.player-mortgaged span`).innerText = playerName;
-
-}
-
-function renderBoughtMain($propertyCard, playerName) {
-    hideElement($propertyCard.querySelector(`.price`));
-    hideElement($propertyCard.querySelector(`.player-mortgaged`));
-    showElement($propertyCard.querySelector(`.player-bought`));
-    $propertyCard.classList.add("card-bought");
-
-    $propertyCard.querySelector(`.player-bought span`).innerText = playerName;
 }
 
 function renderPlayerBankrupt(playerName) {

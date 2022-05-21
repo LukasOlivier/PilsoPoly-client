@@ -4,12 +4,12 @@ function auctionProperty() {
     const playerName = loadFromStorage("name");
     const currentTile = loadFromStorage("currentTile");
     fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTile}`, 'DELETE');
-    makeBuyPopupHidden();
+    hideElement(document.querySelector(`#buy-property-popup`));
 }
 
 function renderAuctionPopup(gameInfo) {
     const auctionInfo = gameInfo.auction;
-    isYourTurnToBid(auctionInfo.lastBidder,auctionInfo.highestBid);
+    isYourTurnToBid(auctionInfo.lastBidder, auctionInfo.highestBid);
     checkIfTimeExceeded();
     document.querySelector("#property-name").innerText = `${auctionInfo.property}`;
     _$containers.lastBidder.querySelector("span").innerText = `${auctionInfo.lastBidder}`;
@@ -19,12 +19,12 @@ function renderAuctionPopup(gameInfo) {
 function checkIfTimeExceeded() {
     const $progressBar = document.querySelector("#duration");
     const lastBidder = _$containers.lastBidder.querySelector("span").innerText;
-    if ( $progressBar.value === 30) {
+    if ($progressBar.value === 30) {
         const body = {
             bidder: loadFromStorage("name"),
             amount: -1
         };
-        if (loadFromStorage("name") === lastBidder){
+        if (loadFromStorage("name") === lastBidder) {
             const property = document.querySelector("#property-name").innerText;
             placeBidOnAuction(body);
             addPropertyToInventory(property);
@@ -44,7 +44,7 @@ function startTimer() {
     }, 1000);
 }
 
-function isYourTurnToBid(lastBidder,highestBid) {
+function isYourTurnToBid(lastBidder, highestBid) {
     const $buttons = document.querySelectorAll("#auction-property-popup button");
     if (lastBidder === loadFromStorage("name")) {
         $buttons.forEach(button => {
@@ -55,7 +55,7 @@ function isYourTurnToBid(lastBidder,highestBid) {
         $buttons.forEach(button => {
                 button.disabled = false;
                 const playerBalance = parseInt(document.querySelector(`#${loadFromStorage("name")} .balance`).innerText);
-                if (playerBalance < parseInt(button.value) + highestBid)  {
+                if (playerBalance < parseInt(button.value) + highestBid) {
                     button.disabled = true;
                 }
                 document.querySelector("#last-bidder-message").classList.add("hidden");

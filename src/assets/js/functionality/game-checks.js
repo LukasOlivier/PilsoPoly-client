@@ -5,24 +5,31 @@ let _player;
 function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            updatePlayerInfo(currentGameInfo);
-            updatePlayerProperties(currentGameInfo);
-            checkGameStates(currentGameInfo);
-            checkPlayerBalance(currentGameInfo);
-            checkIfPlayerOnTile(currentGameInfo);
-            checkAmountOfJailFreeCards(currentGameInfo);
-            checkIfPlayerAuction(currentGameInfo);
-            _gameState = currentGameInfo;
+            if (document.querySelector("body").id === "main-screen"){
+                checkMainPage(currentGameInfo);
+            }
+            checkGameStateAfterTurn(currentGameInfo);
+            checkIfBought(currentGameInfo);
+            checkIfPlayerBankrupt(currentGameInfo);
+            checkIfPlayerWon(currentGameInfo);
+            saveToStorage("gameState", currentGameInfo);
             setTimeout(pollingGameState, 1000);
         });
 }
-function updatePlayerInfo(gameInfo) {
-    gameInfo.players.forEach(player => {
-        if (player.name === loadFromStorage("name")) {
-            _player = player;
-        }
-    });
-    return null;
+
+function checkMainPage(currentGameInfo){
+    checkIfPlayerAuction(currentGameInfo);
+    checkPlayerBalance(currentGameInfo);
+    checkIfPlayerOnTile(currentGameInfo);
+    checkAmountOfJailFreeCards(currentGameInfo);
+    checkIfPlayerCanRoll(currentGameInfo);
+}
+
+function checkGameStateAfterTurn(newGameState) {
+    if (newGameState.currentPlayer !== loadFromStorage("gameState").currentPlayer) {
+        checkIfAPlayerThrewDouble(newGameState);
+        checkIfPlayerNeedsToReceiveRent(newGameState);
+    }
 }
 
 function checkIfPlayerHasFreeCards() {
@@ -43,7 +50,7 @@ function checkIfPlayerJailed(gameInfo) {
     }
 }
 
-function checkAmountOfJailFreeCards(gameInfo){
+function checkAmountOfJailFreeCards(gameInfo) {
     gameInfo.players.forEach(player => {
         document.querySelector(`footer #${player.name} .jail-free-card-amount`).innerText = player.getOutOfJailFreeCards;
     });
@@ -53,8 +60,8 @@ function checkIfCurrentTileBuyAble(gameInfo) {
     const currentTileName = loadFromStorage("currentTile");
     const currentTileAction = loadFromStorage("currentTileAction");
     const name = loadFromStorage("name");
-    if (gameInfo.turns.length > 0){
-        if (isCurrentActionBuy(currentTileAction) && gameInfo.auction == null && gameInfo.currentPlayer === name && !playerHasTile(currentTileName)){
+    if (gameInfo.turns.length > 0) {
+        if (isCurrentActionBuy(currentTileAction) && gameInfo.auction == null && gameInfo.currentPlayer === name && !playerHasTile(currentTileName)) {
             showElement(document.querySelector("#buy-property-popup"));
         }
     }
@@ -68,29 +75,12 @@ function isCurrentActionBuy(currentTileAction) {
     return currentTileAction === "buy";
 }
 
-function checkGameStates(newGameState) {
-    // if your on the map screen, all the other checks are not needed.
-    if (JSON.stringify(newGameState) !== JSON.stringify(_gameState)) {
-        if (newGameState.currentPlayer !== _gameState.currentPlayer) {
-            checkIfAPlayerThrewDouble(newGameState);
-            checkIfPlayerCanRoll(newGameState);
-            checkIfPlayerNeedsToReceiveRent(newGameState);
-        }
-        updatePlayerProperties(newGameState);
-        checkIfPlayerWon(newGameState);
-        checkIfBought(newGameState);
-        checkIfPlayerBankrupt(newGameState);
-        checkIfPlayerWon(newGameState);
-        checkIfPlayerAuction(newGameState);
-    }
-}
-
-function checkIfAPlayerThrewDouble(gameInfo){
+function checkIfAPlayerThrewDouble(gameInfo) {
     const diceOne = gameInfo.lastDiceRoll[0];
     const diceTwo = gameInfo.lastDiceRoll[1];
 
-    if (diceOne === diceTwo){
-        addActionDescriptionToActivity(`${_gameState.currentPlayer} just threw a double`);
+    if (diceOne === diceTwo) {
+        addActionDescriptionToActivity(`${loadFromStorage("gameState").currentPlayer} just threw a double`);
     }
 }
 
@@ -144,6 +134,7 @@ function checkPlayerBalance(gameInfo) {
     });
 }
 
+
 function checkIfPlayerOnTile(gameInfo) {
     document.querySelectorAll(".player-pos").forEach(card => {
         card.querySelector("span").innerText = "";
@@ -161,7 +152,7 @@ function checkIfPlayerOnTile(gameInfo) {
 function checkIfPlayerBankrupt(gameInfo) {
     gameInfo.players.forEach(player => {
         if (player.bankrupt) {
-            if (player.name === loadFromStorage("name")){
+            if (player.name === loadFromStorage("name")) {
                 loseGame();
             }
             renderPlayerBankrupt(player.name.toLowerCase());
@@ -175,7 +166,7 @@ function checkIfPlayerAuction(gameInfo) {
             startAuction();
         }
         renderAuctionPopup(gameInfo);
-    } else if ( !_$containers.auctionPopup.classList.contains("hidden") ){
+    } else if (!_$containers.auctionPopup.classList.contains("hidden")) {
         endAuction();
     }
 }
@@ -187,13 +178,11 @@ function checkIfPlayerWon(gameInfo) {
 }
 
 function checkIfPlayerNeedsToReceiveRent(gameInfo) {
-    if (gameInfo.turns.length > 0 && _gameState.currentPlayer !== loadFromStorage("name") && _gameState.auction === null) {
-        console.log("pay rent")
-        console.log(_gameState)
+    if (gameInfo.turns.length > 0 && loadFromStorage("gameState").currentPlayer !== loadFromStorage("name") && loadFromStorage("gameState").auction === null) {
         const currentTile = getCurrentTile(gameInfo);
         const inventory = loadFromStorage('inventory');
         if (inventory.includes(nameToId(currentTile.tile)) && currentTile.actionType !== "mortgage") {
-            collectDebt(currentTile.tile, _gameState.currentPlayer, loadFromStorage("name"));
+            collectDebt(currentTile.tile, loadFromStorage("gameState").currentPlayer, loadFromStorage("name"));
         }
     } else {
         saveToStorage("rent", ``);

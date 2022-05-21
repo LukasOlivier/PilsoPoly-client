@@ -1,5 +1,5 @@
 _token = {token: loadFromStorage("token")};
-
+_playerProperties = null;
 function initInventory() {
     getGameState();
 }
@@ -12,8 +12,8 @@ function getGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             clearCards();
-            updatePlayerProperties(currentGameInfo);
             addEventListeners();
+            _playerProperties = getPlayerProperties(currentGameInfo);
             renderInventoryCards();
         });
 }
@@ -114,6 +114,7 @@ function renderRailroadUtility(tile) {
     }
     document.querySelector('#cards').insertAdjacentHTML("beforeend", $template.outerHTML);
 }
+
 
 
 function renderHouses() {
