@@ -6,7 +6,7 @@ function loadGameDataForLobby(){
         .then(response => {
             const game = findGameByID(response, _gameID);
             if (game.started === true) {
-                window.location.href = "index.html";
+                window.location.href = "main-screen.html";
             }
             renderLobby(game);
         });
