@@ -18,7 +18,6 @@ function renderMortgagedMain($propertyCard, playerName) {
     showElement($propertyCard.querySelector(`.player-mortgaged`));
     $propertyCard.classList.add("card-mortgaged");
     $propertyCard.querySelector(`.player-mortgaged span`).innerText = playerName;
-
 }
 
 function renderBoughtMain($propertyCard, playerName) {
