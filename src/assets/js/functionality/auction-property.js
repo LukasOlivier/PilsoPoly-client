@@ -69,6 +69,8 @@ function startAuction() {
     hideErrorPopup();
     startTimer();
     showElement(_$containers.auctionPopup);
+    hidePopUpsForAuction();
+    document.querySelector("#cards-parent").classList.remove("reduce-opacity");
 }
 
 function endAuction() {

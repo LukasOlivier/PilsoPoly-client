@@ -16,7 +16,8 @@ function renderMainPage() {
         cardDescription: document.querySelector("#card-description"),
         jailFreeButton: document.querySelector("#jail-free"),
         auctionPopup: document.querySelector("#auction-property-popup"),
-        lastBidder: document.querySelector("#last-bidder")
+        lastBidder: document.querySelector("#last-bidder"),
+        buyPropertyPopup: document.querySelector("#buy-property-popup")
     };
     addEventListeners();
     renderFirstTime();
@@ -149,7 +150,7 @@ function giveUp() {
         taxSystem();
     }
     toggleElementHidden(_$containers.giveUpPopup);
-    document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
+    toggleCardsOpacity();
 }
 
 function taxSystem() {
@@ -157,7 +158,7 @@ function taxSystem() {
         giveUp();
     }
     toggleElementHidden(_$containers.taxPopup);
-    document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
+    toggleCardsOpacity();
 }
 
 function renderTaxSystemFirstTime(currentGameInfo) {
@@ -170,4 +171,14 @@ function renderTaxSystemFirstTime(currentGameInfo) {
     } else {
         $estimateButton.disabled = true;
     }
+}
+
+function hidePopUpsForAuction(){
+    hideElement(_$containers.giveUpPopup);
+    hideElement(_$containers.taxPopup);
+    hideElement(_$containers.buyPropertyPopup);
+}
+
+function toggleCardsOpacity(){
+    document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
 }
