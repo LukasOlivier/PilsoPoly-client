@@ -19,7 +19,7 @@ function rollDice() {
         .then(response => {
             updateCurrentMoveInfo(response);
             checkIfRolledTwice(response);
-            getTiles(response);
+            showCardsByPosition(findTileId(loadFromStorage("currentTile")));
             seeWhatActionThatNeedsToBeTaken(response);
         })
         .catch(errorHandler);

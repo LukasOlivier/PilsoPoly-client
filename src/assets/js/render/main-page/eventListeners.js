@@ -66,7 +66,7 @@ function addEventListenersBoardNavigation() {
     document.querySelector("#cards-parent").addEventListener("wheel", wheelEvent);
     document.addEventListener('keydown', keyPressEvent);
     document.querySelector("#back-to-current-position button").addEventListener("click", () => {
-        seeOtherPlayerPosition(loadFromStorage("name"));
+        goToPlayerPosition(loadFromStorage("name"));
     });
 }
 
@@ -78,7 +78,7 @@ function addEventListenersJail() {
 function addEventListenerFooter(){
     document.querySelector(`footer`).addEventListener('click', (e) => {
         if (e.target.closest(".info-container") !== null){
-            seeOtherPlayerPosition(e.target.closest(".info-container").id);
+            goToPlayerPosition(e.target.closest(".info-container").id);
         }
     });
 }
