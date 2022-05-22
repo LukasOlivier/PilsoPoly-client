@@ -7,6 +7,7 @@ function loadGameDataForLobby(){
             const game = findGameByID(response, _gameID);
             if (game.started === true) {
                 window.location.href = "main-screen.html";
+                saveToStorage("currentTile","Go")
             }
             renderLobby(game);
         });

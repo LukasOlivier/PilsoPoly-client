@@ -18,6 +18,7 @@ function renderMainPage() {
         lastBidder: document.querySelector("#last-bidder"),
         buyPropertyPopup: document.querySelector("#buy-property-popup")
     };
+    getTiles();
     addEventListeners();
     renderFirstTime();
 }
