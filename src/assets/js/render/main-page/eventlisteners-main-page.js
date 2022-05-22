@@ -1,7 +1,7 @@
+"use strict";
 
 function addEventListeners() {
     addEventListenersBoardNavigation();
-    addEventListenersTrading();
     addEventListenersGiveUp();
     addEventListenersRollDice();
     addEventListenersAuction();
@@ -35,16 +35,6 @@ function addEventListenersTaxSystem() {
     document.querySelector("#tax-system").addEventListener("click", taxSystem);
     _$containers.taxPopup.querySelector("#estimate").addEventListener("click", setTaxSystem);
     _$containers.taxPopup.querySelector("#compute").addEventListener("click", setTaxSystem);
-}
-
-function addEventListenersTrading() {
-    document.querySelector("#trade").addEventListener("click", initTrade);
-    document.querySelector("#trade-select-player").addEventListener("click", selectPlayer);
-    document.querySelector("#cancel-select-player").addEventListener("click", cancelSelectPlayer);
-    document.querySelector("#cancel-trading").addEventListener("click", cancelTrading);
-    document.querySelector("#player1 ul").addEventListener("click", addToOffers);
-    document.querySelector("#player2 ul").addEventListener("click", addToWants);
-    document.querySelector("#send-trade").addEventListener("click", sendTrade);
 }
 
 function addEventListenersAuction() {

@@ -1,11 +1,10 @@
 "use strict";
-_token = {token: loadFromStorage("token")};
+
 _gameID = loadFromStorage("gameId");
 
 function initMap() {
     pollingGameState();
     const streetNames = [];
-    _token = {token: loadFromStorage("token")};
     fetchFromServer(`/games/${_gameID}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);

@@ -57,11 +57,10 @@ function joinGame(name, icon) {
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${_gameID}/players`, 'POST', body)
         .then(response => {
-            _token = response.token;
             localStorage.clear();
             saveToStorage("gameId", _gameID);
             // this token is your security token.
-            saveToStorage("token", _token);
+            saveToStorage("token", response.token);
             saveToStorage("name", name);
             saveToStorage("inventory", []);
             loadGameDataForLobby();
@@ -71,7 +70,6 @@ function joinGame(name, icon) {
 
 // https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
 function fetchNonStartedGames() {
-    // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
         .then(response => renderAllAvailableGames(response));
 }
@@ -82,4 +80,3 @@ function fillInGameID(e) {
     _$interfaces["joinInterface"].style.opacity = "1";
     _$interfaces["joinInterface"].querySelector("#ID").value = e.currentTarget.id;
 }
-

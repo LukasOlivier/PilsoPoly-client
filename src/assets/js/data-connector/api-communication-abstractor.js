@@ -1,4 +1,5 @@
 "use strict";
+
 function fetchFromServer(path, httpVerb, requestBody){
     const options = constructOptions(httpVerb, requestBody);
 
@@ -16,14 +17,15 @@ function fetchFromServer(path, httpVerb, requestBody){
 }
 
 function constructOptions(httpVerb, requestBody){
+    const token = loadFromStorage("token");
     const options= {};
     options.method = httpVerb;
 
     options.headers = {};
     options.headers["Content-Type"] = "application/json";
 
-    if(_token !== null) {
-        options.headers["Authorization"] = "Bearer " + _token.token;
+    if(token !== null) {
+        options.headers["Authorization"] = "Bearer " + token;
     }
     // Don't forget to add data to the body when needed
     options.body = JSON.stringify(requestBody);

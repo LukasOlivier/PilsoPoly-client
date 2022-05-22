@@ -1,4 +1,6 @@
-function getOutOfJailFree(gameInfo) {
+"use strict";
+
+function getOutOfJailFree() {
     fetchFromServer(`/games/${loadFromStorage("gameId")}/prison/${loadFromStorage("name")}/free`,"POST")
         .then(() => {
             hideElement(document.querySelector("#get-out-of-jail-popup"));
@@ -6,7 +8,7 @@ function getOutOfJailFree(gameInfo) {
         .catch((error) => errorHandler(error));
 }
 
-function getOutOfJailFine(gameInfo){
+function getOutOfJailFine(){
     fetchFromServer(`/games/${loadFromStorage("gameId")}/prison/${loadFromStorage("name")}/fine`,"POST")
         .then(() => {
             hideElement(document.querySelector("#get-out-of-jail-popup"));

@@ -5,6 +5,7 @@ function checkIfPlayerCanRoll(gameState) {
     renderPlayerActionRollDice(gameState);
     _$containers["rollDiceOpenDialog"].disabled = !(gameState.currentPlayer === playerName && gameState.canRoll === true);
 }
+
 // This function adds the glowing effect to the player icon
 function renderPlayerActionRollDice(gameState) {
     if (gameState.canRoll === true) {
@@ -32,13 +33,16 @@ function changePopUpText(text) {
 }
 
 function checkIfRolledTwice(response) {
-    const totalRolled = response.lastDiceRoll[0] + response.lastDiceRoll[1];
+    const diceOne = response.lastDiceRoll[0];
+    const diceTwo = response.lastDiceRoll[1];
+    const totalRolled = diceOne + diceTwo;
     const diceResult = document.querySelector("#dice-result");
     let text = "";
-    diceResult.innerText = `${response.lastDiceRoll[0]} - ${response.lastDiceRoll[1]}`;
-    if (response.lastDiceRoll[0] === response.lastDiceRoll[1]) {
+    diceResult.innerText = `${diceOne} - ${diceTwo}`;
+    if (diceOne === diceTwo) {
         diceResult.classList.add("dice-roll-double");
-        text = `You rolled a double ${response.lastDiceRoll[0]}. You can throw again!`;
+        text = `You rolled a double ${diceOne}. You can roll again!`;
+        addActionDescriptionToActivity(`You rolled a double ${diceOne}.`);
     } else {
         diceResult.classList.remove("dice-roll-double");
         _$containers.rollDiceOpenDialog.disabled = true;
@@ -59,4 +63,3 @@ function resetRollDiceText() {
     _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
     _$containers.rollDiceDialog.querySelector("#location").innerText = "";
 }
-

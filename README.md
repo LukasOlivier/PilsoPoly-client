@@ -1,7 +1,4 @@
-# Monopoly web project group [number]
-
-## Before you start
-Search for the string 29 and **replace it with your group number**.
+# Monopoly web project group 29
 
 ## Parent group
 https://git.ti.howest.be/TI/2021-2022/s2/programming-project/projects/group-29
@@ -62,6 +59,11 @@ https://grid.layoutit.com/
 | Bug behaviour                                              | How to reproduce                 | Why it hasn't been fixed   |
 |------------------------------------------------------------|----------------------------------|----------------------------|
 | Refreshing browser restarts the auction timer | refresh browser while auctioning | minor issue   |
+| "Auction was won by _null_" message in activity log | This is only sometimes and we are unsure why this is happening. | minor issue, only visual. |
+| "You paid rent to _null_" message in activity log | If a player lands on your tile, sometimes the request does not work | No time |
+|"When you join a game at the same time with the same icon, you have the same icon."|Trying to join the game with two players at the exact same time| minor issue|
+|"When you join a game at the same time with the same name, you are stuck in the lobby."|Trying to join the game with two players at the exact same time with the same name|Minor issue, doesn't occur regularly.|
+
 
 ## Functionality Table
 | PRIORITY | ENDPOINT                                                                                                 | Client                | Client           | Server                       | Server                       |

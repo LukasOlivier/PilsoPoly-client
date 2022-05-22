@@ -1,6 +1,5 @@
 "use strict";
 
-
 function move(value) {
     _viewPosition = keepInRangeOfBoard(_viewPosition - value);
     removeTemplateContents("#cards-parent article");
