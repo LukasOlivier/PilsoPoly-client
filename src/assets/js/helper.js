@@ -162,7 +162,6 @@ function findTileId(tileName) {
     let tilePosition = null;
     loadFromStorage("tiles").forEach(function (tile) {
         if (tile.name === tileName) {
-            _viewPosition = tile.position;
             tilePosition = tile.position;
         }
     });

@@ -77,6 +77,8 @@ function showCardsByPosition(position) {
         }
     }
     checkIfViewingCurrentPosition();
+    _viewPosition = position;
+
     // We also update these here because we don't want to wait for polling while scrolling (user experience)
     checkIfBought(loadFromStorage("gameState"));
     checkIfPlayerOnTile(loadFromStorage("gameState"));
