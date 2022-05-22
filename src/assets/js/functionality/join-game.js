@@ -13,7 +13,7 @@ function fetchAllGames() {
                     throw new Error("This game has already started.");
                 }
                 checkName(name, game);
-                saveToStorage("gameId",gameID)
+                saveToStorage("gameId",gameID);
                 renderIconPicker(name);
             })
             .catch((error) => errorHandler(error));
