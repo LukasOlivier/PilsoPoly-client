@@ -48,7 +48,7 @@ function utilityAndRailroadTemplate($template, cardInfo, middle) {
         $icon.src = `images/railroad.png`;
         $template.querySelector('.rent').innerText = `Rent: M${cardInfo.rent}`;
     } else {
-        $template.querySelector('.rent').innerText = `Rent:${cardInfo.rent}`;
+        $template.querySelector('.rent').innerText = `Rent: ${cardInfo.rent}`;
         if (cardInfo.name.includes("Electric")) {
             $icon.src = `images/electric.png`;
         } else {

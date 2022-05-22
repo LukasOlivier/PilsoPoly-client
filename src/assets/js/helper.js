@@ -112,8 +112,8 @@ function checkIfPlayerNeedsToPayRent(move, response) {
         addActionDescriptionToActivity("No need to pay rent, this tile is mortgaged");
     } else {
         const currentTile = nameToId(loadFromStorage("currentTile"));
-        const debtorName = document.querySelector(`#${currentTile} .player-bought span`).innerText;
-        addActionDescriptionToActivity(`${move.description} ${debtorName}`);
+        const debtorName = document.querySelector(`#${currentTile} .player-bought span`).innerText.toLowerCase();
+        addActionDescriptionToActivity(`${move.description} ${debtorName}.`);
     }
 }
 
