@@ -1,11 +1,8 @@
 "use strict";
-
-_gameID = loadFromStorage("gameId");
-
 function initMap() {
     pollingGameState();
     const streetNames = [];
-    fetchFromServer(`/games/${_gameID}`, 'GET')
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, 'GET')
         .then(players => {
             linkPlayersAndStreets(players.players);
         });
@@ -40,9 +37,13 @@ function renderStreets(street) {
     $template.id = nameToId(street.name);
     $template.querySelector('.name').classList.add(street.color);
     $template.querySelector('.name').insertAdjacentHTML("afterbegin",street.name);
-    $template.querySelector('.mortgage').innerText = `Mortgage ${street.mortgage}`;
+    $template.querySelector('.mortgage').innerText = `Mortgage: M${street.mortgage}`;
     $template.querySelector('.price').innerText = `Cost: M${street.cost}`;
-    $template.querySelector('.rent').innerText = `Rent: ${street.rent}`;
+    if (street.type === "utility"){
+        $template.querySelector('.rent').innerText = `Rent: ${street.rent}`;
+    }else{
+        $template.querySelector('.rent').innerText = `Rent: M${street.rent}`;
+    }
     $template.querySelector('.position').innerText = `Position: ${street.position}`;
     document.querySelector('#card-container').insertAdjacentHTML("beforeend", $template.outerHTML);
 }

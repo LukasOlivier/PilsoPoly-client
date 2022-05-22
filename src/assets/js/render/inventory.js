@@ -9,7 +9,7 @@ function clearCards(){
 }
 
 function getGameState() {
-    fetchFromServer(`/games/${_gameID}`, "GET")
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, "GET")
         .then(currentGameInfo => {
             setPlayerBalance(currentGameInfo);
             clearCards();
@@ -137,7 +137,7 @@ function renderHouses() {
 function mortgage() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
+        fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'POST')
             .then(() => {
                 getGameState();
             }).catch(() => showErrorPopup("This tile is already mortgaged"));
@@ -148,7 +148,7 @@ function mortgage() {
 function unMortgage() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
+        fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${loadFromStorage("name")}/properties/${cardName}/mortgage`, 'DELETE')
             .then(() => {
                 getGameState();
             })
@@ -159,7 +159,7 @@ function unMortgage() {
 function buyHouse() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
+        fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'POST')
             .then(() => {
                 getGameState();
             })
@@ -170,7 +170,7 @@ function buyHouse() {
 function sellHouse() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'DELETE')
+        fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${loadFromStorage("name")}/properties/${cardName}/houses`, 'DELETE')
             .then(() => {
                 getGameState();
             })
@@ -181,7 +181,7 @@ function sellHouse() {
 function sellHotel() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'DELETE')
+        fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'DELETE')
             .then(() => {
                 getGameState();
             })
@@ -192,7 +192,7 @@ function sellHotel() {
 function buyHotel() {
     document.querySelectorAll(".selected").forEach(card => {
         const cardName = card.querySelector("h3").innerText;
-        fetchFromServer(`/games/${_gameID}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'POST')
+        fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${loadFromStorage("name")}/properties/${cardName}/hotel`, 'POST')
             .then(() => {
                 getGameState();
             })

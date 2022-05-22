@@ -22,6 +22,7 @@ header {
 header h1 {
     font-size: 3rem;
     text-decoration: underline;
+    font-family: "Oswald", serif;
 }
 
 article h2 {
@@ -109,8 +110,8 @@ article:hover {
     font-size: 1.5rem;
 }
 
-.PURPLE {
-    background: rgba(161, 27, 161, 0.5);
+.BROWN {
+    background: rgb(84, 54, 37);
 }
 
 .BLACK {

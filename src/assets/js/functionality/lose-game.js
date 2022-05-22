@@ -2,7 +2,7 @@
 
 function loseGame() {
     const playerName = loadFromStorage("name");
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/bankruptcy`, 'POST')
+    fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${playerName}/bankruptcy`, 'POST')
         .then(() => {
             localStorage.clear();
             window.location.href = "lose-screen.html";

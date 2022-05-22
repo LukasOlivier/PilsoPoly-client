@@ -3,7 +3,7 @@
 function auctionProperty() {
     const playerName = loadFromStorage("name");
     const currentTile = loadFromStorage("currentTile");
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTile}`, 'DELETE');
+    fetchFromServer(`/games/${ loadFromStorage("gameId")}/players/${playerName}/properties/${currentTile}`, 'DELETE');
     hideElement(document.querySelector(`#buy-property-popup`));
 }
 
@@ -96,5 +96,5 @@ function addAmount(amount) {
 }
 
 function placeBidOnAuction(body) {
-    fetchFromServer(`/games/${_gameID}/bank/auctions/property/bid`, "POST", body);
+    fetchFromServer(`/games/${ loadFromStorage("gameId")}/bank/auctions/property/bid`, "POST", body);
 }

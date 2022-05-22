@@ -111,7 +111,9 @@ function checkIfPlayerNeedsToPayRent(move, response) {
     } else if (isTileMortgaged(response)) {
         addActionDescriptionToActivity("No need to pay rent, this tile is mortgaged");
     } else {
-        addActionDescriptionToActivity(`${move.description} ${loadFromStorage("debtor")}`);
+        const currentTile = nameToId(loadFromStorage("currentTile"));
+        const debtorName = document.querySelector(`#${currentTile} .player-bought span`).innerText.toLowerCase();
+        addActionDescriptionToActivity(`${move.description} ${debtorName}.`);
     }
 }
 
@@ -173,16 +175,12 @@ function getCurrentTile(gameInfo) {
 
 function findTileId(tileName) {
     let tilePosition = null;
-    try {
-        loadFromStorage("tiles").forEach(function (tile) {
-            if (tile.name === tileName) {
-                tilePosition = tile.position;
-            }
-        });
-        return tilePosition;
-    }catch (error){
-        setTimeout(findTileId,100);
-    }
+    loadFromStorage("tiles").forEach(function (tile) {
+        if (tile.name === tileName) {
+            tilePosition = tile.position;
+        }
+    });
+    return tilePosition;
 }
 
 function getTaxSystem(gameInfo) {

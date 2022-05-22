@@ -1,7 +1,5 @@
 "use strict";
 
-let _gameID = null;
-
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {

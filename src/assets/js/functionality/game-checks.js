@@ -3,7 +3,7 @@
 let _playerProperties;
 
 function pollingGameState() {
-    fetchFromServer(`/games/${_gameID}`, "GET")
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, "GET")
         .then(currentGameInfo => {
             if (document.querySelector("body").id === "main-screen") {
                 checkMainPage(currentGameInfo);

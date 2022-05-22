@@ -3,7 +3,7 @@
 function buyProperty() {
     const playerName = loadFromStorage("name");
     const currentTile = loadFromStorage("currentTile");
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/properties/${currentTile}`, 'POST')
+    fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${playerName}/properties/${currentTile}`, 'POST')
         .then(() => {
             addPropertyToInventory(currentTile);
             addActionDescriptionToActivity(`You bought: ${loadFromStorage("currentTile")}`);

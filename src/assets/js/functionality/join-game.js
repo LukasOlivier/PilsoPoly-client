@@ -13,7 +13,7 @@ function fetchAllGames() {
                     throw new Error("This game has already started.");
                 }
                 checkName(name, game);
-                _gameID = gameID;
+                saveToStorage("gameId",gameID);
                 renderIconPicker(name);
             })
             .catch((error) => errorHandler(error));
@@ -55,10 +55,8 @@ function joinGame(name, icon) {
         icon: icon
     };
     document.querySelector(".errormessages p").innerText = "";
-    fetchFromServer(`/games/${_gameID}/players`, 'POST', body)
+    fetchFromServer(`/games/${loadFromStorage("gameId")}/players`, 'POST', body)
         .then(response => {
-            localStorage.clear();
-            saveToStorage("gameId", _gameID);
             // this token is your security token.
             saveToStorage("token", response.token);
             saveToStorage("name", name);

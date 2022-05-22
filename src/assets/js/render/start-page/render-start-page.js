@@ -1,4 +1,5 @@
 "use strict";
+
 let _$interfaces = {};
 let timoutIDForIconPicker = null;
 
@@ -31,7 +32,7 @@ function renderLobby(game) {
     const players = game.players;
     const playersToJoin = numberOfPlayers - players.length;
     _$interfaces.lobbyInterface.querySelector("#players").innerText = "";
-    _$interfaces.lobbyInterface.querySelector("span").innerText = _gameID;
+    _$interfaces.lobbyInterface.querySelector("span").innerText = loadFromStorage("gameId");
     _$interfaces.lobbyInterface.querySelector("p").innerText = `Waiting for ${playersToJoin} more players to join.`;
     players.forEach(player => {
         renderPlayer(player);
@@ -60,7 +61,7 @@ function goToLobby(name, icon) {
 function loadGameDataForIconPicker() {
     fetchFromServer(`/games?prefix=${_config.prefix}`)
         .then(response => {
-            const game = findGameByID(response, _gameID);
+            const game = findGameByID(response, loadFromStorage("gameId"));
             game.players.forEach(player => {
                 if (document.querySelector(`li`).id !== player.icon) {
                     document.querySelector(`#${player.icon}`).classList.remove("available");
@@ -94,6 +95,7 @@ function renderAllAvailableGames(allGames) {
 }
 
 function backToMainMenu() {
+    localStorage.clear();
     showElement(_$interfaces.startInterface);
 }
 
