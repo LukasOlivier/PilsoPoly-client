@@ -29,6 +29,10 @@ header div img{
 header h1 {
     color: white;
     font-size: 2rem;
+    left: 50%;
+    top: 3.5%;
+    transform: translate(-50%,-50%);
+    position: fixed;
 }
 
 header a {
@@ -44,8 +48,15 @@ header a:hover {
     cursor: pointer;
 }
 
+header p{
+    margin-left: 5rem;
+    margin-right: auto;
+    font-size: 1.5rem;
+    color: white;
+}
+
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 #cards {
@@ -223,15 +234,6 @@ aside ul {
 .errormessages p:empty {
     padding: 0;
     border: none;
-}
-
-#error{
-    padding: 1rem;
-    position: fixed;
-    background: red;
-    color: white;
-    top: 50%;
-    left: 35%;
 }
 
 .clickable {

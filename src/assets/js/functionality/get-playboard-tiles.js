@@ -1,7 +1,6 @@
-function getTiles(currentGameInfo) {
+function getTiles() {
     fetchFromServer("/tiles", "GET")
         .then(tiles => {
             saveToStorage("tiles", tiles);
-            renderCards(currentGameInfo);
         });
 }

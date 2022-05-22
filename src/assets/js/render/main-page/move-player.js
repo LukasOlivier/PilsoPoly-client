@@ -2,23 +2,14 @@
 
 
 function move(value) {
-    const $button = document.querySelector("#back-to-current-position button");
-    if ($button.classList.contains("hidden")) {
-        $button.classList.toggle("hidden");
-        $button.id = loadFromStorage("name");
-    }
-    _tempPlayerPositionID -= value;
-
-    if (_tempPlayerPositionID === 40) {
-        _tempPlayerPositionID = 0;
-    }
-
-    if (_tempPlayerPositionID === -1) {
-        _tempPlayerPositionID = 39;
-    }
-
+    _viewPosition = keepInRangeOfBoard(_viewPosition - value);
     removeTemplateContents("#cards-parent article");
-    getCardById(_tempPlayerPositionID);
+    showCardsByPosition(_viewPosition);
+}
+
+function keepInRangeOfBoard(position){
+    const amountOfTilesOnBoard = 40;
+    return (position + amountOfTilesOnBoard) % amountOfTilesOnBoard;
 }
 
 function wheelEvent(e) {
@@ -29,7 +20,7 @@ function wheelEvent(e) {
     }
 }
 
-function keyPressEvent(e){
+function keyPressEvent(e) {
     // a and q for move left for the fellow qwerty users..
     if (e.key === 'ArrowRight' || e.key === 'd') {
         moveRight();

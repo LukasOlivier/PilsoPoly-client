@@ -1,6 +1,5 @@
 // "use strict";
-let _playerPositionID = null;
-let _tempPlayerPositionID = null;
+let _viewPosition = null;
 let _$containers = {};
 _token = {token: loadFromStorage("token")};
 _gameID = loadFromStorage("gameId");
@@ -19,6 +18,7 @@ function renderMainPage() {
         lastBidder: document.querySelector("#last-bidder"),
         buyPropertyPopup: document.querySelector("#buy-property-popup")
     };
+    getTiles();
     addEventListeners();
     renderFirstTime();
 }
@@ -26,26 +26,22 @@ function renderMainPage() {
 function renderFirstTime() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
-            saveToStorage("gameState",currentGameInfo);
+            saveToStorage("gameState", currentGameInfo);
             checkAmountOfPlayersOverflow(currentGameInfo);
             renderPlayerInfo(currentGameInfo);
             checkIfPlayerCanRoll(currentGameInfo);
             checkIfCurrentTileBuyAble(currentGameInfo);
             renderTaxSystemFirstTime(currentGameInfo);
-            getTiles(currentGameInfo);
+            showCardsByPosition(findTileId(loadFromStorage("currentTile")));
             pollingGameState();
         });
 }
 
-function checkAmountOfPlayersOverflow(gameInfo){
+function checkAmountOfPlayersOverflow(gameInfo) {
     const maxPlayersThatFitInFooter = 6;
-    if (gameInfo.numberOfPlayers > maxPlayersThatFitInFooter){
+    if (gameInfo.numberOfPlayers > maxPlayersThatFitInFooter) {
         document.querySelector("footer").classList.add("scrollable-footer");
     }
-}
-
-function seeOtherPlayerPosition(player) {
-    goToPlayerPosition(player);
 }
 
 function renderCards(currentGameInfo) {
@@ -59,38 +55,45 @@ function renderCards(currentGameInfo) {
         }
     });
     // Find that tile in localStorage
-    findTileId(currentTileName);
+    showCardsByPosition(findTileId(currentTileName));
 }
 
-function getCardById(id) {
-    const toShow = createToShow(id, id - 2, id + 3);
-    for (const cardId of toShow) {
-        if (cardId === id) {
-            showCards(loadFromStorage("tiles")[cardId], true);
+function checkIfViewingCurrentPosition(){
+    const currentMiddleCard = document.querySelector(".middle").id.toLowerCase();
+    if (currentMiddleCard === nameToId(loadFromStorage("currentTile"))){
+        hideElement(_$containers.backToCurrentPositionButton);
+    }else{
+        showElement(_$containers.backToCurrentPositionButton);
+    }
+}
+
+function showCardsByPosition(position) {
+    removeTemplateContents("#cards-parent article");
+    const cardsToShow = createToShow(position);
+    for (const cardPosition of cardsToShow) {
+        if (cardPosition === position) {
+            showCards(loadFromStorage("tiles")[cardPosition], true);
         } else {
-            showCards(loadFromStorage("tiles")[cardId], false);
+            showCards(loadFromStorage("tiles")[cardPosition], false);
         }
     }
+    _viewPosition = position;
+    checkIfViewingCurrentPosition();
     // We also update these here because we don't want to wait for polling while scrolling (user experience)
     checkIfBought(loadFromStorage("gameState"));
     checkIfPlayerOnTile(loadFromStorage("gameState"));
 }
 
-function createToShow(id, firstId, lastId) {
+function createToShow(middleCardPosition) {
     const toShow = [];
-    if (id === 0) {
-        toShow.push(38, 39, 0, 1, 2);
-    } else if (id === 1) {
-        toShow.push(39, 0, 1, 2, 3);
-    } else if (id === 38) {
-        toShow.push(36, 37, 38, 39, 0);
-    } else if (id === 39) {
-        toShow.push(37, 38, 39, 0, 1);
-    } else {
-        for (let i = firstId; i < lastId; i++) {
-            toShow.push(i);
-        }
-    }
+    let i = 0;
+    const numberOfCardsBeforeMiddleCard = 2;
+    const firstCardOnDisplay = middleCardPosition - numberOfCardsBeforeMiddleCard;
+    const maxCardsOnDisplay = 5;
+   while (i < maxCardsOnDisplay){
+       toShow.push(keepInRangeOfBoard(firstCardOnDisplay + i));
+       i++;
+   }
     return toShow;
 }
 
@@ -173,12 +176,12 @@ function renderTaxSystemFirstTime(currentGameInfo) {
     }
 }
 
-function hidePopUpsForAuction(){
+function hidePopUpsForAuction() {
     hideElement(_$containers.giveUpPopup);
     hideElement(_$containers.taxPopup);
     hideElement(_$containers.buyPropertyPopup);
 }
 
-function toggleCardsOpacity(){
+function toggleCardsOpacity() {
     document.querySelector("#cards-parent").classList.toggle("reduce-opacity");
 }

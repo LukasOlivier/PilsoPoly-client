@@ -61,7 +61,6 @@ https://grid.layoutit.com/
 
 | Bug behaviour                                              | How to reproduce                 | Why it hasn't been fixed   |
 |------------------------------------------------------------|----------------------------------|----------------------------|
-| Card description shows twice **sometimes** when passing go | pass 'go'                        | minor issue, cause unknown |
 | Refreshing browser restarts the auction timer | refresh browser while auctioning | minor issue, only visual   |
 
 ## Functionality Table

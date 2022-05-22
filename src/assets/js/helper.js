@@ -124,16 +124,11 @@ function goToPlayerPosition(playerName) {
     loadFromStorage("gameState").players.forEach(function (player) {
         if (player.name === playerName) {
             currentTileName = player.currentTile;
-            if (playerName === loadFromStorage("name")) {
-                hideElement(_$containers.backToCurrentPositionButton);
-            } else {
-                showElement(_$containers.backToCurrentPositionButton);
-            }
         }
 
     });
     // Find that tile in localStorage
-    findTileId(currentTileName);
+    showCardsByPosition(findTileId(currentTileName));
 }
 
 function updateCurrentMoveInfo(gameInfo) {
@@ -164,13 +159,13 @@ function getCurrentTile(gameInfo) {
 }
 
 function findTileId(tileName) {
+    let tilePosition = null;
     loadFromStorage("tiles").forEach(function (tile) {
         if (tile.name === tileName) {
-            _tempPlayerPositionID = tile.position;
-            _playerPositionID = tile.position;
-            getCardById(tile.position);
+            tilePosition = tile.position;
         }
     });
+    return tilePosition;
 }
 
 function getTaxSystem(gameInfo) {
