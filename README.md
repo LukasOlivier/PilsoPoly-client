@@ -60,6 +60,8 @@ https://grid.layoutit.com/
 |------------------------------------------------------------|----------------------------------|----------------------------|
 | Refreshing browser restarts the auction timer | refresh browser while auctioning | minor issue   |
 | "Auction was won by _null_" message in activity log | This is only sometimes and we are unsure why this is happening. | minor issue, only visual. |
+| "You paid rent to _null_" message in activity log | If a player lands on your tile, sometimes the request does not work | No time |
+
 
 ## Functionality Table
 | PRIORITY | ENDPOINT                                                                                                 | Client                | Client           | Server                       | Server                       |
