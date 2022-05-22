@@ -56,12 +56,15 @@ https://grid.layoutit.com/
 
 ## Known Bugs
 
-| Bug behaviour                                                                                                                      | How to reproduce                                                                   | Why it hasn't been fixed              |
-|------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|---------------------------------------|
-| No token authorization on ```DELETE /games /{gameId} /players /{playerName} /properties /{propertyName} /visitors /{debtorName} /rent``` | Send a request                                                                     | Lack of time                          |
-| Refreshing browser restarts the auction timer                                                                                      | refresh browser while auctioning                                                   | Minor issue                           |
-| When you join a game at the same time with the same icon, you have the same icon."                                                 | Trying to join the game with two players at the exact same time                    | Minor issue                           |
-| When you join a game at the same time with the same name, you are stuck in the lobby."                                             | Trying to join the game with two players at the exact same time with the same name | Minor issue, doesn't occur regularly. |
+| Bug behaviour                                                                                                                            | How to reproduce                                                                       | Why it hasn't been fixed                                   |
+|------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------|
+| No token authorization on ```DELETE /games /{gameId} /players /{playerName} /properties /{propertyName} /visitors /{debtorName} /rent``` | Send a request                                                                         | Lack of time                                               |
+| Refreshing browser restarts the auction timer                                                                                            | refresh browser while auctioning or being redirected from other HTML pages             | Minor issue                                                |
+| When you join a game at the same time with the same icon, you have the same icon."                                                       | Trying to join the game with two players at the exact same time                        | Minor issue                                                |
+| When you join a game at the same time with the same name, you are stuck in the lobby."                                                   | Trying to join the game with two players at the exact same time with the same name     | Minor issue, doesn't occur regularly.                      |
+| Middle card gets squashed when playing on wide screens.                                                                                  | Play on a wide screen                                                                  | Minor issue, does not effect gameplay logic.               |
+| QuerySelectors & variables are null / undefined when player viewing the map or inventory                                                 | view inventory or map when other players are doing action in the main-page of the game | Lack of time.                                              |
+| `You received money because player is on tile:` still appears in activity box when the tile is mortgaged                                 | other player landing on mortgaged tile that you own                                    | Minor issue, does not effect gameplay logic. only visually |
 
 
 ## Functionality Table
