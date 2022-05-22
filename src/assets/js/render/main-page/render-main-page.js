@@ -1,7 +1,7 @@
 // "use strict";
 let _viewPosition = null;
 let _$containers = {};
-_token = {token: loadFromStorage("token")};
+
 _gameID = loadFromStorage("gameId");
 
 function renderMainPage() {

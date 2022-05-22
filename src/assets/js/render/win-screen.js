@@ -1,4 +1,4 @@
-_token = {token: loadFromStorage("token")};
+
 _gameID = loadFromStorage("gameId");
 
 function renderWinScreen(){

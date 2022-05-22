@@ -1,4 +1,4 @@
-_token = {token: loadFromStorage("token")};
+
 _playerProperties = null;
 function initInventory() {
     getGameState();
