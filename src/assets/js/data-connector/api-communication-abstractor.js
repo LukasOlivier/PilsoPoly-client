@@ -18,6 +18,7 @@ function fetchFromServer(path, httpVerb, requestBody){
 
 function constructOptions(httpVerb, requestBody){
     const token = loadFromStorage("token");
+    console.log(token)
     const options= {};
     options.method = httpVerb;
 
