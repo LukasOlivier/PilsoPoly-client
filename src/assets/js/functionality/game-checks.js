@@ -5,6 +5,7 @@ function pollingGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
             if (document.querySelector("body").id === "main-screen"){
+                console.log(currentGameInfo)
                 checkMainPage(currentGameInfo);
             }
             checkGameStateAfterTurn(currentGameInfo);
@@ -19,6 +20,7 @@ function checkMainPage(currentGameInfo){
     checkIfPlayerAuction(currentGameInfo);
     checkPlayerBalance(currentGameInfo);
     checkIfPlayerOnTile(currentGameInfo);
+    console.log("test")
     checkAmountOfJailFreeCards(currentGameInfo);
     checkIfPlayerCanRoll(currentGameInfo);
 }
@@ -141,6 +143,7 @@ function checkIfPlayerOnTile(gameInfo) {
     });
     const playersInfo = gameInfo.players;
     playersInfo.forEach(player => {
+        console.log(player)
         // Checks if player is on a card that is currently shown on screen. (And filters out bankrupted players)
         if (document.querySelector(`#${nameToId(player.currentTile)}`) !== null && !player.bankrupt && document.querySelector("body").id !== "see-all-the-streets-with-owners") {
             renderPlayerOnTile(nameToId(player.currentTile), player.name);
