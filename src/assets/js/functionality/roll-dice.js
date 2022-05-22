@@ -16,7 +16,7 @@ function renderPlayerActionRollDice(gameState) {
 
 function rollDice() {
     const playerName = loadFromStorage("name");
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/dice`, 'POST')
+    fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${playerName}/dice`, 'POST')
         .then(response => {
             updateCurrentMoveInfo(response);
             checkIfRolledTwice(response);

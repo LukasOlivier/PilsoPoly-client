@@ -1,8 +1,7 @@
-// "use strict";
+"use strict";
+
 let _viewPosition = null;
 let _$containers = {};
-
-_gameID = loadFromStorage("gameId");
 
 function renderMainPage() {
     _$containers = {
@@ -18,13 +17,21 @@ function renderMainPage() {
         lastBidder: document.querySelector("#last-bidder"),
         buyPropertyPopup: document.querySelector("#buy-property-popup")
     };
-    getTiles();
     addEventListeners();
-    renderFirstTime();
+    getTiles();
+    waitForTilesToLoad();
+}
+
+function waitForTilesToLoad(){
+    if (loadFromStorage("tiles") === null){
+        setTimeout(waitForTilesToLoad,100);
+    }else {
+        renderFirstTime();
+    }
 }
 
 function renderFirstTime() {
-    fetchFromServer(`/games/${_gameID}`, "GET")
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, "GET")
         .then(currentGameInfo => {
             saveToStorage("gameState", currentGameInfo);
             checkAmountOfPlayersOverflow(currentGameInfo);

@@ -173,16 +173,12 @@ function getCurrentTile(gameInfo) {
 
 function findTileId(tileName) {
     let tilePosition = null;
-    try {
-        loadFromStorage("tiles").forEach(function (tile) {
-            if (tile.name === tileName) {
-                tilePosition = tile.position;
-            }
-        });
-        return tilePosition;
-    }catch (error){
-        setTimeout(findTileId,100);
-    }
+    loadFromStorage("tiles").forEach(function (tile) {
+        if (tile.name === tileName) {
+            tilePosition = tile.position;
+        }
+    });
+    return tilePosition;
 }
 
 function getTaxSystem(gameInfo) {

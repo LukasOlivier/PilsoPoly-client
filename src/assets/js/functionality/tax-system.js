@@ -3,7 +3,7 @@
 function setTaxSystem(e) {
     const type = e.target.value;
     const playerName = loadFromStorage("name");
-    fetchFromServer(`/games/${_gameID}/players/${playerName}/tax/${type}`, 'POST')
+    fetchFromServer(`/games/${loadFromStorage("gameId")}/players/${playerName}/tax/${type}`, 'POST')
         .then(() => {
             _$containers.taxPopup.querySelector("#current").innerText = type;
             saveToStorage("taxSystem", type);

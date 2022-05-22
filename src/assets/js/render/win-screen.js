@@ -1,8 +1,7 @@
-
-_gameID = loadFromStorage("gameId");
+"use strict";
 
 function renderWinScreen(){
-    fetchFromServer(`/games/${_gameID}`, "GET")
+    fetchFromServer(`/games/${loadFromStorage("gameId")}`, "GET")
         .then(currentGameInfo => {
             document.querySelector("p").insertAdjacentHTML("beforeend",`${getPlayer(currentGameInfo).money}M`);
         });

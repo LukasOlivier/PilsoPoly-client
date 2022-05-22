@@ -38,7 +38,7 @@ function createGame(numberOfPlayer, name) {
     };
     fetchFromServer('/games', 'POST', body)
         .then(response => {
-            _gameID = response.id;
+            saveToStorage("gameId",response.id);
             renderIconPicker(name);
         })
         .catch(errorHandler);
