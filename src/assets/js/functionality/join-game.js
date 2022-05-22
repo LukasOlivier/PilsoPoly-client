@@ -71,7 +71,6 @@ function joinGame(name, icon) {
 
 // https://project-i.ti.howest.be/monopoly-00/api/games?started=false&prefix=PilsoPoly
 function fetchNonStartedGames() {
-    // ${_config.prefix}
     fetchFromServer(`/games?started=false&prefix=${_config.prefix}`)
         .then(response => renderAllAvailableGames(response));
 }
@@ -82,4 +81,3 @@ function fillInGameID(e) {
     _$interfaces["joinInterface"].style.opacity = "1";
     _$interfaces["joinInterface"].querySelector("#ID").value = e.currentTarget.id;
 }
-

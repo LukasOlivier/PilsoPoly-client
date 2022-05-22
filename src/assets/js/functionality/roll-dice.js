@@ -5,6 +5,7 @@ function checkIfPlayerCanRoll(gameState) {
     renderPlayerActionRollDice(gameState);
     _$containers["rollDiceOpenDialog"].disabled = !(gameState.currentPlayer === playerName && gameState.canRoll === true);
 }
+
 // This function adds the glowing effect to the player icon
 function renderPlayerActionRollDice(gameState) {
     if (gameState.canRoll === true) {
@@ -59,4 +60,3 @@ function resetRollDiceText() {
     _$containers.rollDiceDialog.querySelector("p").innerText = "You can roll the dice";
     _$containers.rollDiceDialog.querySelector("#location").innerText = "";
 }
-

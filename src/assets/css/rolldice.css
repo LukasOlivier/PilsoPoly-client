@@ -1,17 +1,18 @@
-h1{
+h1 {
     text-align: center;
     margin: 5rem 0 0 0;
     font-size: 3rem;
     border: black solid 0.25rem;
     padding: 0.5rem;
 }
-input{
+
+input {
     border: black solid 0.25rem;
     width: 30%;
     margin: 3rem 50% 0 50%;
 }
 
-div{
+div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,12 +23,12 @@ div{
     display: none !important;
 }
 
-h2{
-    margin-top: 2rem ;
+h2 {
+    margin-top: 2rem;
     font-size: 2rem;
 }
 
-h3{
-    margin-top: 2rem ;
+h3 {
+    margin-top: 2rem;
     font-size: 1.5rem;
 }

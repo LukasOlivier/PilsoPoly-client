@@ -1,3 +1,5 @@
+"use strict";
+
 function getTiles() {
     fetchFromServer("/tiles", "GET")
         .then(tiles => {

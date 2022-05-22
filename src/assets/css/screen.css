@@ -18,21 +18,23 @@ body {
     font-family: "Oswald", serif;
     color: white;
 }
-footer{
+
+footer {
     position: fixed;
     top: 97%;
     left: 1%;
 }
-footer p{
+
+footer p {
     color: #999999;
 }
 
-#icon-interface .taken{
+#icon-interface .taken {
     border: red solid 0.2rem;
     opacity: 70%;
 }
 
-#icon-interface .taken:hover{
+#icon-interface .taken:hover {
     border: red solid 0.2rem;
     cursor: unset;
     padding: 1rem;
@@ -447,8 +449,8 @@ footer p{
 }
 
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 #see-all-games-interface h2 {

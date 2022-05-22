@@ -1,4 +1,5 @@
-// buy the property
+"use strict";
+
 function buyProperty() {
     const playerName = loadFromStorage("name");
     const currentTile = loadFromStorage("currentTile");

@@ -15,4 +15,3 @@ function loadFromStorage(key) {
         return null;
     }
 }
-

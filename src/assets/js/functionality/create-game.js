@@ -10,7 +10,6 @@ function getInputValues() {
         errorHandler(errorMessage);
         return;
     }
-    // name0
     createGame(numberOfPlayers, name);
 }
 
@@ -31,7 +30,6 @@ function checkInput(numberOfPlayers, name) {
     }
     return "";
 }
-
 
 function createGame(numberOfPlayer, name) {
     const body = {
