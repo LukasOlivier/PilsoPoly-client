@@ -57,13 +57,24 @@ function nameToId(name) {
     return name.toLowerCase().replace(/\s/g, "-");
 }
 
+function isTileMortgaged(gameInfo) {
+    let isMortgaged = null;
+    gameInfo.players.forEach(player => {
+        player.properties.forEach(property => {
+            if (_currentMoveInfo.tileName === property.property) {
+                isMortgaged = property.mortgage;
+            }
+        });
+    });
+    return isMortgaged;
+}
+
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
         if (checkIfPlayerJailed(response)) {
             addActionDescriptionToActivity("You are jailed!");
-        }
-        else if (move.actionType === "rent") {
+        } else if (move.actionType === "rent") {
             checkIfPlayerNeedsToPayRent(move, response);
         } else {
             addActionDescriptionToActivity(move.description);
@@ -95,10 +106,12 @@ function checkIfPlayerJailed(gameInfo) {
 
 function checkIfPlayerNeedsToPayRent(move, response) {
     const currentTile = nameToId(getCurrentTile(response).tile);
-    if (!loadFromStorage("inventory").includes(currentTile)) {
-        addActionDescriptionToActivity(`${move.description} ${loadFromStorage("debtor")}`);
-    } else {
+    if (loadFromStorage("inventory").includes(currentTile)) {
         addActionDescriptionToActivity("You own this property");
+    } else if (isTileMortgaged(response)) {
+        addActionDescriptionToActivity("No need to pay rent, this tile is mortgaged");
+    } else {
+        addActionDescriptionToActivity(`${move.description} ${loadFromStorage("debtor")}`);
     }
 }
 
