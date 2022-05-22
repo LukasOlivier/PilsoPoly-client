@@ -42,7 +42,7 @@ function checkIfRolledTwice(response) {
     if (diceOne === diceTwo) {
         diceResult.classList.add("dice-roll-double");
         text = `You rolled a double ${diceOne}. You can roll again!`;
-        addActionDescriptionToActivity(`You rolled a double ${diceOne}.`)
+        addActionDescriptionToActivity(`You rolled a double ${diceOne}.`);
     } else {
         diceResult.classList.remove("dice-roll-double");
         _$containers.rollDiceOpenDialog.disabled = true;

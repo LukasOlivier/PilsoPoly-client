@@ -72,7 +72,6 @@ function isTileMortgaged(gameInfo) {
 // switch case where all possible actions on the tiles
 function seeWhatActionThatNeedsToBeTaken(response) {
     _currentMoveInfo.moves.forEach(move => {
-        console.log(move)
         if (checkIfPlayerJailed(response)) {
             addActionDescriptionToActivity("You are jailed!");
         } else if (move.actionType === "rent") {
