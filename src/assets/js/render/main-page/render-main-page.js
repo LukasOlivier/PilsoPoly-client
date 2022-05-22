@@ -76,6 +76,7 @@ function showCardsByPosition(position) {
             showCards(loadFromStorage("tiles")[cardPosition], false);
         }
     }
+    _viewPosition = position;
     checkIfViewingCurrentPosition();
     _viewPosition = position;
 
