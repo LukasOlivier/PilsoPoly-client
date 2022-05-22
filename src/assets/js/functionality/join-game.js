@@ -57,11 +57,10 @@ function joinGame(name, icon) {
     document.querySelector(".errormessages p").innerText = "";
     fetchFromServer(`/games/${_gameID}/players`, 'POST', body)
         .then(response => {
-            _token = response.token;
             localStorage.clear();
             saveToStorage("gameId", _gameID);
             // this token is your security token.
-            saveToStorage("token", _token);
+            saveToStorage("token", response.token);
             saveToStorage("name", name);
             saveToStorage("inventory", []);
             loadGameDataForLobby();
