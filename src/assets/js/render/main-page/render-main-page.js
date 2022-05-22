@@ -60,9 +60,9 @@ function renderCards(currentGameInfo) {
 function checkIfViewingCurrentPosition(){
     const currentMiddleCard = document.querySelector(".middle").id.toLowerCase();
     if (currentMiddleCard === nameToId(loadFromStorage("currentTile"))){
-        hideElement(document.querySelector("#back-to-current-position button"));
+        hideElement(_$containers.backToCurrentPositionButton);
     }else{
-        showElement(document.querySelector("#back-to-current-position button"));
+        showElement(_$containers.backToCurrentPositionButton);
     }
 }
 
