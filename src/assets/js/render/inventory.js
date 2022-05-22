@@ -11,11 +11,16 @@ function clearCards(){
 function getGameState() {
     fetchFromServer(`/games/${_gameID}`, "GET")
         .then(currentGameInfo => {
+            setPlayerBalance(currentGameInfo);
             clearCards();
             addEventListeners();
             _playerProperties = getPlayerProperties(currentGameInfo);
             renderInventoryCards();
         });
+}
+
+function setPlayerBalance(currentGameInfo){
+    document.querySelector("#balance").innerText = `Balance: M${getPlayer(currentGameInfo).money}`;
 }
 
 function addEventListeners() {
@@ -83,7 +88,7 @@ function filterCards(e) {
 function renderStreet(tile) {
     const $template = document.querySelector('.street-template').content.firstElementChild.cloneNode(true);
     $template.id = nameToId(tile.name);
-    $template.querySelector(".name").innerText = tile.name;
+    $template.querySelector(".name").innerText  = tile.name;
     $template.querySelector('.rent').innerText = `Rent: M${tile.rent}`;
     $template.querySelector('.rent-one-house').innerText = `M${tile.rentWithOneHouse}`;
     $template.querySelector('.rent-two-house').innerText = `M${tile.rentWithTwoHouses}`;
