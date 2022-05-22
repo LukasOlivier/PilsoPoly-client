@@ -61,7 +61,7 @@ https://grid.layoutit.com/
 
 | Bug behaviour                                              | How to reproduce                 | Why it hasn't been fixed   |
 |------------------------------------------------------------|----------------------------------|----------------------------|
-| Refreshing browser restarts the auction timer | refresh browser while auctioning | minor issue, only visual   |
+| Refreshing browser restarts the auction timer | refresh browser while auctioning | minor issue   |
 
 ## Functionality Table
 | PRIORITY | ENDPOINT                                                                                                 | Client                | Client           | Server                       | Server                       |
